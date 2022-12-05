@@ -1,5 +1,8 @@
 # Kmarket1
 
+####팀장 : 박진휘
+####팀원 : 김훈, 설우영, 한분?
+
 ## main
 ### 메인 : /kmarket/index.html
 
