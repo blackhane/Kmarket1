@@ -1115,6 +1115,63 @@ main>.view>.review>.paging>.num>a.on {
     font-weight: bold;
 }
 
+/* cart 시작 */
+main > .cart {}
+main > .cart > form > input[name=del] {
+    border-color: #bdbdbd;
+    border-bottom-color: #828282;
+    background: #fafafa;
+    color: #4d4d4d;
+    padding: 6px 11px;
+    border-width: 1px;
+    margin-top: 6px;
+}
+main > .cart > form > table {}
+main > .cart > form > table > th {}
+
+main > .cart > form > table  tbody {}
+main > .cart > form > table  tr {}
+
+main > .cart > form > table  td {}
+main > .cart > form > table  th:first-child {}
+
+main > .cart > form > table  td:first-child {}
+main > .cart > form > table  td:last-child {}
+
+main > .cart > form > table  td > article {}
+
+main > .cart > form > table  td > article >a {}
+
+main > .cart > form > table  td > article >div {}
+main > .cart > form > table  td > article >div > h2{}
+main > .cart > form > table  td > article >div > p {}
+
+main > .cart > form > table  td > article img {}
+
+main > .cart > form > .total {}
+main > .cart > form > .total >h2 {}
+
+main > .cart > form > .total >table {}
+main > .cart > form > .total >table tr {}
+main > .cart > form > .total >table tr:nth-last-child(2) {}
+main > .cart > form > .total >table tr:nth-last-child(1) td {}
+main > .cart > form > .total >table tr:nth-last-child(1) td:last-child {}
+
+main > .cart > form > .total >table td {}
+main > .cart > form > .total >table td:last-child {}
+main > .cart > form > .total > input[type=submit] {}
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* footer */
 footer {
