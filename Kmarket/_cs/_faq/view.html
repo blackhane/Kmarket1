@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>케이마켓 고객센터</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font: normal 12px '고딕';
+        }
+        ul, ol {
+            list-style: none;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        #wrapper {
+            width: 100%;
+            height: auto;
+        }
+        /* header */
+        header {
+            width: 100%;
+            height: auto;
+        }
+        header > div {
+            border-bottom: 1px solid #e9e9e9;
+            box-sizing: border-box;
+        }
+        header > .info {
+            height: 35px;
+        }
+        header > .info > div {
+            width: 1200px;
+            height: 100%;
+            margin: 0 auto;
+        }
+        header > .info ul {
+            float: right;
+        }
+        header > .info ul > li {
+            height: auto;
+            line-height: 35px;
+            float: left;
+            padding: 0 10px;
+        }
+        header > .info ul > li > a {
+            color: #555;
+        }
+        header > .info ul > li > a:hover {
+            text-decoration: underline;
+        }
+        header > .cs_logo {
+            width: 100%;
+            height: 115px;
+        }
+        header > .cs_logo > div {
+            width: 1200px;
+            height: 100%;
+            margin: 0 auto;
+        }
+        header > .cs_logo > div > a {
+            display: inline-block;
+            margin-top: 30px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        header > .cs_logo > div > a > img {
+            vertical-align: bottom;
+        }
+        
+        /* main */
+        main {
+            width: 100%;
+            height: auto;
+        }
+        main > section {
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #e9e9e9;
+            box-sizing: border-box;
+        }
+        main > section > div {
+            width: 1200px;
+            height: 60px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+        main > section > div > p {
+            line-height: 60px;
+            font-size: 16px;
+        }
+        main > div {
+            width: 1200px;
+            height: auto;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        main aside {
+            width: 220px;
+            height: auto;
+            padding-top: 26px;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+        main aside > p {
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 20px ;
+        }
+        main aside li {
+            font-size: 16px;
+            font-weight: bold;
+            color: #9e9e9e;
+            line-height: 32px;
+        }
+        main aside > ul > .current {
+            color: #111111;
+            text-decoration: underline;
+        }
+        main aside li:hover{
+            color: #111111;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        main article {
+            width: 980px;
+            min-height: 600px;
+            float: right;
+            padding: 26px;
+            border-left: 1px solid #e9e9e9;
+            box-sizing: border-box;
+        }
+        main article > p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        main article > p > strong {
+            font-weight: bold;
+            font-size: 24px;
+        }
+        main article > div {
+            width: 100%;
+            height: auto;
+            border-top: 2px solid black;
+        }
+        main article > div > table {
+            width: 100%;
+            height: auto;
+            border-collapse: collapse;
+        }
+        main article > div > table tr {
+            border-bottom: 1px solid #ccc;
+        }
+        main article > div > table tr:hover {
+            background-color: #f8f8f8;
+        }
+        main article > div > table tr > td {
+            font-size: 14px;
+            padding: 16px;
+            border-bottom: 1px solid #ccc;
+        }
+        main article > div > table tr > td > a {
+            font-size: 16px;
+        }
+        main article > div > table td:nth-of-type(1) {width: 60%;}
+        main article > div > table td:nth-of-type(2) {width: 10%;}
+        main article > div > table td:nth-of-type(3) {width: 10%;}
+        main article > div > .page {
+            width: 100%;
+            height: auto;
+            text-align: center;
+            margin-top: 20px;
+        }
+        main article .page > a:first-child {
+            font-size: 0px;
+            background: url('/Kmarket/img/img_cs/cs_sprites.png') no-repeat -712px -659px;
+        }
+        main article .page > a {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: bold;
+            width: 34px;
+            height: 34px;
+            line-height: 34px;
+        }
+        main article .page > a.current {
+            background: #006cff;
+            border-radius: 17px;
+            color: #fff;
+        }
+        main article .page > a:last-child {
+            font-size: 0px;
+            background: url('/Kmarket/img/img_cs/cs_sprites.png') no-repeat -628px -659px;
+        }
+        main article > div > button {
+            background: #067dfd;
+            border: 1px solid #0063ce;
+            font-size: 20px;
+            position: absolute;
+            right: 42px;
+            bottom: 24px;
+            color: #fff;
+            padding: 10px 18px;
+        }
+        /* notice_view */
+        main article > .title {
+            border-bottom: 1px solid #e9e9e9;
+            padding: 24px;
+        }
+        main article > .title > h2 > span {
+            font-size: 32px;
+            font-weight: bold;
+            color: #006cff;
+        }
+        main article > .title > h2 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+        main article > .title > span {
+            color: #777777;
+        }
+        main article > .content {
+            border: none;
+        }
+        main article > .content > p {
+            width: 100%;
+            height: auto;
+            border: none;
+            padding: 40px 20px;
+            font-size: 16px;
+            line-height: 32px;
+            border-bottom: 1px solid #e9e9e9;
+        }
+        main article > .content > a {
+            display: inline-block;
+            width: 200px;
+            height: 55px;
+            border: 1px solid #cecece;
+            border-radius: 30px;
+            text-align: center;
+            line-height: 55px;
+            font-size: 16px;
+            margin-top: 40px;
+        }
+        /* footer */
+        footer {
+            width: 100%;
+            height: 192px;
+            background-color: #f8f8f8;
+            border-top: 1px solid #e9e9e9;
+            box-sizing: border-box;
+        }
+        footer > div:nth-child(1) > ul {
+            width: 1200px;
+            height: 40px;
+            margin: 0 auto;
+            padding: 15px 0;
+            border-bottom: 1px solid #e9e9e9;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        footer > div:nth-child(1) > ul > li:first-child {
+            border-left: 1px solid #d7d7d7;
+        }
+        footer > div:nth-child(1) > ul > li {
+            display: inline-block;
+            font-weight: bold;
+            border-right: 1px solid #d7d7d7;
+            padding: 0 10px;
+        }
+        footer > div:nth-child(1) > ul > li > a {
+            color: #333949;
+        }
+        footer > div:nth-child(2) {
+            width: 1200px;
+            height: auto;
+            padding-top: 20px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+        footer > div:nth-child(2) > p {
+            float: left;
+            height: 100%;
+            font-size: 11px;
+            line-height: 15px;
+            color: #676767;
+        }
+        footer > div:nth-child(2) > p:nth-child(2){
+            width: 300px;
+            margin-left: 30px;
+            margin-right: 30px;
+        }
+        footer > div:nth-child(2) > p > strong {
+            display: inline-block;
+            padding: 6px 15px 7px 0;
+            color: #464646;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <header>
+            <div class="info">
+                <div>
+                    <ul>
+                        <li><a href="#">로그인</a></li>
+                        <li><a href="#">회원가입</a></li>
+                        <li><a href="#">마이페이지</a></li>
+                        <li><a href="#">장바구니</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="cs_logo">
+                <div>
+                    <a href="#">
+                        <img src="/Kmarket/img/img_cs/logo.png" alt="고객센터">
+                        고객센터
+                    </a>
+                </div>
+            </div>
+        </header>
+        <main>
+            <section>
+                <div>
+                    <p>홈 > 자주묻는 질문</p>
+                </div>
+            </section>
+            <div>
+                <aside>
+                        <p>자주묻는 질문</p>
+                        <ul>
+                            <li class="current">회원</li>
+                            <li>쿠폰/이벤트</li>
+                            <li>주문/결제</li>
+                            <li>배송</li>
+                            <li>취소/반품/교환</li>
+                            <li>여행/숙박/항공</li>
+                            <li>안전거래</li>
+                        </ul>
+                </aside>
+                <article>
+                    <div class="title">
+                        <h2><span>Q.</span>개인회원과 법인회원의 차이가 있나요?</h2>
+                        <span>2022.12.06</span>
+                    </div>
+                    <div class="content">
+                        <p>
+                            개인회원에서 법인회원(사업자 회원)으로 전환은 불가하므로 법인회원(사업자 회원) 전환은 신규 가입으로 진행을 해야 합니다.
+                            <br/><br/>※ 피싱 관련 피해신고
+                            <br/><br/>▶ 경찰청 사이버수사국 (국번없이)182 : http://cyberbureau.police.go.kr
+                            <br/>▶ KISA 인터넷침해대응센터 (국번없이)118 : http://www.krcert.or.kr
+                            <br/>감사합니다.
+                        </p>
+                        <a href="#">목록보기</a>
+                    </div>
+                </article>
+            </div>
+        </main>
+        <footer>
+            <div>
+                <ul>
+                    <li><a href="#">회사소개</a></li>
+                    <li><a href="#">서비스이용약관</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                    <li><a href="#">전자금융거래약관</a></li>
+                </ul>
+            </div>
+            <div>
+                <p>
+                    <img src="/Kmarket/img/img_main/footer_logo.png" alt="footerLogo">
+                </p>
+                <p>
+                    <strong>(주)KMARKET</strong><br/>
+                    부산시 강남구 테헤란로 152 (역삼동 강남파이낸스센터)<br/>
+                    대표이사 : 홍길동<br/>
+                    사업자등록번호 : 220-81-83676 사업자정보확인<br/>
+                    통신판매업신고 : 강남 10630호 Fax : 02-589-8842
+                </p>
+                <p>
+                    <strong>고객센터</strong><br/>
+                    Tel : 1234-5678 (평일 09:00~18:00)<br/>
+                    스마일클럽/SVIP 전용 : 1522-5700 (365일 09:00~18:00)<br/>
+                    경기도 부천시 원미구 부일로 233(상동) 투나빌딩 6층<br/>
+                    Fax : 051-123-4567 | Mail : kmaerket@kmarket.co.kr<br/>
+                </p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
