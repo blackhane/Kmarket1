@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kmarket</title>
+    <link rel="stylesheet" href="/Kmarket1/Kmarket/css/css_admin.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../css/style.css">
+
 </head>
 </style>
+<script>
+    /* 제이쿼리 시작 */
+    $(function(){
+
+        $('#gnb > li > a').click(function(){
+            $(this).siblings().slideToggle(300);
+        })
+
+    /* 제이쿼리 끝 */
+    })
+</script>
 <body>
     <div id="admin-wrapper">
         <header>
             <div>
                 <a href="./index.html" class="logo">
-                    <img src="/Kmarket1/Kmarket1/Kmarket/_admin/img/admin_logo.png" alt="로고">
+                    <img src="/Kmarket1/Kmarket/img/img_admin/admin_logo.png" alt="로고">
                 </a>
                 <p>
                     <span>홍길동님 반갑습니다</span>
@@ -89,13 +103,111 @@
                     </li>
                 </ul>
             </aside>
-            <section id="admin-index">
+            <section id="admin-product-list">
                 <nav>
                     <h3>상품목록</h3>
                     <p>
                         HOME > 상품관리 > <strong>상품목록</strong>
                     </p>
                 </nav>
+                <div>
+                    <section class="search">
+                        <select name="search" id="search">
+                            <option value="search1">상품명</option>
+                            <option value="search1">상품코드</option>
+                            <option value="search1">제조사</option>
+                            <option value="search1">판매자</option>
+                        </select>
+                        <input type="text" name="search">
+                    </section>
+                </div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th><input type="checkbox" name="all"></th>
+                            <th>이미지</th>
+                            <th>상품코드</th>
+                            <th>상품명</th>
+                            <th>판매가격</th>
+                            <th>할인율</th>
+                            <th>포인트</th>
+                            <th>재고</th>
+                            <th>판매자</th>
+                            <th>조회</th>
+                            <th>관리</th>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" name="상품코드"></td>
+                            <td><img src="/Kmarket1/Kmarket/img/img_admin/sample_thumb.jpg" class="thumb"></td>
+                            <td>201603292</td>
+                            <td>FreeMovement BLUEFORCE</td>
+                            <td>36,000</td>
+                            <td>10</td>
+                            <td>360</td>
+                            <td>400</td>
+                            <td>홍길동</td>
+                            <td>126</td>
+                            <td>
+                                <a href="#">[삭제]</a>
+                                <a href="#">[수정]</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" name="상품코드"></td>
+                            <td><img src="/Kmarket1/Kmarket/img/img_admin/sample_thumb.jpg" class="thumb"></td>
+                            <td>201603292</td>
+                            <td>FreeMovement BLUEFORCE</td>
+                            <td>36,000</td>
+                            <td>10</td>
+                            <td>360</td>
+                            <td>400</td>
+                            <td>홍길동</td>
+                            <td>126</td>
+                            <td>
+                                <a href="#">[삭제]</a>
+                                <a href="#">[수정]</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" name="상품코드"></td>
+                            <td><img src="/Kmarket1/Kmarket/img/img_admin/sample_thumb.jpg" class="thumb"></td>
+                            <td>201603292</td>
+                            <td>FreeMovement BLUEFORCE</td>
+                            <td>36,000</td>
+                            <td>10</td>
+                            <td>360</td>
+                            <td>400</td>
+                            <td>홍길동</td>
+                            <td>126</td>
+                            <td>
+                                <a href="#">[삭제]</a>
+                                <a href="#">[수정]</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <input type="button" value="선택삭제">
+                <div class="paging">
+                    <span class="prev">
+                        <a href="#"><이전</a>
+                    </span>
+                    <span class="num">
+                        <a href="#" class="on">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">6</a>
+                        <a href="#">7</a>
+                    </span>
+                    <span class="next">
+                        <a href="#">다음></a>
+                    </span>
+                </div>
+                <p class="ico info">
+                    <strong>Tip!</strong>
+                    전자상거래 등에서의 상품 등의 정보제공에 관한 고시에 따라 총 35개 상품군에 대해 상품 특성 등을 양식에 따라 입력할 수 있습니다.
+                </p>
             </section>
         </main>
         <footer>
@@ -105,4 +217,5 @@
         </footer>
     </div>
 </body>
+
 </html>
