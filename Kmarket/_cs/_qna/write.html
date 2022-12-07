@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <title>케이마켓 고객센터</title>
     <link rel="stylesheet" href="/Kmarket/css/css_cs.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $('.btnCancel').click(function(){
+                location.href = "/Kmarket/_cs/_qna/list.html";
+            });
+            $('.btnWrite').click(function(){
+                location.href = "/Kmarket/_cs/_qna/list.html";
+            });
+        });
+    </script>
 </head>
 <body>
     <div id="wrapper">
@@ -11,8 +22,8 @@
             <div class="info">
                 <div>
                     <ul>
-                        <li><a href="#">로그인</a></li>
-                        <li><a href="#">회원가입</a></li>
+                        <li><a href="/Kmarket/_member/login.html">로그인</a></li>
+                        <li><a href="/Kmarket/_member/signup.html">회원가입</a></li>
                         <li><a href="#">마이페이지</a></li>
                         <li><a href="#">장바구니</a></li>
                     </ul>
@@ -20,7 +31,7 @@
             </div>
             <div class="cs_logo">
                 <div>
-                    <a href="#">
+                    <a href="/Kmarket/_cs/index.html">
                         <img src="/Kmarket/img/img_cs/logo.png" alt="고객센터">
                         고객센터
                     </a>

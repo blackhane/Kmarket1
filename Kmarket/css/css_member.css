@@ -1,0 +1,350 @@
+/* css 초기화*/
+* {
+    padding: 0;
+    margin: 0;
+    font: normal 12px '고딕';
+}
+ul, ol {list-style: none;}
+a {text-decoration: none;color: black;}
+#wrapper {width: 100%;height: auto;}
+/*////////////////////////////////////////////*/
+/*////////////////////////////////////////////*/
+/* Header */
+header {
+    width: 100%;
+    height: auto;
+}
+header > div {
+    border-bottom: 1px solid #e9e9e9;
+    box-sizing: border-box;
+}
+header > .info {
+    height: 35px;
+}
+header > .info > div {
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+}
+header > .info ul {
+    float: right;
+}
+header > .info ul > li {
+    height: auto;
+    line-height: 35px;
+    float: left;
+    padding: 0 10px;
+}
+header > .info ul > li > a {
+    color: #555;
+}
+header > .info ul > li > a:hover {
+    text-decoration: underline;
+}
+header > .cs_logo {
+    width: 100%;
+    height: 115px;
+}
+header > .cs_logo > div {
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+}
+header > .cs_logo > div > a {
+    display: inline-block;
+    margin-top: 30px;
+}
+header > .cs_logo > div > a > img {
+    vertical-align: bottom;
+}
+/*////////////////////////////////////////////*/
+/*////////////////////////////////////////////*/
+/* Footer */
+footer {
+    width: 100%;
+    height: 192px;
+    background-color: #f8f8f8;
+    border-top: 1px solid #e9e9e9;
+    box-sizing: border-box;
+}
+footer > div:nth-child(1) > ul {
+    width: 1200px;
+    height: 40px;
+    margin: 0 auto;
+    padding: 15px 0;
+    border-bottom: 1px solid #e9e9e9;
+    box-sizing: border-box;
+    text-align: center;
+}
+footer > div:nth-child(1) > ul > li:first-child {
+    border-left: 1px solid #d7d7d7;
+}
+footer > div:nth-child(1) > ul > li {
+    display: inline-block;
+    font-weight: bold;
+    border-right: 1px solid #d7d7d7;
+    padding: 0 10px;
+}
+footer > div:nth-child(1) > ul > li > a {
+    color: #333949;
+}
+footer > div:nth-child(2) {
+    width: 1200px;
+    height: auto;
+    padding-top: 20px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+footer > div:nth-child(2) > p {
+    float: left;
+    height: 100%;
+    font-size: 11px;
+    line-height: 15px;
+    color: #676767;
+}
+footer > div:nth-child(2) > p:nth-child(2){
+    width: 300px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+footer > div:nth-child(2) > p > strong {
+    display: inline-block;
+    padding: 6px 15px 7px 0;
+    color: #464646;
+    font-size: 12px;
+    font-weight: bold;
+}
+/*////////////////////////////////////////////*/
+/*////////////////////////////////////////////*/
+/* member_register */
+main > .registerForm {
+    width: 1000px;
+    height: auto;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 40px 0;
+}
+.registerForm > div:first-child {
+    border-bottom: 2px solid #0e6ad3;
+}
+.registerForm p {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+.registerForm > div > table {
+    width: 100%;
+    height: auto;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.registerForm > div > table tr {}
+.registerForm > div > table tr > th {
+    font-size: 16px;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #b6bdc7;
+}
+.registerForm > div > table tr > td {
+    padding: 0 16px;
+    padding-top: 16px;
+    padding-bottom: 10px;
+    text-align: left;
+    border-bottom: 1px solid #dfe5ed;
+}
+.registerForm > div > table tr > td > label {
+    font-size: 16px;
+}
+.registerForm > div > table tr > td:nth-child(1) {
+    background-color: #f4f6f9;
+    width: 18%;
+}
+.registerForm > div > table tr > td > span {
+    color: #ef3f43;
+}
+.registerForm > div > table tr > td > input {
+    border: 1px solid #ccc;
+    width: 200px;
+    height: 15px;
+    padding: 6px;
+    margin-bottom: 6px;
+}
+.registerForm div:last-child {
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+.registerForm div > .btnRegister, .btnNext {
+    cursor: pointer;
+    background-color: #ef3f43;
+    color: #fff;
+    font-size: 20px;
+    border: none;
+    width: 220px;
+    height: 45px;
+    margin-top: 40px;
+}
+/*////////////////////////////////////////////*/
+/*////////////////////////////////////////////*/
+/* member_signup */
+.TermsForm > section > p > span {
+    color: #ef3f43;
+}
+.TermsForm > section > p > .choice {
+    color: #53cddf;
+}
+.TermsForm > section > p {
+    font-size: 14px;
+    float: left;
+    margin-top: 26px;
+}
+.TermsForm > section > textarea {
+    width: 100%;
+    min-height: 150px;
+    outline: none;
+    resize: none;
+    border: 1px solid #bababa;
+}
+/*////////////////////////////////////////////*/
+/*////////////////////////////////////////////*/
+/* member_join */
+.join {
+    width: 1000px;
+    height: auto;
+    margin: 0 auto;
+    text-align: center;
+}
+.join > .welcome {
+    width: 651px;
+    height: 89px;
+    background-image: url('/Kmarket/img/img_user/member_join_tit_welcome.gif');
+    background-repeat: no-repeat;
+    margin: 60px auto;
+}
+.join > .goRegister {
+    width: 900px;
+    height: auto;
+    box-sizing: border-box;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 20px;
+}
+.join > .goRegister > section {
+    width: 400px;
+    height: 200px;
+    border: 1px solid #d5d5d5;
+    background-repeat: no-repeat;
+    position: relative;
+}
+.join > .goRegister > section:nth-child(1) {
+    float: left;
+    background-image: url('/Kmarket/img/img_user/member_join_tit_normal.gif');
+}
+.join > .goRegister > section:nth-child(2) {
+    float: right;
+    background-image: url('/Kmarket/img/img_user/member_join_tit_seller.gif');
+}
+.join > .goRegister > section > img:nth-child(1) {
+    position: absolute;
+    top: 110px;
+    left: 40px;
+}
+.join > .goRegister > section > a > img {
+    position: absolute;
+    top: 107px;
+    right: 30px;
+}
+.banner {
+    width: 900px;
+    height: 119px;
+    background-repeat: no-repeat;
+    margin: 20px auto;
+}
+.ban1 {
+    background-image: url('/Kmarket/img/img_user/member_join_banner1.jpg');
+}
+.ban2 {
+    background-image: url('/Kmarket/img/img_user/member_join_banner2.jpg');
+}
+/*////////////////////////////////////////////*/
+/*////////////////////////////////////////////*/
+/* member_login */
+main > .loginForm {
+    width: 1000px;
+    height: auto;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 40px 0;
+    text-align: c;
+}
+.loginForm > div:first-child {
+    border-bottom: 2px solid #0e6ad3;
+    position: relative;
+}
+.loginForm p {
+    font-size: 24px;
+    margin-bottom: 6px;
+}
+.loginForm p:nth-child(2) {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    color: #888888;
+    font-size: 12px;
+}
+.loginForm p:nth-child(2) > span {
+    font-weight: bold;
+}
+.loginForm > .login {
+    overflow: hidden;
+    position: relative;
+    padding: 25px 0;
+    border-bottom: 1px solid #b3b3b3;
+}
+.loginForm > .login > table {
+    position: absolute;
+    top: 75px;
+    left: 95px;
+    border-collapse: collapse;
+}
+.loginForm > .login > table tr {
+}
+.loginForm > .login > table tr td > input {
+    padding: 6px;
+    width: 200px;
+    height: 20px;
+    background-color: #fefefe;
+    border: 1px solid #e3e3e3;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #676767;
+}
+.loginForm > .login > table tr > td {
+    padding-right: 6px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.loginForm > .login > table tr:last-child > td {
+    padding-top: 20px;
+    text-align: right;
+}
+.loginForm > .login > table tr:last-child > td > * {   
+    font-weight: bold;
+    color: #676767;
+}
+.btnLogin {
+    cursor: pointer;
+    width: 97px;
+    height: 71px;
+    border: none;
+    background-repeat: no-repeat;
+    background-image: url('/Kmarket/img/img_user/member_btn_login.gif');
+}
+.loginForm > .login > img {
+    float: right;
+}
+.loginForm > .certifi {
+    width: 100%;
+    height: auto;
+    margin-top: 40px;
+    text-align: center;
+}
