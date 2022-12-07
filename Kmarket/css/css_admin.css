@@ -39,7 +39,7 @@
     header{
         width: 100%;
         height: 120px;
-        background: url('/Kmarket1/Kmarket/img/img_admin/admin_bg_header.jpg') repeat-x;
+        background: url('/Kmarket/img/img_admin/admin_bg_header.jpg') repeat-x;
     }
     header > div{
         width: 1400px;
@@ -76,7 +76,7 @@
         float: left;
         width: 270px;
         height: auto;
-        background: url('/Kmarket1/Kmarket1/Kmarket/_admin/img/admin_bg_aside.jpg');
+        background: url('/Kmarket1/Kmarket/_admin/img/admin_bg_aside.jpg');
     }
     main > aside ul{
         background: #eaeaea
@@ -425,12 +425,12 @@
     
     p.info {
         border-color: #8497BF;
-        background: #A8B2C5 url(/Kmarket1/Kmarket/img/img_admin/admin_ico_info.png) no-repeat scroll 15px 16px;
+        background: #A8B2C5 url(/Kmarket/img/img_admin/admin_ico_info.png) no-repeat scroll 15px 16px;
     }
 
     p.alert{
         border-color: #FDD845;
-        background: #FFF6BF url(/Kmarket1/Kmarket/img/img_admin/admin_ico_alert.png) no-repeat scroll 15px 16px;
+        background: #FFF6BF url(/Kmarket/img/img_admin/admin_ico_alert.png) no-repeat scroll 15px 16px;
     }
 
     p.ico {
