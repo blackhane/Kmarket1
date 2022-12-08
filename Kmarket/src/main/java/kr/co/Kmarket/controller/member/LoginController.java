@@ -10,15 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import kr.co.Kmarket.VO.MemberVO;
-import kr.co.Kmarket.utils.MemberService;
+import kr.co.Kmarket.DAO.MemberDAO;
+import kr.co.Kmarket.VO.KmMemberVO;
 
-@WebServlet("/member/login.do")
+@WebServlet("/_member/login.do")
 public class LoginController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	
-	MemberService service = MemberService.getInstacne();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,23 +30,29 @@ public class LoginController extends HttpServlet {
 		String pass = req.getParameter("pass");
 		
 		HttpSession session = req.getSession();
+		KmMemberVO vo  = new KmMemberVO();
 		
-		//하드코딩
 		if(uid.equals("root") && pass.equals("1234")) {
-			session.setAttribute("sessUid", uid);
-			session.setAttribute("sessName", "관리자");
+			vo.setUid(uid);
+			vo.setName("관리자");
 			
-			resp.sendRedirect("/Kmarket/index.jsp");
+			session.setAttribute("sessUser", vo);
+			
+			resp.sendRedirect("/Kmarket/");
 			return;
 		}
 		
-		MemberVO vo = service.selectMemeber(uid, pass);
+		vo = MemberDAO.getInstance().selectMemeber(uid, pass);
 		
-		if(vo != null) {
+		if(vo.getUid() != null) {
 			session.setAttribute("sessUser", vo);
-		}else {
-			resp.sendRedirect("/Kmarket/_member/login.jsp?Err=100");
+			
+			resp.sendRedirect("/Kmarket/index.do");
+			return;
 		}
+		
+		String code = "100";
+		resp.sendRedirect("/Kmarket/_member/login.do?code=100");
 	}
 	
 }
