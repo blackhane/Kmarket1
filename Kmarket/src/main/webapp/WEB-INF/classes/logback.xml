@@ -2,7 +2,6 @@
 <!DOCTYPE configuration>
 
 <configuration>
-	<property name="NAME" value="Jboard2"/>
 	<import class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"/>
 	<import class="ch.qos.logback.core.ConsoleAppender"/>
 
@@ -22,13 +21,7 @@
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
 		</encoder>
 	</appender> -->
-	
-	<appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/logs/${NAME}.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">	    
-			<fileNamePattern>/logs/${NAME}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-				<maxFileSize>1MB</maxFileSize>
+
 			</timeBasedFileNamingAndTriggeringPolicy>
 		</rollingPolicy>
 		<encoder>
@@ -36,7 +29,6 @@
 		</encoder>
 	</appender>
 
-	<root level="info">
 		<appender-ref ref="STDOUT"/>
 		<appender-ref ref="ROLLING"/>
 	</root>

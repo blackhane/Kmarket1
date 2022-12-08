@@ -901,7 +901,7 @@ main>.view>.info>.summary .count>button {
     position: absolute;
     width: 21px;
     height: 21px;
-    background-image: url('/kmarket/img/img_product/ico_sprites.png');
+    background-image: url('/Kmarket/img/img_product/ico_sprites.png');
     font-size: 0;
     background-color: transparent;
     border: none;
@@ -1144,7 +1144,7 @@ main>.cart>form>table {
 main>.cart>form>table>th {
     padding: 12px 0;
     border-top: 2px solid #000;
-    border-bottom: solid #d3d3d3;
+    border-bottom: solid#d3d3d3;
     background: #fff;
     color: #383838;
     font-size: 0.95em;
