@@ -2,7 +2,11 @@
 <!DOCTYPE configuration>
 
 <configuration>
+<<<<<<< HEAD
 	<property name="NAME" value="Jboard1"/>
+=======
+	<property name="NAME" value="Farmstory2"/>
+>>>>>>> 2f2dab43d45698196fc0b1896b279c07f7d8f7ba
 	<import class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"/>
 	<import class="ch.qos.logback.core.ConsoleAppender"/>
 
@@ -23,11 +27,18 @@
 		</encoder>
 	</appender> -->
 	
+<<<<<<< HEAD
 	
 	<appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>/logs/${NAME}.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">	    
 			<fileNamePattern>/logs/${NAME}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+=======
+	<appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/var/log/${NAME}/${NAME}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">	    
+			<fileNamePattern>/var/log/${NAME}/${NAME}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+>>>>>>> 2f2dab43d45698196fc0b1896b279c07f7d8f7ba
 			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
 				<maxFileSize>1MB</maxFileSize>
 			</timeBasedFileNamingAndTriggeringPolicy>
