@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kmarket</title>
+    <link rel="stylesheet" href="/Kmarket/css/css_admin.css">
+    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<script>
+    /* 제이쿼리 시작 */
+    $(function(){
+
+        $('#gnb > li > a').click(function(){
+            $(this).siblings().slideToggle(300);
+        })
+
+    /* 제이쿼리 끝 */
+    })
+</script>
+<body>
+    <div id="admin-wrapper">
+        <header>
+            <div>
+                <a href="index.html" class="logo">
+                    <img src="/Kmarket/img/img_admin/admin_logo.png" alt="로고">
+                </a>
+                <p>
+                    <span>홍길동님 반갑습니다. &nbsp;&nbsp; </span>
+                    <a href="#">HOME |</a>
+                    <a href="#">로그아웃 |</a>
+                    <a href="#">고객센터</a>
+                </p>
+            </div>
+        </header>
+        <main>
+            <aside>
+                <ul id="gnb">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-cogs" aria-hidden="true"></i>
+                            환경설정
+                        </a>
+                        <ol>
+                            <li><a href="#">기본환경설정</a></li>
+                            <li><a href="#">배너관리</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-store" aria-hidden="true"></i>
+                            상점관리
+                        </a>
+                        <ol>
+                            <li><a href="#">판매자현황</a></li>
+                            <li><a href="/Kmarket/_admin/_product/list.html">재고관리</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            회원관리
+                        </a>
+                        <ol>
+                            <li><a href="#">회원현황</a></li>
+                            <li><a href="#">포인트관리</a></li>
+                            <li><a href="#">비회원관리</a></li>
+                            <li><a href="#">접속자집계</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-box-open" aria-hidden="true"></i>
+                            상품관리
+                        </a>
+                        <ol>
+                            <li><a href="/Kmarket/_admin/_product/list.html">상품현황</a></li>
+                            <li><a href="/Kmarket/_admin/_product/register.html">상품등록</a></li>
+                            <li><a href="/Kmarket/_admin/_product/list.html">재고관리</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-credit-card" aria-hidden="true"></i>
+                            주문관리
+                        </a>
+                        <ol>
+                            <li><a href="#">주문현황</a></li>
+                            <li><a href="#">매출현황</a></li>
+                            <li><a href="#">결제관리</a></li>
+                            <li><a href="#">배송관리</a></li>
+                        </ol>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            게시판관리
+                        </a>
+                        <ol>
+                            <li><a href="#">게시판 현황</a></li>
+                            <li><a href="#">고객문의</a></li>
+                        </ol>
+                    </li>
+                </ul>
+            </aside>
+            <section id="admin-index">
+                <nav>
+                    <h3>관리자 메인</h3>
+                    <p>
+                        HOME > <strong>메인</strong>
+                    </p>
+                </nav>
+                <h4>쇼핑몰 운영현황</h4>
+                <article>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>주무건수(건)</strong>
+                                    <span>131</span>
+                                </td>
+                                <td>
+                                    <strong>주무건수(건)</strong>
+                                    <span>131</span>
+                                </td>
+                                <td>
+                                    <strong>주무건수(건)</strong>
+                                    <span>131</span>
+                                </td>
+                                <td>
+                                    <strong>주무건수(건)</strong>
+                                    <span>131</span>
+                                </td>
+                                <td>
+                                    <strong>주무건수(건)</strong>
+                                    <span>131</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>
+                                        <span>PC</span>
+                                        <span>60</span>
+                                    </p>
+                                    <p>
+                                        <span>Mobile</span>
+                                        <span>60</span>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <span>PC</span>
+                                        <span>60</span>
+                                    </p>
+                                    <p>
+                                        <span>Mobile</span>
+                                        <span>60</span>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <span>PC</span>
+                                        <span>60</span>
+                                    </p>
+                                    <p>
+                                        <span>Mobile</span>
+                                        <span>60</span>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <span>PC</span>
+                                        <span>60</span>
+                                    </p>
+                                    <p>
+                                        <span>Mobile</span>
+                                        <span>60</span>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <span>PC</span>
+                                        <span>60</span>
+                                    </p>
+                                    <p>
+                                        <span>Mobile</span>
+                                        <span>60</span>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>
+                                        <span>어제</span>
+                                        <span>4</span>
+                                    </p>
+                                    <p>
+                                        <span>주간</span>
+                                        <span>10</span>
+                                    </p>
+                                    <p>
+                                        <span>월간</span>
+                                        <span>30</span>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <span>어제</span>
+                                        <span>4</span>
+                                    </p>
+                                    <p>
+                                        <span>주간</span>
+                                        <span>10</span>
+                                    </p>
+                                    <p>
+                                        <span>월간</span>
+                                        <span>30</span>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <span>어제</span>
+                                        <span>4</span>
+                                    </p>
+                                    <p>
+                                        <span>주간</span>
+                                        <span>10</span>
+                                    </p>
+                                    <p>
+                                        <span>월간</span>
+                                        <span>30</span>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <span>어제</span>
+                                        <span>4</span>
+                                    </p>
+                                    <p>
+                                        <span>주간</span>
+                                        <span>10</span>
+                                    </p>
+                                    <p>
+                                        <span>월간</span>
+                                        <span>30</span>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <span>어제</span>
+                                        <span>4</span>
+                                    </p>
+                                    <p>
+                                        <span>주간</span>
+                                        <span>10</span>
+                                    </p>
+                                    <p>
+                                        <span>월간</span>
+                                        <span>30</span>
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+                <h4>주문 업무현황</h4>
+                <article>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>입금대기(건)</strong>
+                                    <span>100</span>
+                                </td>
+                                <td>
+                                    <strong>입금대기(건)</strong>
+                                    <span>100</span>
+                                </td>
+                                <td>
+                                    <strong>입금대기(건)</strong>
+                                    <span>100</span>
+                                </td>
+                                <td>
+                                    <strong>입금대기(건)</strong>
+                                    <span>100</span>
+                                </td>
+                                <td>
+                                    <strong>입금대기(건)</strong>
+                                    <span>100</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+                <div>
+                    <div>
+                        <h4>공지사항</h4>
+                        <article>
+                            <p>
+                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[공지] 1주년 기념 신규가입 사은품 안내</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                        </article>
+                    </div>
+                    <div>
+                        <h4>고객문의</h4>
+                        <article>
+                            <p>
+                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                            <p>
+                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
+                                <span>20-07-08 12:23</span>
+                            </p>
+                        </article>
+                    </div> 
+                </div>
+            </section>
+        </main>
+        <footer>
+            <div>
+                <p>Copyright ©kmarket.co.kr All rights reserved. KMARKET ADMINISTRATOR Version 5.4.1.2</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
