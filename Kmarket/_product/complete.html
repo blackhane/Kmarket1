@@ -8,6 +8,22 @@
     <title>케이마켓</title>
     <link rel="stylesheet" href="/Kmarket/css/css_product.css">
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $( document ).ready( function() {
+        $( window ).scroll( function() {
+          if ( $( this ).scrollTop() > 200 ) {
+            $( '#top' ).fadeIn();
+          } else {
+            $( '#top' ).fadeOut();
+          }
+        } );
+        $( '#top' ).click( function() {
+          $( 'html, body' ).animate( { scrollTop : 0 }, 400 );
+          return false;
+        } );
+      } );
+    </script>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
@@ -112,7 +128,7 @@
                     <h1>상품정보</h1>
                     <table border="0">
                         <tr>
-                            <th>상품명</th>
+                            <th>상품명</th>                                    
                             <th>상품금액</th>
                             <th>할인금액</th>
                             <th>수량</th>
@@ -255,6 +271,7 @@
                 </p>
             </div>
         </footer>
+        <button type="button" id="top">상단이동</button>
     </div>
 </body>
 
