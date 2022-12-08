@@ -10,19 +10,19 @@
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
   
-  <!-- 인코딩 필터 -->
+<!-- web.xml 인코딩 필터 -->
   <filter>
-  	<filter-name>SetCharacterEncodingFilter</filter-name>
-  	<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
-  	<init-param>
-  		<param-name>encoding</param-name>
-  		<param-value>UTF-8</param-value>
-  	</init-param>
+    <filter-name>SetCharacterEncodingFilter</filter-name>
+    <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+    <init-param>
+        <param-name>encoding</param-name>
+        <param-value>UTF-8</param-value>
+    </init-param>
   </filter>
   
   <filter-mapping>
-  	<filter-name>SetCharacterEncodingFilter</filter-name>
-  	<url-pattern>/*</url-pattern>
+    <filter-name>SetCharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
   </filter-mapping>
   
 </web-app>
