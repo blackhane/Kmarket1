@@ -21,11 +21,7 @@
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
 		</encoder>
 	</appender> -->
-	<appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/var/log/${NAME}/${NAME}.log</file>
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">	    
-			<fileNamePattern>/var/log/${NAME}/${NAME}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+
 			</timeBasedFileNamingAndTriggeringPolicy>
 		</rollingPolicy>
 		<encoder>
@@ -33,7 +29,6 @@
 		</encoder>
 	</appender>
 
-	<root level="debug">
 		<appender-ref ref="STDOUT"/>
 		<appender-ref ref="ROLLING"/>
 	</root>
