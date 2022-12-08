@@ -22,7 +22,7 @@
 			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
 		</encoder>
 	</appender> -->
-	
+
 	<appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>/var/log/${NAME}/${NAME}.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">	    
