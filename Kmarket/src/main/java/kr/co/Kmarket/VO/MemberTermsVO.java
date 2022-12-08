@@ -1,6 +1,6 @@
 package kr.co.Kmarket.VO;
 
-public class KmMemberTermsVO {
+public class MemberTermsVO {
 
 	private String terms;
 	private String privacy;

@@ -1,6 +1,6 @@
 package kr.co.Kmarket.VO;
 
-public class KmMemberVO {
+public class MemberVO {
 	
 	private String uid;
 	private String pass;

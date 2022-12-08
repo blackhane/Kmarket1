@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.Kmarket.DAO.MemberDAO;
-import kr.co.Kmarket.VO.KmMemberTermsVO;
+import kr.co.Kmarket.VO.MemberTermsVO;
 
 @WebServlet("/_member/join.do")
 public class JoinController extends HttpServlet {

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.Kmarket.DAO.MemberDAO;
-import kr.co.Kmarket.VO.KmMemberVO;
+import kr.co.Kmarket.VO.MemberVO;
 
 @WebServlet("/_member/register.do")
 public class RegisterController extends HttpServlet {
@@ -37,7 +37,7 @@ public class RegisterController extends HttpServlet {
 		String addr2 = req.getParameter("addr2");
 		String regip = req.getRemoteAddr();
 		
-		KmMemberVO vo = new KmMemberVO();
+		MemberVO vo = new MemberVO();
 		vo.setUid(uid);
 		vo.setPass(pass);
 		vo.setName(name);

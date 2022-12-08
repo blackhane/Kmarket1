@@ -43,7 +43,7 @@
                         </tr>
                         <tr>
                             <td colspan="3">
-                                <label><input type="checkbox"> 자동 로그인 |</label>
+                                <label><input type="checkbox" name="auto_login"> 자동 로그인 |</label>
                                 <a href="#">아이디 찾기 |</a>
                                 <a href="#">비밀번호 찾기 |</a>
                                 <a href="/Kmarket/_member/join.do">회원가입</a>
