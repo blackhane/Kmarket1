@@ -1562,33 +1562,206 @@ main>.order>form>.alert>ul>li>span {
 
 /* complete */
 main>.complete {}
-main>.complete table {}
-main>.complete table tr {}
-main>.complete>.message>h2 {}
-main>.complete>.message>h2>i {}
-main>.complete>.message>p {}
-main>.complete>article {}
-main>.complete>article>h1 {}
-main>.complete>.info>table tr>th {}
-main>.complete>.info>table tr>th:last-child {}
-main>.complete>.info table tr>td {}
-main>.complete>.info table tr>td:last-child {}
-main>.complete>.info table tr>td>article {}
-main>.complete>.info table tr>td img {}
-main>.complete>.info table tr>td div {}
-main>.complete>.info table tr>td div>p {}
 
-main>.complete>.info .total>td> {}
+main>.complete table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-top: 2px solid #000;
+}
 
+main>.complete table tr {
+    border-bottom: 1px solid #d3d3d3;
+}
 
+main>.complete>.message>h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    color: #555;
+    padding: 10px;
+}
 
+main>.complete>.message>h2>i {
+    font-size: 26px;
+}
 
+main>.complete>.message>p {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+}
 
+main>.complete>article {
+    margin-top: 16px;
+}
 
+main>.complete>article>h1 {
+    font-weight: bold;
+}
 
+main>.complete>.info>table tr>th {
+    padding: 12px 0;
+    background: #fff;
+    color: #383838;
+    font-size: 0.95em;
+    text-align: center;
+    letter-spacing: -0.1em;
+}
 
+main>.complete>.info>table tr>th:last-child {
+    width: 200px;
+}
 
+main>.complete>.info table tr>td {
+    text-align: center;
+}
 
+main>.complete>.info table tr>td:last-child {
+    color: #ff006c;
+    font-weight: bold;
+    text-align: right;
+}
+
+main>.complete>.info table tr>td>article {
+    overflow: hidden;
+    padding: 6px;
+}
+
+main>.complete>.info table tr>td img {
+    float: left;
+    width: 80px;
+}
+
+main>.complete>.info table tr>td div {
+    float: left;
+    margin-left: 10px;
+    text-align: left;
+}
+
+main>.complete>.info table tr>td div>p {
+    text-align: left;
+    color: #777;
+    margin-top: 4px;
+}
+
+main>.complete>.info .total>td>table {
+    border: none;
+}
+
+main>.complete>.info .total>td>table tr {
+    border: none;
+}
+
+main>.complete>.info .total>td>table tr:last-child span {
+    font-weight: bold;
+    color: #ff006c;
+}
+
+main>.complete>.info .total>td>table td {
+    text-align: right;
+    color: #111;
+    background: #f2f2f2;
+    font-weight: normal;
+    border-bottom: none;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+main>.complete>.order {}
+
+main>.complete>.order table {}
+
+main>.complete>.order table tr {}
+
+main>.complete>.order table tr>td {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+main>.complete>.order table span {
+    font-weight: bold;
+    color: #ff006c;
+}
+
+main>.complete>.order table tr>td:nth-child(1) {
+    width: 160px;
+    background: #f2f2f2;
+}
+
+main>.complete>.order table tr>td:nth-child(2) {
+    width: auto;
+}
+
+main>.complete>.order table tr>td:nth-child(3) {
+    width: 100px;
+    text-align: right;
+    vertical-align: top;
+    background: #f2f2f2;
+}
+
+main>.complete>.order table tr>td:nth-child(4) {}
+
+main>.complete .delivery {}
+
+main>.complete .delivery table {}
+
+main>.complete .delivery table tr {}
+
+main>.complete .delivery table tr>td {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+main>.complete .delivery table tr>td:nth-child(1) {
+    width: 160px;
+    background: #f2f2f2;
+}
+
+main>.complete .delivery table tr>td:nth-child(3) {
+    width: 200px;
+    background: #f2f2f2;
+}
+
+main>.complete>.alert {
+    width: 100%;
+    background-color: #f7f7f7;
+    padding: 10px;
+    padding-left: 24px;
+    color: #999;
+    box-sizing: border-box;
+}
+
+main>.complete>.alert>h1 {
+    margin-left: -12px;
+}
+
+main>.complete>.alert>ul {
+    list-style: inherit;
+}
+
+main>.complete>.alert>ul>li {
+    line-height: 20px;
+}
+
+main>.complete>.alert>ul>li>span {
+    position: relative;
+    left: -6px;
+}
+/* 상단이동 */
+#top {
+position: fixed;
+left: 50%;
+margin-left: 600px;
+bottom: 10px;
+width: 42px;
+height: 42px;
+background-image: url("/Kmarket/img/img_main/top.png");
+border: none;
+font-size: 0;
+cursor: pointer;
+}
 
 /* footer */
 footer {
