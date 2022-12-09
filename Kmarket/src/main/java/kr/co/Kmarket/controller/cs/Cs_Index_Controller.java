@@ -9,24 +9,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/_cs/_fnq/view.do")
-public class View_FAQ_Controller extends HttpServlet{
+@WebServlet("/_cs/index.do")
+public class Cs_Index_Controller extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-
+	
+	
 	
 	@Override
 	public void init() throws ServletException {
 
 	}
 	
-	 @Override
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		 RequestDispatcher dispatcher = req.getRequestDispatcher("/_cs/_faq/view.jsp");
-			dispatcher.forward(req, resp);
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/_cs/index.jsp");
+		dispatcher.forward(req, resp);
 	}
-	 
-	 @Override
+	
+	
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 	}
+	
+
 }
