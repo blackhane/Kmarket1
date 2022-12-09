@@ -1,57 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:include page="./_header.jsp"/>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>케이마켓</title>
-    <link rel="stylesheet" href="/Kmarket/css/css_product.css">
-    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-</head>
-
-<body>
-    <div id="wrapper">
-        <header>
-            <div class="info">
-                <div>
-                    <ul>
-                      <li><a href="/Kmarket/_member/login.html">로그인</a></li>
-                      <li><a href="/Kmarket/_member/signup.html">회원가입</a></li>
-                      <li><a href="/Kmarket/_admin/index.html">마이페이지</a></li>
-                      <li><a href="/Kmarket/_product/cart.html">장바구니</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="search">
-                <div>
-                    <a href="/Kmarket/index.html"><img src="/Kmarket/img/img_main/header_logo.png" alt="headerLogo"></a>
-                    <form action="#">
-                        <input type="search">
-                        <button><span class="material-symbols-outlined">search</span></button>
-                    </form>
-                </div>    
-            </div>
-            <div class="menu">
-                <nav>
-                    <ul class="hitProduct">
-                        <li><a href="/Kmarket/_product/list.html">히트상품</a></li>
-                        <li><a href="/Kmarket/_product/list.html">추천상품</a></li>
-                        <li><a href="/Kmarket/_product/list.html">최신상품</a></li>
-                        <li><a href="/Kmarket/_product/list.html">인기상품</a></li>
-                        <li><a href="/Kmarket/_product/list.html">할인상품</a></li>
-                    </ul>
-                    <ul class="cs">
-                        <li><a href="#">쿠폰존</a></li>
-                        <li><a href="#">사용후기</a></li>
-                        <li><a href="#">개인결제</a></li>
-                        <li><a href="#">고객센터</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
         <main id="product">
             <aside>
                 <ul class="category">
@@ -344,36 +293,4 @@
             </section>
         </main>
 
-        <footer>
-            <div>
-                <ul>
-                    <li><a href="#">회사소개</a></li>
-                    <li><a href="#">서비스이용약관</a></li>
-                    <li><a href="#">개인정보처리방침</a></li>
-                    <li><a href="#">전자금융거래약관</a></li>
-                </ul>
-            </div>
-            <div>
-                <p>
-                    <img src="/Kmarket/img/img_main/footer_logo.png" alt="footerLogo">
-                </p>
-                <p>
-                    <strong>(주)KMARKET</strong><br />
-                    부산시 강남구 테헤란로 152 (역삼동 강남파이낸스센터)<br />
-                    대표이사 : 홍길동<br />
-                    사업자등록번호 : 220-81-83676 사업자정보확인<br />
-                    통신판매업신고 : 강남 10630호 Fax : 02-589-8842
-                </p>
-                <p>
-                    <strong>고객센터</strong><br />
-                    Tel : 1234-5678 (평일 09:00~18:00)<br />
-                    스마일클럽/SVIP 전용 : 1522-5700 (365일 09:00~18:00)<br />
-                    경기도 부천시 원미구 부일로 233(상동) 투나빌딩 6층<br />
-                    Fax : 051-123-4567 | Mail : kmaerket@kmarket.co.kr<br />
-                </p>
-            </div>
-        </footer>
-    </div>
-</body>
-
-</html>
+ <jsp:include page="./_footer.jsp"/>
