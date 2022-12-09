@@ -46,7 +46,7 @@
         height: 100%;
         margin: 0 auto;
     }
-    header > div > a >.logo {
+    header > div > a .logo {
         float: left;
         margin-top: 46px;
     }
