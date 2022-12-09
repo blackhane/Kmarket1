@@ -1,41 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>케이마켓 고객센터</title>
-    <link rel="stylesheet" href="/Kmarket/css/css_cs.css">
-</head>
-<body>
-    <div id="wrapper">
-        <header>
-            <div class="info">
-                <div>
-                    <ul>
-                        <li><a href="/Kmarket/_member/login.html">로그인</a></li>
-                        <li><a href="/Kmarket/_member/signup.html">회원가입</a></li>
-                        <li><a href="#">마이페이지</a></li>
-                        <li><a href="#">장바구니</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="cs_logo">
-                <div>
-                    <a href="/Kmarket/_cs/index.html">
-                        <img src="/Kmarket/img/img_cs/logo.png" alt="고객센터">
-                        고객센터
-                    </a>
-                </div>
-            </div>
-        </header>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:include page="/_cs/_header.jsp"/>
         <main>
             <section class="help">
                 <p><span>케이마켓</span>이 도와드릴게요!</p>
             </section>
             <section class="notice">
-                <h1>공지사항 <a href="/Kmarket/_cs/_notice/list.html">전체보기</a></h1>
+                <h1>공지사항 <a href="/Kmarket/_cs/_notice/list.do">전체보기</a></h1>
                 <ul>
                     <li>
-                        <a href="/Kmarket/_cs/_notice/view.html">[안내] 해외결제 사칭 문자 주의 <span>22.10.31</span></a>
+                        <a href="/Kmarket/_cs/_notice/view.do">[안내] 해외결제 사칭 문자 주의 <span>22.10.31</span></a>
                     </li>
                     <li>
                         <a href="#">[안내] 해외결제 사칭 문자 주의 <span>22.10.31</span></a>
@@ -52,9 +25,9 @@
                 </ul>
             </section>
             <section class="faq">
-                <h1>자주 묻는 질문 <a href="/Kmarket/_cs/_faq/list.html">전체보기</a></h1>
+                <h1>자주 묻는 질문 <a href="/Kmarket/_cs/_faq/list.do">전체보기</a></h1>
                 <ul>
-                    <li><a href="/Kmarket/_cs/_faq/list.html"><span>회원</span></a></li>
+                    <li><a href="/Kmarket/_cs/_faq/list.do"><span>회원</span></a></li>
                     <li><a href="#"><span>쿠폰/이벤트</span></a></li>
                     <li><a href="#"><span>주문/결제</span></a></li>
                     <li><a href="#"><span>배송</span></a></li>
@@ -64,10 +37,10 @@
                 </ul>
             </section>
             <section class="inquiry">
-                <h1>문의하기 <a href="/Kmarket/_cs/_qna/list.html">전체보기</a></h1>
+                <h1>문의하기 <a href="/Kmarket/_cs/_qna/list.do">전체보기</a></h1>
                 <ul>
                     <li>
-                        <a href="/Kmarket/_cs/_qna/view.html">[회원] 개인회원과 법인회원에 차이가 있나요? <p>*******<span>22.10.31</span></p></a>
+                        <a href="/Kmarket/_cs/_qna/view.do">[회원] 개인회원과 법인회원에 차이가 있나요? <p>*******<span>22.10.31</span></p></a>
                     </li>
                     <li>
                         <a href="#">[쿠폰/이벤트] 스마일포인트는 어디에 사용하나요? <p>*******<span>22.10.31</span></p></a>
@@ -116,35 +89,4 @@
                 </article>  
             </section>
         </main>
-        <footer>
-            <div>
-                <ul>
-                    <li><a href="#">회사소개</a></li>
-                    <li><a href="#">서비스이용약관</a></li>
-                    <li><a href="#">개인정보처리방침</a></li>
-                    <li><a href="#">전자금융거래약관</a></li>
-                </ul>
-            </div>
-            <div>
-                <p>
-                    <img src="/Kmarket/img/img_main/footer_logo.png" alt="footerLogo">
-                </p>
-                <p>
-                    <strong>(주)KMARKET</strong><br/>
-                    부산시 강남구 테헤란로 152 (역삼동 강남파이낸스센터)<br/>
-                    대표이사 : 홍길동<br/>
-                    사업자등록번호 : 220-81-83676 사업자정보확인<br/>
-                    통신판매업신고 : 강남 10630호 Fax : 02-589-8842
-                </p>
-                <p>
-                    <strong>고객센터</strong><br/>
-                    Tel : 1234-5678 (평일 09:00~18:00)<br/>
-                    스마일클럽/SVIP 전용 : 1522-5700 (365일 09:00~18:00)<br/>
-                    경기도 부천시 원미구 부일로 233(상동) 투나빌딩 6층<br/>
-                    Fax : 051-123-4567 | Mail : kmaerket@kmarket.co.kr<br/>
-                </p>
-            </div>
-        </footer>
-    </div>
-</body>
-</html>
+<jsp:include page="/_cs/_footer.jsp"/>
