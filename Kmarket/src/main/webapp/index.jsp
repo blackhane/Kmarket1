@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,16 +44,24 @@
             <div class="info">
                 <div>
                     <ul>
-                      <li><a href="/Kmarket/_member/login.html">로그인</a></li>
-                      <li><a href="/Kmarket/_member/signup.html">회원가입</a></li>
-                      <li><a href="/Kmarket/_admin/index.html">마이페이지</a></li>
-                      <li><a href="/Kmarket/_product/cart.html">장바구니</a></li>
+                      <c:choose>
+                      	<c:when test="${empty sessUser.name}">
+                      		<li><a href="/Kmarket/_member/login.do">로그인</a></li>
+                     		<li><a href="/Kmarket/_member/join.do">회원가입</a></li>
+                      	</c:when>
+                      	<c:otherwise>
+                      		<li style="font-weight:bold;">${sessUser.name}님, 환영합니다.</li>
+                      		<li><a href="/Kmarket/logout.do">로그아웃</a></li>
+                      	</c:otherwise>
+                      </c:choose>
+                      <li><a href="/Kmarket/_admin/index.do">마이페이지</a></li>
+                      <li><a href="/Kmarket/_product/cart.do">장바구니</a></li>
                     </ul>
                 </div>
             </div>
             <div class="search">
                 <div>
-                    <a href="/Kmarket/index.html"><img src="./img/img_main/header_logo.png" alt="headerLogo"></a>
+                    <a href="/Kmarket/"><img src="/Kmarket/img/img_main/header_logo.png" alt="headerLogo"></a>
                     <form action="#">
                         <input type="search">
                         <button><span class="material-symbols-outlined">search</span></button>

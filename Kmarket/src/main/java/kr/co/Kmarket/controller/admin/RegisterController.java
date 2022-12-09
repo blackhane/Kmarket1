@@ -160,4 +160,7 @@ public class RegisterController extends HttpServlet{
 		resp.sendRedirect("/Kmarket/_admin/list.do");
 		
 	}
+=======
+public class RegisterController {
+
 }

@@ -204,6 +204,11 @@ main > .registerForm {
     resize: none;
     border: 1px solid #bababa;
 }
+.TermsForm > section > label {
+	font-size: 14px;
+	float: right;
+	margin-top: 6px;
+}
 /*////////////////////////////////////////////*/
 /*////////////////////////////////////////////*/
 /* member_join */
@@ -284,31 +289,29 @@ main > .loginForm {
     font-size: 24px;
     margin-bottom: 6px;
 }
-.loginForm p:nth-child(2) {
+.loginForm > div > p:nth-child(2) {
     position: absolute;
     right: 0px;
     bottom: 0px;
     color: #888888;
     font-size: 12px;
 }
-.loginForm p:nth-child(2) > span {
+.loginForm > div > p:nth-child(2) > span {
     font-weight: bold;
 }
-.loginForm > .login {
+.login {
     overflow: hidden;
     position: relative;
     padding: 25px 0;
     border-bottom: 1px solid #b3b3b3;
 }
-.loginForm > .login > table {
+.login > table {
     position: absolute;
     top: 75px;
     left: 95px;
     border-collapse: collapse;
 }
-.loginForm > .login > table tr {
-}
-.loginForm > .login > table tr td > input {
+.login > table tr td > input {
     padding: 6px;
     width: 200px;
     height: 20px;
@@ -318,16 +321,16 @@ main > .loginForm {
     font-weight: bold;
     color: #676767;
 }
-.loginForm > .login > table tr > td {
+.login > table tr > td {
     padding-right: 6px;
     font-size: 14px;
     font-weight: bold;
 }
-.loginForm > .login > table tr:last-child > td {
+.login > table tr:last-child > td {
     padding-top: 20px;
     text-align: right;
 }
-.loginForm > .login > table tr:last-child > td > * {   
+.login > table tr:last-child > td > * {   
     font-weight: bold;
     color: #676767;
 }
@@ -339,7 +342,7 @@ main > .loginForm {
     background-repeat: no-repeat;
     background-image: url('/Kmarket/img/img_user/member_btn_login.gif');
 }
-.loginForm > .login > img {
+.login > img {
     float: right;
 }
 .loginForm > .certifi {
@@ -347,4 +350,18 @@ main > .loginForm {
     height: auto;
     margin-top: 40px;
     text-align: center;
+}
+.login p {
+	display: none;
+    position: absolute;
+    top: 207px;
+    left: 95px;
+    width: 385px;
+    height: 50px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 50px;
+    background-color: #fafafa;
+    color: #e86444;
+    padding-left: 20px;
 }
