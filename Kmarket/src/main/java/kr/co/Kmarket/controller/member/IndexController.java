@@ -37,7 +37,7 @@ public class IndexController extends HttpServlet {
 //			}
 //		}
 		
-		RequestDispatcher dispathcer = req.getRequestDispatcher("/Kmarket/index.jsp");
+		RequestDispatcher dispathcer = req.getRequestDispatcher("/index.jsp");
 		dispathcer.forward(req, resp);
 	}
 }
