@@ -26,6 +26,11 @@
         vertical-align: middle;
         box-sizing: border-box;
     }
+    
+    .register_btn{
+    	float: right;
+   		width: 100px;
+    }
 
     /* wrapper */
     .admin-wrapper{
@@ -45,11 +50,19 @@
         width: 1400px;
         height: 100%;
         margin: 0 auto;
+        
     }
-    header > div > a .logo {
+    header > div > .logo {
+        display: block;
+
         float: left;
         margin-top: 46px;
     }
+    
+    header > div > .logo > img{
+    	margin-top: 46px;
+    }
+    
     header > div > p{
         float: right;
         color: #fff;
