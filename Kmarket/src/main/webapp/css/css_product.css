@@ -688,9 +688,19 @@ main>.view>.info>.summary .card>i {
     margin-right: 2px;
 }
 
-main>.view>.info>.summary .cardfree>i {}
+main>.view>.info>.summary .cardfree> i {
+	background: url('/Kmarket/img/img_main/ico_sprites.png') no-repeat -133px 0;
+	width: 21px;
+	height: 15px;
+	margin-right: 6px;
+}
 
-main>.view>.info>.summary .cardadd>i {}
+main>.view>.info>.summary .cardadd> i {
+	background: url('/Kmarket/img/img_main/ico_sprites.png') no-repeat -54px -22px;
+	width: 25px;
+	height: 17px;
+	margin-right: 6px;
+}
 
 main>.view>.info>.summary .origin {
     font-size: 16px;

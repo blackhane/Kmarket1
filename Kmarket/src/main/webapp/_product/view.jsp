@@ -1,52 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
-
-        <main id="product">
-            <aside>
-                <ul class="category">
-                    <li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
-                    <li><a href="#"><i class="fas fa-tshirt"></i>패션·의류·뷰티</a>
-                        <ol>
-                            <li><a href="/Kmarket/_product/list.html">남성의류</a></li>
-                            <li><a href="/Kmarket/_product/list.html">여성의류</a></li>
-                            <li><a href="/Kmarket/_product/list.html">잡화</a></li>
-                            <li><a href="/Kmarket/_product/list.html">뷰티</a></li>
-                        </ol>
-                    </li>
-                    <li><a href="#"><i class="fas fa-laptop"></i>가전·디지털</a>
-                        <ol>
-                            <li><a href="/Kmarket/_product/list.html">노트북/PC</a></li>
-                            <li><a href="/Kmarket/_product/list.html">가전</a></li>
-                            <li><a href="/Kmarket/_product/list.html">휴대폰</a></li>
-                            <li><a href="/Kmarket/_product/list.html">기타</a></li>
-                        </ol>
-                    </li>
-                    <li><a href="#"><i class="fas fa-utensils"></i>식품·생필품</a>
-                        <ol>
-                            <li><a href="/Kmarket/_product/list.html">신선식품</a></li>
-                            <li><a href="/Kmarket/_product/list.html">가공식품</a></li>
-                            <li><a href="/Kmarket/_product/list.html">건강식품</a></li>
-                            <li><a href="/Kmarket/_product/list.html">생필품</a></li>
-                        </ol>
-                    </li>
-                    <li><a href="#"><i class="fas fa-home"></i>홈·문구·취미</a>
-                        <ol>
-                            <li><a href="/Kmarket/_product/list.html">가구/DIY</a></li>
-                            <li><a href="/Kmarket/_product/list.html">침구·커튼</a></li>
-                            <li><a href="/Kmarket/_product/list.html">생활용품</a></li>
-                            <li><a href="/Kmarket/_product/list.html">사무용품</a></li>
-                        </ol>
-                    </li>
-                </ul>
-            </aside>
-
+<jsp:include page="./nagivation.jsp"/>
             <section class="view">
 
                 <nav>
                     <h1>상품보기</h1>
-                    <p>
-                        HOME > <span>패션·의류·뷰티</span> > <strong>남성의류</strong>
-                    </p>
+                    <p>HOME > <span>${cate.c1Name}</span> > <strong>${cate.c2Name}</strong></p>
                 </nav>
 
                 <article class="info">
