@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="./_header.jsp"/>
 <jsp:include page="./nagivation.jsp"/>
             <!-- 상단 목록 -->
@@ -11,7 +12,7 @@
 
                 <!-- 메뉴 -->
                 <ul class="sort">
-                <input type="hidden" name="ls" value="${ls}"/>
+                	<input type="hidden" name="ls" value="${ls}"/>
                     <li><a href="/Kmarket/product/list.do?cate1=${cate.cate1}&cate2=${cate.cate2}&ls=1" class="${ls eq '1' ? 'on' : 'off'} highSold">판매많은순</a></li>
                     <li><a href="/Kmarket/product/list.do?cate1=${cate.cate1}&cate2=${cate.cate2}&ls=2" class="${ls eq '2' ? 'on' : 'off'} lowPrice">낮은가격순</a></li>
                     <li><a href="/Kmarket/product/list.do?cate1=${cate.cate1}&cate2=${cate.cate2}&ls=3" class="${ls eq '3' ? 'on' : 'off'} highPrice">높은가격순</a></li>
@@ -25,7 +26,7 @@
                     <tr>
                         <td>
                             <a href="/Kmarket/product/view.do?cate1=${cate.cate1}&cate2=${cate.cate2}&prodNo=${item.prodNo}" class="thumb">
-                            <img src="${item.thumb1}" alt="thumb1"> </a>
+                            <img src="/Kmarket/${item.thumb1}" alt="thumb1"> </a>
                         </td>
                         <td>
                             <h3 class="name">${item.prodName}</h3>
@@ -34,14 +35,16 @@
                         <td>
                             <ul>
                                 <li>
-                                    <ins class="dis-price">${item.price - (item.price/item.discount)}</ins>
+                                    <ins class="dis-price"><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/item.discount)}"/></ins>
                                 </li>
                                 <li>
                                     <del class="org-price">${item.price}</del>
                                     <span class="discount">${item.discount}%</span>
                                 </li>
                                 <li>
-                                    <span class="free-delivery">무료배송</span>
+                                    <c:if test="${item.delivery eq '0'}">
+										<span class="free">무료배송</span>
+									</c:if>
                                 </li>
                             </ul>
                         </td>
@@ -50,23 +53,23 @@
                             <!-- ??? 무슨 등급임 -->
                             <h5 class="badge power">판매자등급</h5>
                             <c:choose>
-                            	<c:when test="${item.score gt 4}">
-                            		<h6 class="rating star5">${item.score}</h6>
+                            	<c:when test="${item.score/item.review ge 5}">
+                            		<h6 class="rating star5">상품평</h6>
                             	</c:when>
-                            	<c:when test="${item.score gt 3}">
-                            		<h6 class="rating star4">${item.score}</h6>
+                            	<c:when test="${item.score/item.review ge 4}">
+                            		<h6 class="rating star4">상품평</h6>
                             	</c:when>
-                            	<c:when test="${item.score gt 2}">
-                            		<h6 class="rating star3">${item.score}</h6>
+                            	<c:when test="${item.score/item.review ge 3}">
+                            		<h6 class="rating star3">상품평</h6>
                             	</c:when>
-                            	<c:when test="${item.score gt 1}">
-                            		<h6 class="rating star2">${item.score}</h6>
+                            	<c:when test="${item.score/item.review ge 2}">
+                            		<h6 class="rating star2">상품평</h6>
                             	</c:when>
-                            	<c:when test="${item.score gt 0}">
-                            		<h6 class="rating star1">${item.score}</h6>
+                            	<c:when test="${item.score/item.review ge 1}">
+                            		<h6 class="rating star1">상품평</h6>
                             	</c:when>
                             	<c:otherwise>
-                            		<h6 class="rating star0">${item.score}</h6>
+                            		<h6 class="rating star0">상품평</h6>
                             	</c:otherwise>
                             </c:choose>
                             

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.Kmarket.DAO.ProductDAO;
 import kr.co.Kmarket.VO.ProductVO;
 
-@WebServlet("/")
+@WebServlet("/index.do")
 public class IndexController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -38,7 +38,7 @@ public class IndexController extends HttpServlet {
 		req.setAttribute("newItem", newItem);
 		req.setAttribute("discount", discount);
 		
-		RequestDispatcher dispathcer = req.getRequestDispatcher("/index.jsp");
+		RequestDispatcher dispathcer = req.getRequestDispatcher("/_member/index.jsp");
 		dispathcer.forward(req, resp);
 	}
 }

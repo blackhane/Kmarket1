@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="./_header.jsp"/>
 <jsp:include page="./nagivation.jsp"/>
 <script>
@@ -62,8 +63,10 @@
 		
 		function total(){
 			let count = $('input[name=num]').val();
-			let price = $('.dis_price').children('ins').text();
-			$('.totalPrice').text(price * count);
+			let price = $('.dis_price').children('ins.ori').text();
+			let total = (count*price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			console.log(total);
+			$('.totalPrice').text(total);
 		}
 		total();
 		
@@ -100,30 +103,30 @@
 
                 <article class="info">
                     <div class="image">
-                        <img src="${item.thumb3}" alt="thumb3" />
+                        <img src="/Kmarket/${item.thumb3}" alt="thumb3" />
                     </div>
                     <div class="summary">
                         <nav>
-                            <h1>${item.seller}</h1>
+                            <h1>${item.company}</h1>
                             <h2>상품번호&nbsp;:&nbsp;<span>${item.prodNo}</span></h2>
                         </nav>
                         <nav>
                             <h3>${item.prodName}</h3>
                             <p>${item.descript}</p>
                             <c:choose>
-                            	<c:when test="${item.score gt 4}">
+                            	<c:when test="${item.score ge 5}">
                             		<h5 class="rating star5">${item.score}<a href="#review">상품평보기</a></h5>
                             	</c:when>
-                            	<c:when test="${item.score gt 3}">
+                            	<c:when test="${item.score ge 4}">
                             		<h5 class="rating star4">${item.score}<a href="#review">상품평보기</a></h5>
                             	</c:when>
-                            	<c:when test="${item.score gt 2}">
+                            	<c:when test="${item.score ge 3}">
                             		<h5 class="rating star3">${item.score}<a href="#review">상품평보기</a></h5>
                             	</c:when>
-                            	<c:when test="${item.score gt 1}">
+                            	<c:when test="${item.score ge 2}">
                             		<h5 class="rating star2">${item.score}<a href="#review">상품평보기</a></h5>
                             	</c:when>
-                            	<c:when test="${item.score gt 0}">
+                            	<c:when test="${item.score ge 1}">
                             		<h5 class="rating star1">${item.score}<a href="#review">상품평보기</a></h5>
                             	</c:when>
                             	<c:otherwise>
@@ -133,13 +136,32 @@
                             
                         </nav>
                         <nav>
-                            <div class="org_price">
-                                <del>${item.price}</del>
-                                <span>${item.discount}%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>${item.price - (item.price/item.discount)}</ins>
-                            </div>
+                        <c:choose>
+                        	<c:when test="${item.discount gt 0}">
+	                            <div class="org_price">
+	                                <del><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/></del>
+	                                <span>${item.discount}%</span>
+	                            </div>
+	                            <div class="dis_price">
+	                                <ins class="ori" style="display:none;">
+	                                	<fmt:formatNumber type="number" pattern="0" value="${item.price - (item.price/item.discount)}"/>
+	                                </ins>
+	                                <ins>
+	                                	<fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/item.discount)}"/>
+                                	</ins>
+	                            </div>
+                            </c:when>
+                            <c:otherwise>
+                            	<div class="dis_price">
+	                                <ins class="ori" style="display:none;">
+	                                	<fmt:formatNumber type="number" pattern="0" value="${item.price}"/>
+	                                </ins>
+	                                <ins>
+	                                	<fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/>
+	                                </ins>
+                            	</div>
+                            </c:otherwise>
+                        </c:choose>
                         </nav>
                         <nav>
                         	<c:choose>
@@ -186,8 +208,9 @@
                     <nav>
                         <h1>상품정보</h1>
                     </nav>
-                    <img src="https://via.placeholder.com/860x460" alt="상세페이지2">
-                    <img src="${item.detail}" alt="detail">
+                    <img src="/Kmarket/${item.detail1}" alt="detail">
+                    <img src="/Kmarket/${item.detail2}" alt="detail">
+                    <img src="/Kmarket/${item.detail3}" alt="detail">
                 </article>
 
                 <article class="notice">

@@ -95,17 +95,19 @@ public class ProductDAO extends DBCP {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, cate1);
 			psmt.setString(2, cate2);
+			rs = psmt.executeQuery();
 			while(rs.next()) {
 				ProductVO vo = new ProductVO();
 				vo.setProdNo(rs.getString("prodNo"));
-				vo.setCate1(rs.getString("prodCate1"));
-				vo.setCate2(rs.getString("prodCate2"));
+				vo.setCate1(rs.getString("cate1"));
+				vo.setCate2(rs.getString("cate2"));
 				vo.setProdName(rs.getString("prodName"));
 				vo.setDescript(rs.getString("descript"));
 				vo.setPrice(rs.getString("price"));
 				vo.setDiscount(rs.getString("discount"));
 				vo.setSeller(rs.getString("seller"));
 				vo.setScore(rs.getInt("score"));
+				vo.setReview(rs.getInt("review"));
 				vo.setThumb1(rs.getString("thumb1"));
 				product.add(vo);
 			}
@@ -123,17 +125,18 @@ public class ProductDAO extends DBCP {
 			logger.info("INDEX 페이지 상품목록 : best");
 			conn = getConnection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery(ProductSQL.SELECT_PPRODUCTS_BEST1);
+			rs = stmt.executeQuery(ProductSQL.BEST_PRODUCT_5);
 			while(rs.next()) {
 				ProductVO vo = new ProductVO();
-				vo.setProdNo(rs.getString("prodNo"));
-				vo.setCate1(rs.getString("prodCate1"));
-				vo.setCate2(rs.getString("prodCate2"));
-				vo.setProdName(rs.getString("prodName"));
-				vo.setDescript(rs.getString("descript"));
-				vo.setPrice(rs.getString("price"));
-				vo.setDiscount(rs.getString("discount"));
-				vo.setThumb2(rs.getString("thumb2"));
+				vo.setProdNo(rs.getString(1));
+				vo.setCate1(rs.getString(2));
+				vo.setCate2(rs.getString(3));
+				vo.setProdName(rs.getString(4));
+				vo.setDescript(rs.getString(5));
+				vo.setPrice(rs.getString(8));
+				vo.setDiscount(rs.getString(9));
+				vo.setDelivery(rs.getString(13));
+				vo.setThumb2(rs.getString(18));
 				product.add(vo);
 			}
 			close();
@@ -149,19 +152,20 @@ public class ProductDAO extends DBCP {
 		try {
 			logger.info("INDEX 페이지 상품목록 : " + col);
 			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSQL.SELECT_PPRODUCTS_BEST2);
+			psmt = conn.prepareStatement(ProductSQL.BEST_PRODUCT_8);
 			psmt.setString(1, col);
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				ProductVO vo = new ProductVO();
-				vo.setProdNo(rs.getString("prodNo"));
-				vo.setCate1(rs.getString("prodCate1"));
-				vo.setCate2(rs.getString("prodCate2"));
-				vo.setProdName(rs.getString("prodName"));
-				vo.setDescript(rs.getString("descript"));
-				vo.setPrice(rs.getString("price"));
-				vo.setDiscount(rs.getString("discount"));
-				vo.setThumb2(rs.getString("thumb2"));
+				vo.setProdNo(rs.getString(1));
+				vo.setCate1(rs.getString(2));
+				vo.setCate2(rs.getString(3));
+				vo.setProdName(rs.getString(4));
+				vo.setDescript(rs.getString(5));
+				vo.setPrice(rs.getString(8));
+				vo.setDiscount(rs.getString(9));
+				vo.setDelivery(rs.getString(13));
+				vo.setThumb2(rs.getString(18));
 				product.add(vo);
 			}
 			close();
@@ -189,8 +193,11 @@ public class ProductDAO extends DBCP {
 				vo.setDiscount(rs.getString("discount"));;
 				vo.setDelivery(rs.getString("delivery"));
 				vo.setScore(rs.getInt("score"));
+				vo.setReview(rs.getInt("review"));
 				vo.setThumb3(rs.getString("thumb3"));
-				vo.setDetail(rs.getString("detail"));
+				vo.setDetail1(rs.getString("detail1"));
+				vo.setDetail2(rs.getString("detail2"));
+				vo.setDetail3(rs.getString("detail3"));
 				vo.setCompany(rs.getString("company"));
 				vo.setStatus(rs.getString("status"));
 				vo.setDuty(rs.getString("duty"));
