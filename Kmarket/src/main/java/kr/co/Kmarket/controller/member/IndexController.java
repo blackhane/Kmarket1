@@ -1,22 +1,19 @@
 package kr.co.Kmarket.controller.member;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import kr.co.Kmarket.DAO.MemberDAO;
 import kr.co.Kmarket.DAO.ProductDAO;
-import kr.co.Kmarket.VO.MemberVO;
-import kr.co.Kmarket.VO.productVO;
+import kr.co.Kmarket.VO.ProductVO;
 
-@WebServlet("/index.do")
+@WebServlet("/")
 public class IndexController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -25,15 +22,15 @@ public class IndexController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ProductDAO dao = ProductDAO.getInstance();
 		//베스트 상품
-		productVO best = dao.selectProductsBest1();
+		List<ProductVO> best = dao.selectProductsBest1();
 		//히트 상품
-		productVO hit = dao.selectProductsBest2("hit");
+		List<ProductVO> hit = dao.selectProductsBest2("hit");
 		//추천 상품
-		productVO recommend = dao.selectProductsBest2("score");
+		List<ProductVO> recommend = dao.selectProductsBest2("score");
 		//최신 상품
-		productVO newItem = dao.selectProductsBest2("rdate");
+		List<ProductVO> newItem = dao.selectProductsBest2("rdate");
 		//할인 상품
-		productVO discount = dao.selectProductsBest2("discount");
+		List<ProductVO> discount = dao.selectProductsBest2("discount");
 		
 		req.setAttribute("best", best);
 		req.setAttribute("hit", hit);

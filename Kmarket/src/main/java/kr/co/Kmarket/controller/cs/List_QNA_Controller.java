@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/_cs/_qna/list.do")
+@WebServlet("/cs/qna/list.do")
 public class List_QNA_Controller extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	

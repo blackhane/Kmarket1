@@ -1,6 +1,7 @@
 package kr.co.Kmarket.controller.product;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.Kmarket.DAO.ProductDAO;
 import kr.co.Kmarket.VO.CateVO;
-import kr.co.Kmarket.VO.productVO;
+import kr.co.Kmarket.VO.ProductVO;
 
 
 @WebServlet("/product/list.do")
@@ -31,7 +32,7 @@ public class ListController extends HttpServlet {
 		
 		ProductDAO dao = ProductDAO.getInstance();
 		
-		productVO product = dao.selectProducts(cate1, cate2, ls);
+		List<ProductVO> product = dao.selectProducts(cate1, cate2, ls);
 		
 		String c1Name = dao.selectCate1Name(cate1);
 		String c2Name = dao.selectCate2Name(cate1, cate2);

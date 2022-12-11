@@ -1,4 +1,4 @@
-package kr.co.Kmarket.dao.admin;
+package kr.co.Kmarket.DAO.admin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +6,7 @@ import java.sql.Statement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.co.Kmarket.VO.productVO;
+import kr.co.Kmarket.VO.ProductVO;
 import kr.co.Kmarket.utils.DBCP;
 import kr.co.Kmarket.utils.Sql_admin;
 
@@ -21,7 +21,7 @@ public class AdminDAO extends DBCP {
 	private AdminDAO() {}
 	
 
-public void insertProduct(productVO vo) {
+public void insertProduct(ProductVO vo) {
 		
 		
 		try{

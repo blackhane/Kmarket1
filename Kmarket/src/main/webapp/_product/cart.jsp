@@ -1,6 +1,39 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
 <jsp:include page="./nagivation.jsp"/>
+<script>
+	$(function(){
+		cartList();
+		
+		function cartList(){
+			let uid = "${sessUser.uid}";
+			
+			$.ajax({
+				url : '/Kmarket/product/listCart.do',
+				method : 'get',
+				data : {'uid' : uid},
+				dataType : 'json',
+				success : function(data){
+					if(data == 0){
+						let	tag = "<tr><td colspan='8'>장바구니에 상품이 없습니다.</td></tr>";
+					}
+					if(data != null){
+						console.log(data);
+						for(let item of data){
+							let	tag = "<tr>";
+								tag += "<td><input type='checkbox'></td>";
+								tag += "<td><article><a href='#'><img src='https://via.placeholder.com/80x80'></a>";
+								tag += "<div><h2><a href='#'>상품명</a></h2><p>상품설명</p></div></article></td>";
+								tag += "<td>1</td><td>27,000</td><td>5%</td><td>270</td>";
+								tag += "<td>무료배송</td><td>27,000</td></tr>";
+						}
+					}
+				}
+			});
+		}
+	});
+</script>
             <section class="cart">
 
                 <nav>

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.Kmarket.DAO.ProductDAO;
 import kr.co.Kmarket.VO.CateVO;
-import kr.co.Kmarket.VO.productVO;
+import kr.co.Kmarket.VO.ProductVO;
 
 @WebServlet("/product/view.do")
 public class ViewController extends HttpServlet {
@@ -22,18 +22,18 @@ public class ViewController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cate1 = req.getParameter("cate1");
 		String cate2 = req.getParameter("cate2");
-		String prodNo = req.getParameter("prodNo");
+		//String prodNo = req.getParameter("prodNo");
 		
 		ProductDAO dao = ProductDAO.getInstance();
 		String c1Name = dao.selectCate1Name(cate1);
 		String c2Name = dao.selectCate2Name(cate1, cate2);
-		productVO product = dao.selectProduct(prodNo);
+		//ProductVO item = dao.selectProduct(prodNo);
 		
 		CateVO vo = new CateVO();
 		vo.setC1Name(c1Name);
 		vo.setC2Name(c2Name);
 		
-		req.setAttribute("product", product);
+		//req.setAttribute("item", item);
 		req.setAttribute("cate", vo);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/_product/view.jsp");

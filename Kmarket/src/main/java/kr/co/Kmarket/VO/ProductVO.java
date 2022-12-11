@@ -1,6 +1,7 @@
 package kr.co.Kmarket.VO;
 
 public class ProductVO {
+
 	private int prodNo;
 	private int cate1;
 	private int cate2;
@@ -44,8 +45,39 @@ public class ProductVO {
 	private String as;
 	private String delivery_date;
 	
+	//파일 첨부 추가필드
+	
+	private String fname;
+	
+	public String getFname() {
+		return fname;
+	}
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+	private int fno;
+	private String oriName;
+	private int download;
 	
 	
+	public int getFno() {
+		return fno;
+	}
+	public void setFno(int fno) {
+		this.fno = fno;
+	}
+	public String getOriName() {
+		return oriName;
+	}
+	public void setOriName(String oriName) {
+		this.oriName = oriName;
+	}
+	public int getDownload() {
+		return download;
+	}
+	public void setDownload(int download) {
+		this.download = download;
+	}
 	public String getBrand() {
 		return brand;
 	}
@@ -124,11 +156,17 @@ public class ProductVO {
 	public void setCate1(int cate1) {
 		this.cate1 = cate1;
 	}
+	public void setCate1(String cate1) {
+		this.cate1 = Integer.parseInt(cate1);
+	}
 	public int getCate2() {
 		return cate2;
 	}
 	public void setCate2(int cate2) {
 		this.cate2 = cate2;
+	}
+	public void setCate2(String cate2) {
+		this.cate2 = Integer.parseInt(cate2);
 	}
 	public String getProdName() {
 		return prodName;
@@ -280,6 +318,32 @@ public class ProductVO {
 	public void setOrdNo(int ordNo) {
 		this.ordNo = ordNo;
 	}
+	public void setPrice(String price) {
+		this.price = Integer.parseInt(price);
+
+	}
+	public void setDiscount(String discount) {
+		this.discount = Integer.parseInt(discount);
+		
+	}
+	public void setPoint(String point) {
+		this.point = Integer.parseInt(point);
+		
+	}
+	public void setStock(String stock) {
+		this.stock = Integer.parseInt(stock);
+		
+	}
+	public void setDelivery(String delivery) {
+		this.delivery = Integer.parseInt(delivery);
+		
+	}
+	public void setProdNo(String prodNo) {
+		this.prodNo = Integer.parseInt(prodNo);
+		
+	}
 	
+	
+
 	
 }

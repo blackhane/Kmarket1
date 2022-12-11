@@ -20,6 +20,12 @@ public class ProductSQL {
 	//상품보기
 	public static String SELECT_PPRODUCT = "SELECT * FROM `km_product` WHERE `prodNo`=?";
 
+	//장바구니 등록
+	public static String INSERT_CART = "INSERT INTO `km_product_cart` VALUES `uid`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, `point`=?, `delivery`=?, `total`=? `rdate`=NOW()";
+	
+	//장바구니 등록
+	public static String SELECT_CART_ITEM = "SELECT * FROM `km_product_order_item` WHERE `uid`=?";
+	
 	//상품 판매 + 1
 	public static String PRODUCT_SOLD_UP = "UPDATE `km_product` SET `sold`=`sold`+1 WHERE `prodNo`=?";
 	
