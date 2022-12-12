@@ -425,3 +425,12 @@ font-variation-settings:
 'GRAD' 0,
 'opsz' 48
 }
+.material-symbols-outlined	{
+	cursor: pointer;
+}
+
+div.bx-pager {
+	  position: absolute;
+  	  top: 365px;
+}
+  

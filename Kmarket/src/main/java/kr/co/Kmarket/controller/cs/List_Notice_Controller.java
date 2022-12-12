@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/_cs/_notice/list.do")
+@WebServlet("/cs/notice/list.do")
 public class List_Notice_Controller extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
