@@ -233,11 +233,11 @@
                         </tr>
                         <tr>
                             <td><span>*</span> 아이디</td>
-                            <td><input type="text" name="uid" placeholder="아이디를 입력하세요.">&nbsp;&nbsp;<p class="resultId"></p></td>
+                            <td><input type="text" name="uid" placeholder="아이디를 입력하세요.">&nbsp;&nbsp;<p class="resultId">영문,숫자로 이루어진 4~12자까지 설정해주세요.</p></td>
                         </tr>
                         <tr>
                             <td><span>*</span> 비밀번호</td>
-                            <td><input type="password" name="pass1" placeholder="비밀번호를 입력하세요.">&nbsp;&nbsp;<p class="resultPw1"></p></td>
+                            <td><input type="password" name="pass1" placeholder="비밀번호를 입력하세요.">&nbsp;&nbsp;<p class="resultPw1">영문,숫자,특수문자를 조합하여 8~12자리까지 설정해주세요.</p></td>
                         </tr>
                         <tr>
                             <td><span>*</span> 비밀번호 확인</td>
@@ -267,7 +267,7 @@
                         </tr>
                         <tr>
                             <td><span>*</span> 휴대폰</td>
-                            <td><input type="text" name="hp" placeholder="휴대폰을 입력하세요.">&nbsp;&nbsp;<p class="resultHp"></p></td>
+                            <td><input type="text" name="hp" placeholder="휴대폰을 입력하세요.">&nbsp;&nbsp;<p class="resultHp">- 포함 13자리를 입력하세요.</p></td>
                         </tr>
                         <tr>
                             <td>주소</td>

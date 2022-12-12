@@ -45,7 +45,7 @@ public void insertProduct(ProductVO vo) {
 			psmt.setString(11, vo.getThumb1());
 			psmt.setString(12, vo.getThumb2());
 			psmt.setString(13, vo.getThumb3());
-			psmt.setString(14, vo.getDetail());
+			//psmt.setString(14, vo.getDetail());
 			psmt.setInt(15, vo.getProdNo());
 			psmt.setString(16, vo.getStatus());
 			psmt.setString(17, vo.getDuty());

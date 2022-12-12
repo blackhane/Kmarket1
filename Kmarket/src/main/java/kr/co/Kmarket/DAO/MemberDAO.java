@@ -48,17 +48,23 @@ public class MemberDAO extends DBCP {
 		try {
 			logger.info("신규 회원가입 - 판매자");
 			conn = getConnection();
-			psmt = conn.prepareStatement(MemberSQL.INSERT_MEMBER);
+			psmt = conn.prepareStatement(MemberSQL.INSERT_MEMBER_SELLER);
 			psmt.setString(1, vo.getUid());
 			psmt.setString(2, vo.getPass());
-			psmt.setString(3, vo.getName());
-			psmt.setString(4, vo.getEmail());
-			psmt.setString(5, vo.getHp());
-			psmt.setInt(6, vo.getType());
-			psmt.setString(7, vo.getZip());
-			psmt.setString(8, vo.getAddr1());
-			psmt.setString(9, vo.getAddr2());
-			psmt.setString(10, vo.getRegip());
+			psmt.setString(3, vo.getCompany());
+			psmt.setString(4, vo.getCeo());
+			psmt.setString(5, vo.getBizRegNum());
+			psmt.setString(6, vo.getComRegNum());
+			psmt.setString(7, vo.getTel());
+			psmt.setString(8, vo.getEmail());
+			psmt.setString(9, vo.getFax());
+			psmt.setInt(10, vo.getType());
+			psmt.setString(11, vo.getZip());
+			psmt.setString(12, vo.getAddr1());
+			psmt.setString(13, vo.getAddr2());
+			psmt.setString(14, vo.getManager());
+			psmt.setString(15, vo.getManagerHp());
+			psmt.setString(16, vo.getRegip());
 			psmt.executeUpdate();
 			close();
 		}catch(Exception e) {

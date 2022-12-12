@@ -55,11 +55,13 @@
                         <textarea readonly>${vo.privacy}</textarea>
                         <label><input type="checkbox" name="privacy"/> 동의합니다.</label>
                     </section>
-                    <section>
-                        <p><span class="choice">(선택)</span> 위치정보 이용약관</p>
-                        <textarea readonly>${vo.location}</textarea>
-                        <label><input type="checkbox"/> 동의합니다.</label>
-                    </section>
+                    <c:if test="${sign eq 1}">
+	                    <section>
+	                        <p><span class="choice">(선택)</span> 위치정보 이용약관</p>
+	                        <textarea readonly>${vo.location}</textarea>
+	                        <label><input type="checkbox"/> 동의합니다.</label>
+	                    </section>
+                    </c:if>
                     <div>
                         <button type="submit" class="btnNext">동의하기</button>
                     </div>

@@ -31,17 +31,20 @@ public class LoginController extends HttpServlet {
 		String pass = req.getParameter("pass");
 		String auto_login = req.getParameter("auto_login");
 		
-		HttpSession session = req.getSession();
 		MemberDAO dao = MemberDAO.getInstance();
 		MemberVO vo = dao.selectMemeber(uid, pass);
 		
-		//회원 O
-		if(vo.getUid() != null) {
-			session.setAttribute("sessUser", vo);
-
+		if(vo.getUid() == null) {
+			//로그인 실패
+			resp.sendRedirect("/Kmarket/member/login.do?code=100");
+		}else {
+			//로그인 성공
+			HttpSession sess = req.getSession();
+			sess.setAttribute("sessUser", vo);
+			
 			//자동로그인 체크
 			if(auto_login != null) {
-				String sessId = session.getId();
+				String sessId = sess.getId();
 				
 				//쿠키생성
 				Cookie cookie = new Cookie("sessId", sessId);
@@ -54,11 +57,7 @@ public class LoginController extends HttpServlet {
 			}
 			
 			resp.sendRedirect("/Kmarket/index.do");
-			return;
 		}
-		
-		//로그인 실패
-		resp.sendRedirect("/Kmarket/member/login.do?code=100");
 	}
 	
 }

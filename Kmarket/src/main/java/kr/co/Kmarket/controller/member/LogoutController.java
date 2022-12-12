@@ -23,6 +23,7 @@ public class LogoutController extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		//세션 삭제
+		session.removeAttribute("sessUser");
 		session.invalidate();
 		
 		//자동로그인 해제 - 덮어쓸 새로운 쿠키 생성

@@ -25,21 +25,6 @@ public class IndexController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		HttpSession session = req.getSession();
-		//자동로그인 여부
-		Cookie[] cookies = req.getCookies();
-		if(cookies != null) {
-			for(Cookie cookie : cookies) {
-				if(cookie.getName().equals("sessId")) {
-					String sessId = cookie.getValue();
-					MemberVO vo = MemberDAO.getInstance().selectCookie(sessId);
-					if(vo != null) {
-						session.setAttribute("sessUser", vo);
-					}
-				}
-			}
-		}
-		
 		ProductDAO dao = ProductDAO.getInstance();
 		//베스트 상품
 		List<ProductVO> best = dao.selectProductsBest1();

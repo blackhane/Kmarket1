@@ -10,6 +10,16 @@
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
   
+  <!-- 자동로그인 필터 -->
+  <filter>
+  	<filter-name>AutoLogin</filter-name>
+  	<filter-class>filter.AutoLogin</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>AutoLogin</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
   <!-- 인코딩 필터 -->
   <filter>
   	<filter-name>SetCharacterEncodingFilter</filter-name>

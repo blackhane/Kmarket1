@@ -91,7 +91,7 @@ public class RegisterController extends HttpServlet{
 		vo.setThumb1(thumb1);
 		vo.setThumb2(thumb2);
 		vo.setThumb3(thumb3);
-		vo.setDetail(detail);
+		//vo.setDetail(detail);
 		vo.setProdNo(prodNo);
 		vo.setStatus(status);
 		vo.setDuty(duty);

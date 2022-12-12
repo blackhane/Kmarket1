@@ -53,22 +53,20 @@
                 <div>
                     <ul>
                       <c:choose>
-                      	<c:when test="${sessUser.name eq '관리자'}">
-                      		<li style="font-weight:bold;">${sessUser.name}님, 환영합니다.</li>
-                      		<li><a href="/Kmarket/admin/index.do">관리자</a></li>
-                     		<li><a href="/Kmarket/logout.do">로그아웃</a></li>
-                      	</c:when>
-                      	<c:when test="${not empty sessUser.name}">
-                      		<li style="font-weight:bold;">${sessUser.name}님, 환영합니다.</li>
-                      		<li><a href="/Kmarket/logout.do">로그아웃</a></li>
+                      	<c:when test="${not empty sessUser.uid}">
+                      		<li style="font-weight:bold;">${sessUser.uid}님, 환영합니다.</li>
+                      		<li><a href="/Kmarket/logout.do?uid=${sessUser.uid}">로그아웃</a></li>
+                      		<c:if test="${sessUser.name eq '관리자'}">	                      		
+	                      		<li><a href="/Kmarket/admin/index.do">관리자</a></li>	                     		
+	                      	</c:if>
+		                    <li><a href="#">마이페이지</a></li>
+		                    <li><a href="/Kmarket/product/cart.do">장바구니</a></li>
                       	</c:when>
                       	<c:otherwise>
                       		<li><a href="/Kmarket/member/login.do">로그인</a></li>
                      		<li><a href="/Kmarket/member/join.do">회원가입</a></li>
                       	</c:otherwise>
                       </c:choose>
-                      <li><a href="#">마이페이지</a></li>
-                      <li><a href="/Kmarket/product/cart.do">장바구니</a></li>
                     </ul>
                 </div>
             </div>
