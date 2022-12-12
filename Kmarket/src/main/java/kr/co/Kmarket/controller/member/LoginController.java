@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import kr.co.Kmarket.DAO.MemberDAO;
 import kr.co.Kmarket.VO.MemberVO;
 
-@WebServlet("/_member/login.do")
+@WebServlet("/member/login.do")
 public class LoginController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -32,21 +32,8 @@ public class LoginController extends HttpServlet {
 		String auto_login = req.getParameter("auto_login");
 		
 		HttpSession session = req.getSession();
-		MemberVO vo  = new MemberVO();
 		MemberDAO dao = MemberDAO.getInstance();
-		
-		//하드코딩
-		if(uid.equals("root") && pass.equals("1234")) {
-			vo.setUid(uid);
-			vo.setName("관리자");
-			
-			session.setAttribute("sessUser", vo);
-			
-			resp.sendRedirect("/Kmarket/");
-			return;
-		}
-		
-		vo = dao.selectMemeber(uid, pass);
+		MemberVO vo = dao.selectMemeber(uid, pass);
 		
 		//회원 O
 		if(vo.getUid() != null) {
@@ -66,13 +53,12 @@ public class LoginController extends HttpServlet {
 				dao.makeCookie(uid, sessId);
 			}
 			
-			resp.sendRedirect("/Kmarket/");
+			resp.sendRedirect("/Kmarket/index.do");
 			return;
 		}
 		
 		//로그인 실패
-		String code = "100";
-		resp.sendRedirect("/Kmarket/_member/login.do?code=100");
+		resp.sendRedirect("/Kmarket/member/login.do?code=100");
 	}
 	
 }
