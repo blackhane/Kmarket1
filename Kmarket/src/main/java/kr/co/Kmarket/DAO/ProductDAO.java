@@ -257,7 +257,7 @@ public class ProductDAO extends DBCP {
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				CartVO vo = new CartVO();
-				vo.setOrdNo(rs.getString(1));
+				vo.setCartNo(rs.getString(1));
 				vo.setUid(rs.getString(2));
 				vo.setProdNo(rs.getString(3));
 				vo.setCount(rs.getString(4));

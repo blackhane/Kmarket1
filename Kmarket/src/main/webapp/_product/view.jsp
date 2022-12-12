@@ -6,15 +6,15 @@
 <script>
 	$(function(){
 		$('.cart').click(function(){
-			let uid = $('input[name=uid]').val();
-			let prodNo = $('input[name=prodNo]').val();
+			let uid = "${sessUser.uid}";
+			let prodNo = "${item.prodNo}";
 			let count = $('input[name=num]').val();
-			let price = $('input[name=price]').val();
-			let discount = $('input[name=discount]').val();
+			let price = "${item.price}";
+			let discount = "${item.discount}";
 			let point = price / 100 * count;
-			let delivery = $('input[name=delivery]').val();
+			let delivery = "${item.delivery}";
 			let total = (price - (price/100 * discount)) * count;
-			
+
 			let jsonData = {
 					'uid' : uid,
 					'prodNo' : prodNo,
@@ -26,21 +26,28 @@
 					'total' : total
 			};
 			
-			$.ajax({
-				url : '/Kmarket/product/addCart.do',
-				method : 'get',
-				data : jsonData,
-				dataType : 'json',
-				success : function(data){
-					if(data.result > 0){
-						let answer = confirm('선택하신 상품이 장바구니에 담겼습니다.\n장바구니로 이동하시겠습니까?');
-						if(answer){
-							location.href = "/Kmarket/product/cart.do?uid="+uid;
-							return;
+			if(uid == ''){
+				let answer = confirm('로그인 후 이용가능한 기능입니다. 로그인 하시겠습니까?');
+				if(answer){
+					location.href = "/Kmarket/member/login.do";
+				}
+			}else{
+				$.ajax({
+					url : '/Kmarket/product/addCart.do',
+					method : 'get',
+					data : jsonData,
+					dataType : 'json',
+					success : function(data){
+						if(data.result > 0){
+							let answer = confirm('선택하신 상품이 장바구니에 담겼습니다.\n장바구니로 이동하시겠습니까?');
+							if(answer){
+								location.href = "/Kmarket/product/cart.do?uid="+uid;
+								return;
+							}
 						}
-					}
-				}			
-			});
+					}			
+				});
+			}
 		});
 		
 		$('.order').click(function(){
@@ -98,11 +105,6 @@
 	});
 </script>
             <section class="view">
-            <input type="hidden" name="uid" value="${sessUser.uid}">
-            <input type="hidden" name="prodNo" value="${item.prodNo}">
-            <input type="hidden" name="price" value="${item.price}">
-            <input type="hidden" name="discount" value="${item.discount}">
-            <input type="hidden" name="delivery" value="${item.delivery}"/>
                 <nav>
                     <h1>상품보기</h1>
                     <p>HOME > <span>${cate.c1Name}</span> > <strong>${cate.c2Name}</strong></p>

@@ -5,10 +5,10 @@
                 <p><span>케이마켓</span>이 도와드릴게요!</p>
             </section>
             <section class="notice">
-                <h1>공지사항 <a href="/Kmarket/_cs/_notice/list.do">전체보기</a></h1>
+                <h1>공지사항 <a href="/Kmarket/cs/notice/list.do">전체보기</a></h1>
                 <ul>
                     <li>
-                        <a href="/Kmarket/_cs/_notice/view.do">[안내] 해외결제 사칭 문자 주의 <span>22.10.31</span></a>
+                        <a href="/Kmarket/cs/notice/view.do">[안내] 해외결제 사칭 문자 주의 <span>22.10.31</span></a>
                     </li>
                     <li>
                         <a href="#">[안내] 해외결제 사칭 문자 주의 <span>22.10.31</span></a>
@@ -25,9 +25,9 @@
                 </ul>
             </section>
             <section class="faq">
-                <h1>자주 묻는 질문 <a href="/Kmarket/_cs/_faq/list.do">전체보기</a></h1>
+                <h1>자주 묻는 질문 <a href="/Kmarket/cs/faq/list.do">전체보기</a></h1>
                 <ul>
-                    <li><a href="/Kmarket/_cs/_faq/list.do"><span>회원</span></a></li>
+                    <li><a href="/Kmarket/cs/faq/list.do"><span>회원</span></a></li>
                     <li><a href="#"><span>쿠폰/이벤트</span></a></li>
                     <li><a href="#"><span>주문/결제</span></a></li>
                     <li><a href="#"><span>배송</span></a></li>
@@ -37,10 +37,10 @@
                 </ul>
             </section>
             <section class="inquiry">
-                <h1>문의하기 <a href="/Kmarket/_cs/_qna/list.do">전체보기</a></h1>
+                <h1>문의하기 <a href="/Kmarket/cs/qna/list.do">전체보기</a></h1>
                 <ul>
                     <li>
-                        <a href="/Kmarket/_cs/_qna/view.do">[회원] 개인회원과 법인회원에 차이가 있나요? <p>*******<span>22.10.31</span></p></a>
+                        <a href="/Kmarket/cs/qna/view.do">[회원] 개인회원과 법인회원에 차이가 있나요? <p>*******<span>22.10.31</span></p></a>
                     </li>
                     <li>
                         <a href="#">[쿠폰/이벤트] 스마일포인트는 어디에 사용하나요? <p>*******<span>22.10.31</span></p></a>

@@ -2,7 +2,7 @@ package kr.co.Kmarket.VO;
 
 public class CartVO {
 
-	private String ordNo;
+	private String cartNo;
 	private String uid;
 	private String prodNo;
 	private String count;
@@ -36,11 +36,11 @@ public class CartVO {
 	public void setDescript(String descript) {
 		this.descript = descript;
 	}
-	public String getOrdNo() {
-		return ordNo;
+	public String getCartNo() {
+		return cartNo;
 	}
-	public void setOrdNo(String ordNo) {
-		this.ordNo = ordNo;
+	public void setCartNo(String cartNo) {
+		this.cartNo = cartNo;
 	}
 	public String getUid() {
 		return uid;
