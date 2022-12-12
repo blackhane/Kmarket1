@@ -5,6 +5,7 @@
                 <div>
                     <p>판매자 회원가입</p>
                 </div>
+            	<form action="/Kmarket/member/registerSeller.do" method="post">
                 <div>
                     <table>
                         <tr>
@@ -16,11 +17,11 @@
                         </tr>
                         <tr>
                             <td><span>*</span> 비밀번호</td>
-                            <td><input type="password" pass1="pass" placeholder="비밀번호를 입력하세요."> 영문,숫자,특수문자를 조합하여 8~12자리까지 설정해 주세요.</td>
+                            <td><input type="password" name="pass" placeholder="비밀번호를 입력하세요."> 영문,숫자,특수문자를 조합하여 8~12자리까지 설정해 주세요.</td>
                         </tr>
                         <tr>
                             <td><span>*</span> 비밀번호 확인</td>
-                            <td><input type="password" pass2="pass2" placeholder="비밀번호를 한번 더 입력하세요."> 비밀번호 재입력</td>
+                            <td><input type="password" name="pass2" placeholder="비밀번호를 한번 더 입력하세요."> 비밀번호 재입력</td>
                         </tr>
                     </table>
                     <table>
@@ -81,6 +82,7 @@
                         <button type="submit" class="btnRegister">회원가입</button>
                     </div>
                 </div>
+                </form>
             </div>
         </main>
 <jsp:include page="./_footer.jsp"/>

@@ -30,7 +30,7 @@
                         </td>
                         <td>
                             <h3 class="name">${item.prodName}</h3>
-                            <a href="#" class="desc">${item.descript}</a>
+                            <a href="/Kmarket/product/view.do?cate1=${cate.cate1}&cate2=${cate.cate2}&prodNo=${item.prodNo}" class="desc">${item.descript}</a>
                         </td>
                         <td>
                             <ul>
@@ -76,35 +76,6 @@
                         </td>
                     </tr>
                 </c:forEach>
-                	<tr>
-                        <td>
-                            <a href="/Kmarket/product/view.do?cate1=${cate.cate1}&cate2=${cate.cate2}" class="thumb">
-                                <img src="https://via.placeholder.com/120x120" alt="상품이미지"> </a>
-                        </td>
-                        <td>
-                            <h3 class="name">상품명</h3>
-                            <a href="#" class="desc">상품설명</a>
-                        </td>
-                        <td>
-                            <ul>
-                                <li>
-                                    <ins class="dis-price">270,000</ins>
-                                </li>
-                                <li>
-                                    <del class="org-price">30,000</del>
-                                    <span class="discount">10%</span>
-                                </li>
-                                <li>
-                                    <span class="free-delivery">무료배송</span>
-                                </li>
-                            </ul>
-                        </td>
-                        <td>
-                            <h4 class="seller"><i class="fas fa-home"></i>&nbsp;판매자</h4>
-                            <h5 class="badge power">판매자등급</h5>
-                            <h6 class="rating star1">상품평</h6>
-                        </td>
-                    </tr>
                 </table>
                 <!-- 페이지 번호 -->
                 <div class="paging">

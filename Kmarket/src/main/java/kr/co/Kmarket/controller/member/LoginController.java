@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import kr.co.Kmarket.DAO.MemberDAO;
 import kr.co.Kmarket.VO.MemberVO;
 
-@WebServlet("/_member/login.do")
+@WebServlet("/member/login.do")
 public class LoginController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;

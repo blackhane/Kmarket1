@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.Kmarket.DAO.MemberDAO;
 import kr.co.Kmarket.VO.MemberVO;
 
-@WebServlet("/_member/register.do")
+@WebServlet("/member/register.do")
 public class RegisterController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
