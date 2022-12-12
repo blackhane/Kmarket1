@@ -26,7 +26,7 @@ public class RegisterController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uid = req.getParameter("uid");
-		String pass = req.getParameter("pass");
+		String pass = req.getParameter("pass2");
 		String name = req.getParameter("name");
 		String gender = req.getParameter("gender");
 		String email = req.getParameter("email");
@@ -51,5 +51,7 @@ public class RegisterController extends HttpServlet {
 		vo.setRegip(regip);
 		
 		MemberDAO.getInstance().insertMember(vo);
+		
+		resp.sendRedirect("/Kmarket/member/login.do?code=101");
 	}
 }

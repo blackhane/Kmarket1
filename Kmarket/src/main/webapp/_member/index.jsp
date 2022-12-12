@@ -53,18 +53,18 @@
                 <div>
                     <ul>
                       <c:choose>
-                      	<c:when test="${empty sessUser.name}">
-                      		<li><a href="/Kmarket/member/login.do">로그인</a></li>
-                     		<li><a href="/Kmarket/member/join.do">회원가입</a></li>
-                      	</c:when>
-                      	<c:when test="${sessUser.name eq 'java1_team1'}">
+                      	<c:when test="${sessUser.name eq '관리자'}">
                       		<li style="font-weight:bold;">${sessUser.name}님, 환영합니다.</li>
                       		<li><a href="/Kmarket/admin/index.do">관리자</a></li>
                      		<li><a href="/Kmarket/logout.do">로그아웃</a></li>
                       	</c:when>
-                      	<c:otherwise>
+                      	<c:when test="${not empty sessUser.name}">
                       		<li style="font-weight:bold;">${sessUser.name}님, 환영합니다.</li>
                       		<li><a href="/Kmarket/logout.do">로그아웃</a></li>
+                      	</c:when>
+                      	<c:otherwise>
+                      		<li><a href="/Kmarket/member/login.do">로그인</a></li>
+                     		<li><a href="/Kmarket/member/join.do">회원가입</a></li>
                       	</c:otherwise>
                       </c:choose>
                       <li><a href="#">마이페이지</a></li>
@@ -214,7 +214,7 @@
 						        </div>
 						    </a>
 						</li>
-					 <c:set var="i" value="i+1"/>
+					 <c:set var="i" value="${i+1}"/>
 					 </c:forEach>
                     </ol>
                 </article>

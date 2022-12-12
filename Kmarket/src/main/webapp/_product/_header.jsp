@@ -37,8 +37,8 @@
                     <ul>
                    	<c:choose>
 	                   	<c:when test="${empty sessUser.name}">
-	                   		<li><a href="/Kmarket/_member/login.do">로그인</a></li>
-	                  		<li><a href="/Kmarket/_member/join.do">회원가입</a></li>
+	                   		<li><a href="/Kmarket/member/login.do">로그인</a></li>
+	                  		<li><a href="/Kmarket/member/join.do">회원가입</a></li>
 	                   	</c:when>
 	                   	<c:otherwise>
 	                   		<li style="font-weight:bold;">${sessUser.name}님, 환영합니다.</li>

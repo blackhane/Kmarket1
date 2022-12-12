@@ -6,11 +6,15 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import kr.co.Kmarket.DAO.MemberDAO;
 import kr.co.Kmarket.DAO.ProductDAO;
+import kr.co.Kmarket.VO.MemberVO;
 import kr.co.Kmarket.VO.ProductVO;
 
 @WebServlet("/index.do")
@@ -20,6 +24,22 @@ public class IndexController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		HttpSession session = req.getSession();
+		//자동로그인 여부
+		Cookie[] cookies = req.getCookies();
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("sessId")) {
+					String sessId = cookie.getValue();
+					MemberVO vo = MemberDAO.getInstance().selectCookie(sessId);
+					if(vo != null) {
+						session.setAttribute("sessUser", vo);
+					}
+				}
+			}
+		}
+		
 		ProductDAO dao = ProductDAO.getInstance();
 		//베스트 상품
 		List<ProductVO> best = dao.selectProductsBest1();
