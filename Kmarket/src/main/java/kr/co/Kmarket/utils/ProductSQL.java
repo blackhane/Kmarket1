@@ -19,17 +19,21 @@ public class ProductSQL {
 
 	//상품보기
 	public static String SELECT_PPRODUCT = "SELECT * FROM `km_product` WHERE `prodNo`=?";
-
-	//장바구니 등록
-	public static String INSERT_CART = "INSERT INTO `km_product_cart` VALUES `uid`=?, `prodNo`=?, `count`=?, `price`=?, `discount`=?, `point`=?, `delivery`=?, `total`=? `rdate`=NOW()";
+	
+	//상품 조회수 + 1
+	public static String PRODUCT_HIT_UP = "UPDATE `km_product` SET `hit`=`hit`+1 WHERE `prodNo`=?";
 	
 	//장바구니 등록
-	public static String SELECT_CART_ITEM = "SELECT * FROM `km_product_order_item` WHERE `uid`=?";
+	public static String INSERT_CART = "INSERT INTO `km_product_cart` (`uid`,`prodNo`,`count`,`price`,`discount`,`point`,`delivery`,`total`,`rdate`) VALUE (?,?,?,?,?,?,?,?,NOW())";
+	
+	//장바구니 목록
+	public static String SELECT_CART = "SELECT a.*,b.`prodName`,b.`descript`,b.`thumb1` FROM `km_product_cart` AS a "
+									+ "JOIN `km_product` AS b "
+									+ "ON a.prodNo = b.prodNo  WHERE `uid`=?";
 	
 	//상품 판매 + 1
 	public static String PRODUCT_SOLD_UP = "UPDATE `km_product` SET `sold`=`sold`+1 WHERE `prodNo`=?";
 	
-	//상품 조회수 + 1
-	public static String PRODUCT_HIT_UP = "UPDATE `km_product` SET `hit`=`hit`+1 WHERE `prodNo`=?";
+	
 
 }

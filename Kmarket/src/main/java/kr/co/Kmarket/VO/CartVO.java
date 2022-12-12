@@ -1,8 +1,9 @@
 package kr.co.Kmarket.VO;
 
-public class OrderItemVO {
+public class CartVO {
 
 	private String ordNo;
+	private String uid;
 	private String prodNo;
 	private String count;
 	private String price;
@@ -10,12 +11,42 @@ public class OrderItemVO {
 	private String point;
 	private String delivery;
 	private String total;
+	private String rdate;
 	
+	private String prodName;
+	private String descript;
+	private String thumb1;
+	
+	
+	public String getThumb1() {
+		return thumb1;
+	}
+	public void setThumb1(String thumb1) {
+		this.thumb1 = thumb1;
+	}
+	public String getProdName() {
+		return prodName;
+	}
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
+	public String getDescript() {
+		return descript;
+	}
+	public void setDescript(String descript) {
+		this.descript = descript;
+	}
 	public String getOrdNo() {
 		return ordNo;
 	}
 	public void setOrdNo(String ordNo) {
 		this.ordNo = ordNo;
+	}
+	public String getUid() {
+		return uid;
+	}
+	public void setUid(String uid) {
+		this.uid = uid;
 	}
 	public String getProdNo() {
 		return prodNo;
@@ -58,6 +89,12 @@ public class OrderItemVO {
 	}
 	public void setTotal(String total) {
 		this.total = total;
+	}
+	public String getRdate() {
+		return rdate;
+	}
+	public void setRdate(String rdate) {
+		this.rdate = rdate;
 	}
 	
 }

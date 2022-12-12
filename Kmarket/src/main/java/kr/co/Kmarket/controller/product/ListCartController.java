@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import kr.co.Kmarket.DAO.ProductDAO;
-import kr.co.Kmarket.VO.OrderItemVO;
+import kr.co.Kmarket.VO.CartVO;
 
 @WebServlet("/product/listCart.do")
 public class ListCartController extends HttpServlet {
@@ -21,15 +21,6 @@ public class ListCartController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String uid = req.getParameter("uid");
 		
-		OrderItemVO vo = ProductDAO.getInstance().selectCartItem(uid);
-		
-		resp.setContentType("application/json; charset=UTF-8");
-		Gson gson = new Gson();
-		String jsonData = gson.toJson(vo);
-		PrintWriter writer = resp.getWriter();
-		writer.write(jsonData);
-		writer.flush();
 	}
 }

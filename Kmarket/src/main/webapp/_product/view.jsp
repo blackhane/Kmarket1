@@ -7,32 +7,35 @@
 	$(function(){
 		$('.cart').click(function(){
 			let uid = $('input[name=uid]').val();
-			if(uid == null){
-				let answer = confirm('로그인 후에 주문 가능합니다. 로그인 하시겠습니까?');
-				if(answer){
-					//로그인 후 뒤로가기 ㄱㄱ
-					location.href = "/Kmarket/_member/login.do";
-					return;
-				}
-			}
 			let prodNo = $('input[name=prodNo]').val();
 			let count = $('input[name=num]').val();
+			let price = $('input[name=price]').val();
+			let discount = $('input[name=discount]').val();
+			let point = price / 100 * count;
+			let delivery = $('input[name=delivery]').val();
+			let total = (price - (price/100 * discount)) * count;
+			
 			let jsonData = {
-				'uid' : uid,
-				'prodNo' : prodNo,
-				'count' : count
+					'uid' : uid,
+					'prodNo' : prodNo,
+					'count' : count,
+					'price' : price,
+					'discount' : discount,
+					'point' : point,
+					'delivery' : delivery,
+					'total' : total
 			};
+			
 			$.ajax({
 				url : '/Kmarket/product/addCart.do',
 				method : 'get',
 				data : jsonData,
 				dataType : 'json',
 				success : function(data){
-					console.log(data.result);
 					if(data.result > 0){
 						let answer = confirm('선택하신 상품이 장바구니에 담겼습니다.\n장바구니로 이동하시겠습니까?');
 						if(answer){
-							location.href = "/Kmarket/product/cart.do";
+							location.href = "/Kmarket/product/cart.do?uid="+uid;
 							return;
 						}
 					}
@@ -95,7 +98,11 @@
 	});
 </script>
             <section class="view">
-
+            <input type="hidden" name="uid" value="${sessUser.uid}">
+            <input type="hidden" name="prodNo" value="${item.prodNo}">
+            <input type="hidden" name="price" value="${item.price}">
+            <input type="hidden" name="discount" value="${item.discount}">
+            <input type="hidden" name="delivery" value="${item.delivery}"/>
                 <nav>
                     <h1>상품보기</h1>
                     <p>HOME > <span>${cate.c1Name}</span> > <strong>${cate.c2Name}</strong></p>
@@ -114,19 +121,19 @@
                             <h3>${item.prodName}</h3>
                             <p>${item.descript}</p>
                             <c:choose>
-                            	<c:when test="${item.score ge 5}">
+                            	<c:when test="${item.score/item.review ge 5}">
                             		<h5 class="rating star5">${item.score}<a href="#review">상품평보기</a></h5>
                             	</c:when>
-                            	<c:when test="${item.score ge 4}">
+                            	<c:when test="${item.score/item.review ge 4}">
                             		<h5 class="rating star4">${item.score}<a href="#review">상품평보기</a></h5>
                             	</c:when>
-                            	<c:when test="${item.score ge 3}">
+                            	<c:when test="${item.score/item.review ge 3}">
                             		<h5 class="rating star3">${item.score}<a href="#review">상품평보기</a></h5>
                             	</c:when>
-                            	<c:when test="${item.score ge 2}">
+                            	<c:when test="${item.score/item.review ge 2}">
                             		<h5 class="rating star2">${item.score}<a href="#review">상품평보기</a></h5>
                             	</c:when>
-                            	<c:when test="${item.score ge 1}">
+                            	<c:when test="${item.score/item.review ge 1}">
                             		<h5 class="rating star1">${item.score}<a href="#review">상품평보기</a></h5>
                             	</c:when>
                             	<c:otherwise>
@@ -144,10 +151,10 @@
 	                            </div>
 	                            <div class="dis_price">
 	                                <ins class="ori" style="display:none;">
-	                                	<fmt:formatNumber type="number" pattern="0" value="${item.price - (item.price/item.discount)}"/>
+	                                	<fmt:formatNumber type="number" pattern="0" value="${item.price - (item.price/100 *item.discount)}"/>
 	                                </ins>
 	                                <ins>
-	                                	<fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/item.discount)}"/>
+	                                	<fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/100 *item.discount)}"/>
                                 	</ins>
 	                            </div>
                             </c:when>
@@ -196,10 +203,8 @@
                         </div>
 
                         <div class="button">
-                        	<input type="hidden" name="uid" value="${sessUser.uid}">
-                        	<input type="hidden" name="prodNo" value="${product.prodNo}">
                             <input type="button" class="cart" value="장바구니" />
-                            <input type="button" class="order"value="구매하기" />
+                            <input type="button" class="order" value="구매하기" />
                         </div>
                     </div>
                 </article>
@@ -209,8 +214,6 @@
                         <h1>상품정보</h1>
                     </nav>
                     <img src="/Kmarket/${item.detail1}" alt="detail">
-                    <img src="/Kmarket/${item.detail2}" alt="detail">
-                    <img src="/Kmarket/${item.detail3}" alt="detail">
                 </article>
 
                 <article class="notice">

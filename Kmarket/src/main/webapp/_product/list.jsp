@@ -35,7 +35,7 @@
                         <td>
                             <ul>
                                 <li>
-                                    <ins class="dis-price"><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/item.discount)}"/></ins>
+                                    <ins class="dis-price"><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/100 * item.discount)}"/></ins>
                                 </li>
                                 <li>
                                     <del class="org-price">${item.price}</del>

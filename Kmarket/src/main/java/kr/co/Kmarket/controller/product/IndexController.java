@@ -1,4 +1,4 @@
-package kr.co.Kmarket.controller.member;
+package kr.co.Kmarket.controller.product;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,22 +28,21 @@ public class IndexController extends HttpServlet {
 		ProductDAO dao = ProductDAO.getInstance();
 		//베스트 상품
 		List<ProductVO> best = dao.selectProductsBest1();
+		req.setAttribute("best", best);
 		//히트 상품
 		List<ProductVO> hit = dao.selectProductsBest2("hit");
+		req.setAttribute("hit", hit);
 		//추천 상품
 		List<ProductVO> recommend = dao.selectProductsBest2("score");
+		req.setAttribute("recommend", recommend);
 		//최신 상품
 		List<ProductVO> newItem = dao.selectProductsBest2("rdate");
+		req.setAttribute("newItem", newItem);
 		//할인 상품
 		List<ProductVO> discount = dao.selectProductsBest2("discount");
-		
-		req.setAttribute("best", best);
-		req.setAttribute("hit", hit);
-		req.setAttribute("recommend", recommend);
-		req.setAttribute("newItem", newItem);
 		req.setAttribute("discount", discount);
 		
-		RequestDispatcher dispathcer = req.getRequestDispatcher("/_member/index.jsp");
+		RequestDispatcher dispathcer = req.getRequestDispatcher("/_product/index.jsp");
 		dispathcer.forward(req, resp);
 	}
 }

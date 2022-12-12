@@ -59,14 +59,14 @@
                       		<c:if test="${sessUser.name eq '관리자'}">	                      		
 	                      		<li><a href="/Kmarket/admin/index.do">관리자</a></li>	                     		
 	                      	</c:if>
-		                    <li><a href="#">마이페이지</a></li>
-		                    <li><a href="/Kmarket/product/cart.do">장바구니</a></li>
                       	</c:when>
                       	<c:otherwise>
                       		<li><a href="/Kmarket/member/login.do">로그인</a></li>
                      		<li><a href="/Kmarket/member/join.do">회원가입</a></li>
                       	</c:otherwise>
                       </c:choose>
+	                  <li><a href="#">마이페이지</a></li>
+	                  <li><a href="/Kmarket/product/cart.do?uid=${sessUser.uid}">장바구니</a></li>
                     </ul>
                 </div>
             </div>
@@ -208,7 +208,7 @@
 						            <span>${item.discount}%</span>
 						        </div>
 						        <div class="dis_price">
-						            <ins><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/item.discount)}"/>원</ins>
+						            <ins><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/100 * item.discount)}"/>원</ins>
 						        </div>
 						    </a>
 						</li>
@@ -262,7 +262,7 @@
 								<span>${item.discount}%</span>
 							</div>
 							<div class="dis_price">
-								<ins><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/item.discount)}"/>원</ins>
+								<ins><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/100 * item.discount)}"/>원</ins>
 								<c:if test="${item.delivery eq '0'}">
 									<span class="free">무료배송</span>
 								</c:if>
@@ -284,7 +284,7 @@
 								<span>${item.discount}%</span>
 							</div>
 							<div class="dis_price">
-								<ins><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/item.discount)}"/>원</ins>
+								<ins><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/100 * item.discount)}"/>원</ins>
 								<c:if test="${item.delivery eq '0'}">
 									<span class="free">무료배송</span>
 								</c:if>
@@ -306,7 +306,7 @@
 								<span>${item.discount}%</span>
 							</div>
 							<div class="dis_price">
-								<ins><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/item.discount)}"/>원</ins>
+								<ins><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/100 * item.discount)}"/>원</ins>
 								<c:if test="${item.delivery eq 0}">
 									<span class="free">무료배송</span>
 								</c:if>
@@ -318,18 +318,18 @@
 			<section class="discount" id="discount">
 				<h3><span>할인상품</span></h3>
 				<article>
-					<c:forEach items="${discount}" var="item">
-						<a href="/Kmarket/product/view.do?cate1=${item.cate1}&cate2=${item.cate2}&prodNo=${item.prodNo}">
-							<div class="thumb"><img src="/Kmarket/${item.thumb2}" alt="thumb2" /></div>
-							<h2>${item.prodName}</h2>
-							<p>${item.descript}</p>
+					<c:forEach items="${discount}" var="discount">
+						<a href="/Kmarket/product/view.do?cate1=${discount.cate1}&cate2=${discount.cate2}&prodNo=${discount.prodNo}">
+							<div class="thumb"><img src="/Kmarket/${discount.thumb2}" alt="thumb2" /></div>
+							<h2>${discount.prodName}</h2>
+							<p>${discount.descript}</p>
 							<div class="org_price">
-								<del>${item.price}원</del>
-								<span>${item.discount}%</span>
+								<del>${discount.price}원</del>
+								<span>${discount.discount}%</span>
 							</div>
 							<div class="dis_price">
-								<ins><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/item.discount)}"/>원</ins>
-								<c:if test="${item.delivery eq 0}">
+								<ins><fmt:formatNumber type="number" pattern="#,###" value="${discount.price - (discount.price/100 * discount.discount)}"/>원</ins>
+								<c:if test="${discount.delivery eq 0}">
 									<span class="free">무료배송</span>
 								</c:if>
 							</div>

@@ -28,6 +28,7 @@ public class ViewController extends HttpServlet {
 		String c1Name = dao.selectCate1Name(cate1);
 		String c2Name = dao.selectCate2Name(cate1, cate2);
 		ProductVO item = dao.selectProduct(prodNo);
+		dao.updateProductHit(prodNo);
 		
 		CateVO vo = new CateVO();
 		vo.setC1Name(c1Name);

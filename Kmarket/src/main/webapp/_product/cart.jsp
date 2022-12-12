@@ -2,38 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
 <jsp:include page="./nagivation.jsp"/>
-<script>
-	$(function(){
-		cartList();
-		
-		function cartList(){
-			let uid = "${sessUser.uid}";
-			
-			$.ajax({
-				url : '/Kmarket/product/listCart.do',
-				method : 'get',
-				data : {'uid' : uid},
-				dataType : 'json',
-				success : function(data){
-					if(data == 0){
-						let	tag = "<tr><td colspan='8'>장바구니에 상품이 없습니다.</td></tr>";
-					}
-					if(data != null){
-						console.log(data);
-						for(let item of data){
-							let	tag = "<tr>";
-								tag += "<td><input type='checkbox'></td>";
-								tag += "<td><article><a href='#'><img src='https://via.placeholder.com/80x80'></a>";
-								tag += "<div><h2><a href='#'>상품명</a></h2><p>상품설명</p></div></article></td>";
-								tag += "<td>1</td><td>27,000</td><td>5%</td><td>270</td>";
-								tag += "<td>무료배송</td><td>27,000</td></tr>";
-						}
-					}
-				}
-			});
-		}
-	});
-</script>
             <section class="cart">
 
                 <nav>
@@ -58,55 +26,32 @@
                             </tr>
                         </thead>
                         <!-- 장바구니 목록 -->
-                        <tbody>
+                        <tbody class="cartList">
+                        <c:forEach items="${cart}" var="cart">
                             <tr>
                                 <td><input type="checkbox"></td>
-                                <td><article><a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
+                                <td><article><a href="#"><img src="/Kmarket/${cart.thumb1}" alt="thumb1"></a>
                                 <div>
-                                    <h2><a href="#">상품명</a></h2>
-                                    <p>상품설명</p>
+                                    <h2><a href="#">${cart.prodName}</a></h2>
+                                    <p>${cart.descript}</p>
                                 </div>
                                 </article>
                                 </td>
-                                <td>1</td>
-                                <td>27,000</td>
-                                <td>5%</td>
-                                <td>270</td>
-                                <td>무료배송</td>
-                                <td>27,000</td>
+                                <td>${cart.count}</td>
+                                <td>${cart.price}</td>
+                                <td>${cart.discount}%</td>
+                                <td>${cart.point}</td>
+                                <c:choose>
+                                	<c:when test="${cart.delivery eq 0}">
+                                		<td>무료배송</td>
+                                	</c:when>
+                                	<c:otherwise>
+                                		<td>${cart.delivery}</td>
+                                	</c:otherwise>
+                                </c:choose>
+                                <td>${cart.total}</td>
                             </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td><article><a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                                <div>
-                                    <h2><a href="#">상품명</a></h2>
-                                    <p>상품설명</p>
-                                </div>
-                                </article>
-                                </td>
-                                <td>1</td>
-                                <td>27,000</td>
-                                <td>5%</td>
-                                <td>270</td>
-                                <td>무료배송</td>
-                                <td>27,000</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td><article><a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                                <div>
-                                    <h2><a href="#">상품명</a></h2>
-                                    <p>상품설명</p>
-                                </div>
-                                </article>
-                                </td>
-                                <td>1</td>
-                                <td>27,000</td>
-                                <td>5%</td>
-                                <td>270</td>
-                                <td>무료배송</td>
-                                <td>27,000</td>
-                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                     <input type="button" name="del" value="선택삭제">
@@ -117,27 +62,27 @@
                         <table border="0">
                             <tr>
                                 <td>상품수</td>
-                                <td>1</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>상품금액</td>
-                                <td>27,000</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>할인금액</td>
-                                <td>-1,000</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>배송비</td>
-                                <td>0</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>포인트</td>
-                                <td>260</td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>전체주문금액</td>
-                                <td>26,000</td>
+                                <td></td>
                             </tr>
                         </table>
                         <input type="submit" value="주문하기">

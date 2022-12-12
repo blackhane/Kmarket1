@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,8 +26,8 @@
       } );
     </script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-
 <body>
     <div id="wrapper">
         <header>
@@ -46,7 +45,7 @@
 	                   	</c:otherwise>
                     </c:choose>
                     <li><a href="#">마이페이지</a></li>
-                    <li><a href="/Kmarket/product/cart.do">장바구니</a></li>
+                    <li><a href="/Kmarket/product/cart.do?uid=${sessUser.uid}">장바구니</a></li>
                     </ul>
                 </div>
             </div>

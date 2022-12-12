@@ -6,7 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.co.Kmarket.VO.OrderItemVO;
+import kr.co.Kmarket.VO.CartVO;
 import kr.co.Kmarket.VO.ProductVO;
 import kr.co.Kmarket.utils.DBCP;
 import kr.co.Kmarket.utils.ProductSQL;
@@ -74,10 +74,10 @@ public class ProductDAO extends DBCP {
 					ls = "`sold` DESC";
 					break;
 				case 2:
-					ls = "`price` ASC";
+					ls = "`price`-(`price`/100 * `discount`) ASC";
 					break;
 				case 3:
-					ls = "`price` DESC";
+					ls = "`price`-(`price`/100 * `discount`) DESC";
 					break;
 				case 4:
 					ls = "`score` DESC";
@@ -152,9 +152,8 @@ public class ProductDAO extends DBCP {
 		try {
 			logger.info("INDEX 페이지 상품목록 : " + col);
 			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSQL.BEST_PRODUCT_8);
-			psmt.setString(1, col);
-			rs = psmt.executeQuery();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM `km_product` ORDER BY " + col + " DESC LIMIT 8");
 			while(rs.next()) {
 				ProductVO vo = new ProductVO();
 				vo.setProdNo(rs.getString(1));
@@ -196,8 +195,6 @@ public class ProductDAO extends DBCP {
 				vo.setReview(rs.getInt("review"));
 				vo.setThumb3(rs.getString("thumb3"));
 				vo.setDetail1(rs.getString("detail1"));
-				vo.setDetail2(rs.getString("detail2"));
-				vo.setDetail3(rs.getString("detail3"));
 				vo.setCompany(rs.getString("company"));
 				vo.setStatus(rs.getString("status"));
 				vo.setDuty(rs.getString("duty"));
@@ -212,21 +209,35 @@ public class ProductDAO extends DBCP {
 		return vo;
 	};
 	
+	//조회수+1
+	public void updateProductHit(String prodNo) {
+		try {
+			logger.info("조회수+1");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.PRODUCT_HIT_UP);
+			psmt.setString(1, prodNo);
+			psmt.executeUpdate();
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
 	//장바구니 등록
-	public int insertCart(String uid, ProductVO vo, String count) {
+	public int insertCart(CartVO vo) {
 		int result = 0;
 		try {
-			logger.info(uid + " 장바구니 추가");
+			logger.info("장바구니 추가");
 			conn = getConnection();
 			psmt = conn.prepareStatement(ProductSQL.INSERT_CART);
-			psmt.setString(1, uid);
-			psmt.setInt(2, vo.getProdNo());
-			psmt.setString(3, count);
-			psmt.setInt(4, vo.getPrice());
-			psmt.setInt(5, vo.getDiscount());
-			psmt.setInt(6, vo.getPoint());
-			psmt.setInt(7, vo.getDelivery());
-			psmt.setInt(8, vo.getPrice() * Integer.parseInt(count));
+			psmt.setString(1, vo.getUid());
+			psmt.setString(2, vo.getProdNo());
+			psmt.setString(3, vo.getCount());
+			psmt.setString(4, vo.getPrice());
+			psmt.setString(5, vo.getDiscount());
+			psmt.setString(6, vo.getPoint());
+			psmt.setString(7, vo.getDelivery());
+			psmt.setString(8, vo.getTotal());
 			result = psmt.executeUpdate();
 			close();
 		}catch(Exception e) {
@@ -236,28 +247,34 @@ public class ProductDAO extends DBCP {
 	}
 	
 	//장바구니 보기
-	public OrderItemVO selectCartItem(String uid) {
-		OrderItemVO vo = new OrderItemVO();
+	public List<CartVO> selectCartItem(String uid) {
+		List<CartVO> carts = new ArrayList<>();
 		try {
-			logger.info(uid + " 장바구니 보기");
+			logger.info("장바구니 보기");
 			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSQL.SELECT_CART_ITEM);
+			psmt = conn.prepareStatement(ProductSQL.SELECT_CART);
 			psmt.setString(1, uid);
 			rs = psmt.executeQuery();
-			if(rs.next()) {
+			while(rs.next()) {
+				CartVO vo = new CartVO();
 				vo.setOrdNo(rs.getString(1));
-				vo.setProdNo(rs.getString(2));
-				vo.setCount(rs.getString(3));
-				vo.setPrice(rs.getString(4));
-				vo.setDiscount(rs.getString(5));
-				vo.setPoint(rs.getString(6));
-				vo.setDelivery(rs.getString(7));
-				vo.setTotal(rs.getString(8));
+				vo.setUid(rs.getString(2));
+				vo.setProdNo(rs.getString(3));
+				vo.setCount(rs.getString(4));
+				vo.setPrice(rs.getString(5));
+				vo.setDiscount(rs.getString(6));
+				vo.setPoint(rs.getString(7));
+				vo.setDelivery(rs.getString(8));
+				vo.setTotal(rs.getString(9));
+				vo.setProdName(rs.getString(11));
+				vo.setDescript(rs.getString(12));
+				vo.setThumb1(rs.getString(13));
+				carts.add(vo);
 			}
 			close();
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		return vo;
+		return carts;
 	}
 }

@@ -17,7 +17,11 @@
   </filter>
   <filter-mapping>
   	<filter-name>AutoLogin</filter-name>
-  	<url-pattern>/*</url-pattern>
+  	<url-pattern>/index.do</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>AutoLogin</filter-name>
+  	<url-pattern>/member/login.do</url-pattern>
   </filter-mapping>
   
   <!-- 인코딩 필터 -->
