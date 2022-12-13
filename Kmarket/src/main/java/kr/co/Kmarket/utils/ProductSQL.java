@@ -31,6 +31,12 @@ public class ProductSQL {
 									+ "JOIN `km_product` AS b "
 									+ "ON a.prodNo = b.prodNo  WHERE `uid`=?";
 	
+	//장바구니 삭제
+	public static String DELETE_CART = "DELETE FROM `km_product_cart` WHERE `cartNo`=?";
+			
+	//장바구니 합계
+	public static String TOTAL_CART = "SELECT SUM(`count`),SUM(`price`*`count`),ROUND(SUM(`price`/100*`discount`)),SUM(`delivery`),SUM(`point`) FROM `km_product_cart` WHERE `uid`=? GROUP BY `uid`";
+	
 	//상품 판매 + 1
 	public static String PRODUCT_SOLD_UP = "UPDATE `km_product` SET `sold`=`sold`+1 WHERE `prodNo`=?";
 	

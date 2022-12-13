@@ -277,4 +277,42 @@ public class ProductDAO extends DBCP {
 		}
 		return carts;
 	}
+	
+	//장바구니 삭제
+	public int deleteCart(String cartNo) {
+		int result = 0;
+		try {
+			logger.info("장바구니선택삭제");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.DELETE_CART);
+			psmt.setString(1, cartNo);
+			result = psmt.executeUpdate();
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	//장바구니 합계
+	public CartVO selectTotalCart(String uid) {
+		CartVO vo = new CartVO();
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.TOTAL_CART);
+			psmt.setString(1, uid);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				vo.setCount(rs.getString(1));
+				vo.setPrice(rs.getString(2));
+				vo.setDiscount(rs.getString(3));
+				vo.setDelivery(rs.getString(4));
+				vo.setPoint(rs.getString(5));
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return vo;
+	}
 }

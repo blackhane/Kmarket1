@@ -6,15 +6,11 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import kr.co.Kmarket.DAO.MemberDAO;
 import kr.co.Kmarket.DAO.ProductDAO;
-import kr.co.Kmarket.VO.MemberVO;
 import kr.co.Kmarket.VO.ProductVO;
 
 @WebServlet("/index.do")

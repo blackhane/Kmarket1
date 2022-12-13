@@ -19,4 +19,10 @@ public class OrderController extends HttpServlet {
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/_product/order.jsp");
 		dispatcher.forward(req, resp);
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/_product/order.jsp");
+		dispatcher.forward(req, resp);
+	}
 }
