@@ -93,7 +93,7 @@ public class CsNoticeDAO extends DBCP{
 			psmt.setString(2, article.getContent());
 			psmt.setString(5, article.getRegip());
 			psmt.executeUpdate();
-			rs = stmt.executeQuery(CsSQL.SELECT_MAX_NO);
+			rs = stmt.executeQuery(CsSQL.SELECT_CS_MAX_NO_NOTICE);
 			
 			conn.commit();			// 트렌젝션 끝 All or Nothing
 			

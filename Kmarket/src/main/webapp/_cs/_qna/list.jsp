@@ -26,11 +26,13 @@
                         </p>
                         <div>
                             <table>
+                            	<c:forEach var="article" items="${articles}">
                                 <tr>
-                                    <td><a href="/Kmarket/_cs/_qna/view.do">[가입] 가입 문의내용</a></td>
-                                    <td>******</td>
-                                    <td>2022-12-06</td>
+                                    <td><a href="/Kmarket/_cs/_qna/view.do">[${article.cate}] ${article.title}</a></td>
+                                    <td>${article.uid}</td> 
+                                    <td>${article.rdate.substring(2, 10)}</td>
                                 </tr>
+                                </c:forEach>
                                 <tr>
                                     <td><a href="#">[탈퇴] 탈퇴 문의내용</a></td>
                                     <td>******</td>
