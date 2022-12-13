@@ -1,50 +1,45 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="./_header.jsp"/>
-        <main id="product">
-            <aside>
-                <ul class="category">
-                    <li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
-                    <li><a href="#"><i class="fas fa-tshirt"></i>패션·의류·뷰티</a>
-                        <ol>
-                            <li><a href="/Kmarket/_product/list.html">남성의류</a></li>
-                            <li><a href="/Kmarket/_product/list.html">여성의류</a></li>
-                            <li><a href="/Kmarket/_product/list.html">잡화</a></li>
-                            <li><a href="/Kmarket/_product/list.html">뷰티</a></li>
-                        </ol>
-                    </li>
-                    <li><a href="#"><i class="fas fa-laptop"></i>가전·디지털</a>
-                        <ol>
-                            <li><a href="/Kmarket/_product/list.html">노트북/PC</a></li>
-                            <li><a href="/Kmarket/_product/list.html">가전</a></li>
-                            <li><a href="/Kmarket/_product/list.html">휴대폰</a></li>
-                            <li><a href="/Kmarket/_product/list.html">기타</a></li>
-                        </ol>
-                    </li>
-                    <li><a href="#"><i class="fas fa-utensils"></i>식품·생필품</a>
-                        <ol>
-                            <li><a href="/Kmarket/_product/list.html">신선식품</a></li>
-                            <li><a href="/Kmarket/_product/list.html">가공식품</a></li>
-                            <li><a href="/Kmarket/_product/list.html">건강식품</a></li>
-                            <li><a href="/Kmarket/_product/list.html">생필품</a></li>
-                        </ol>
-                    </li>
-                    <li><a href="#"><i class="fas fa-home"></i>홈·문구·취미</a>
-                        <ol>
-                            <li><a href="/Kmarket/_product/list.html">가구/DIY</a></li>
-                            <li><a href="/Kmarket/_product/list.html">침구·커튼</a></li>
-                            <li><a href="/Kmarket/_product/list.html">생활용품</a></li>
-                            <li><a href="/Kmarket/_product/list.html">사무용품</a></li>
-                        </ol>
-                    </li>
-                </ul>
-            </aside>
-
+<jsp:include page="./nagivation.jsp"/>
+<script>
+	$(function(){
+		cartList();
+		
+		function cartList(){
+			let uid = "${sessUser.uid}";
+			
+			$.ajax({
+				url : '/Kmarket/product/listCart.do',
+				method : 'get',
+				data : {'uid' : uid},
+				dataType : 'json',
+				success : function(data){
+					if(data == 0){
+						let	tag = "<tr><td colspan='8'>장바구니에 상품이 없습니다.</td></tr>";
+					}
+					if(data != null){
+						console.log(data);
+						for(let item of data){
+							let	tag = "<tr>";
+								tag += "<td><input type='checkbox'></td>";
+								tag += "<td><article><a href='#'><img src='https://via.placeholder.com/80x80'></a>";
+								tag += "<div><h2><a href='#'>상품명</a></h2><p>상품설명</p></div></article></td>";
+								tag += "<td>1</td><td>27,000</td><td>5%</td><td>270</td>";
+								tag += "<td>무료배송</td><td>27,000</td></tr>";
+						}
+					}
+				}
+			});
+		}
+	});
+</script>
             <section class="cart">
 
                 <nav>
                     <h1>장바구니</h1>
                     <p>
-                        HOME > <span>패션·의류·뷰티</span> > <strong>장바구니</strong>
+                        HOME > <strong>장바구니</strong>
                     </p>
                 </nav>
                 

@@ -131,37 +131,40 @@ main > .registerForm {
     font-size: 24px;
     margin-bottom: 6px;
 }
-.registerForm > div > table {
+.registerForm div > table {
     width: 100%;
     height: auto;
     border-collapse: collapse;
     margin-top: 10px;
 }
-.registerForm > div > table tr {}
-.registerForm > div > table tr > th {
+.registerForm div > table tr > th {
     font-size: 16px;
     padding: 10px;
     text-align: left;
     border-bottom: 1px solid #b6bdc7;
 }
-.registerForm > div > table tr > td {
+.registerForm div > table tr > td {
     padding: 0 16px;
     padding-top: 16px;
     padding-bottom: 10px;
     text-align: left;
     border-bottom: 1px solid #dfe5ed;
 }
-.registerForm > div > table tr > td > label {
-    font-size: 16px;
+.registerForm div > table tr > td > p {
+	display: inline;
+	font-size: 12px;
 }
-.registerForm > div > table tr > td:nth-child(1) {
+.registerForm div > table tr > td > label {
+    font-size: 12px;
+}
+.registerForm div > table tr > td:nth-child(1) {
     background-color: #f4f6f9;
     width: 18%;
 }
-.registerForm > div > table tr > td > span {
+.registerForm div > table tr > td > span {
     color: #ef3f43;
 }
-.registerForm > div > table tr > td > input {
+.registerForm div > table tr > td > input {
     border: 1px solid #ccc;
     width: 200px;
     height: 15px;

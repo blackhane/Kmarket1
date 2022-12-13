@@ -15,10 +15,10 @@
 			
 			if(terms && finance && privacy){
 				if(sign == 1){
-					location.href = "/Kmarket/_member/register.do";	
+					location.href = "/Kmarket/member/register.do";	
 				}
 				if(sign == 2){
-					location.href = "/Kmarket/_member/registerSeller.do";	
+					location.href = "/Kmarket/member/registerSeller.do";	
 				}				
 			}else{
 				alert("필수 항목에는 동의하셔야합니다.");

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/_admin/list.do")
+@WebServlet("/admin/list.do")
 public class ListController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
@@ -19,7 +19,4 @@ public class ListController extends HttpServlet{
 		RequestDispatcher dispathcer = req.getRequestDispatcher("/_admin/_product/list.jsp");
 		dispathcer.forward(req, resp);
 	}
-=======
-public class ListController {
-
 }

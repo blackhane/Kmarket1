@@ -1,6 +1,7 @@
 package kr.co.Kmarket.controller.member;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.co.Kmarket.DAO.MemberDAO;
+import kr.co.Kmarket.DAO.ProductDAO;
 import kr.co.Kmarket.VO.MemberVO;
+import kr.co.Kmarket.VO.ProductVO;
 
 @WebServlet("/index.do")
 public class IndexController extends HttpServlet {
@@ -21,23 +24,41 @@ public class IndexController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//자동로그인 여부
-//		HttpSession session = req.getSession();
-//		Cookie[] cookies = req.getCookies();
-//		if(cookies != null) {
-//			for(Cookie cookie : cookies) {
-//				if(cookie.getName().equals("sessId")) {
-//					String sessId = cookie.getValue();
-//					KmMemberVO vo = MemberDAO.getInstance().selectCookie(sessId);
-//					
-//					if(vo != null) {
-//						session.setAttribute("sessUser", vo);
-//					}
-//				}
-//			}
-//		}
 		
-		RequestDispatcher dispathcer = req.getRequestDispatcher("/Kmarket/index.jsp");
+		HttpSession session = req.getSession();
+		//자동로그인 여부
+		Cookie[] cookies = req.getCookies();
+		if(cookies != null) {
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("sessId")) {
+					String sessId = cookie.getValue();
+					MemberVO vo = MemberDAO.getInstance().selectCookie(sessId);
+					if(vo != null) {
+						session.setAttribute("sessUser", vo);
+					}
+				}
+			}
+		}
+		
+		ProductDAO dao = ProductDAO.getInstance();
+		//베스트 상품
+		List<ProductVO> best = dao.selectProductsBest1();
+		//히트 상품
+		List<ProductVO> hit = dao.selectProductsBest2("hit");
+		//추천 상품
+		List<ProductVO> recommend = dao.selectProductsBest2("score");
+		//최신 상품
+		List<ProductVO> newItem = dao.selectProductsBest2("rdate");
+		//할인 상품
+		List<ProductVO> discount = dao.selectProductsBest2("discount");
+		
+		req.setAttribute("best", best);
+		req.setAttribute("hit", hit);
+		req.setAttribute("recommend", recommend);
+		req.setAttribute("newItem", newItem);
+		req.setAttribute("discount", discount);
+		
+		RequestDispatcher dispathcer = req.getRequestDispatcher("/_member/index.jsp");
 		dispathcer.forward(req, resp);
 	}
 }

@@ -1,80 +1,178 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="./_header.jsp"/>
-
-        <main id="product">
-            <aside>
-                <ul class="category">
-                    <li><i class="fa fa-bars" aria-hidden="true"></i>카테고리</li>
-                    <li><a href="#"><i class="fas fa-tshirt"></i>패션·의류·뷰티</a>
-                        <ol>
-                            <li><a href="/Kmarket/_product/list.html">남성의류</a></li>
-                            <li><a href="/Kmarket/_product/list.html">여성의류</a></li>
-                            <li><a href="/Kmarket/_product/list.html">잡화</a></li>
-                            <li><a href="/Kmarket/_product/list.html">뷰티</a></li>
-                        </ol>
-                    </li>
-                    <li><a href="#"><i class="fas fa-laptop"></i>가전·디지털</a>
-                        <ol>
-                            <li><a href="/Kmarket/_product/list.html">노트북/PC</a></li>
-                            <li><a href="/Kmarket/_product/list.html">가전</a></li>
-                            <li><a href="/Kmarket/_product/list.html">휴대폰</a></li>
-                            <li><a href="/Kmarket/_product/list.html">기타</a></li>
-                        </ol>
-                    </li>
-                    <li><a href="#"><i class="fas fa-utensils"></i>식품·생필품</a>
-                        <ol>
-                            <li><a href="/Kmarket/_product/list.html">신선식품</a></li>
-                            <li><a href="/Kmarket/_product/list.html">가공식품</a></li>
-                            <li><a href="/Kmarket/_product/list.html">건강식품</a></li>
-                            <li><a href="/Kmarket/_product/list.html">생필품</a></li>
-                        </ol>
-                    </li>
-                    <li><a href="#"><i class="fas fa-home"></i>홈·문구·취미</a>
-                        <ol>
-                            <li><a href="/Kmarket/_product/list.html">가구/DIY</a></li>
-                            <li><a href="/Kmarket/_product/list.html">침구·커튼</a></li>
-                            <li><a href="/Kmarket/_product/list.html">생활용품</a></li>
-                            <li><a href="/Kmarket/_product/list.html">사무용품</a></li>
-                        </ol>
-                    </li>
-                </ul>
-            </aside>
-
+<jsp:include page="./nagivation.jsp"/>
+<script>
+	$(function(){
+		$('.cart').click(function(){
+			let uid = $('input[name=uid]').val();
+			if(uid == null){
+				let answer = confirm('로그인 후에 주문 가능합니다. 로그인 하시겠습니까?');
+				if(answer){
+					//로그인 후 뒤로가기 ㄱㄱ
+					location.href = "/Kmarket/_member/login.do";
+					return;
+				}
+			}
+			let prodNo = $('input[name=prodNo]').val();
+			let count = $('input[name=num]').val();
+			let jsonData = {
+				'uid' : uid,
+				'prodNo' : prodNo,
+				'count' : count
+			};
+			$.ajax({
+				url : '/Kmarket/product/addCart.do',
+				method : 'get',
+				data : jsonData,
+				dataType : 'json',
+				success : function(data){
+					console.log(data.result);
+					if(data.result > 0){
+						let answer = confirm('선택하신 상품이 장바구니에 담겼습니다.\n장바구니로 이동하시겠습니까?');
+						if(answer){
+							location.href = "/Kmarket/product/cart.do";
+							return;
+						}
+					}
+				}			
+			});
+		});
+		
+		$('.order').click(function(){
+			alert("구매하기 버튼 클릭");
+		});
+		
+		function delivery(){
+			//오늘
+			let today = new Date();
+			
+			//3일 뒤
+			let after = new Date(today);
+			after.setDate(today.getDate() + 3);
+				
+			let Month = after.getMonth() +1;
+			let Day = after.getDate();
+			const week = ['일','월','화','수','목','금','토'];
+			let DayOfWeek = week[after.getDay()];
+		
+			$('.arrival').text("모레("+DayOfWeek+") "+Month+"/"+Day+" 도착예정");
+		}
+		delivery();
+		
+		function total(){
+			let count = $('input[name=num]').val();
+			let price = $('.dis_price').children('ins.ori').text();
+			let total = (count*price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+			console.log(total);
+			$('.totalPrice').text(total);
+		}
+		total();
+		
+		$('.decrease').click(function(){
+			let num = $('input[name=num]').val();
+			if(num == 1){
+				alert('1개 이상부터 주문 가능합니다.');
+				return;
+			}
+			num--;
+			$('input[name=num]').val(num);
+			total();
+		});
+		
+		$('.increase').click(function(){
+			let num = $('input[name=num]').val();
+			if(num == 20){
+				alert('주문 가능한 최대 수량은 20개 입니다.');
+				return;
+			}
+			num++;
+			$('input[name=num]').val(num);
+			total();
+		});
+		
+	});
+</script>
             <section class="view">
 
                 <nav>
                     <h1>상품보기</h1>
-                    <p>
-                        HOME > <span>패션·의류·뷰티</span> > <strong>남성의류</strong>
-                    </p>
+                    <p>HOME > <span>${cate.c1Name}</span> > <strong>${cate.c2Name}</strong></p>
                 </nav>
 
                 <article class="info">
                     <div class="image">
-                        <img src="https://via.placeholder.com/460x460" alt="상품이미지" />
+                        <img src="/Kmarket/${item.thumb3}" alt="thumb3" />
                     </div>
                     <div class="summary">
                         <nav>
-                            <h1>(주)판매자명</h1>
-                            <h2>상품번호&nbsp;:&nbsp;<span>10010118412</span></h2>
+                            <h1>${item.company}</h1>
+                            <h2>상품번호&nbsp;:&nbsp;<span>${item.prodNo}</span></h2>
                         </nav>
                         <nav>
-                            <h3>상품명</h3>
-                            <p>상품설명 출력</p>
-                            <h5 class="rating star4"><a href="#">상품평보기</a></h5>
+                            <h3>${item.prodName}</h3>
+                            <p>${item.descript}</p>
+                            <c:choose>
+                            	<c:when test="${item.score ge 5}">
+                            		<h5 class="rating star5">${item.score}<a href="#review">상품평보기</a></h5>
+                            	</c:when>
+                            	<c:when test="${item.score ge 4}">
+                            		<h5 class="rating star4">${item.score}<a href="#review">상품평보기</a></h5>
+                            	</c:when>
+                            	<c:when test="${item.score ge 3}">
+                            		<h5 class="rating star3">${item.score}<a href="#review">상품평보기</a></h5>
+                            	</c:when>
+                            	<c:when test="${item.score ge 2}">
+                            		<h5 class="rating star2">${item.score}<a href="#review">상품평보기</a></h5>
+                            	</c:when>
+                            	<c:when test="${item.score ge 1}">
+                            		<h5 class="rating star1">${item.score}<a href="#review">상품평보기</a></h5>
+                            	</c:when>
+                            	<c:otherwise>
+                            		<h5 class="rating star0">${item.score}<a href="#review">상품평보기</a></h5>
+                            	</c:otherwise>
+                            </c:choose>
+                            
                         </nav>
                         <nav>
-                            <div class="org_price">
-                                <del>30,000</del>
-                                <span>10%</span>
-                            </div>
-                            <div class="dis_price">
-                                <ins>27,000</ins>
-                            </div>
+                        <c:choose>
+                        	<c:when test="${item.discount gt 0}">
+	                            <div class="org_price">
+	                                <del><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/></del>
+	                                <span>${item.discount}%</span>
+	                            </div>
+	                            <div class="dis_price">
+	                                <ins class="ori" style="display:none;">
+	                                	<fmt:formatNumber type="number" pattern="0" value="${item.price - (item.price/item.discount)}"/>
+	                                </ins>
+	                                <ins>
+	                                	<fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/item.discount)}"/>
+                                	</ins>
+	                            </div>
+                            </c:when>
+                            <c:otherwise>
+                            	<div class="dis_price">
+	                                <ins class="ori" style="display:none;">
+	                                	<fmt:formatNumber type="number" pattern="0" value="${item.price}"/>
+	                                </ins>
+	                                <ins>
+	                                	<fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/>
+	                                </ins>
+                            	</div>
+                            </c:otherwise>
+                        </c:choose>
                         </nav>
                         <nav>
-                            <span class="delivery">무료배송</span>
-                            <span class="arrival">모레(금) 7/8 도착예정</span>
+                        	<c:choose>
+                        		<c:when test="${item.delivery eq 0}">
+                        			<span class="delivery">무료배송</span>
+                        		</c:when>
+                        		<c:otherwise>
+                        			<span class="delivery">배송비 ${item.delivery}원</span>
+                        		</c:otherwise>
+                        	</c:choose>
+                            <span class="arrival"></span>
                             <span class="desc">본 상품은 국내배송만 가능합니다.</span>
                         </nav>
                         <nav>
@@ -93,13 +191,15 @@
                         </div>
 
                         <div class="total">
-                            <span>35,000</span>
+                            <span class="totalPrice">35,000</span>
                             <em>총 상품금액</em>
                         </div>
 
                         <div class="button">
+                        	<input type="hidden" name="uid" value="${sessUser.uid}">
+                        	<input type="hidden" name="prodNo" value="${product.prodNo}">
                             <input type="button" class="cart" value="장바구니" />
-                            <input type="button" class="order" value="구매하기" />
+                            <input type="button" class="order"value="구매하기" />
                         </div>
                     </div>
                 </article>
@@ -108,9 +208,9 @@
                     <nav>
                         <h1>상품정보</h1>
                     </nav>
-                    <img src="https://via.placeholder.com/860x460" alt="상세페이지1">
-                    <img src="https://via.placeholder.com/860x460" alt="상세페이지2">
-                    <img src="https://via.placeholder.com/860x460" alt="상세페이지3">
+                    <img src="/Kmarket/${item.detail1}" alt="detail">
+                    <img src="/Kmarket/${item.detail2}" alt="detail">
+                    <img src="/Kmarket/${item.detail3}" alt="detail">
                 </article>
 
                 <article class="notice">
@@ -121,27 +221,27 @@
                     <table border="0">
                         <tr>
                             <td>상품번호</td>
-                            <td>10110125435</td>
+                            <td>${item.prodNo}</td>
                         </tr>
                         <tr>
                             <td>상품상태</td>
-                            <td>새상품</td>
+                            <td>${item.status}</td>
                         </tr>
                         <tr>
                             <td>부가세 면세여부</td>
-                            <td>과세상품</td>
+                            <td>${item.duty}</td>
                         </tr>
                         <tr>
                             <td>영수증발행</td>
-                            <td>발행가능 - 신용카드 전표, 온라인 현금영수증</td>
+                            <td>${item.receipt}</td>
                         </tr>
                         <tr>
                             <td>사업자구분</td>
-                            <td>사업자 판매자</td>
+                            <td>${item.bizType}</td>
                         </tr>
                         <tr>
                             <td>브랜드</td>
-                            <td>블루포스</td>
+                            <td>${item.brand}</td>
                         </tr>
                         <tr>
                             <td>원산지</td>
@@ -151,43 +251,43 @@
                     <table border="0">
                         <tr>
                             <td>제품소재</td>
-                            <td>상세정보 직접입력</td>
+                            <td>${item.material}</td>
                         </tr>
                         <tr>
                             <td>색상</td>
-                            <td>상세정보 직접입력</td>
+                            <td>${item.color}</td>
                         </tr>
                         <tr>
                             <td>치수</td>
-                            <td>상세정보 직접입력</td>
+                            <td>${item.size}</td>
                         </tr>
                         <tr>
                             <td>제조자/수입국</td>
-                            <td>상세정보 직접입력</td>
+                            <td>${item.manufacturer}</td>
                         </tr>
                         <tr>
                             <td>제조국</td>
-                            <td>상세정보 직접입력</td>
+                            <td>${item.country}</td>
                         </tr>
                         <tr>
                             <td>취급시 주의사항</td>
-                            <td>상세정보 직접입력</td>
+                            <td>${item.precautions}</td>
                         </tr>
                         <tr>
                             <td>제조연월</td>
-                            <td>상세정보 직접입력</td>
+                            <td>${item.date}</td>
                         </tr>
                         <tr>
                             <td>품질보증기준</td>
-                            <td>상세정보 직접입력</td>
+                            <td>${item.standard}</td>
                         </tr>
                         <tr>
                             <td>A/S 책임자와 전화번호</td>
-                            <td>상세정보 직접입력</td>
+                            <td>${item.as}</td>
                         </tr>
                         <tr>
                             <td>주문후 예상 배송기간</td>
-                            <td>상세정보 직접입력</td>
+                            <td>${item.delivery_date}</td>
                         </tr>
                         <tr>
                             <td colspan="2">구매, 교환, 반품, 배송, 설치 등과 관련하여 추가비용, 제한조건 등의 특이사항이 있는 경우</td>
@@ -203,7 +303,7 @@
                     </p>
                 </article>
 
-                <article class="review">
+                <article class="review" id="review">
                     <nav>
                         <h1>상품리뷰</h1>
                     </nav>

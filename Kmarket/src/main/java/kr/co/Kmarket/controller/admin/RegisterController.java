@@ -17,10 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import kr.co.Kmarket.VO.productVO;
-import kr.co.Kmarket.dao.admin.AdminDAO;
+import kr.co.Kmarket.DAO.admin.AdminDAO;
+import kr.co.Kmarket.VO.ProductVO;
 
-@WebServlet("/_admin/register.do")
+@WebServlet("/admin/register.do")
 public class RegisterController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
@@ -77,7 +77,7 @@ public class RegisterController extends HttpServlet{
 		String regip   = req.getRemoteAddr();
 
 		// VO 데이터 생성
-		productVO vo = new productVO();
+		ProductVO vo = new ProductVO();
 		vo.setCate1(cate1);
 		vo.setCate2(cate2);
 		vo.setProdName(prodName);
@@ -160,7 +160,5 @@ public class RegisterController extends HttpServlet{
 		resp.sendRedirect("/Kmarket/_admin/list.do");
 		
 	}
-=======
-public class RegisterController {
 
 }

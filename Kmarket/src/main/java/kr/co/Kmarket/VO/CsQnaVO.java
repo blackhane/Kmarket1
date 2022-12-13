@@ -4,14 +4,13 @@ public class CsQnaVO {
 	
 	private String no;
 	private String parent;
-	private String coment;
+	private String comment;
 	private String cate;
 	private String title;
 	private String content;
 	private String uid;
 	private String regip;
 	private String rdate;
-	
 	
 	
 	public String getNo() {
@@ -26,11 +25,11 @@ public class CsQnaVO {
 	public void setParent(String parent) {
 		this.parent = parent;
 	}
-	public String getComent() {
-		return coment;
+	public String getComment() {
+		return comment;
 	}
-	public void setComent(String coment) {
-		this.coment = coment;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 	public String getCate() {
 		return cate;
@@ -68,6 +67,8 @@ public class CsQnaVO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
+	
+	
 	
 
 }
