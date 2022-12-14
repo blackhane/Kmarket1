@@ -124,7 +124,7 @@
 
                 <article class="info">
                     <div class="image">
-                        <img src="/Kmarket/${item.thumb3}" alt="thumb3" />
+                        <img src="/Kmarket/file/${item.thumb3}" alt="thumb3" />
                     </div>
                     <div class="summary">
                         <nav>
@@ -135,19 +135,19 @@
                             <h3>${item.prodName}</h3>
                             <p>${item.descript}</p>
                             <c:choose>
-                            	<c:when test="${item.score/item.review ge 5}">
+                            	<c:when test="${item.score ge 5}">
                             		<h5 class="rating star5">${item.score}<a href="#review">상품평보기</a></h5>
                             	</c:when>
-                            	<c:when test="${item.score/item.review ge 4}">
+                            	<c:when test="${item.score ge 4}">
                             		<h5 class="rating star4">${item.score}<a href="#review">상품평보기</a></h5>
                             	</c:when>
-                            	<c:when test="${item.score/item.review ge 3}">
+                            	<c:when test="${item.score ge 3}">
                             		<h5 class="rating star3">${item.score}<a href="#review">상품평보기</a></h5>
                             	</c:when>
-                            	<c:when test="${item.score/item.review ge 2}">
+                            	<c:when test="${item.score ge 2}">
                             		<h5 class="rating star2">${item.score}<a href="#review">상품평보기</a></h5>
                             	</c:when>
-                            	<c:when test="${item.score/item.review ge 1}">
+                            	<c:when test="${item.score ge 1}">
                             		<h5 class="rating star1">${item.score}<a href="#review">상품평보기</a></h5>
                             	</c:when>
                             	<c:otherwise>
@@ -227,7 +227,7 @@
                     <nav>
                         <h1>상품정보</h1>
                     </nav>
-                    <img src="/Kmarket/${item.detail}" alt="detail">
+                    <img src="/Kmarket/file/${item.detail}" alt="detail">
                 </article>
 
                 <article class="notice">

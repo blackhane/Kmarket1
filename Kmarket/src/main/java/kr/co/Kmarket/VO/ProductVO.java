@@ -28,7 +28,7 @@ public class ProductVO {
 	private String bizType;
 	private String origin;
 	private String ip;
-	private int rdate;
+	private String rdate;
 	private int ordNo;
 	
 	//추가 필드
@@ -319,10 +319,10 @@ public class ProductVO {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public int getRdate() {
+	public String getRdate() {
 		return rdate;
 	}
-	public void setRdate(int rdate) {
+	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
 	public int getOrdNo() {

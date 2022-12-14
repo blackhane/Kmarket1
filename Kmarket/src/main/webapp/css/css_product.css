@@ -303,7 +303,7 @@ main h6.rating {
 }
 
 main h6.rating.star0 {
-    width: 0px;
+    width: 33px;
 }
 
 main h6.rating.star1 {

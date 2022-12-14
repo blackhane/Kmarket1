@@ -206,7 +206,7 @@
                 <c:forEach items="${items}" var="order">
                     <tr>
                         <td>
-                            <article><a href="#"><img src="/Kmarket/${order.thumb1}" alt="thumb1"></a>
+                            <article><a href="#"><img src="/Kmarket/file/${order.thumb1}" alt="thumb1"></a>
                                 <div>
                                     <h2><a href="#">${order.prodName}</a></h2>
                                     <p>${order.descript}</p>

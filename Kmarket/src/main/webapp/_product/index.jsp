@@ -200,7 +200,7 @@
 						    <a href="/Kmarket/product/view.do?cate1=${item.cate1}&cate2=${item.cate2}&prodNo=${item.prodNo}">
 						        <div class="thumb">
 						            <i>${i}</i>
-						            <img style="width:100%;" src="/Kmarket/${item.thumb2}" alt="thumb2" class="best_thumb2">
+						            <img src="/Kmarket/file/${item.thumb2}" alt="thumb2" class="best_thumb2">
 						        </div>
 						        <h2>${item.prodName}</h2>
 						        <div class="org_price">
@@ -254,7 +254,7 @@
 				<article>
 					<c:forEach items="${hit}" var="item">
 						<a href="/Kmarket/product/view.do?cate1=${item.cate1}&cate2=${item.cate2}&prodNo=${item.prodNo}">
-							<div class="thumb"><img src="/Kmarket/${item.thumb2}" alt="thumb2" /></div>
+							<div class="thumb"><img src="/Kmarket/file/${item.thumb2}" alt="thumb2"/></div>
 							<h2>${item.prodName}</h2>
 							<p>${item.descript}</p>
 							<div class="org_price">
@@ -276,7 +276,7 @@
 				<article>
 					<c:forEach items="${recommend}" var="item">
 						<a href="/Kmarket/product/view.do?cate1=${item.cate1}&cate2=${item.cate2}&prodNo=${item.prodNo}">
-							<div class="thumb"><img src="/Kmarket/${item.thumb2}" alt="thumb2" /></div>
+							<div class="thumb"><img src="/Kmarket/file/${item.thumb2}" alt="thumb2"/></div>
 							<h2>${item.prodName}</h2>
 							<p>${item.descript}</p>
 							<div class="org_price">
@@ -298,7 +298,7 @@
 				<article>
 					<c:forEach items="${newItem}" var="item">
 						<a href="/Kmarket/product/view.do?cate1=${item.cate1}&cate2=${item.cate2}&prodNo=${item.prodNo}">
-							<div class="thumb"><img src="/Kmarket/${item.thumb2}" alt="thumb2" /></div>
+							<div class="thumb"><img src="/Kmarket/file/${item.thumb2}" alt="thumb2"/></div>
 							<h2>${item.prodName}</h2>
 							<p>${item.descript}</p>
 							<div class="org_price">
@@ -320,7 +320,7 @@
 				<article>
 					<c:forEach items="${discount}" var="discount">
 						<a href="/Kmarket/product/view.do?cate1=${discount.cate1}&cate2=${discount.cate2}&prodNo=${discount.prodNo}">
-							<div class="thumb"><img src="/Kmarket/${discount.thumb2}" alt="thumb2" /></div>
+							<div class="thumb"><img src="/Kmarket/file/${discount.thumb2}" alt="thumb2"/></div>
 							<h2>${discount.prodName}</h2>
 							<p>${discount.descript}</p>
 							<div class="org_price">

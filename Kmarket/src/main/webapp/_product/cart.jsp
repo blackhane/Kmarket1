@@ -75,7 +75,7 @@
 		
 		//주문하기 클릭
 		$('form').submit(function(){
-			if(total == 0){
+			if($('.chk').length == 0){
 				alert('장바구니에 등록된 상품이 없습니다.');
 				return false;
 			}
@@ -127,6 +127,7 @@
 						}
 					}
 				});
+				$('.all').prop("checked",false);
 			}
 		});
 	});
@@ -168,7 +169,7 @@
 		<c:forEach items="${cart}" var="cart">
 		    <tr>
 		        <td><input type="checkbox" class="chk" name="chk" value="${cart.cartNo}"></td>
-		        <td><article><a href="#"><img src="/Kmarket/${cart.thumb1}" alt="thumb1"></a>
+		        <td><article><a href="#"><img src="/Kmarket/file/${cart.thumb1}" alt="thumb1"></a>
 		        <div>
 		            <h2><a href="#">${cart.prodName}</a></h2>
 		            <p>${cart.descript}</p>

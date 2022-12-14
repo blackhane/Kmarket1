@@ -26,7 +26,7 @@
                     <tr>
                         <td>
                             <a href="/Kmarket/product/view.do?cate1=${cate.cate1}&cate2=${cate.cate2}&prodNo=${item.prodNo}" class="thumb">
-                            <img src="/Kmarket/${item.thumb1}" alt="thumb1"> </a>
+                            <img src="/Kmarket/file/${item.thumb1}" alt="thumb1"/> </a>
                         </td>
                         <td>
                             <h3 class="name">${item.prodName}</h3>
@@ -53,19 +53,19 @@
                             <!-- ??? 무슨 등급임 -->
                             <h5 class="badge power">판매자등급</h5>
                             <c:choose>
-                            	<c:when test="${item.score/item.review ge 5}">
+                            	<c:when test="${item.score ge 5}">
                             		<h6 class="rating star5">상품평</h6>
                             	</c:when>
-                            	<c:when test="${item.score/item.review ge 4}">
+                            	<c:when test="${item.score ge 4}">
                             		<h6 class="rating star4">상품평</h6>
                             	</c:when>
-                            	<c:when test="${item.score/item.review ge 3}">
+                            	<c:when test="${item.score ge 3}">
                             		<h6 class="rating star3">상품평</h6>
                             	</c:when>
-                            	<c:when test="${item.score/item.review ge 2}">
+                            	<c:when test="${item.score ge 2}">
                             		<h6 class="rating star2">상품평</h6>
                             	</c:when>
-                            	<c:when test="${item.score/item.review ge 1}">
+                            	<c:when test="${item.score ge 1}">
                             		<h6 class="rating star1">상품평</h6>
                             	</c:when>
                             	<c:otherwise>
