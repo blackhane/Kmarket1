@@ -22,7 +22,10 @@ public class CsSQL {
 	public static final String UPDATE_CS_ARTICLE_NOTICE = "update `km_cs_notice` set `title`=?,`content`=?,`rdate`=now() where `no`=?";
 	public static final String DELETE_CS_ARTICLE_NOTICE = "DELETE FROM `km_cs_notice` WHERE `no`=? or `parent`=?";
 	public static final String SELECT_CS_MAX_NO_NOTICE = "select max(`no`) from `km_cs_notice`";
-
+	
+	//게시글수
+	public static final String SELECT_CS_COUNT_TOTAL_NOTICE = "SELECT COUNT(`no`) FROM `km_cs_notice` where `parent`=0 and `cate`=?";
+		
 	
 	
 	
@@ -33,6 +36,7 @@ public class CsSQL {
 	//글보기 글쓰기
 	public static final String SELECT_CS_ARTICLE_FAQ = "SELECT * FROM `km_cs_faq`";
 	public static final String INSERT_CS_ARTICLE_FAQ = "insert into `km_cs_faq` set "
+			+ "`group`=?, "
 			+ "`cate`=?, "
 			+ "`title`=?, "
 			+ "`content`=?, "
@@ -78,14 +82,13 @@ public class CsSQL {
 	//게시글수
 	public static final String SELECT_CS_COUNT_TOTAL_QNA = "SELECT COUNT(`no`) FROM `km_cs_qna` where `parent`=0 and `cate`=?";
 	
-	
 	//comment
 	public static final String INSERT_CS_COMMENT_QNA = "insert into `km_cs_qna` set "
-			+ "`parent`=?, "
-			+ "`content`=?, "
-			+ "`uid`=?, "
-			+ "`regip`=?, "
-			+ "`rdate`=NOW()";
+														+ "`parent`=?, "
+														+ "`content`=?, "
+														+ "`uid`=?, "
+														+ "`regip`=?, "
+														+ "`rdate`=NOW()";
 	public static final String SELECT_CS_COMMENTS_QNA = "select a.*, b.uid from `km_cs_qna` as a "
 			+ "join `km_member` as b using (`uid`) "
 			+ "where `parent`=? order by `no` asc";

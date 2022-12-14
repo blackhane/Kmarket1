@@ -3,8 +3,9 @@ package kr.co.Kmarket.VO;
 public class CsQnaVO {
 	
 	private String no;
+	private String group;	
 	private String parent;
-	private String coment;
+	private String comment;
 	private String cate;
 	private String title;
 	private String content;
@@ -13,12 +14,17 @@ public class CsQnaVO {
 	private String rdate;
 	
 	
-	
 	public String getNo() {
 		return no;
 	}
 	public void setNo(String no) {
 		this.no = no;
+	}
+	public String getGroup() {
+		return group;
+	}
+	public void setGroup(String group) {
+		this.group = group;
 	}
 	public String getParent() {
 		return parent;
@@ -26,11 +32,11 @@ public class CsQnaVO {
 	public void setParent(String parent) {
 		this.parent = parent;
 	}
-	public String getComent() {
-		return coment;
+	public String getComment() {
+		return comment;
 	}
-	public void setComent(String coment) {
-		this.coment = coment;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 	public String getCate() {
 		return cate;
@@ -69,5 +75,7 @@ public class CsQnaVO {
 		this.rdate = rdate;
 	}
 	
-
+	
+	
+	
 }

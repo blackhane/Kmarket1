@@ -21,7 +21,7 @@
             </div>
             <div class="cs_logo">
                 <div>
-                    <a href="/Kmarket/_cs/index.do">
+                    <a href="/Kmarket/cs/index.do">
                         <img src="/Kmarket/img/img_cs/logo.png" alt="고객센터">
                         고객센터
                     </a>

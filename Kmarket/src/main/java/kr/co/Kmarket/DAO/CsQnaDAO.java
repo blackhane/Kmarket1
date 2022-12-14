@@ -1,7 +1,5 @@
 package kr.co.Kmarket.DAO;
 
-import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,11 +40,13 @@ public class CsQnaDAO extends DBCP{
 			if(rs.next()){
 				article = new CsQnaVO();
 				article.setNo(rs.getString(1));
-				article.setCate(rs.getString(2));
-				article.setTitle(rs.getString(3));
-				article.setContent(rs.getString(4));
-				article.setRegip(rs.getString(5));
-				article.setRdate(rs.getString(6));
+				article.setGroup(rs.getString(2));
+				article.setCate(rs.getString(3));
+				article.setTitle(rs.getString(4));
+				article.setContent(rs.getString(5));
+				article.setUid(rs.getString(6));
+				article.setRegip(rs.getString(7));
+				article.setRdate(rs.getString(8));
 			}
 			close();
 		}catch(Exception e){
@@ -55,23 +55,26 @@ public class CsQnaDAO extends DBCP{
 		return article;
 	}
 	
-	public List<CsQnaVO> qna_selectArticles(int start) {
+	public List<CsQnaVO> qna_selectArticles(String cate, int start) {
 		List<CsQnaVO> articles = new ArrayList<>();
 		try {
 			logger.info("qna_selectArticles start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(CsSQL.SELECT_CS_ARTICLES_QNA);
-			psmt.setInt(1, start);
+			psmt.setString(1, cate);
+			psmt.setInt(2, start);
 			rs= psmt.executeQuery();
 			while(rs.next()) {
 				CsQnaVO vo = new CsQnaVO();
 				vo = new CsQnaVO();
 				vo.setNo(rs.getString(1));
-				vo.setCate(rs.getString(2));
-				vo.setTitle(rs.getString(3));
-				vo.setContent(rs.getString(4));
-				vo.setRegip(rs.getString(5));
-				vo.setRdate(rs.getString(6));
+				vo.setGroup(rs.getString(2));
+				vo.setCate(rs.getString(3));
+				vo.setTitle(rs.getString(4));
+				vo.setContent(rs.getString(5));
+				vo.setUid(rs.getString(6));
+				vo.setRegip(rs.getString(6));
+				vo.setRdate(rs.getString(7));
 				
 				articles.add(vo);
 			}
@@ -167,6 +170,8 @@ public class CsQnaDAO extends DBCP{
 	
 	
 	
+	
+	/*
 	////// 댓글 //////
 	
 	public CsQnaVO qna_insertComment(CsQnaVO comment) {
@@ -238,6 +243,6 @@ public class CsQnaDAO extends DBCP{
 		}
 		return comments;
 	}
-	
+	*/
 	
 }

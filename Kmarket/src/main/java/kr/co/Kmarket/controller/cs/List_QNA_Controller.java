@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.Kmarket.DAO.CsQnaDAO;
+import kr.co.Kmarket.VO.CsQnaVO;
+import kr.co.Kmarket.service.CsService;
 
 
 @WebServlet("/cs/qna/list.do")
 public class List_QNA_Controller extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-	
+	private CsService service = CsService.INSTANCE;
 
 	@Override
 	public void init() throws ServletException {
@@ -28,9 +30,11 @@ public class List_QNA_Controller extends HttpServlet{
 		
 		req.setCharacterEncoding("utf-8");
 		
-		//group cate 연결작업
-				String group = req.getParameter("group");
+			//group cate 연결작업
+				String group = req.getParameter("group"); //
 				String cate  = req.getParameter("cate");
+				String title  = req.getParameter("title");
+				String content  = req.getParameter("content");
 				
 				//list 작업
 				String pg    = req.getParameter("pg");
@@ -51,14 +55,11 @@ public class List_QNA_Controller extends HttpServlet{
 				CsQnaDAO dao = CsQnaDAO.getInstance();
 				
 				//전체 게시물 갯수
-						if(search == null) {
-							total = dao.qna_selectCountTotal(cate);
-						}else {
-							total = dao.selectCountTotalBySearch(search, cate);
+					if(search == null) {
+						total = dao.qna_selectCountTotal(cate);
 						}
-				
 				// 마지막 페이지 번호
-						int lastPageNum = service.getLastPageNum(total);
+					int lastPageNum = service.getLastPageNum(total);
 				
 				// 페이지 그룹 start, end 번호
 					int[] result = service.getPageGroupNum(currentPageGroup, lastPageNum);		
@@ -66,14 +67,13 @@ public class List_QNA_Controller extends HttpServlet{
 			
 					pageStartNum = total - start;
 					
-					List<CsQnaDAO> articles = null;
-					if(search == null) {
-						articles = dao.qna_selectArticles(cate,start);
-					}else {
-						articles = service.selectArticleByKeyword(cate ,search, start);
-					}
+					List<CsQnaVO> articles = null;
+					articles = dao.qna_selectArticles(cate, start);
+					
 					req.setAttribute("group", group);
 					req.setAttribute("cate", cate);
+					req.setAttribute("title", title);
+					req.setAttribute("content", content);
 					req.setAttribute("pg", pg);
 					req.setAttribute("search", search);
 					req.setAttribute("start", start);

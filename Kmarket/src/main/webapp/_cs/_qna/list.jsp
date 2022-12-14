@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_cs/_header.jsp"/>
         <main>
             <section class="navigation">
@@ -28,7 +29,7 @@
                             <table>
                             	<c:forEach var="article" items="${articles}">
                                 <tr>
-                                    <td><a href="/Kmarket/_cs/_qna/view.do">[${article.cate}] ${article.title}</a></td>
+                                    <td><a href="/Kmarket/cs/qna/view.do">[${article.cate}] ${article.title}</a></td>
                                     <td>${article.uid}</td> 
                                     <td>${article.rdate.substring(2, 10)}</td>
                                 </tr>
