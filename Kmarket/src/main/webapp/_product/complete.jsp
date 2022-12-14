@@ -3,6 +3,29 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="./_header.jsp"/>
 <jsp:include page="./nagivation.jsp"/>
+<script>
+	$(function(){
+		
+		//판매한거 저장 and 장바구니 비우기...
+		
+		function deletecartlist(){
+			let jsonData = {
+				'prodNo' : prodNo,
+				'count' : count
+			}
+			
+			$.ajax({
+				url : '/Kmarket/productcomplete.do',
+				method : 'get',
+				data : jsonData,
+				dataType : 'json',
+				success : function(data){
+					console.log(data.result);
+				}
+			});
+		};
+	});
+</script>
             <section class="complete">
 
                 <nav>
@@ -29,20 +52,22 @@
                             <th>수량</th>
                             <th>주문금액</th>
                         </tr>
+                        <c:forEach items="${sessItem}" var="item">
                         <tr>
                             <td>
-                                <article><img src="https://via.placeholder.com/80x80" alt="">
+                                <article><img src="/Kmarket/${item.thumb1}" alt="thumb1">
                                     <div>
                                         <h2><a href="#">${item.prodName}</a></h2>
                                         <p>${item.descript}</p>
                                     </div>
                                 </article>
                             </td>
-                            <td>${item.ordPrice}원</td>
-                            <td>${item.ordDiscount}원</td>
-                            <td>${item.ordCount}</td>
-                            <td>${item.ordPrice - item.ordDiscount}원</td>
+                            <td>${item.price}원</td>
+                            <td>${item.disPrice}원</td>
+                            <td>${item.count}</td>
+                            <td>${(item.price - item.disPrice)*item.count}원</td>
                         </tr>
+                        </c:forEach>
                         <tr class="total">
                             <td colspan="4"></td>
                             <td>
@@ -61,7 +86,7 @@
                                     </tr>
                                     <tr>
                                         <td>총 결제금액</td>
-                                        <td><span>${order.ordToPrice}</span>원</td>
+                                        <td><span>${order.totalPrice}</span>원</td>
                                     </tr>
                                 </table>
                             </td>

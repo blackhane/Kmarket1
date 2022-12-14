@@ -227,7 +227,7 @@
                     <nav>
                         <h1>상품정보</h1>
                     </nav>
-                    <img src="/Kmarket/${item.detail1}" alt="detail">
+                    <img src="/Kmarket/${item.detail}" alt="detail">
                 </article>
 
                 <article class="notice">

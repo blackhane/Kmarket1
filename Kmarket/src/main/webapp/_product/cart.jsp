@@ -25,14 +25,14 @@
 	        		success : function(data){
 	        			let count = data.count;
 	        			let price = data.price;
-	        			let discount = data.discount;
+	        			let disPrice = data.disPrice;
 	        			let delivery = data.delivery;
 	        			let point = data.point;
-	        			let total = data.price - discount;
+	        			let total = data.price - disPrice;
 	        			if(count == null){
 	        				count = 0;
 	        				price = 0;
-	        				discount = 0;
+	        				disPrice = 0;
 	        				delivery = 0;
 	        				point = 0;
 	        				total = 0;
@@ -42,7 +42,7 @@
 	    				tag += "<table>";
 	    				tag += "<tr>";
 	    				tag += "<td>상품수</td>";
-	    				tag += "<td>"+count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"</td>";
+	    				tag += "<td>"+count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"건</td>";
 	    				tag += "</tr>";
 	    				tag += "<tr>";
 	    				tag += "<td>상품금액</td>";
@@ -50,7 +50,7 @@
 	    				tag += "</tr>";
 	    				tag += "<tr>";
 	    				tag += "<td>할인금액</td>";
-	    				tag += "<td>"+discount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원</td>";
+	    				tag += "<td>"+disPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원</td>";
 	    				tag += "</tr>";
 	    				tag += "<tr>";
 	    				tag += "<td>배송비</td>";

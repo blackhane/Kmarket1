@@ -38,7 +38,6 @@
                       <c:choose>
                       	<c:when test="${not empty sessUser.uid}">
                       		<li style="font-weight:bold;">${sessUser.name}님, 환영합니다.</li>
-                      		<li>포인트: <fmt:formatNumber type="number" pattern="#,###" value="${sessUser.point}"/>점</li>
                       		<li><a href="/Kmarket/logout.do?uid=${sessUser.uid}">로그아웃</a></li>
                       		<c:if test="${sessUser.name eq '관리자'}">	                      		
 	                      		<li><a href="/Kmarket/admin/index.do">관리자</a></li>	                     		

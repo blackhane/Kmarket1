@@ -26,6 +26,7 @@ public class AddCartController extends HttpServlet {
 		String count = req.getParameter("count");
 		String price = req.getParameter("price");
 		String discount = req.getParameter("discount");
+		int disPrice = Integer.parseInt(price) / 100 * Integer.parseInt(discount);
 		String point = req.getParameter("point");
 		String delivery = req.getParameter("delivery");
 		String total = req.getParameter("total");
@@ -36,6 +37,7 @@ public class AddCartController extends HttpServlet {
 		vo.setCount(count);
 		vo.setPrice(price);
 		vo.setDiscount(discount);
+		vo.setDisPrice(disPrice);
 		vo.setPoint(point);
 		vo.setDelivery(delivery);
 		vo.setTotal(total);

@@ -7,7 +7,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,6 +26,7 @@ public class AutoLogin implements Filter {
 		logger.info("LoginFilter");
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpSession sess = req.getSession();
+		
 		//자동로그인 여부
 		Cookie[] cookies = req.getCookies();
 		if(cookies != null) {
@@ -40,6 +40,10 @@ public class AutoLogin implements Filter {
 				}
 			}
 		}
+		
+		//장바구니 비우기
+		sess.removeAttribute("sessItem");
+		
 		chain.doFilter(request, response);
 	}
 

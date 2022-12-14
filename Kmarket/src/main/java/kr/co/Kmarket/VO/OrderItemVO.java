@@ -10,7 +10,7 @@ public class OrderItemVO {
 	private String ordDelivery;
 	private String savePoint;
 	private String usedPoint;
-	private String ordTotPrice;
+	private String totalPrice;
 	private String recipName;
 	private String recipHp;
 	private String recipZip;
@@ -74,11 +74,11 @@ public class OrderItemVO {
 	public void setUsedPoint(String usedPoint) {
 		this.usedPoint = usedPoint;
 	}
-	public String getOrdTotPrice() {
-		return ordTotPrice;
+	public String getTotalPrice() {
+		return totalPrice;
 	}
-	public void setOrdTotPrice(String ordTotPrice) {
-		this.ordTotPrice = ordTotPrice;
+	public void setTotalPrice(String totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 	public String getRecipName() {
 		return recipName;

@@ -8,6 +8,9 @@ public class ProductSQL {
 	//카테고리2 이름
 	public static String FIND_CATE2 = "SELECT * FROM `km_product_cate2` WHERE `cate1`=? AND `cate2`=?";
 	
+	//카테고리2 목록
+	public static String FIND_CATE2_LIST = "SELECT * FROM `km_product_cate2` WHERE `cate1`=?";
+		
 	//상품목록
 	public static String SELECT_PRODUCTS_LIST = "SELECT * FROM `km_product` WHERE `cate1`=? AND `cate2`=? ORDER BY `prodNo` DESC";
 	

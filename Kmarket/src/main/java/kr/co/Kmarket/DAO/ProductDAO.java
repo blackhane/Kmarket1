@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.co.Kmarket.VO.CateVO;
 import kr.co.Kmarket.VO.ProductVO;
 import kr.co.Kmarket.utils.DBCP;
 import kr.co.Kmarket.utils.ProductSQL;
@@ -41,7 +42,7 @@ public class ProductDAO extends DBCP {
 		return cate;
 	}
 	
-	//카테고리1 이름
+	//카테고리2 이름
 	public String selectCate2Name(String cate1, String cate2) {
 		String cate = null;
 		try {
@@ -61,6 +62,28 @@ public class ProductDAO extends DBCP {
 		return cate;
 	}
 	
+	//카테고리2 이름
+	public List<CateVO> selectFindCate2 (String cate1) {
+		List<CateVO> vo = new ArrayList<>();
+		try {
+			logger.info("카테고리2리스트");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.FIND_CATE2_LIST);
+			psmt.setString(1, cate1);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				CateVO cate = new CateVO();
+				cate.setCate2(rs.getString(1));
+				cate.setC2Name(rs.getString(2));
+				vo.add(cate);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return vo;
+	}
+		
 	//상품목록
 	public List<ProductVO> selectProducts(String cate1, String cate2, String ls) {
 		List<ProductVO> product = new ArrayList<>();
@@ -193,8 +216,10 @@ public class ProductDAO extends DBCP {
 				vo.setDelivery(rs.getString("delivery"));
 				vo.setScore(rs.getInt("score"));
 				vo.setReview(rs.getInt("review"));
+				vo.setThumb1(rs.getString("thumb1"));
+				vo.setThumb2(rs.getString("thumb2"));
 				vo.setThumb3(rs.getString("thumb3"));
-				vo.setDetail1(rs.getString("detail1"));
+				vo.setDetail(rs.getString("detail"));
 				vo.setCompany(rs.getString("company"));
 				vo.setStatus(rs.getString("status"));
 				vo.setDuty(rs.getString("duty"));

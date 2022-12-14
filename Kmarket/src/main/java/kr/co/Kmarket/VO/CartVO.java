@@ -16,8 +16,15 @@ public class CartVO {
 	private String prodName;
 	private String descript;
 	private String thumb1;
+
+	private int disPrice;
 	
-	
+	public int getDisPrice() {
+		return disPrice;
+	}
+	public void setDisPrice(int disPrice) {
+		this.disPrice = disPrice;
+	}
 	public String getThumb1() {
 		return thumb1;
 	}

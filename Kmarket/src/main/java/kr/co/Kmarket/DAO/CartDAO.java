@@ -8,10 +8,8 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.VO.CartVO;
 import kr.co.Kmarket.VO.OrderItemVO;
-import kr.co.Kmarket.VO.ProductVO;
 import kr.co.Kmarket.utils.CartSQL;
 import kr.co.Kmarket.utils.DBCP;
-import kr.co.Kmarket.utils.ProductSQL;
 
 public class CartDAO extends DBCP {
 
@@ -37,9 +35,10 @@ public class CartDAO extends DBCP {
 			psmt.setString(3, vo.getCount());
 			psmt.setString(4, vo.getPrice());
 			psmt.setString(5, vo.getDiscount());
-			psmt.setString(6, vo.getPoint());
-			psmt.setString(7, vo.getDelivery());
-			psmt.setString(8, vo.getTotal());
+			psmt.setInt(6, vo.getDisPrice());
+			psmt.setString(7, vo.getPoint());
+			psmt.setString(8, vo.getDelivery());
+			psmt.setString(9, vo.getTotal());
 			result = psmt.executeUpdate();
 			close();
 		}catch(Exception e) {
@@ -65,12 +64,14 @@ public class CartDAO extends DBCP {
 				vo.setCount(rs.getString(4));
 				vo.setPrice(rs.getString(5));
 				vo.setDiscount(rs.getString(6));
-				vo.setPoint(rs.getString(7));
-				vo.setDelivery(rs.getString(8));
-				vo.setTotal(rs.getString(9));
-				vo.setProdName(rs.getString(11));
+				vo.setDisPrice(rs.getInt(7));
+				vo.setPoint(rs.getString(8));
+				vo.setDelivery(rs.getString(9));
+				vo.setTotal(rs.getString(10));
+				vo.setRdate(rs.getString(11));
+				vo.setProdName(rs.getString(12));
 				vo.setDescript(rs.getString(12));
-				vo.setThumb1(rs.getString(13));
+				vo.setThumb1(rs.getString(14));
 				carts.add(vo);
 			}
 			close();
@@ -107,7 +108,7 @@ public class CartDAO extends DBCP {
 			if(rs.next()) {
 				vo.setCount(rs.getString(1));
 				vo.setPrice(rs.getString(2));
-				vo.setDiscount(rs.getString(3));
+				vo.setDisPrice(rs.getInt(3));
 				vo.setDelivery(rs.getString(4));
 				vo.setPoint(rs.getString(5));
 			}
@@ -132,14 +133,13 @@ public class CartDAO extends DBCP {
 			psmt.setString(5, vo.getOrdDelivery());
 			psmt.setString(6, vo.getSavePoint());
 			psmt.setString(7, vo.getUsedPoint());
-			psmt.setString(8, vo.getOrdTotPrice());
+			psmt.setString(8, vo.getTotalPrice());
 			psmt.setString(9, vo.getRecipName());
 			psmt.setString(10, vo.getRecipHp());
 			psmt.setString(11, vo.getRecipZip());
 			psmt.setString(12, vo.getRecipAddr1());
 			psmt.setString(13, vo.getRecipAddr2());
 			psmt.setString(14, vo.getOrdPayment());
-			psmt.setString(15, vo.getOrdComplete());
 			result = psmt.executeUpdate();
 			close();
 		}catch(Exception e) {
@@ -159,22 +159,22 @@ public class CartDAO extends DBCP {
 			rs = psmt.executeQuery();
 			if(rs.next()) {
 				vo.setOrdNo(rs.getString(1));
-				vo.setOrdUid(rs.getString(1));
-				vo.setOrdCount(rs.getString(1));
-				vo.setOrdPrice(rs.getString(1));
-				vo.setOrdDiscount(rs.getString(1));
-				vo.setOrdDelivery(rs.getString(1));
-				vo.setSavePoint(rs.getString(1));
-				vo.setUsedPoint(rs.getString(1));
-				vo.setOrdTotPrice(rs.getString(1));
-				vo.setRecipName(rs.getString(1));
-				vo.setRecipHp(rs.getString(1));
-				vo.setRecipZip(rs.getString(1));
-				vo.setRecipAddr1(rs.getString(1));
-				vo.setRecipAddr2(rs.getString(1));
-				vo.setOrdPayment(rs.getString(1));
-				vo.setOrdComplete(rs.getString(1));
-				vo.setOrdDate(rs.getString(1));
+				vo.setOrdUid(rs.getString(2));
+				vo.setOrdCount(rs.getString(3));
+				vo.setOrdPrice(rs.getString(4));
+				vo.setOrdDiscount(rs.getString(5));
+				vo.setOrdDelivery(rs.getString(6));
+				vo.setSavePoint(rs.getString(7));
+				vo.setUsedPoint(rs.getString(8));
+				vo.setTotalPrice(rs.getString(9));
+				vo.setRecipName(rs.getString(10));
+				vo.setRecipHp(rs.getString(11));
+				vo.setRecipZip(rs.getString(12));
+				vo.setRecipAddr1(rs.getString(13));
+				vo.setRecipAddr2(rs.getString(14));
+				vo.setOrdPayment(rs.getString(15));
+				vo.setOrdComplete(rs.getString(16));
+				vo.setOrdDate(rs.getString(17));
 			}
 			close();
 		}catch(Exception e) {
@@ -213,18 +213,52 @@ public class CartDAO extends DBCP {
 		}
 	}
 	
-	//상품판매++
-	public void updateProductSoldUp(String count,String prodNo) {
+	//포인트 기록
+	public void insertPoint(String uid,String ordNo,String sPoint) {
 		try {
-			logger.info("상품판매");
+			logger.info("포인트 기록");
 			conn = getConnection();
-			psmt = conn.prepareStatement(CartSQL.PRODUCT_SOLD_UP);
-			psmt.setString(1, count);
-			psmt.setString(2, prodNo);
+			psmt = conn.prepareStatement(CartSQL.INSERT_POINT);
+			psmt.setString(1, uid);
+			psmt.setString(2, ordNo);
+			psmt.setString(3, sPoint);
 			psmt.executeUpdate();
 			close();
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
+	}
+	
+	//장바구니 비우기
+	public int deleteCarts(String uid) {
+		int result = 0;
+		try {
+			logger.info("장바구니비우기");
+			conn = getConnection();
+			psmt = conn.prepareStatement(CartSQL.DELECT_CARTS);
+			psmt.setString(1, uid);
+			result = psmt.executeUpdate();
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	//상품판매++
+	public int updateProductSoldUp(String prodNo, String sold) {
+		int result = 0;
+		try {
+			logger.info("상품판매++");
+			conn = getConnection();
+			psmt = conn.prepareStatement(CartSQL.PRODUCT_SOLD_UP);
+			psmt.setString(1, sold);
+			psmt.setString(2, prodNo);
+			result = psmt.executeUpdate();
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
 	}
 }

@@ -21,9 +21,7 @@ public class ProductVO {
 	private String thumb1;
 	private String thumb2;
 	private String thumb3;
-	private String detail1;
-	private String detail2;
-	private String detail3;
+	private String detail;
 	private String status;
 	private String duty;
 	private String receipt;
@@ -47,7 +45,8 @@ public class ProductVO {
 	private String as;
 	private String delivery_date;
 	
-	private String count;
+	private int count;
+	private int disPrice;
 	
 	//파일 첨부 추가필드
 	private String fname;
@@ -56,10 +55,16 @@ public class ProductVO {
 	private int download;
 	
 	
-	public String getCount() {
+	public int getDisPrice() {
+		return disPrice;
+	}
+	public void setDisPrice(int disPrice) {
+		this.disPrice = disPrice;
+	}
+	public int getCount() {
 		return count;
 	}
-	public void setCount(String count) {
+	public void setCount(int count) {
 		this.count = count;
 	}
 	public String getFname() {
@@ -272,23 +277,11 @@ public class ProductVO {
 	public void setThumb3(String thumb3) {
 		this.thumb3 = thumb3;
 	}
-	public String getDetail1() {
-		return detail1;
+	public String getDetail() {
+		return detail;
 	}
-	public void setDetail1(String detail1) {
-		this.detail1 = detail1;
-	}
-	public String getDetail2() {
-		return detail2;
-	}
-	public void setDetail2(String detail2) {
-		this.detail2 = detail2;
-	}
-	public String getDetail3() {
-		return detail3;
-	}
-	public void setDetail3(String detail3) {
-		this.detail3 = detail3;
+	public void setDetail(String detail) {
+		this.detail = detail;
 	}
 	public String getStatus() {
 		return status;
