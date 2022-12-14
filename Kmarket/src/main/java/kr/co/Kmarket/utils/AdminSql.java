@@ -1,6 +1,6 @@
 package kr.co.Kmarket.utils;
 
-public class Sql_admin {
+public class AdminSql {
 	
 	public static final String INSERT_PRODUCT = "insert into `km_product` set "
 												+ "`cate1`=?,"
@@ -8,6 +8,7 @@ public class Sql_admin {
 												+ "`prodName`=?,"
 												+ "`descript`=?,"
 												+ "`company`=?,"
+												+ "`seller`=?,"
 												+ "`price`=?,"
 												+ "`discount`=?,"
 												+ "`point`=?,"
@@ -24,6 +25,8 @@ public class Sql_admin {
 												+ "`bizType`=?,"
 												+ "`brand`=?,"
 												+ "`origin`=?,"
+												+ "`ip`=?,"
+												+ "`rdate`= NOW(), "
 												+ "`material`=?,"
 												+ "`color`=?,"
 												+ "`size`=?,"
@@ -41,6 +44,8 @@ public class Sql_admin {
 										+ "`newName`=?,"
 										+ "`oriName`=?,"
 										+ "`rdate`=NOW()";
+	
+	public static final String SELECT_PRODUCT = "select * from `km_product`";
 	
 	
 }

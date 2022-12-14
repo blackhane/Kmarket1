@@ -302,6 +302,10 @@ main h6.rating {
     background-size: auto 100%;
 }
 
+main h6.rating.star0 {
+    width: 0px;
+}
+
 main h6.rating.star1 {
     width: 55px;
 }
@@ -330,6 +334,10 @@ main h5.rating {
     background-repeat: no-repeat;
     background-position: 36px 0px;
     text-indent: 86px;
+}
+
+main h5.rating.star0 {
+    background-position: 0px 0px;
 }
 
 main h5.rating.star1 {
@@ -688,9 +696,19 @@ main>.view>.info>.summary .card>i {
     margin-right: 2px;
 }
 
-main>.view>.info>.summary .cardfree>i {}
+main>.view>.info>.summary .cardfree> i {
+	background: url('/Kmarket/img/img_main/ico_sprites.png') no-repeat -133px 0;
+	width: 21px;
+	height: 15px;
+	margin-right: 6px;
+}
 
-main>.view>.info>.summary .cardadd>i {}
+main>.view>.info>.summary .cardadd> i {
+	background: url('/Kmarket/img/img_main/ico_sprites.png') no-repeat -54px -22px;
+	width: 25px;
+	height: 17px;
+	margin-right: 6px;
+}
 
 main>.view>.info>.summary .origin {
     font-size: 16px;

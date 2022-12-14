@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -56,7 +56,7 @@
                         </a>
                         <ol>
                             <li><a href="#">판매자현황</a></li>
-                            <li><a href="/Kmarket/_admin/_product/list.html">재고관리</a></li>
+                            <li><a href="/Kmarket/admin/product/list.do">재고관리</a></li>
                         </ol>
                     </li>
                     <li>
@@ -77,9 +77,9 @@
                             상품관리
                         </a>
                         <ol>
-                            <li><a href="/Kmarket/_admin/_product/list.html">상품현황</a></li>
-                            <li><a href="/Kmarket/_admin/_product/register.html">상품등록</a></li>
-                            <li><a href="/Kmarket/_admin/_product/list.html">재고관리</a></li>
+                            <li><a href="/Kmarket/admin/product/list.do">상품현황</a></li>
+                            <li><a href="/Kmarket/admin/product/register.do">상품등록</a></li>
+                            <li><a href="/Kmarket/admin/product/list.do">재고관리</a></li>
                         </ol>
                     </li>
                     <li>

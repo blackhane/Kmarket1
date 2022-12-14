@@ -1,7 +1,5 @@
 package kr.co.Kmarket.VO;
-
-public class productVO {
-
+public class ProductVO {
 	private int prodNo;
 	private int cate1;
 	private int cate2;
@@ -22,6 +20,14 @@ public class productVO {
 	private String thumb2;
 	private String thumb3;
 	private String detail;
+	
+	
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
 	private String status;
 	private String duty;
 	private String receipt;
@@ -264,12 +270,7 @@ public class productVO {
 	public void setThumb3(String thumb3) {
 		this.thumb3 = thumb3;
 	}
-	public String getDetail() {
-		return detail;
-	}
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
+
 	public String getStatus() {
 		return status;
 	}
@@ -320,7 +321,6 @@ public class productVO {
 	}
 	public void setPrice(String price) {
 		this.price = Integer.parseInt(price);
-
 	}
 	public void setDiscount(String discount) {
 		this.discount = Integer.parseInt(discount);
@@ -343,7 +343,10 @@ public class productVO {
 		
 	}
 	
+	public void setRdate(String rdate) {
+		this.rdate = Integer.parseInt(rdate);
+		
+	}
 	
-
 	
 }

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.Kmarket.DAO.MemberDAO;
 import kr.co.Kmarket.VO.MemberTermsVO;
 
-@WebServlet("/_member/signup.do")
+@WebServlet("/member/signup.do")
 public class SignupController extends HttpServlet {
 
 	@Override

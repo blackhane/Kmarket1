@@ -1,14 +1,19 @@
-package kr.co.Kmarket.dao.admin;
+package kr.co.Kmarket.DAO.admin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.co.Kmarket.VO.productVO;
+import com.mysql.cj.protocol.a.DebugBufferingPacketReader;
+
+import kr.co.Kmarket.VO.ProductVO;
 import kr.co.Kmarket.utils.DBCP;
-import kr.co.Kmarket.utils.Sql_admin;
+import kr.co.Kmarket.utils.AdminSql;
 
 public class AdminDAO extends DBCP {
 	
@@ -21,53 +26,47 @@ public class AdminDAO extends DBCP {
 	private AdminDAO() {}
 	
 
-public void insertProduct(productVO vo) {
-		
-		
+public void insertProduct(ProductVO vo) {
 		try{
 			logger.info("어드민 제품등록...");
 			Connection conn = getConnection();
-			
-			// 트랜잭션 시작
-			conn.setAutoCommit(false);
-			
-			psmt = conn.prepareStatement(Sql_admin.INSERT_PRODUCT);
+			psmt = conn.prepareStatement(AdminSql.INSERT_PRODUCT);
 			psmt.setInt(1, vo.getCate1());
 			psmt.setInt(2, vo.getCate2());
 			psmt.setString(3, vo.getProdName());
 			psmt.setString(4, vo.getDescript());
 			psmt.setString(5, vo.getCompany());
-			psmt.setInt(6, vo.getPrice());
-			psmt.setInt(7, vo.getDiscount());
-			psmt.setInt(8, vo.getPoint());
-			psmt.setInt(9, vo.getStock());
-			psmt.setInt(10, vo.getDelivery());
-			psmt.setString(11, vo.getThumb1());
-			psmt.setString(12, vo.getThumb2());
-			psmt.setString(13, vo.getThumb3());
-			psmt.setString(14, vo.getDetail());
-			psmt.setInt(15, vo.getProdNo());
-			psmt.setString(16, vo.getStatus());
-			psmt.setString(17, vo.getDuty());
-			psmt.setString(18, vo.getReceipt());
-			psmt.setString(19, vo.getBizType());
-			psmt.setString(20, vo.getBrand());
-			psmt.setString(21, vo.getOrigin());
-			psmt.setString(22, vo.getMaterial());
-			psmt.setString(23, vo.getColor());
-			psmt.setString(24, vo.getSize());
-			psmt.setString(25, vo.getManufacturer());
-			psmt.setString(26, vo.getCountry());
-			psmt.setString(27, vo.getPrecautions());
-			psmt.setString(28, vo.getDate());
-			psmt.setString(29, vo.getStandard());
-			psmt.setString(30, vo.getAs());
-			psmt.setString(31, vo.getDelivery_date());
-
+			psmt.setString(6, vo.getSeller());
+			psmt.setInt(7, vo.getPrice());
+			psmt.setInt(8, vo.getDiscount());
+			psmt.setInt(9, vo.getPoint());
+			psmt.setInt(10, vo.getStock());
+			psmt.setInt(11, vo.getDelivery());
+			psmt.setString(12, vo.getThumb1());
+			psmt.setString(13, vo.getThumb2());
+			psmt.setString(14, vo.getThumb3());
+			psmt.setString(15, vo.getDetail());
+			psmt.setInt(16, vo.getProdNo());
+			psmt.setString(17, vo.getStatus());
+			psmt.setString(18, vo.getDuty());
+			psmt.setString(19, vo.getReceipt());
+			psmt.setString(20, vo.getBizType());
+			psmt.setString(21, vo.getBrand());
+			psmt.setString(22, vo.getOrigin());
+			psmt.setString(23, vo.getIp());
+			psmt.setString(24, vo.getMaterial());
+			psmt.setString(25, vo.getColor());
+			psmt.setString(26, vo.getSize());
+			psmt.setString(27, vo.getManufacturer());
+			psmt.setString(28, vo.getCountry());
+			psmt.setString(29, vo.getPrecautions());
+			psmt.setString(30, vo.getDate());
+			psmt.setString(31, vo.getStandard());
+			psmt.setString(32, vo.getAs());
+			psmt.setString(33, vo.getDelivery_date());
+//			psmt.setInt(23, vo.getRdate());
 			psmt.executeUpdate();
 			close();
-			
-			
 		}catch(Exception e){
 			logger.error(e.getMessage());
 		}
@@ -78,7 +77,7 @@ public void insertFile(String prodNo, String newName, String fname) {
 	try{
 		logger.info("파일넣기 start...");
 		Connection conn = getConnection();
-		PreparedStatement psmt = conn.prepareStatement(Sql_admin.INSERT_FILE);
+		PreparedStatement psmt = conn.prepareStatement(AdminSql.INSERT_FILE);
 		psmt.setString(1, prodNo);
 		psmt.setString(2, newName);
 		psmt.setString(3, fname);
@@ -93,4 +92,85 @@ public void insertFile(String prodNo, String newName, String fname) {
 	}
 }
 	
+	// select
+	public List<ProductVO> selectProduct() {
+		List<ProductVO> product = new ArrayList<>();
+		try{
+			logger.info("상품불러오기 start...");
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(AdminSql.SELECT_PRODUCT);
+			while(rs.next()) {
+				ProductVO vo = new ProductVO();
+				vo.setProdNo(rs.getString(1));
+				vo.setCate1(rs.getInt(2));
+				vo.setCate2(rs.getInt(3));
+				vo.setProdName(rs.getString(4));
+				vo.setDescript(rs.getString(5));
+				vo.setCompany(rs.getString(6));
+				vo.setSeller(rs.getString(7));
+				vo.setPrice(rs.getInt(8));
+				vo.setDiscount(rs.getInt(9));
+				vo.setPoint(rs.getInt(10));
+				vo.setStock(rs.getInt(11));
+				vo.setSold(rs.getInt(12));
+				vo.setDelivery(rs.getInt(13));
+				vo.setHit(rs.getInt(14));
+				vo.setScore(rs.getInt(15));
+				vo.setReview(rs.getInt(16));
+				vo.setThumb1(rs.getString(17));
+				vo.setThumb2(rs.getString(18));
+				vo.setThumb3(rs.getString(19));
+				vo.setDetail(rs.getString(20));
+				vo.setStatus(rs.getString(21));
+				product.add(vo);
+			}
+			close();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}
+		logger.debug("데이터 입력" + product.size());
+		return product;
+	}
+
+
+//	vo.setProdNo(rs.getString(1));
+//	vo.setCate1(rs.getInt(2));
+//	vo.setCate2(rs.getInt(3));
+//	vo.setProdName(rs.getString(4));
+//	vo.setDescript(rs.getString(5));
+//	vo.setCompany(rs.getString(6));
+//	vo.setSeller(rs.getString(7));
+//	vo.setPrice(rs.getInt(8));
+//	vo.setDiscount(rs.getInt(9));
+//	vo.setPoint(rs.getInt(10));
+//	vo.setStock(rs.getInt(11));
+//	vo.setSold(rs.getInt(12));
+//	vo.setDelivery(rs.getInt(13));
+//	vo.setHit(rs.getInt(14));
+//	vo.setScore(rs.getInt(15));
+//	vo.setReview(rs.getInt(16));
+//	vo.setThumb1(rs.getString(17));
+//	vo.setThumb2(rs.getString(18));
+//	vo.setThumb3(rs.getString(19));
+//	vo.setDetail(rs.getString(20));
+//	vo.setStatus(rs.getString(21));
+//	vo.setDuty(rs.getString(22));
+//	vo.setReceipt(rs.getString(23));
+//	vo.setBizType(rs.getString(24));
+//	vo.setOrigin(rs.getString(25));
+//	vo.setIp(rs.getString(26));
+//	vo.setRdate(rs.getInt(27));
+//	vo.setOrdNo(rs.getInt(28));
+//	vo.setBrand(rs.getString(29));
+//	vo.setMaterial(rs.getString(30));
+//	vo.setColor(rs.getString(31));
+//	vo.setSize(rs.getString(32));
+//	vo.setManufacturer(rs.getString(33));
+//	vo.setCountry(rs.getString(34));
+//	vo.setPrecautions(rs.getString(35));
+//	vo.setDate(rs.getString(36));
+//	vo.setStandard(rs.getString(37));
+//	vo.setAs(rs.getString(38));
+//	vo.setDelivery_date(rs.getString(39));
 }

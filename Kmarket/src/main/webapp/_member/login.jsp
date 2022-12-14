@@ -29,7 +29,7 @@
                     <p>로그인</p>
                     <p>Home > <span>로그인</span></p>
                 </div>
-                <form action="/Kmarket/_member/login.do" method="post">
+                <form action="/Kmarket/member/login.do" method="post">
                 <div class="login">   
                     <table>
                         <tr>
@@ -46,7 +46,7 @@
                                 <label><input type="checkbox" name="auto_login"> 자동 로그인 |</label>
                                 <a href="#">아이디 찾기 |</a>
                                 <a href="#">비밀번호 찾기 |</a>
-                                <a href="/Kmarket/_member/join.do">회원가입</a>
+                                <a href="/Kmarket/member/join.do">회원가입</a>
                             </td>
                         </tr>
                     </table>

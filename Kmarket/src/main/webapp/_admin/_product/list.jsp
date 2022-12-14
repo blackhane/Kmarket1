@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_admin/_header.jsp"/>
             
             <section id="admin-product-list">
@@ -34,54 +35,24 @@
                             <th>조회</th>
                             <th>관리</th>
                         </tr>
-                        <tr>
-                            <td><input type="checkbox" name="상품코드"></td>
-                            <td><img src="/Kmarket/img/img_admin/sample_thumb.jpg" class="thumb"></td>
-                            <td>201603292</td>
-                            <td>FreeMovement BLUEFORCE</td>
-                            <td>36,000</td>
-                            <td>10</td>
-                            <td>360</td>
-                            <td>400</td>
-                            <td>홍길동</td>
-                            <td>126</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="상품코드"></td>
-                            <td><img src="/Kmarket/img/img_admin/sample_thumb.jpg" class="thumb"></td>
-                            <td>201603292</td>
-                            <td>FreeMovement BLUEFORCE</td>
-                            <td>36,000</td>
-                            <td>10</td>
-                            <td>360</td>
-                            <td>400</td>
-                            <td>홍길동</td>
-                            <td>126</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name="상품코드"></td>
-                            <td><img src="/Kmarket/img/img_admin/sample_thumb.jpg" class="thumb"></td>
-                            <td>201603292</td>
-                            <td>FreeMovement BLUEFORCE</td>
-                            <td>36,000</td>
-                            <td>10</td>
-                            <td>360</td>
-                            <td>400</td>
-                            <td>홍길동</td>
-                            <td>126</td>
-                            <td>
-                                <a href="#">[삭제]</a>
-                                <a href="#">[수정]</a>
-                            </td>
-                        </tr>
+	                    <c:forEach var="item" items="${products}">
+				            <tr>
+				                <td><input type="checkbox" name="all"></td>
+                           		<td><img src="/Kmarket/file/${item.thumb1}" class="thumb"></td>
+	                            <td>${item.prodNo}</td>
+	                            <td>${item.prodName}</td>
+	                            <td>${item.price}</td>
+	                            <td>${item.discount}</td>
+	                            <td>${item.point}</td>
+	                            <td>${item.stock}</td>
+	                            <td>${item.seller}</td>
+	                            <td>${item.hit}</td>
+								<td>
+	                                <a href="#">[삭제]</a>
+	                                <a href="#">[수정]</a>
+                          			</td>
+				            </tr>
+			            </c:forEach>
                     </tbody>
                 </table>
                 <input type="button" value="선택삭제">

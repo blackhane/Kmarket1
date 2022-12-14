@@ -48,5 +48,12 @@ public class CsSQL {
 	
 	
 	
+	//글보기-공지사항
+	public static final String SELECT_CS_ARTICLE_NOTICE = "SELECT * FROM `km_cs_notice`";
 	
+	//글보기-자주묻는질문
+	public static final String SELECT_CS_ARTICLE_FAQ = "SELECT * FROM `km_cs_faq`";
+	
+	//글보기-문의하기
+	public static final String SELECT_CS_ARTICLE_QNA = "SELECT * FROM `km_cs_qna`";
 }
