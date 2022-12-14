@@ -23,23 +23,4 @@ public class ProductSQL {
 	//상품 조회수 + 1
 	public static String PRODUCT_HIT_UP = "UPDATE `km_product` SET `hit`=`hit`+1 WHERE `prodNo`=?";
 	
-	//장바구니 등록
-	public static String INSERT_CART = "INSERT INTO `km_product_cart` (`uid`,`prodNo`,`count`,`price`,`discount`,`point`,`delivery`,`total`,`rdate`) VALUE (?,?,?,?,?,?,?,?,NOW())";
-	
-	//장바구니 목록
-	public static String SELECT_CART = "SELECT a.*,b.`prodName`,b.`descript`,b.`thumb1` FROM `km_product_cart` AS a "
-									+ "JOIN `km_product` AS b "
-									+ "ON a.prodNo = b.prodNo  WHERE `uid`=?";
-	
-	//장바구니 삭제
-	public static String DELETE_CART = "DELETE FROM `km_product_cart` WHERE `cartNo`=?";
-			
-	//장바구니 합계
-	public static String TOTAL_CART = "SELECT SUM(`count`),SUM(`price`*`count`),ROUND(SUM(`price`/100*`discount`)),SUM(`delivery`),SUM(`point`) FROM `km_product_cart` WHERE `uid`=? GROUP BY `uid`";
-	
-	//상품 판매 + 1
-	public static String PRODUCT_SOLD_UP = "UPDATE `km_product` SET `sold`=`sold`+1 WHERE `prodNo`=?";
-	
-	
-
 }

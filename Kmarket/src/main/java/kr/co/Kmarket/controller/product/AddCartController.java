@@ -11,9 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonObject;
 
-import kr.co.Kmarket.DAO.ProductDAO;
+import kr.co.Kmarket.DAO.CartDAO;
 import kr.co.Kmarket.VO.CartVO;
-import kr.co.Kmarket.VO.ProductVO;
 
 @WebServlet("/product/addCart.do")
 public class AddCartController extends HttpServlet {
@@ -42,7 +41,7 @@ public class AddCartController extends HttpServlet {
 		vo.setTotal(total);
 		
 		//장바구니 입력
-		int result = ProductDAO.getInstance().insertCart(vo);
+		int result = CartDAO.getInstance().insertCart(vo);
 		
 		resp.setContentType("application/json;charset=UTF-8");
 		JsonObject json = new JsonObject();

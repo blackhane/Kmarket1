@@ -47,21 +47,27 @@ public class ProductVO {
 	private String as;
 	private String delivery_date;
 	
+	private String count;
+	
 	//파일 첨부 추가필드
-	
 	private String fname;
+	private int fno;
+	private String oriName;
+	private int download;
 	
+	
+	public String getCount() {
+		return count;
+	}
+	public void setCount(String count) {
+		this.count = count;
+	}
 	public String getFname() {
 		return fname;
 	}
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
-	private int fno;
-	private String oriName;
-	private int download;
-	
-	
 	public int getFno() {
 		return fno;
 	}

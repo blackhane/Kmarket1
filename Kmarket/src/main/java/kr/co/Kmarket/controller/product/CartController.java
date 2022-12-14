@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.co.Kmarket.DAO.ProductDAO;
+import kr.co.Kmarket.DAO.CartDAO;
 import kr.co.Kmarket.VO.CartVO;
 
 @WebServlet("/product/cart.do")
@@ -25,7 +25,7 @@ public class CartController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uid = req.getParameter("uid");
-		List<CartVO> carts = ProductDAO.getInstance().selectCartItem(uid);
+		List<CartVO> carts = CartDAO.getInstance().selectCartItem(uid);
 		
 		req.setAttribute("cart", carts);
 		

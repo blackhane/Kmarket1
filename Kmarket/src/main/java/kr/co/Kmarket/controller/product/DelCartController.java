@@ -2,8 +2,6 @@ package kr.co.Kmarket.controller.product;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,9 +15,8 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-import kr.co.Kmarket.DAO.ProductDAO;
+import kr.co.Kmarket.DAO.CartDAO;
 import kr.co.Kmarket.VO.CartVO;
-import kr.co.Kmarket.VO.ProductVO;
 
 @WebServlet("/product/cartHelper.do")
 public class DelCartController extends HttpServlet {
@@ -32,7 +29,7 @@ public class DelCartController extends HttpServlet {
 		String[] cartNo = req.getParameterValues("chkBox");
 		int result = 0;
 		
-		ProductDAO dao = ProductDAO.getInstance();
+		CartDAO dao = CartDAO.getInstance();
 		for(int i=0; i<cartNo.length; i++) {
 			result = dao.deleteCart(cartNo[i]);
 		}
@@ -47,7 +44,7 @@ public class DelCartController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uid = req.getParameter("uid");
-		CartVO vo = ProductDAO.getInstance().selectTotalCart(uid);
+		CartVO vo = CartDAO.getInstance().selectTotalCart(uid);
 		
 		resp.setContentType("application/json;charset=UTF-8");
 		Gson gson = new Gson();

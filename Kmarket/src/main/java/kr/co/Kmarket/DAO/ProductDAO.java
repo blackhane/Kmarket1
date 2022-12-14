@@ -6,7 +6,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.co.Kmarket.VO.CartVO;
 import kr.co.Kmarket.VO.ProductVO;
 import kr.co.Kmarket.utils.DBCP;
 import kr.co.Kmarket.utils.ProductSQL;
@@ -190,6 +189,7 @@ public class ProductDAO extends DBCP {
 				vo.setSeller(rs.getString("seller"));
 				vo.setPrice(rs.getString("price"));
 				vo.setDiscount(rs.getString("discount"));;
+				vo.setPoint(rs.getString("point"));;
 				vo.setDelivery(rs.getString("delivery"));
 				vo.setScore(rs.getInt("score"));
 				vo.setReview(rs.getInt("review"));
@@ -223,96 +223,4 @@ public class ProductDAO extends DBCP {
 		}
 	}
 	
-	//장바구니 등록
-	public int insertCart(CartVO vo) {
-		int result = 0;
-		try {
-			logger.info("장바구니 추가");
-			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSQL.INSERT_CART);
-			psmt.setString(1, vo.getUid());
-			psmt.setString(2, vo.getProdNo());
-			psmt.setString(3, vo.getCount());
-			psmt.setString(4, vo.getPrice());
-			psmt.setString(5, vo.getDiscount());
-			psmt.setString(6, vo.getPoint());
-			psmt.setString(7, vo.getDelivery());
-			psmt.setString(8, vo.getTotal());
-			result = psmt.executeUpdate();
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-		return result;
-	}
-	
-	//장바구니 보기
-	public List<CartVO> selectCartItem(String uid) {
-		List<CartVO> carts = new ArrayList<>();
-		try {
-			logger.info("장바구니 보기");
-			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSQL.SELECT_CART);
-			psmt.setString(1, uid);
-			rs = psmt.executeQuery();
-			while(rs.next()) {
-				CartVO vo = new CartVO();
-				vo.setCartNo(rs.getString(1));
-				vo.setUid(rs.getString(2));
-				vo.setProdNo(rs.getString(3));
-				vo.setCount(rs.getString(4));
-				vo.setPrice(rs.getString(5));
-				vo.setDiscount(rs.getString(6));
-				vo.setPoint(rs.getString(7));
-				vo.setDelivery(rs.getString(8));
-				vo.setTotal(rs.getString(9));
-				vo.setProdName(rs.getString(11));
-				vo.setDescript(rs.getString(12));
-				vo.setThumb1(rs.getString(13));
-				carts.add(vo);
-			}
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-		return carts;
-	}
-	
-	//장바구니 삭제
-	public int deleteCart(String cartNo) {
-		int result = 0;
-		try {
-			logger.info("장바구니선택삭제");
-			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSQL.DELETE_CART);
-			psmt.setString(1, cartNo);
-			result = psmt.executeUpdate();
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-		return result;
-	}
-	
-	//장바구니 합계
-	public CartVO selectTotalCart(String uid) {
-		CartVO vo = new CartVO();
-		try {
-			conn = getConnection();
-			psmt = conn.prepareStatement(ProductSQL.TOTAL_CART);
-			psmt.setString(1, uid);
-			rs = psmt.executeQuery();
-			if(rs.next()) {
-				vo.setCount(rs.getString(1));
-				vo.setPrice(rs.getString(2));
-				vo.setDiscount(rs.getString(3));
-				vo.setDelivery(rs.getString(4));
-				vo.setPoint(rs.getString(5));
-			}
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-		return vo;
-	}
 }

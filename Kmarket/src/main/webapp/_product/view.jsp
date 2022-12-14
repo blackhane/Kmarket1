@@ -5,16 +5,18 @@
 <jsp:include page="./nagivation.jsp"/>
 <script>
 	$(function(){
+
+		//장바구니
 		$('.cart').click(function(){
 			let uid = "${sessUser.uid}";
 			let prodNo = "${item.prodNo}";
 			let count = $('input[name=num]').val();
 			let price = "${item.price}";
 			let discount = "${item.discount}";
-			let point = price / 100 * count;
+			let point = ${item.point} * count;
 			let delivery = "${item.delivery}";
 			let total = (price - (price/100 * discount)) * count;
-
+			
 			let jsonData = {
 					'uid' : uid,
 					'prodNo' : prodNo,
@@ -50,8 +52,18 @@
 			}
 		});
 		
+		//주문하기
 		$('.order').click(function(){
-			alert("구매하기 버튼 클릭");
+			let uid = "${sessUser.uid}";
+			let count = $('input[name=num]').val();
+			if(uid == ''){
+				let answer = confirm('로그인 후 이용가능한 기능입니다. 로그인 하시겠습니까?');
+				if(answer){
+					location.href = "/Kmarket/member/login.do";
+				}
+			}else{
+				location.href = "/Kmarket/product/order.do?prodNo="+${item.prodNo}+"&count="+count;
+			}
 		});
 		
 		function delivery(){

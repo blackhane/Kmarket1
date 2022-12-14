@@ -79,8 +79,6 @@
 				alert('장바구니에 등록된 상품이 없습니다.');
 				return false;
 			}
-			alert('주문하기 멈춰!');
-			return false;
 		});
 		
 		//전체선택
@@ -141,7 +139,7 @@
 	    </p>
 	</nav>
     
-	<form action="/Kmarket/product/order.do" method="post">
+	<form action="/Kmarket/product/order.do?uid=${sessUser.uid}" method="post">
 	    <table>
 	        <thead>
 	            <tr>
@@ -180,7 +178,7 @@
 		        <td>${cart.count}</td>
 		        <td><fmt:formatNumber type="number" pattern="#,###" value="${cart.price}"/>원</td>
 		        <td>${cart.discount}%</td>
-		        <td>${cart.point}점</td>
+		        <td><fmt:formatNumber type="number" pattern="#,###" value="${cart.point}"/>점</td>
 		        <c:choose>
 		        	<c:when test="${cart.delivery eq 0}">
 		        		<td>무료배송</td>
