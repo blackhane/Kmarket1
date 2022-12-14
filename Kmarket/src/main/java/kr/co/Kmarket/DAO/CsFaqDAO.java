@@ -40,11 +40,12 @@ public class CsFaqDAO extends DBCP{
 			if(rs.next()){
 				article = new CsFaqVO();
 				article.setNo(rs.getString(1));
-				article.setCate(rs.getString(2));
-				article.setTitle(rs.getString(3));
-				article.setContent(rs.getString(4));
-				article.setRegip(rs.getString(5));
-				article.setRdate(rs.getString(6));
+				article.setGroup(rs.getString(2));
+				article.setCate(rs.getString(3));
+				article.setTitle(rs.getString(4));
+				article.setContent(rs.getString(5));
+				article.setRegip(rs.getString(6));
+				article.setRdate(rs.getString(7));
 			}
 			close();
 		}catch(Exception e){
@@ -53,23 +54,25 @@ public class CsFaqDAO extends DBCP{
 		return article;
 	}
 	
-	public List<CsFaqVO> faq_selectArticles(int start) {
+	public List<CsFaqVO> faq_selectArticles(String group, String cate) {
 		List<CsFaqVO> articles = new ArrayList<>();
 		try {
 			logger.info("faq_selectArticles start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(CsSQL.SELECT_CS_ARTICLES_FAQ);
-			psmt.setInt(1, start);
+			psmt.setString(1, group);
+			psmt.setString(2, cate);
 			rs= psmt.executeQuery();
 			while(rs.next()) {
 				CsFaqVO vo = new CsFaqVO();
 				vo = new CsFaqVO();
 				vo.setNo(rs.getString(1));
-				vo.setCate(rs.getString(2));
-				vo.setTitle(rs.getString(3));
-				vo.setContent(rs.getString(4));
-				vo.setRegip(rs.getString(5));
-				vo.setRdate(rs.getString(6));
+				vo.setGroup(rs.getString(2));
+				vo.setCate(rs.getString(3));
+				vo.setTitle(rs.getString(4));
+				vo.setContent(rs.getString(5));
+				vo.setRegip(rs.getString(6));
+				vo.setRdate(rs.getString(7));
 				
 				articles.add(vo);
 			}
@@ -79,8 +82,8 @@ public class CsFaqDAO extends DBCP{
 		}
 		return articles;
 	}
-	////@@ 막힘
-	public int notice_insertArticle(CsFaqVO article) {
+	
+	public int faq_insertArticle(CsFaqVO article) {
 		int parent = 0;
 		try {
 			logger.info("faq_insertArticle start...");
@@ -107,9 +110,8 @@ public class CsFaqDAO extends DBCP{
 		}
 		return parent;
 	}
-	///////////
 	
-	public int faq_updateArticle(String title, String content, String no) {
+	public int faq_updateArticle(String title, String group, String content, String no) {
 		logger.info("faq_updateArticle start...");
 		int result = 0;
 		try{
@@ -117,8 +119,9 @@ public class CsFaqDAO extends DBCP{
 			
 			psmt = conn.prepareStatement(CsSQL.UPDATE_CS_ARTICLE_FAQ);
 			psmt.setString(1, title);
-			psmt.setString(2, content);
-			psmt.setString(3, no);
+			psmt.setString(2, group);
+			psmt.setString(3, content);
+			psmt.setString(4, no);
 			result = psmt.executeUpdate();
 			
 			psmt.close();
@@ -143,6 +146,8 @@ public class CsFaqDAO extends DBCP{
 			logger.error(e.getMessage());
 		}
 	}
+	
+	
 	
 	
 }

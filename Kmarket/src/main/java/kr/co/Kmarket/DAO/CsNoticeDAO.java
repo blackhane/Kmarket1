@@ -52,13 +52,14 @@ public class CsNoticeDAO extends DBCP{
 		return article;
 	}
 	
-	public List<CsNoticeVO> notice_selectArticles(int start) {
+	public List<CsNoticeVO> notice_selectArticles(int start, String cate) {
 		List<CsNoticeVO> articles = new ArrayList<>();
 		try {
 			logger.info("notice_selectArticles start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(CsSQL.SELECT_CS_ARTICLES_NOTICE);
 			psmt.setInt(1, start);
+			psmt.setString(2, cate);
 			rs= psmt.executeQuery();
 			while(rs.next()) {
 				CsNoticeVO vo = new CsNoticeVO();
@@ -78,7 +79,7 @@ public class CsNoticeDAO extends DBCP{
 		}
 		return articles;
 	}
-	////@@ 막힘
+	
 	public int notice_insertArticle(CsNoticeVO article) {
 		int parent = 0;
 		try {
@@ -106,7 +107,6 @@ public class CsNoticeDAO extends DBCP{
 		}
 		return parent;
 	}
-	///////////
 	
 	public int notice_updateArticle(String title, String content, String no) {
 		logger.info("notice_updateArticle start...");
@@ -142,6 +142,25 @@ public class CsNoticeDAO extends DBCP{
 			logger.error(e.getMessage());
 		}
 	}
+	
+	
+	// 전체 게시글 카운트
+		public int notice_selectCountTotal(String cate) {
+			int total = 0;
+			try {
+				logger.info("notice_selectCountTotal start...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(CsSQL.SELECT_CS_COUNT_TOTAL_NOTICE);
+				psmt.setString(1, cate);
+				rs = psmt.executeQuery();
+				if(rs.next()) {
+					
+				}
+			}catch(Exception e) {
+				
+			}
+			return total;
+		}
 	
 	
 }

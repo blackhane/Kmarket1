@@ -3,6 +3,7 @@ package kr.co.Kmarket.VO;
 public class CsFaqVO {
 
 	private String no;
+	private String group;
 	private String cate;
 	private String title;
 	private String content;
@@ -15,6 +16,12 @@ public class CsFaqVO {
 	}
 	public void setNo(String no) {
 		this.no = no;
+	}
+	public String getGroup() {
+		return group;
+	}
+	public void setGroup(String group) {
+		this.group = group;
 	}
 	public String getCate() {
 		return cate;
@@ -46,6 +53,7 @@ public class CsFaqVO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
+	
 	
 	
 }
