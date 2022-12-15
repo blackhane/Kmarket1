@@ -34,7 +34,6 @@ public class AddOrderController extends HttpServlet {
 		String recipAddr1 = req.getParameter("addr1");
 		String recipAddr2 = req.getParameter("addr2");
 		String payment = req.getParameter("payment");
-		String[] prodNoArr = req.getParameterValues("prodNoArr");
 		
 		OrderItemVO vo = new OrderItemVO();
 		vo.setOrdUid(uid);
@@ -51,8 +50,35 @@ public class AddOrderController extends HttpServlet {
 		vo.setRecipAddr1(recipAddr1);
 		vo.setRecipAddr2(recipAddr2);
 		vo.setOrdPayment(payment);
+		
 		CartDAO dao = CartDAO.getInstance();
 		int result = dao.insertOrderItem(vo);
+
+		String[] arr = req.getParameterValues("arr");
+		String comeCart = req.getParameter("comeCart");
+		
+		//주문완료가 맞다면
+		if(result > 0) {
+			//판매갯수 ++
+			for(int i=0; i<arr.length; i+=2) {
+				//i가 짝수=번호, 홀수=갯수
+				String prodNo = arr[i];
+				String sold = arr[i+1];
+				dao.updateProductSoldUp(prodNo, sold);
+			}
+			//장바구니를 거쳐 왔다면
+			if(comeCart.equals("1")) {
+				//장바구니 비우기
+				dao.deleteCarts(uid);
+			}
+			//포인트적립
+			dao.updatePointUp(savePoint, uid);
+			//포인트사용
+			dao.updatePointDown(usedPoint, uid);
+			//포인트적립 기록
+			dao.insertPoint(uid,result,savePoint);
+		}
+		
 		
 		resp.setContentType("application/json;charset=UTF-8");
 		JsonObject json = new JsonObject();
@@ -62,18 +88,4 @@ public class AddOrderController extends HttpServlet {
 		writer.flush();
 	}
 	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String uid = req.getParameter("uid");
-		
-		//장바구니 비우기
-		int result = CartDAO.getInstance().deleteCarts(uid);
-		
-		resp.setContentType("application/json;charset=UTF-8");
-		JsonObject json = new JsonObject();
-		json.addProperty("result", result);
-		PrintWriter writer = resp.getWriter();
-		writer.print(json);
-		writer.flush();
-	}
 }

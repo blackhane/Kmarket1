@@ -23,6 +23,9 @@ public class CartSQL {
 		+ "(`ordUid`,`ordCount`,`ordPrice`,`ordDiscount`,`ordDelivery`,`savePoint`,`usedPoint`,`totalPrice`,`recipName`,`recipHp`,`recipZip`,`recipAddr1`,`recipAddr2`,`ordPayment`,`ordDate`) "
 		+ "VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())";
 	
+	//주문번호 검색
+	public static String SELECT_ORDNO = "SELECT `ordNo` FROM `km_product_order` WHERE `ordUid`=?  ORDER BY `ordNo` DESC LIMIT 1";
+	
 	//주문결과
 	public static String SELECT_ORDER_LATEST = "SELECT * FROM `km_product_order` WHERE `ordUid`=?  ORDER BY `ordDate` DESC LIMIT 1";
 	

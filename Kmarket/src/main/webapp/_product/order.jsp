@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/Kmarket/js/postcode.js"></script>
 <jsp:include page="./_header.jsp"/>
@@ -129,6 +130,15 @@
 			let addr2 = $('input[name=addr2]').val();
 			let payment = $('input[name=payment]:checked').val();
 			
+			//제품 판매++를 위한 변수
+			let arr = new Array();
+			<c:forEach items="${items}" var="item">
+				arr.push('${item.prodNo}','${item.count}');
+			</c:forEach>
+			
+			//장바구니 비우기를 위한 변수
+			let comeCart = ${comeCart};
+			
 			let jsonData = {
 				'uid':uid,
 				'count':count,
@@ -143,7 +153,9 @@
 				'zip':zip,
 				'addr1':addr1,
 				'addr2':addr2,
-				'payment':payment
+				'payment':payment,
+				'arr' : arr,
+				'comeCart' : comeCart
 			}
 				
 			$.ajax({
@@ -151,13 +163,12 @@
 				method : 'get',
 				data : jsonData,
 				traditional: true,	
+				aync : false,
 				dataType : 'json',
 				success : function(data){
 					if(data.result > 0){
 					 	alert('주문이 완료되었습니다.');
-					 	setTimeout(function() {
-						 	return true;
-				 		}, 3000);
+					 	return true;
 					}else{
 						alert('주문에 실패하였습니다.');
 						return false;

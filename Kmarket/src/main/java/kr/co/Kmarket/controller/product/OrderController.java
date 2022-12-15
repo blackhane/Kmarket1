@@ -37,6 +37,10 @@ public class OrderController extends HttpServlet {
 		List<ProductVO> vo = new ArrayList<>();
 		vo.add(item);
 		req.setAttribute("items", vo);
+
+		//장바구니에서 왔어요~
+		int comeCart = 0;
+		req.setAttribute("comeCart", comeCart);
 		
 		HttpSession session = req.getSession();
 		session.setAttribute("sessItem", vo);
@@ -63,6 +67,10 @@ public class OrderController extends HttpServlet {
 		//장바구니 => 주문
 		List<CartVO> items = dao.selectCartItem(uid);
 		req.setAttribute("items", items);
+		
+		//장바구니에서 왔어요~
+		int comeCart = 1;
+		req.setAttribute("comeCart", comeCart);
 		
 		HttpSession session = req.getSession();
 		session.setAttribute("sessItem", items);

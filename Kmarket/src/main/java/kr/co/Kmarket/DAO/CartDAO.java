@@ -1,5 +1,6 @@
 package kr.co.Kmarket.DAO;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -125,6 +126,7 @@ public class CartDAO extends DBCP {
 		try {
 			logger.info("주문완료");
 			conn = getConnection();
+			conn.setAutoCommit(false);
 			psmt = conn.prepareStatement(CartSQL.INSERT_ORDER);
 			psmt.setString(1, vo.getOrdUid());
 			psmt.setString(2, vo.getOrdCount());
@@ -140,7 +142,18 @@ public class CartDAO extends DBCP {
 			psmt.setString(12, vo.getRecipAddr1());
 			psmt.setString(13, vo.getRecipAddr2());
 			psmt.setString(14, vo.getOrdPayment());
-			result = psmt.executeUpdate();
+			psmt.executeUpdate();
+			
+			//ordNo 찾기
+			PreparedStatement psmt2 = conn.prepareStatement(CartSQL.SELECT_ORDNO);
+			psmt2.setString(1, vo.getOrdUid());
+			rs = psmt2.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+			conn.commit();
+			psmt2.close();
 			close();
 		}catch(Exception e) {
 			logger.error(e.getMessage());
@@ -186,7 +199,7 @@ public class CartDAO extends DBCP {
 	//포인트 적립
 	public void updatePointUp(String point,String uid) {
 		try {
-			logger.info("포인트 적립");
+			logger.info("포인트 적립 : "+ point);
 			conn = getConnection();
 			psmt = conn.prepareStatement(CartSQL.UPDATA_POINT_UP);
 			psmt.setString(1, point);
@@ -201,7 +214,7 @@ public class CartDAO extends DBCP {
 	//포인트 사용
 	public void updatePointDown(String point,String uid) {
 		try {
-			logger.info("포인트 사용");
+			logger.info("포인트 사용 : "+ point);
 			conn = getConnection();
 			psmt = conn.prepareStatement(CartSQL.UPDATA_POINT_DOWN);
 			psmt.setString(1, point);
@@ -214,14 +227,14 @@ public class CartDAO extends DBCP {
 	}
 	
 	//포인트 기록
-	public void insertPoint(String uid,String ordNo,String sPoint) {
+	public void insertPoint(String uid,int ordNo,String point) {
 		try {
-			logger.info("포인트 기록");
+			logger.info("포인트 기록 : "+ point);
 			conn = getConnection();
 			psmt = conn.prepareStatement(CartSQL.INSERT_POINT);
 			psmt.setString(1, uid);
-			psmt.setString(2, ordNo);
-			psmt.setString(3, sPoint);
+			psmt.setInt(2, ordNo);
+			psmt.setString(3, point);
 			psmt.executeUpdate();
 			close();
 		}catch(Exception e) {

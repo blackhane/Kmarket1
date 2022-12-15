@@ -41,7 +41,7 @@ public class AutoLogin implements Filter {
 			}
 		}
 		
-		//장바구니 비우기
+		//주문세션 비우기
 		sess.removeAttribute("sessItem");
 		
 		chain.doFilter(request, response);
