@@ -76,8 +76,6 @@ public class OrderController extends HttpServlet {
 		session.setAttribute("sessItem", items);
 		
 		//최종결제정보
-		CartVO total = dao.selectTotalCart(uid);
-		req.setAttribute("total", total);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/_product/order.jsp");
 		dispatcher.forward(req, resp);

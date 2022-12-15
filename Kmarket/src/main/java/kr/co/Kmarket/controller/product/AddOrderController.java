@@ -15,8 +15,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kr.co.Kmarket.DAO.CartDAO;
+import kr.co.Kmarket.DAO.ProductDAO;
 import kr.co.Kmarket.VO.OrderItemVO;
 import kr.co.Kmarket.VO.OrderVO;
+import kr.co.Kmarket.VO.ProductVO;
 
 @WebServlet("/product/orderHelper.do")
 public class AddOrderController extends HttpServlet {
@@ -58,6 +60,7 @@ public class AddOrderController extends HttpServlet {
 		vo.setOrdPayment(payment);
 		
 		CartDAO dao = CartDAO.getInstance();
+		ProductDAO dao2 = ProductDAO.getInstance();
 		int result = dao.insertOrderItem(vo);
 
 		String[] arr = req.getParameterValues("arr");
@@ -75,6 +78,12 @@ public class AddOrderController extends HttpServlet {
 				
 				//재고량--
 				dao.updateProductStockDown(prodNo, sold);
+				
+				//제품찾기
+				ProductVO prod = dao2.selectProduct(prodNo);
+				
+				//주문기록
+				dao.insertOrderItem(prod,sold);
 			}
 			//장바구니를 거쳐 왔다면
 			if(comeCart.equals("1")) {

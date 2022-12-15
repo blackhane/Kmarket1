@@ -19,7 +19,7 @@ import kr.co.Kmarket.DAO.CartDAO;
 import kr.co.Kmarket.VO.CartVO;
 
 @WebServlet("/product/cartHelper.do")
-public class DelCartController extends HttpServlet {
+public class CartHelperController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -41,16 +41,4 @@ public class DelCartController extends HttpServlet {
 		writer.print(json.toString());
 	}
 	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String uid = req.getParameter("uid");
-		CartVO vo = CartDAO.getInstance().selectTotalCart(uid);
-		
-		resp.setContentType("application/json;charset=UTF-8");
-		Gson gson = new Gson();
-		String json = gson.toJson(vo);
-		PrintWriter writer = resp.getWriter();
-		writer.print(json.toString());
-		writer.flush();
-	}
 }

@@ -99,28 +99,6 @@ public class CartDAO extends DBCP {
 		return result;
 	}
 	
-	//장바구니 합계
-	public CartVO selectTotalCart(String uid) {
-		CartVO vo = new CartVO();
-		try {
-			conn = getConnection();
-			psmt = conn.prepareStatement(CartSQL.TOTAL_CART);
-			psmt.setString(1, uid);
-			rs = psmt.executeQuery();
-			if(rs.next()) {
-				vo.setCount(rs.getString(1));
-				vo.setPrice(rs.getString(2));
-				vo.setDisPrice(rs.getInt(3));
-				vo.setDelivery(rs.getString(4));
-				vo.setPoint(rs.getString(5));
-			}
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-		return vo;
-	}
-	
 	//주문완료
 	public int insertOrderItem(OrderItemVO vo) {
 		int result = 0;
@@ -282,6 +260,34 @@ public class CartDAO extends DBCP {
 			psmt = conn.prepareStatement(CartSQL.PRODUCT_STOCK_DOWN);
 			psmt.setString(1, sold);
 			psmt.setString(2, prodNo);
+			psmt.executeUpdate();
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
+	//주문기록
+	public void insertOrderItem(ProductVO vo, String sold) {
+		int count = Integer.parseInt(sold);
+		int price = vo.getPrice()  ;
+		int discount = vo.getDiscount();
+		discount = price/100*discount;
+		int point = vo.getPoint() * count;
+		int delivery = vo.getDelivery();
+		int total = (price-discount) * count + delivery;
+		
+		try {
+			logger.info("주문기록");
+			conn = getConnection();
+			psmt = conn.prepareStatement(CartSQL.INSERT_ORDER_ITEM);
+			psmt.setInt(1, vo.getProdNo());
+			psmt.setString(2, sold);
+			psmt.setInt(3, price*count);
+			psmt.setInt(4, discount*count);
+			psmt.setInt(5, point);
+			psmt.setInt(6, delivery);
+			psmt.setInt(7, total);
 			psmt.executeUpdate();
 			close();
 		}catch(Exception e) {
