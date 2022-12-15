@@ -8,6 +8,12 @@
 
 		//장바구니
 		$('.cart').click(function(){
+			let stock = '${item.stock}';
+			if(stock == 0){
+				alert('죄송합니다. 현 제품은 현재 재고가 없습니다.');
+				return;
+			}
+			
 			let uid = "${sessUser.uid}";
 			let prodNo = "${item.prodNo}";
 			let count = $('input[name=num]').val();
@@ -54,6 +60,12 @@
 		
 		//주문하기
 		$('.order').click(function(){
+			let stock = '${item.stock}';
+			if(stock == 0){
+				alert('죄송합니다. 현 제품은 현재 재고가 없습니다.');
+				return;
+			}
+			
 			let uid = "${sessUser.uid}";
 			let count = $('input[name=num]').val();
 			if(uid == ''){

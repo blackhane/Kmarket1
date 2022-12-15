@@ -8,15 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kr.co.Kmarket.DAO.CartDAO;
 import kr.co.Kmarket.VO.OrderItemVO;
+import kr.co.Kmarket.VO.OrderVO;
 
 @WebServlet("/product/orderHelper.do")
 public class AddOrderController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -59,12 +65,16 @@ public class AddOrderController extends HttpServlet {
 		
 		//주문완료가 맞다면
 		if(result > 0) {
-			//판매갯수 ++
 			for(int i=0; i<arr.length; i+=2) {
 				//i가 짝수=번호, 홀수=갯수
 				String prodNo = arr[i];
 				String sold = arr[i+1];
+				
+				//판매갯수 ++
 				dao.updateProductSoldUp(prodNo, sold);
+				
+				//재고량--
+				dao.updateProductStockDown(prodNo, sold);
 			}
 			//장바구니를 거쳐 왔다면
 			if(comeCart.equals("1")) {
@@ -83,6 +93,23 @@ public class AddOrderController extends HttpServlet {
 		resp.setContentType("application/json;charset=UTF-8");
 		JsonObject json = new JsonObject();
 		json.addProperty("result", result);
+		PrintWriter writer = resp.getWriter();
+		writer.print(json);
+		writer.flush();
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String[] jsonData = req.getParameterValues("array");
+		
+		Gson gson = new Gson();
+		OrderVO vo = gson.fromJson(jsonData.toString(), OrderVO.class);
+		
+		logger.debug("vo: " +vo);
+		
+		resp.setContentType("application/json;charset=UTF-8");
+		JsonObject json = new JsonObject();
+		json.addProperty("result", 1);
 		PrintWriter writer = resp.getWriter();
 		writer.print(json);
 		writer.flush();

@@ -24,16 +24,16 @@
 				let tag = "<h2>최종결제 정보</h2>";
 					tag += "<table>";
 					tag += "<tr><td>총</td>";
-					tag += "<td>"+count+"건</td></tr>";
+					tag += "<td>"+count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"건</td></tr>";
 					tag += "<tr><td>상품금액</td>";
-					tag += "<td>"+price+"원</td></tr>";
+					tag += "<td>"+price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원</td></tr>";
 					tag += "<tr><td>할인금액</td>";
-					tag += "<td>"+disPrice+"원</td></tr>";
+					tag += "<td>"+disPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원</td></tr>";
 	                tag += "<tr><td>배송비</td>";
-					tag += "<td>"+delivery+"원</td></tr>";
-	                tag += "<tr><td>포인트 할인</td><td class='pointDiscount'>"+point+"원</td></tr>";
+					tag += "<td>"+delivery.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원</td></tr>";
+	                tag += "<tr><td>포인트 할인</td><td class='pointDiscount'>"+point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원</td></tr>";
 					tag += "<tr><td>전체주문금액</td>";
-					tag += "<td>"+totalPrice+"원</td></tr>";
+					tag += "<td>"+totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원</td></tr>";
 					tag += "</table>";
 					tag += "<button type='sumbit' class='complete'>결제하기</button>";
 					$('.final').append(tag);
@@ -157,25 +157,27 @@
 				'arr' : arr,
 				'comeCart' : comeCart
 			}
-				
+			
 			$.ajax({
 				url : '/Kmarket/product/orderHelper.do',
 				method : 'get',
 				data : jsonData,
 				traditional: true,	
-				aync : false,
+				async : false,
 				dataType : 'json',
 				success : function(data){
 					if(data.result > 0){
-					 	alert('주문이 완료되었습니다.');
-					 	return true;
+						alert('주문이 완료되었습니다.');
+						location.href = "/Kmarket/product/complete.do?uid=${sessUser.uid}";
+						return true;
 					}else{
-						alert('주문에 실패하였습니다.');
+						alert('주문이 실패하였습니다.');
 						return false;
 					}
 				}
 			});
-		});
+			return false;
+	  	});
 		
 		//주소
 		$('input[name=zipSearch]').click(function(){
@@ -199,7 +201,7 @@
             </p>
         </nav>
 
-        <form action="/Kmarket/product/complete.do?uid=${sessUser.uid}" method="post">
+        <form action="/Kmarket/product/complete.do?uid=${sessUser.uid}">
             <table>
                 <thead>
                     <tr>
@@ -225,9 +227,9 @@
                             </article>
                         </td>
                         <td>${order.count}</td>
-                        <td>${order.price}원</td>
+                        <td><fmt:formatNumber type="number" pattern="#,###" value="${order.price}"/>원</td>
                         <td>${order.discount}%</td>
-                        <td>${order.point}점</td>
+                        <td><fmt:formatNumber type="number" pattern="#,###" value="${order.point}"/>점</td>
                         <c:choose>
                         	<c:when test="${order.delivery eq 0}">
                         		<td>무료배송</td>

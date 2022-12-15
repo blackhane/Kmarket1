@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.VO.CartVO;
 import kr.co.Kmarket.VO.OrderItemVO;
+import kr.co.Kmarket.VO.ProductVO;
 import kr.co.Kmarket.utils.CartSQL;
 import kr.co.Kmarket.utils.DBCP;
 
@@ -259,19 +260,33 @@ public class CartDAO extends DBCP {
 	}
 	
 	//상품판매++
-	public int updateProductSoldUp(String prodNo, String sold) {
-		int result = 0;
+	public void updateProductSoldUp(String prodNo, String sold) {
 		try {
 			logger.info("상품판매++");
 			conn = getConnection();
 			psmt = conn.prepareStatement(CartSQL.PRODUCT_SOLD_UP);
 			psmt.setString(1, sold);
 			psmt.setString(2, prodNo);
-			result = psmt.executeUpdate();
+			psmt.executeUpdate();
 			close();
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}
-		return result;
 	}
+	
+	//상품재고--
+	public void updateProductStockDown(String prodNo, String sold) {
+		try {
+			logger.info("상품재고--");
+			conn = getConnection();
+			psmt = conn.prepareStatement(CartSQL.PRODUCT_STOCK_DOWN);
+			psmt.setString(1, sold);
+			psmt.setString(2, prodNo);
+			psmt.executeUpdate();
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
 }

@@ -38,10 +38,10 @@
                             </div>
                         </article>
                     </td>
-                    <td>${item.price}원</td>
-                    <td>${item.disPrice}원</td>
+                    <td><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/>원</td>
+                    <td><fmt:formatNumber type="number" pattern="#,###" value="${item.disPrice}"/>원</td>
                     <td>${item.count}</td>
-                    <td>${(item.price - item.disPrice)*item.count}원</td>
+                    <td><fmt:formatNumber type="number" pattern="#,###" value="${(item.price - item.disPrice)*item.count}"/>원</td>
                 </tr>
                 </c:forEach>
                 <tr class="total">
@@ -50,19 +50,19 @@
                         <table border="0">
                             <tr>
                                 <td>총 상품금액</td>
-                                <td><span>${order.ordPrice}</span>원</td>
+                                <td><span><fmt:formatNumber type="number" pattern="#,###" value="${order.ordPrice}"/></span>원</td>
                             </tr>
                             <tr>
                                 <td>총 할인금액</td>
-                                <td><span>-${order.ordDiscount}</span>원</td>
+                                <td><span>-<fmt:formatNumber type="number" pattern="#,###" value="${order.ordDiscount}"/></span>원</td>
                             </tr>
                             <tr>
                                 <td>배송비</td>
-                                <td><span>${order.ordDelivery}</span>원</td>
+                                <td><span><fmt:formatNumber type="number" pattern="#,###" value="${order.ordDelivery}"/></span>원</td>
                             </tr>
                             <tr>
                                 <td>총 결제금액</td>
-                                <td><span>${order.totalPrice}</span>원</td>
+                                <td><span><fmt:formatNumber type="number" pattern="#,###" value="${order.totalPrice}"/></span>원</td>
                             </tr>
                         </table>
                     </td>

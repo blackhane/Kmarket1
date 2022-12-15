@@ -41,7 +41,12 @@ public class CartSQL {
 	//장바구니 비우기
 	public static String DELECT_CARTS = "DELETE FROM `km_product_cart` WHERE `uid`=?";
 	
-	//상품 판매 + 1
+	//상품 판매 ++
 	public static String PRODUCT_SOLD_UP = "UPDATE `km_product` SET `sold`=`sold`+? WHERE `prodNo`=?";
 	
+	//상품 재고 --
+	public static String PRODUCT_STOCK_DOWN = "UPDATE `km_product` SET `stock`=`stock`-? WHERE `prodNo`=?";
+	
+	//주문기록
+	public static String INSERT_ORDER_ITEM = "INSERT INTO `km_product_order_item` (`prodNo`,`count`,`price`,`discount`,`point`,`delivery`,`total`) VALUE (?,?,?,?,?,?,?)";
 }
