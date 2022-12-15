@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/cs/qna/view.do")
-public class View_QNA_Controller extends HttpServlet{
+public class ViewController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
 	@Override

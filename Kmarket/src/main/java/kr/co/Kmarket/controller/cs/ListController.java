@@ -8,25 +8,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-@WebServlet("/cs/fnq/view.do")
-public class View_FAQ_Controller extends HttpServlet{
+@WebServlet("/cs/qna/list.do")
+public class ListController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
-	
 	@Override
-	public void init() throws ServletException {
-
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/_cs/_qna/list.jsp");
+		dispatcher.forward(req, resp);
 	}
 	
-	 @Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		 RequestDispatcher dispatcher = req.getRequestDispatcher("/_cs/_faq/view.jsp");
-			dispatcher.forward(req, resp);
-	}
-	 
-	 @Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-	}
 }
