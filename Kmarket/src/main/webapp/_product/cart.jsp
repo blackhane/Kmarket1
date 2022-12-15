@@ -21,11 +21,11 @@
 		
 		//장바구니 합계 정보창
 		if(uid != null){
-			sumCart();
+			allCart();
 			totalCart();
 		}
 		
-		//장바구니 체크값 합계
+		//장바구니 체크된것만 합계
 		function sumCart(){
 			count = 0;
 			price = 0;
@@ -54,7 +54,37 @@
 				</c:forEach>
 			});
 		}
-		
+
+		//장바구니 전체 합계
+		function allCart(){
+			count = 0;
+			price = 0;
+			disPrice = 0;
+			delivery = 0;
+			point = 0;
+			totalPrice = 0;
+			
+			let allNo = new Array();
+			$('.chk').each(function(){
+				allNo.push($(this).val());
+			});
+			
+			allNo.forEach(function(number){
+				<c:forEach items="${cart}" var="cart">
+				console.log("number : "+number);
+				console.log("cartNo : "+${cart.cartNo});
+				if(number == ${cart.cartNo}){
+					count += ${cart.count};
+					price += ${cart.price} * ${cart.count};
+					disPrice += ${cart.disPrice} * -1 * ${cart.count};
+					delivery += ${cart.delivery};
+					point += ${cart.point};
+					totalPrice += (${cart.price} + (${cart.disPrice} * -1) + ${cart.delivery} ) * ${cart.count};
+				}
+				</c:forEach>
+			});
+		}
+			
 		function totalCart(){
    			let tag = "<h2>전체합계</h2>";
 			tag += "<table>";
@@ -104,14 +134,19 @@
 				$('.chk').prop("checked",false);
 			}
 			$('.total').empty();
-			sumCart();
+			allCart();
 			totalCart();
 		});
 
+		//선택해제
 		$('.chk').click(function(){
 			$('.all').prop("checked",false);
 			$('.total').empty();
-			sumCart();
+			if($('input[name=chk]').is(':checked')){
+				sumCart();
+			}else{
+				allCart();
+			}
 			totalCart();
 		})
 
@@ -128,6 +163,21 @@
 				$('input[name=chk]:checked').each(function(){
 					checkArr.push($(this).val());
 				});
+				
+				allCart();
+				checkArr.forEach(function(number){
+					<c:forEach items="${cart}" var="cart">
+					if(number == ${cart.cartNo}){
+						count -= ${cart.count};
+						price -= ${cart.price} * ${cart.count};
+						disPrice -= ${cart.disPrice} * -1 * ${cart.count};
+						delivery -= ${cart.delivery};
+						point -= ${cart.point};
+						totalPrice -= (${cart.price} + (${cart.disPrice} * -1) + ${cart.delivery} ) * ${cart.count};
+					}
+					</c:forEach>
+				});
+				
 				$.ajax({
 					url : '/Kmarket/product/cartHelper.do',
 					method : 'get',
@@ -151,12 +201,6 @@
 				alert('삭제되었습니다.');
 				$('.all').prop("checked",false);
 				$('.total').empty();
-				count = 0;
-				price = 0;
-				disPrice = 0;
-				delivery = 0;
-				point = 0;
-				totalPrice = 0;
 				totalCart();
 			}
 		});
