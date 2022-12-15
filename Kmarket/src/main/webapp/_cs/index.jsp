@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_cs/_header.jsp"/>
         <main>
             <section class="help">
@@ -7,21 +8,11 @@
             <section class="notice">
                 <h1>공지사항 <a href="/Kmarket/cs/notice/list.do">전체보기</a></h1>
                 <ul>
+                <c:forEach items="${notice}" var="notice">
                     <li>
-                        <a href="/Kmarket/cs/notice/view.do">[안내] 해외결제 사칭 문자 주의 <span>22.10.31</span></a>
+                        <a href="#">[${notice.cate}] ${notice.title} <span>${notice.rdate}</span></a>
                     </li>
-                    <li>
-                        <a href="#">[안내] 해외결제 사칭 문자 주의 <span>22.10.31</span></a>
-                    </li>
-                    <li>
-                        <a href="#">[안내] 해외결제 사칭 문자 주의 <span>22.10.31</span></a>
-                    </li>
-                    <li>
-                        <a href="#">[안내] 해외결제 사칭 문자 주의 <span>22.10.31</span></a>
-                    </li>
-                    <li>
-                        <a href="#">[안내] 해외결제 사칭 문자 주의 <span>22.10.31</span></a>
-                    </li>
+                </c:forEach>
                 </ul>
             </section>
             <section class="faq">
@@ -39,22 +30,12 @@
             <section class="inquiry">
                 <h1>문의하기 <a href="/Kmarket/cs/qna/list.do">전체보기</a></h1>
                 <ul>
+               	<c:forEach items="${qna}" var="qna">
                     <li>
-                        <a href="/Kmarket/cs/qna/view.do">[회원] 개인회원과 법인회원에 차이가 있나요? <p>*******<span>22.10.31</span></p></a>
+                        <a href="#">[${qna.cate}] ${qna.title} <p>${qna.uid}<span>${qna.rdate}</span></p></a>
                     </li>
-                    <li>
-                        <a href="#">[쿠폰/이벤트] 스마일포인트는 어디에 사용하나요? <p>*******<span>22.10.31</span></p></a>
-                    </li>
-                    <li>
-                        <a href="#">[주문/결제] 신용카드 결제중 오류가 난 경우는 어떻게 하나요? <p>*******<span>22.10.31</span></p></a>
-                    </li>
-                    <li>
-                        <a href="#">[배송] 주문한 상품은 언제 배송되나요? <p>*******<span>22.10.31</span></p></a>
-                    </li>
-                    <li>
-                        <a href="#">[취소/반품/교환] 주문을 취소하고 싶어요. <p>*******<span>22.10.31</span></p></a>
-                    </li>
-                    <a href="#">문의글 작성 ></a>
+                </c:forEach>
+                    <a href="/Kmarket/cs/qna/write.do">문의글 작성 ></a>
                 </ul>
             </section>
             <section class="consult">
