@@ -41,7 +41,7 @@ $(function(){
                     </p>
                 </nav>
                 <article>
-                    <form action="/Kmarket/admin/product/register.do" method="post" enctype="multipart/form-data">
+                    <form action="/Kmarket/admin/register.do" method="post" enctype="multipart/form-data">
                         <!-- 상품분류 -->
                         <section>
                             <h4>상품분류</h4>
