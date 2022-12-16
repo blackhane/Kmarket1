@@ -61,6 +61,9 @@ public class CartVO {
 	public void setProdNo(String prodNo) {
 		this.prodNo = prodNo;
 	}
+	public void setProdNo(int prodNo) {
+		this.prodNo = prodNo+"";
+	}
 	public String getCount() {
 		return count;
 	}
@@ -73,11 +76,17 @@ public class CartVO {
 	public void setPrice(String price) {
 		this.price = price;
 	}
+	public void setPrice(int price) {
+		this.price = price+"";
+	}
 	public String getDiscount() {
 		return discount;
 	}
 	public void setDiscount(String discount) {
 		this.discount = discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount+"";
 	}
 	public String getPoint() {
 		return point;
@@ -85,11 +94,17 @@ public class CartVO {
 	public void setPoint(String point) {
 		this.point = point;
 	}
+	public void setPoint(int point) {
+		this.point = point+"";
+	}
 	public String getDelivery() {
 		return delivery;
 	}
 	public void setDelivery(String delivery) {
 		this.delivery = delivery;
+	}
+	public void setDelivery(int delivery) {
+		this.delivery = delivery+"";
 	}
 	public String getTotal() {
 		return total;

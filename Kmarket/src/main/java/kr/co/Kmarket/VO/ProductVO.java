@@ -67,6 +67,9 @@ public class ProductVO {
 	public void setCount(int count) {
 		this.count = count;
 	}
+	public void setCount(String count) {
+		this.count = Integer.parseInt(count);
+	}
 	public String getFname() {
 		return fname;
 	}

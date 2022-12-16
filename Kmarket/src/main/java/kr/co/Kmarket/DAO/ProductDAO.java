@@ -158,7 +158,7 @@ public class ProductDAO extends DBCP {
 				vo.setPrice(rs.getString(8));
 				vo.setDiscount(rs.getString(9));
 				vo.setDelivery(rs.getString(13));
-				vo.setThumb2(rs.getString(18));
+				vo.setThumb1(rs.getString(17));
 				product.add(vo);
 			}
 			close();
@@ -245,6 +245,36 @@ public class ProductDAO extends DBCP {
 				vo.setStandard(rs.getString(37));
 				vo.setAs(rs.getString(38));
 				vo.setDelivery_date(rs.getString(39));
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return vo;
+	};
+	
+	//주문상품 찾기
+	public ProductVO selectOrderProduct(String prodNo, String count) {
+		ProductVO vo = new ProductVO();
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.SELECT_PPRODUCT);
+			psmt.setString(1, prodNo);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				vo.setProdNo(rs.getString(1));
+				vo.setProdName(rs.getString(4));
+				vo.setDescript(rs.getString(5));
+				vo.setPrice(rs.getInt(8));
+				vo.setDiscount(rs.getInt(9));
+				vo.setPoint(rs.getInt(10));
+				vo.setStock(rs.getInt(11));
+				vo.setSold(rs.getInt(12));
+				vo.setDelivery(rs.getInt(13));
+				vo.setThumb1(rs.getString(17));
+				vo.setThumb2(rs.getString(18));
+				vo.setThumb3(rs.getString(19));
+				vo.setCount(count);
 			}
 			close();
 		}catch(Exception e) {

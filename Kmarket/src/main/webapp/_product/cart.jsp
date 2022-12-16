@@ -36,7 +36,7 @@
 			
 			let cartNo = new Array();
 			$('input[name=chk]:checked').each(function(){
-				cartNo.push($(this).val());
+				cartNo.push($(this).data("no"));
 			});
 			
 			cartNo.forEach(function(number){
@@ -66,13 +66,11 @@
 			
 			let allNo = new Array();
 			$('.chk').each(function(){
-				allNo.push($(this).val());
+				allNo.push($(this).data("no"));
 			});
 			
 			allNo.forEach(function(number){
 				<c:forEach items="${cart}" var="cart">
-				console.log("number : "+number);
-				console.log("cartNo : "+${cart.cartNo});
 				if(number == ${cart.cartNo}){
 					count += ${cart.count};
 					price += ${cart.price} * ${cart.count};
@@ -120,10 +118,33 @@
 		
 		//주문하기 클릭
 		$('form').submit(function(){
+			
+			//장바구니에 물건이 없으면
 			if($('.chk').length == 0){
 				alert('장바구니에 등록된 상품이 없습니다.');
 				return false;
 			}
+			
+			//물건 체크된 값이 없으면 전체 체크
+			if($('input[name=chk]:checked').length == 0){
+				$('.chk').prop("checked",true);
+			}
+			
+			let ordArray = new Array();
+			
+			$('input[name=chk]:checked').each(function(){
+				ordArray.push($(this).data("no"));
+			});
+			let jsonData =  {'jsonData' : ordArray};
+			console.log(jsonData);
+			alert('');
+			$.ajax({
+				url : '/Kmarket/product/order.do',
+				method : 'post',
+				data : {'jsonData' : ordArray}, 
+				traditional : true,
+				dataType : 'data'
+			});
 		});
 
 		//전체선택
@@ -147,8 +168,12 @@
 			}else{
 				allCart();
 			}
+			if($('input[name=chk]:checked').length == $('.chk').length){
+				$('.all').prop("checked",true);
+			}
 			totalCart();
-		})
+		});
+		
 
 		//선택삭제
 		$('.cartDelete').click(function(){
@@ -215,7 +240,7 @@
 	    </p>
 	</nav>
     
-	<form action="/Kmarket/product/order.do?uid=${sessUser.uid}" method="post">
+	<form action="/Kmarket/product/order.do" method="post"/>
 	    <table>
 	        <thead>
 	            <tr>
@@ -247,7 +272,10 @@
 		<!--  장바구니에 상품이 있을 때 -->
 		<c:forEach items="${cart}" var="cart">
 		    <tr>
-		        <td><input type="checkbox" class="chk" name="chk" value="${cart.cartNo}"></td>
+		        <td>
+		        	<input type="checkbox" class="chk" name="chk" value="${cart.prodNo}" data-no="${cart.cartNo}">
+		        	<input type="hidden" name="count" value="${cart.count}" data-no="${cart.cartNo}">		
+		        </td>
 		        <td><article><a href="#"><img src="/Kmarket/file/${cart.thumb1}" alt="thumb1"></a>
 		        <div>
 		            <h2><a href="#">${cart.prodName}</a></h2>

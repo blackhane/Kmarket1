@@ -200,7 +200,7 @@
 						    <a href="/Kmarket/product/view.do?cate1=${item.cate1}&cate2=${item.cate2}&prodNo=${item.prodNo}">
 						        <div class="thumb">
 						            <i>${i}</i>
-						            <img src="/Kmarket/file/${item.thumb2}" alt="thumb2" class="best_thumb2">
+						            <img src="/Kmarket/file/${item.thumb1}" alt="thumb1" class="best_thumb2">
 						        </div>
 						        <h2>${item.prodName}</h2>
 						        <div class="org_price">

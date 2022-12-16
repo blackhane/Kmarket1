@@ -15,6 +15,11 @@ public class CartSQL {
 	//장바구니 삭제
 	public static String DELETE_CART = "DELETE FROM `km_product_cart` WHERE `cartNo`=?";
 			
+	//장바구니 주문
+	public static String SELECT_CART_ORDER = "SELECT a.*,b.`prodName`,b.`descript`,b.`thumb1` FROM `km_product_cart` AS a "
+		+ "JOIN `km_product` AS b "
+		+ "ON a.prodNo = b.prodNo  WHERE `cartNo`=?";
+	
 	//주문완료
 	public static String INSERT_ORDER = "INSERT INTO `km_product_order` "
 		+ "(`ordUid`,`ordCount`,`ordPrice`,`ordDiscount`,`ordDelivery`,`savePoint`,`usedPoint`,`totalPrice`,`recipName`,`recipHp`,`recipZip`,`recipAddr1`,`recipAddr2`,`ordPayment`,`ordDate`) "

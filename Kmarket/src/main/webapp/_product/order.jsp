@@ -8,19 +8,31 @@
 <jsp:include page="./nagivation.jsp"/>
 <script>
 	$(function(){
-	
-		let count = '${total.count}';
-		let price = '${total.price}';
-		let disPrice = '${total.disPrice}';
-		let delivery = '${total.delivery}';
-		delivery = Number(delivery);
-		let point = $('input[name=point]').val();
-		let totalPrice = price - disPrice + delivery - point;
 		
+		let count = 0;
+		let price = 0;
+		let disPrice = 0;
+		let delivery = 0;
+		let point = 0;
+		let totalPrice = 0;
+
 		//최종주문
 		finalOrder();
 		function finalOrder(){
-			totalPrice = price - disPrice + delivery - point;
+			let count = 0;
+			let price = 0;
+			let disPrice = 0;
+			let delivery = 0;
+			let totalPrice = 0;
+			<c:forEach items="${orderList}" var="order">
+			console.log("${order.prodName}");
+			console.log("${order.count}");
+			count += ${order.count};
+			price += ${order.price * order.count};
+			disPrice += ${(order.price / 100 * order.discount) * order.count} * -1;
+			delivery += ${order.delivery};
+			totalPrice += (${order.price} + (${order.price / 100 * order.discount} * -1) + ${order.delivery}) * ${order.count} - point;
+			</c:forEach>
 				let tag = "<h2>최종결제 정보</h2>";
 					tag += "<table>";
 					tag += "<tr><td>총</td>";
@@ -68,8 +80,6 @@
 			
 			//주문금액 재계산
 			point = usedPoint;
-			totalPrice = price - disPrice + delivery - point;
-			$('.pointDiscount').text(point +"원");
 			
 			//포인트 > 주문금액
 			if(totalPrice < 0){
@@ -86,6 +96,26 @@
 			finalOrder();
 		});
 		
+		//휴대폰 유효성 검사
+		let regHp = /^\d{3}-\d{3,4}-\d{4}$/;
+		let chkHp = true;
+		$('input[name=hp]').focusout(function(){
+			let hp = $('input[name=hp]').val();
+			//유효성검사
+			if(!hp.match(regHp)){
+				//실패
+				alert('- 포함 13자리를 입력하세요.');
+				chkHp = false;
+				return;
+			}
+			chkHp = true;
+		});
+		
+		//주소
+		$('input[name=zipSearch]').click(function(){
+			postcode();
+		});
+		
 		//검사
 		$('form').submit(function(){
 			if($('input[name=orderer]').val() == ''){
@@ -96,6 +126,10 @@
 			if($('input[name=hp]').val() == ''){
 				alert('휴대폰을 확인하세요.');
 				$('input[name=hp]').focus();
+				return false;
+			}
+			if(!chkHp){
+				alert('휴대폰을 확인하세요.');
 				return false;
 			}
 			if($('input[name=addr1]').val() == ''){
@@ -135,9 +169,6 @@
 			<c:forEach items="${items}" var="item">
 				arr.push('${item.prodNo}','${item.count}');
 			</c:forEach>
-			
-			//장바구니 비우기를 위한 변수
-			let comeCart = ${comeCart};
 			
 			let jsonData = {
 				'uid':uid,
@@ -179,11 +210,6 @@
 			return false;
 	  	});
 		
-		//주소
-		$('input[name=zipSearch]').click(function(){
-			postcode();
-		});
-		
 		//엔터 막기
 		document.addEventListener('keydown', function(event) {
 		  if (event.keyCode === 13) {
@@ -214,9 +240,9 @@
                         <th>소계</th>
                     </tr>
                 </thead>
-                <!-- 장바구니 목록 -->
+                <!-- 주문 목록 -->
                 <tbody>
-                <c:forEach items="${items}" var="order">
+                <c:forEach items="${orderList}" var="order">
                     <tr>
                         <td>
                             <article><a href="#"><img src="/Kmarket/file/${order.thumb1}" alt="thumb1"></a>
@@ -229,6 +255,7 @@
                         <td>${order.count}</td>
                         <td><fmt:formatNumber type="number" pattern="#,###" value="${order.price}"/>원</td>
                         <td>${order.discount}%</td>
+                        <c:set var="disPrice" value="${order.price / 100 * order.discount}"/>
                         <td><fmt:formatNumber type="number" pattern="#,###" value="${order.point}"/>점</td>
                         <c:choose>
                         	<c:when test="${order.delivery eq 0}">
@@ -238,7 +265,7 @@
                         		<td><fmt:formatNumber type="number" pattern="#,###" value="${order.delivery}"/>원</td>
                         	</c:otherwise>
                         </c:choose>
-                        <td><fmt:formatNumber type="number" pattern="#,###" value="${order.price - order.disPrice}"/>원</td>
+                        <td><fmt:formatNumber type="number" pattern="#,###" value="${(order.price - disPrice) * order.count}"/>원</td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -261,7 +288,7 @@
                     </tr>
                     <tr>
                         <td>우편번호</td>
-                        <td><input type="text" name="zip" id="zip" value="${sessUser.zip}">
+                        <td><input type="text" name="zip" id="zip" value="${sessUser.zip}" readonly>
                             <input type="button" name="zipSearch" value="검색">
                         </td>
                     </tr>
@@ -280,9 +307,9 @@
             <article class="discount">
                 <h1>할인정보</h1>
                 <div>
-                    <p>현재 포인트 : <span>${sessUser.point}</span>점</p>
+                    <p>현재 포인트 : <span><fmt:formatNumber type="number" pattern="#,###" value="${sessUser.point}"/></span>점</p>
                     <label>
-                        <input type="text" name="point" value="0" style="text-align: right; padding-right: 6px;">점
+                        <input type="text" name="point" value="0" style="text-align: right;">점
                         <input type="button" name="usePoint" value="적용">
                     </label>
                     <span>포인트 5,000점 이상이면 현금처럼 사용 가능합니다.</span>

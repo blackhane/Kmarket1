@@ -10,7 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.DAO.CartDAO;
 import kr.co.Kmarket.DAO.ProductDAO;
@@ -21,63 +23,45 @@ import kr.co.Kmarket.VO.ProductVO;
 public class OrderController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//뷰 페이지에서 올 경우
 		String prodNo = req.getParameter("prodNo");
-		int count = Integer.parseInt(req.getParameter("count"));
+		String count = req.getParameter("count");
 		
-		ProductDAO dao = ProductDAO.getInstance();
+		ProductVO vo = ProductDAO.getInstance().selectOrderProduct(prodNo, count);
+		List<ProductVO> orderList = new ArrayList<>();
+		orderList.add(vo);
 		
-		//상품보기 => 주문
-		ProductVO item = dao.selectProduct(prodNo);
-		item.setCount(count);
-		item.setDisPrice(item.getPrice()/100*item.getDiscount());
+		req.setAttribute("orderList", orderList);
 		
-		List<ProductVO> vo = new ArrayList<>();
-		vo.add(item);
-		req.setAttribute("items", vo);
-
-		//장바구니에서 왔어요~
-		int comeCart = 0;
-		req.setAttribute("comeCart", comeCart);
-		
-		HttpSession session = req.getSession();
-		session.setAttribute("sessItem", vo);
-		
-		//최종결제정보
-		ProductVO total = new ProductVO();
-		total.setCount(count);
-		total.setPrice(item.getPrice()*count);
-		total.setDisPrice(item.getDisPrice()*count);
-		total.setDelivery(item.getDelivery()*count);
-		total.setPoint(item.getPoint()*count);
-		req.setAttribute("total", total);
-
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/_product/order.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String uid = req.getParameter("uid");
+		//장바구니에서 올 경우
+		String jsonData = req.getParameter("jsonData");
+		String[] item = jsonData.split(",");
+		logger.debug("상품번호 : " +item.length);
 		
-		CartDAO dao = CartDAO.getInstance();
+		CartDAO dao =CartDAO.getInstance();
+		List<CartVO> orderList = new ArrayList<>();
 		
-		//장바구니 => 주문
-		List<CartVO> items = dao.selectCartItem(uid);
-		req.setAttribute("items", items);
+//		for(int i=0; i<len; i++) {
+//			String cartNo = item[i];
+//			logger.debug("카트번호 : " + cartNo);
+//			CartVO vo = dao.selectCartOrder(cartNo);
+//			orderList.add(vo);
+//		}
 		
-		//장바구니에서 왔어요~
-		int comeCart = 1;
-		req.setAttribute("comeCart", comeCart);
-		
-		HttpSession session = req.getSession();
-		session.setAttribute("sessItem", items);
-		
-		//최종결제정보
+		req.setAttribute("orderList", orderList);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/_product/order.jsp");
 		dispatcher.forward(req, resp);
+		
 	}
 }

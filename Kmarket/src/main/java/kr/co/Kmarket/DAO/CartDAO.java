@@ -12,6 +12,7 @@ import kr.co.Kmarket.VO.OrderItemVO;
 import kr.co.Kmarket.VO.ProductVO;
 import kr.co.Kmarket.utils.CartSQL;
 import kr.co.Kmarket.utils.DBCP;
+import kr.co.Kmarket.utils.ProductSQL;
 
 public class CartDAO extends DBCP {
 
@@ -99,6 +100,63 @@ public class CartDAO extends DBCP {
 		return result;
 	}
 	
+	//장바구니 주문
+	public CartVO selectCartOrder(String cartNo) {
+		CartVO vo = new CartVO();
+		try {
+			logger.info("장바구니 주문");
+			conn = getConnection();
+			psmt = conn.prepareStatement(CartSQL.SELECT_CART_ORDER);
+			psmt.setString(1, cartNo);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				vo.setCartNo(rs.getString(1));
+				vo.setUid(rs.getString(2));
+				vo.setProdNo(rs.getString(3));
+				vo.setCount(rs.getString(4));
+				vo.setPrice(rs.getString(5));
+				vo.setDiscount(rs.getString(6));
+				vo.setDisPrice(rs.getInt(7));
+				vo.setPoint(rs.getString(8));
+				vo.setDelivery(rs.getString(9));
+				vo.setTotal(rs.getString(10));
+				vo.setRdate(rs.getString(11));
+				vo.setProdName(rs.getString(12));
+				vo.setDescript(rs.getString(12));
+				vo.setThumb1(rs.getString(14));
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return vo;
+	}
+	
+	//주문하기
+	public ProductVO selectOrder(String prodNo) {
+		ProductVO vo = new ProductVO();
+		try {
+			logger.info("주문상품출력: "+prodNo);
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.SELECT_PPRODUCT);
+			psmt.setString(1, prodNo);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				vo.setProdNo(rs.getString(1));
+				vo.setProdName(rs.getString(4));
+				vo.setDescript(rs.getString(5));
+				vo.setPrice(rs.getInt(8));
+				vo.setDiscount(rs.getInt(9));
+				vo.setPoint(rs.getInt(10));
+				vo.setDelivery(rs.getInt(13));
+				vo.setThumb1(rs.getString(17));
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return vo;
+	}
 	//주문완료
 	public int insertOrderItem(OrderItemVO vo) {
 		int result = 0;
