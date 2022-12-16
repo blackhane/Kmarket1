@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 
 import com.mysql.cj.protocol.a.DebugBufferingPacketReader;
 
+import kr.co.Kmarket.VO.CsFaqVO;
+import kr.co.Kmarket.VO.CsNoticeVO;
 import kr.co.Kmarket.VO.ProductVO;
 import kr.co.Kmarket.utils.DBCP;
 import kr.co.Kmarket.utils.AdminSql;
@@ -91,6 +93,53 @@ public void insertFile(String prodNo, String newName, String fname) {
 		logger.error(e.getMessage());
 	}
 }
+
+//공지사항
+public void insertNoctice(CsNoticeVO vo) {
+	try{
+		logger.info("공지사항 넣기 start...");
+		conn = getConnection();
+		psmt = conn.prepareStatement(AdminSql.INSERT_NOTICE);
+		psmt.setString(1, vo.getCate());
+		psmt.setString(2, vo.getTitle());
+		psmt.setString(3, vo.getHit());
+		psmt.setString(4, vo.getContent());
+		psmt.setString(5, vo.getRegip());
+		
+		psmt.executeUpdate();
+		close();
+		
+	}catch(Exception e){
+		e.printStackTrace();
+		logger.error(e.getMessage());
+	}
+}
+
+public void insertFaq(CsFaqVO vo) {
+	try{
+		logger.info("faq 넣기 start...");
+		conn = getConnection();
+		psmt = conn.prepareStatement(AdminSql.INSERT_FAQ);
+		psmt.setString(1, vo.getCate1());
+		psmt.setString(2, vo.getCate2());
+		psmt.setString(3, vo.getTitle());
+		psmt.setString(4, vo.getHit());
+		psmt.setString(5, vo.getContent());
+		psmt.setString(6, vo.getRegip());
+		
+		psmt.executeUpdate();
+		close();
+		
+	}catch(Exception e){
+		e.printStackTrace();
+		logger.error(e.getMessage());
+	}
+}
+
+
+
+
+
 	
 	// select
 	public List<ProductVO> selectProduct() {
@@ -132,7 +181,74 @@ public void insertFile(String prodNo, String newName, String fname) {
 		logger.debug("데이터 입력" + product.size());
 		return product;
 	}
+	
+	public List<CsNoticeVO> selectNotice() {
+		List<CsNoticeVO> notice = new ArrayList<>();
+		try{
+			logger.info("공지불러오기 start...");
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(AdminSql.SELECT_NOTICE);
+			while(rs.next()) {
+				CsNoticeVO vo = new CsNoticeVO();
+				vo.setNo(rs.getString(1));
+				vo.setCate(rs.getString(5));
+				vo.setTitle(rs.getString(6));
+				vo.setHit(rs.getString(7));
+				vo.setRdate(rs.getString(11));
+				notice.add(vo);
+			}
+			close();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}
+		logger.debug("공지불러오기 입력" + notice.size());
+		return notice;
+	}
 
+	
+	//delete
+	
+	/*
+	 * public String deleteFile(String parent) {
+	 * 
+	 * String newName = null;
+	 * 
+	 * try { Connection conn = getConnection();
+	 * 
+	 * conn.setAutoCommit(false);
+	 * 
+	 * PreparedStatement psmt1 = conn.prepareStatement(Sql.SELECT_FILE_WITH_PARENT);
+	 * PreparedStatement psmt2 = conn.prepareStatement(Sql.DELETE_FILE);
+	 * psmt1.setString(1, parent); psmt2.setString(1, parent);
+	 * 
+	 * ResultSet rs = psmt1.executeQuery(); psmt2.executeUpdate();
+	 * 
+	 * conn.commit();
+	 * 
+	 * if(rs.next()) { newName = rs.getString(3); }
+	 * 
+	 * psmt1.close(); psmt2.close(); conn.close(); }catch (Exception e) {
+	 * e.printStackTrace(); }
+	 * 
+	 * return newName; }
+	 */
+	
+	public void deleteNotice(String no) {
+		try {
+			logger.info("공지삭제 start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(AdminSql.DELETE_NOTICE);
+			psmt.setString(1, no);
+			psmt.setString(2, no);		
+			psmt.executeUpdate();
+			close();
+			logger.debug("공지삭제" + no);
+		}catch(Exception e){
+			
+			logger.error(e.getMessage());
+		}
+	}
 
 //	vo.setProdNo(rs.getString(1));
 //	vo.setCate1(rs.getInt(2));

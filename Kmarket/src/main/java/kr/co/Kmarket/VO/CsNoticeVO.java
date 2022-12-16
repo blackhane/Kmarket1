@@ -3,24 +3,28 @@ package kr.co.Kmarket.VO;
 public class CsNoticeVO {
 	
 	private String no;
-	private String group;
 	private String cate;
 	private String title;
 	private String content;
 	private String regip;
 	private String rdate;
 	
+	//추가필드
+	
+	private String hit;
+	
+	
+	public String getHit() {
+		return hit;
+	}
+	public void setHit(String hit) {
+		this.hit = hit;
+	}
 	public String getNo() {
 		return no;
 	}
 	public void setNo(String no) {
 		this.no = no;
-	}
-	public String getGroup() {
-		return group;
-	}
-	public void setGroup(String group) {
-		this.group = group;
 	}
 	public String getCate() {
 		return cate;
@@ -52,6 +56,4 @@ public class CsNoticeVO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-	
-	
 }

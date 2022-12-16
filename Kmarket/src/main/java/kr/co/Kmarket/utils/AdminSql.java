@@ -38,14 +38,39 @@ public class AdminSql {
 												+ "`as`=?,"
 												+ "`delivery_date`=?";
 
-	
+	//파일 넣기
 	public static final String INSERT_FILE = "insert into `km_product_file` set "
 										+ "`prodNo`=?,"
 										+ "`newName`=?,"
 										+ "`oriName`=?,"
-										+ "`rdate`=NOW()";
+										+ "`rdate`= NOW()";
 	
+	//공지사항 입력
+	public static final String INSERT_NOTICE = "insert into `km_cs_notice` set "
+										+ "`cate`=?, "
+										+ "`title`=?, "
+										+ "`hit`=?, "
+										+ "`content`=?, "
+										+ "`regip`=?, "
+										+ "`rdate`= NOW()";
+	
+	public static final String INSERT_FAQ = "insert into `km_cs_faq` set "
+										+ "`cate1`=?, "
+										+ "`cate2`=?, "
+										+ "`title`=?, "
+										+ "`hit`=?, "
+										+ "`content`=?, "
+										+ "`regip`=?, "
+										+ "`rdate`= NOW()";
+	
+	
+	//공지사항 게시글 삭제
+	public static final String DELETE_NOTICE = "delete from `km_cs_notice` where `no`=? or `parent`=?";
+										
+	//상품 리스트
 	public static final String SELECT_PRODUCT = "select * from `km_product`";
+	public static final String SELECT_NOTICE = "select * from `km_cs_notice`";
+	public static final String SELECT_FAQ = "select * from `km_product`";
 	
 	
 }
