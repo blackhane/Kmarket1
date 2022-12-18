@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.co.Kmarket.VO.CateVO;
 import kr.co.Kmarket.VO.ProductVO;
+import kr.co.Kmarket.VO.ReviewVO;
 import kr.co.Kmarket.utils.DBCP;
 import kr.co.Kmarket.utils.ProductSQL;
 
@@ -85,7 +86,7 @@ public class ProductDAO extends DBCP {
 	}
 		
 	//상품목록
-	public List<ProductVO> selectProducts(String cate1, String cate2, String ls) {
+	public List<ProductVO> selectProducts(String cate1, String cate2, String ls, int start) {
 		List<ProductVO> product = new ArrayList<>();
 		try {
 			switch(Integer.parseInt(ls)) {
@@ -113,10 +114,11 @@ public class ProductDAO extends DBCP {
 			}
 			logger.info("상품목록 정렬 : " + ls);
 			conn = getConnection();
-			String sql = "SELECT * FROM `km_product` WHERE `cate1`=? AND `cate2`=? ORDER BY " + ls;
+			String sql = "SELECT * FROM `km_product` WHERE `cate1`=? AND `cate2`=? ORDER BY " + ls + " LIMIT ?, 10";
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, cate1);
 			psmt.setString(2, cate2);
+			psmt.setInt(3, start);
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				ProductVO vo = new ProductVO();
@@ -140,6 +142,25 @@ public class ProductDAO extends DBCP {
 		return product;
 	}
 	
+	//리스트 페이징
+	public int selectCountTotal(String cate1, String cate2) {
+		int result = 0;
+		try {
+			logger.info("페이징 처리");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.TOTAL_COUNT);
+			psmt.setString(1, cate1);
+			psmt.setString(2, cate2);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
 	//메인페이지 상품
 	public List<ProductVO> selectProductsBest1() {
 		List<ProductVO> product = new ArrayList<>();
@@ -159,6 +180,7 @@ public class ProductDAO extends DBCP {
 				vo.setDiscount(rs.getString(9));
 				vo.setDelivery(rs.getString(13));
 				vo.setThumb1(rs.getString(17));
+				vo.setThumb2(rs.getString(18));
 				product.add(vo);
 			}
 			close();
@@ -253,6 +275,53 @@ public class ProductDAO extends DBCP {
 		return vo;
 	};
 	
+	//상품 리뷰
+	public List<ReviewVO> selectReviews(String prodNo, int start) {
+		List<ReviewVO> reviews = new ArrayList<>();
+		try {
+			logger.info("리뷰가져오기");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.SELECT_REVIEWS);
+			psmt.setString(1, prodNo);
+			psmt.setInt(2, start);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ReviewVO vo = new ReviewVO();
+				vo.setRevNo(rs.getString(1));
+				vo.setProdNo(rs.getString(2));
+				vo.setContent(rs.getString(3));
+				vo.setUid(rs.getString(4).replaceAll("(?<=.{2})." , "*"));
+				vo.setRating(rs.getString(5));
+				vo.setRegip(rs.getString(6));
+				vo.setRdate(rs.getString(7).substring(0,10));
+				vo.setProdName(rs.getString(8));
+				reviews.add(vo);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return reviews;
+	}
+	
+	//리뷰 갯수
+	public int selectCountReview(String prodNo) {
+		int result = 0;
+		try {
+			logger.info("리뷰개수");
+			conn = getConnection();
+			psmt = conn.prepareStatement(ProductSQL.TOTAL_COUNT_REIVEW);
+			psmt.setString(1, prodNo);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
 	//주문상품 찾기
 	public ProductVO selectOrderProduct(String prodNo, String count) {
 		ProductVO vo = new ProductVO();
@@ -267,7 +336,7 @@ public class ProductDAO extends DBCP {
 				vo.setDescript(rs.getString(5));
 				vo.setPrice(rs.getInt(8));
 				vo.setDiscount(rs.getInt(9));
-				vo.setPoint(rs.getInt(10));
+				vo.setPoint(rs.getInt(10)*Integer.parseInt(count));
 				vo.setStock(rs.getInt(11));
 				vo.setSold(rs.getInt(12));
 				vo.setDelivery(rs.getInt(13));

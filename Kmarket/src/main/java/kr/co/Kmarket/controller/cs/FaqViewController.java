@@ -8,16 +8,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-@WebServlet("/cs/faq/list.do")
-public class ListController3 extends HttpServlet{
-	private static final long serialVersionUID = 1L;
 
+@WebServlet("/cs/faq/view.do")
+public class FaqViewController extends HttpServlet{
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/_cs/_faq/list.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/_cs/_faq/view.jsp");
 		dispatcher.forward(req, resp);
 	}
-	
 }

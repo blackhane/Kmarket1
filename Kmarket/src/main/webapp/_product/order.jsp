@@ -24,27 +24,36 @@
 			let disPrice = 0;
 			let delivery = 0;
 			let totalPrice = 0;
+			let savePoint = 0;
 			<c:forEach items="${orderList}" var="order">
-			console.log("${order.prodName}");
-			console.log("${order.count}");
-			count += ${order.count};
-			price += ${order.price * order.count};
-			disPrice += ${(order.price / 100 * order.discount) * order.count} * -1;
-			delivery += ${order.delivery};
-			totalPrice += (${order.price} + (${order.price / 100 * order.discount} * -1) + ${order.delivery}) * ${order.count} - point;
+				console.log("${order.prodName}");
+				console.log("${order.count}");
+				count += ${order.count};
+				price += ${order.price * order.count};
+				disPrice += ${(order.price / 100 * order.discount) * order.count} * -1;
+				delivery += ${order.delivery};
+				savePoint += ${order.point};
+				totalPrice += (${order.price} + (${order.price / 100 * order.discount} * -1) + ${order.delivery}) * ${order.count} - point;
 			</c:forEach>
 				let tag = "<h2>최종결제 정보</h2>";
 					tag += "<table>";
 					tag += "<tr><td>총</td>";
+					tag += "<input type='hidden' name='count' value="+count+">";
 					tag += "<td>"+count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"건</td></tr>";
 					tag += "<tr><td>상품금액</td>";
+					tag += "<input type='hidden' name='price' value="+price+">";
 					tag += "<td>"+price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원</td></tr>";
 					tag += "<tr><td>할인금액</td>";
+					tag += "<input type='hidden' name='disPrice' value="+disPrice+">";
 					tag += "<td>"+disPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원</td></tr>";
 	                tag += "<tr><td>배송비</td>";
+	                tag += "<input type='hidden' name='delivery' value="+delivery+">";
 					tag += "<td>"+delivery.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원</td></tr>";
+					tag += "<input type='hidden' name='used' value="+point+">";
+					tag += "<input type='hidden' name='save' value="+savePoint+">";
 	                tag += "<tr><td>포인트 할인</td><td class='pointDiscount'>"+point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원</td></tr>";
 					tag += "<tr><td>전체주문금액</td>";
+					tag += "<input type='hidden' name='totalPrice' value="+totalPrice+">";
 					tag += "<td>"+totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원</td></tr>";
 					tag += "</table>";
 					tag += "<button type='sumbit' class='complete'>결제하기</button>";
@@ -147,67 +156,56 @@
 				alert('결제방법을 확인해주세요.');
 				return false;
 			}
-			
-			let uid = '${sessUser.uid}';
-			let count = '${total.count}';
-			let price = '${total.price}';
-			let disPrice = '${total.disPrice}';
-			let delivery = '${total.delivery}';
-			delivery = Number(delivery);
-			let savePoint = '${total.point}';
-			let usedPoint = $('input[name=point]').val();
-			let totalPrice = price - disPrice + delivery - usedPoint;
-			let orderer = $('input[name=orderer]').val();
-			let hp = $('input[name=hp]').val();	
-			let zip = $('input[name=zip]').val();
-			let addr1 = $('input[name=addr1]').val();
-			let addr2 = $('input[name=addr2]').val();
+
+			let ordUid = '${sessUser.uid}';
+			let ordCount =  $('input[name=count]').val();
+			let ordPrice =  $('input[name=price]').val();
+			let ordDisPrice =  $('input[name=disPrice]').val();
+			let ordDelivery =  $('input[name=delivery]').val();
+			let ordUsed =  $('input[name=used]').val();
+			let ordSave =  $('input[name=save]').val();
+			let ordTotalPrice =  $('input[name=totalPrice]').val();
+			let recipName = $('input[name=orderer]').val();
+			let recipHp = $('input[name=hp]').val();	
+			let recipZip = $('input[name=zip]').val();
+			let recipAddr1 = $('input[name=addr1]').val();
+			let recipAddr2 = $('input[name=addr2]').val();
 			let payment = $('input[name=payment]:checked').val();
 			
-			//제품 판매++를 위한 변수
-			let arr = new Array();
-			<c:forEach items="${items}" var="item">
-				arr.push('${item.prodNo}','${item.count}');
-			</c:forEach>
-			
 			let jsonData = {
-				'uid':uid,
-				'count':count,
-				'price':price,
-				'disPrice':disPrice,
-				'delivery':delivery,
-				'savePoint':savePoint,
-				'usedPoint':usedPoint,
-				'totalPrice':totalPrice,
-				'orderer':orderer,
-				'hp':hp,
-				'zip':zip,
-				'addr1':addr1,
-				'addr2':addr2,
-				'payment':payment,
-				'arr' : arr,
-				'comeCart' : comeCart
+				'ordUid':ordUid,
+				'ordCount':ordCount,
+				'ordPrice':ordPrice,
+				'ordDiscount':ordDisPrice,
+				'ordDelivery':ordDelivery,
+				'savePoint':ordSave,
+				'usedPoint':ordUsed,
+				'totalPrice':ordTotalPrice,
+				'recipName':recipName,
+				'recipHp':recipHp,
+				'recipZip':recipZip,
+				'recipAddr1':recipAddr1,
+				'recipAddr2':recipAddr2,
+				'payment':payment
 			}
+			console.log(jsonData);
 			
 			$.ajax({
 				url : '/Kmarket/product/orderHelper.do',
 				method : 'get',
 				data : jsonData,
-				traditional: true,	
 				async : false,
 				dataType : 'json',
 				success : function(data){
 					if(data.result > 0){
 						alert('주문이 완료되었습니다.');
-						location.href = "/Kmarket/product/complete.do?uid=${sessUser.uid}";
 						return true;
 					}else{
-						alert('주문이 실패하였습니다.');
 						return false;
 					}
 				}
 			});
-			return false;
+			
 	  	});
 		
 		//엔터 막기
@@ -227,7 +225,7 @@
             </p>
         </nav>
 
-        <form action="/Kmarket/product/complete.do?uid=${sessUser.uid}">
+        <form action="/Kmarket/product/complete.do?uid=${sessUser.uid}" method="post">
             <table>
                 <thead>
                     <tr>

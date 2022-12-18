@@ -43,11 +43,27 @@
 				return;
 			}
 			
-			//성공
-			$('.resultId').css({'font-weight':'bold','color':'#33b354'}).text('유효한 아이디입니다.');
-			chkId = true;
-			console.log(chkId);
-			return;
+			console.log(uid);
+			$.ajax({
+				url : '/Kmarket/member/chkUid.do',
+				method : 'get',
+				data : {'uid' : uid},
+				dataType : 'json',
+				success : function(data){
+					if(data.result == 1){
+						//실패
+						$('.resultId').css({'font-weight':'bold','color':'#e86444'}).text('이미 사용중인 아이디입니다.');
+						chkId = false;
+						return;
+					}else{
+						//성공
+						$('.resultId').css({'font-weight':'bold','color':'#33b354'}).text('유효한 아이디입니다.');
+						chkId = true;
+						console.log(chkId);
+						return;
+					}
+				}
+			});
 		});
 		
 		//비밀번호 유효성검사

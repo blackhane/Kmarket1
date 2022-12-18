@@ -89,7 +89,7 @@
                         <li><a href="#discount">할인상품</a></li>
                     </ul>
                     <ul class="cs">
-                        <li><a href="/Kmarket/cs/notice/list.do">공지사항</a></li>
+                        <li><a href="/Kmarket/cs/notice/list.do?group=all">공지사항</a></li>
                         <li><a href="/Kmarket/cs/faq/list.do">자주묻는질문</a></li>
                         <li><a href="/Kmarket/cs/qna/list.do">문의하기</a></li>
                         <li><a href="/Kmarket/cs/index.do">고객센터</a></li>
@@ -200,7 +200,7 @@
 						    <a href="/Kmarket/product/view.do?cate1=${item.cate1}&cate2=${item.cate2}&prodNo=${item.prodNo}">
 						        <div class="thumb">
 						            <i>${i}</i>
-						            <img src="/Kmarket/file/${item.thumb1}" alt="thumb1" class="best_thumb2">
+						            <img src="/Kmarket/file/${item.thumb2}" alt="thumb2" class="best_thumb2" style="width:100%">
 						        </div>
 						        <h2>${item.prodName}</h2>
 						        <div class="org_price">

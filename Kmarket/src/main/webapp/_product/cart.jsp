@@ -36,7 +36,7 @@
 			
 			let cartNo = new Array();
 			$('input[name=chk]:checked').each(function(){
-				cartNo.push($(this).data("no"));
+				cartNo.push($(this).val());
 			});
 			
 			cartNo.forEach(function(number){
@@ -66,7 +66,7 @@
 			
 			let allNo = new Array();
 			$('.chk').each(function(){
-				allNo.push($(this).data("no"));
+				allNo.push($(this).val());
 			});
 			
 			allNo.forEach(function(number){
@@ -117,8 +117,7 @@
 		}
 		
 		//주문하기 클릭
-		$('form').submit(function(){
-			
+		$('.orderCart').click(function(){
 			//장바구니에 물건이 없으면
 			if($('.chk').length == 0){
 				alert('장바구니에 등록된 상품이 없습니다.');
@@ -129,22 +128,6 @@
 			if($('input[name=chk]:checked').length == 0){
 				$('.chk').prop("checked",true);
 			}
-			
-			let ordArray = new Array();
-			
-			$('input[name=chk]:checked').each(function(){
-				ordArray.push($(this).data("no"));
-			});
-			let jsonData =  {'jsonData' : ordArray};
-			console.log(jsonData);
-			alert('');
-			$.ajax({
-				url : '/Kmarket/product/order.do',
-				method : 'post',
-				data : {'jsonData' : ordArray}, 
-				traditional : true,
-				dataType : 'data'
-			});
 		});
 
 		//전체선택
@@ -273,7 +256,7 @@
 		<c:forEach items="${cart}" var="cart">
 		    <tr>
 		        <td>
-		        	<input type="checkbox" class="chk" name="chk" value="${cart.prodNo}" data-no="${cart.cartNo}">
+		        	<input type="checkbox" class="chk" name="chk" value="${cart.cartNo}" data-no="${cart.prodNo}">
 		        	<input type="hidden" name="count" value="${cart.count}" data-no="${cart.cartNo}">		
 		        </td>
 		        <td><article><a href="#"><img src="/Kmarket/file/${cart.thumb1}" alt="thumb1"></a>

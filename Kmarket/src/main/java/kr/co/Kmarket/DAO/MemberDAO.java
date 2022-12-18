@@ -113,6 +113,24 @@ public class MemberDAO extends DBCP {
 		return vo;
 	}
 	
+	//아이디 중복체크
+	public int selectUid(String uid) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(MemberSQL.SELECT_UID);
+			psmt.setString(1, uid);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
 	//자동로그인
 	public void makeCookie(String uid, String sessId) {
 		try {

@@ -6,6 +6,26 @@ public class CsSQL {
 	
 	/////////// 공지사항 NOTICE /////////////
 	
+	//글목록
+	public static final String SELECT_ARTICLES = "SELECT * FROM `km_cs_notice` ORDER BY `no` DESC";
+	
+	//글보기
+	public static final String SELECT_ARTICLE = "SELECT * FROM `km_cs_notice` WHERE `no`=?";
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//글보기 글쓰기
 	public static final String SELECT_CS_ARTICLE_NOTICE = "SELECT * FROM `km_cs_notice`";
 	public static final String INSERT_CS_ARTICLE_NOTICE = "insert into `km_cs_notice` set "
@@ -15,13 +35,6 @@ public class CsSQL {
 			+ "`uid`=?, "
 			+ "`regip`=?, "
 			+ "`rdate`=NOW()";
-	public static final String SELECT_CS_ARTICLES_NOTICE = "SELECT a.*, b.`nick` FROM `km_cs_notice` AS a JOIN `km_member` AS b ON a.uid = b.uid "
-			+ "where `parent`=0 and `cate`=? "
-			+ "order by `no` desc "
-			+ "limit ?,10";
-	public static final String UPDATE_CS_ARTICLE_NOTICE = "update `km_cs_notice` set `title`=?,`content`=?,`rdate`=now() where `no`=?";
-	public static final String DELETE_CS_ARTICLE_NOTICE = "DELETE FROM `km_cs_notice` WHERE `no`=? or `parent`=?";
-	public static final String SELECT_CS_MAX_NO_NOTICE = "select max(`no`) from `km_cs_notice`";
 	
 	//게시글수
 	public static final String SELECT_CS_COUNT_TOTAL_NOTICE = "SELECT COUNT(`no`) FROM `km_cs_notice` where `parent`=0 and `cate`=?";

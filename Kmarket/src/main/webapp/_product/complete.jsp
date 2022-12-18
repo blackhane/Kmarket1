@@ -39,9 +39,9 @@
                         </article>
                     </td>
                     <td><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/>원</td>
-                    <td><fmt:formatNumber type="number" pattern="#,###" value="${item.disPrice}"/>원</td>
+                    <td><fmt:formatNumber type="number" pattern="#,###" value="${(item.price/100*item.discount)}"/>원</td>
                     <td>${item.count}</td>
-                    <td><fmt:formatNumber type="number" pattern="#,###" value="${(item.price - item.disPrice)*item.count}"/>원</td>
+                    <td><fmt:formatNumber type="number" pattern="#,###" value="${(item.price - (item.price/100*item.discount))*item.count}"/>원</td>
                 </tr>
                 </c:forEach>
                 <tr class="total">
@@ -54,7 +54,7 @@
                             </tr>
                             <tr>
                                 <td>총 할인금액</td>
-                                <td><span>-<fmt:formatNumber type="number" pattern="#,###" value="${order.ordDiscount}"/></span>원</td>
+                                <td><span><fmt:formatNumber type="number" pattern="#,###" value="${order.ordDiscount}"/></span>원</td>
                             </tr>
                             <tr>
                                 <td>배송비</td>
