@@ -159,17 +159,17 @@ main > .menu > .detail_menu > p {
     font-size: 24px;
     margin-bottom: 20px ;
 }
-main > .menu > .detail_menu li {
+main > .menu > .detail_menu li > a {
     font-size: 16px;
     font-weight: bold;
     color: #9e9e9e;
     line-height: 32px;
 }
-main > .menu > .detail_menu > ul > .current {
+main > .menu > .detail_menu  li > a.current {
     color: #111111;
     text-decoration: underline;
 }
-main > .menu > .detail_menu li:hover{
+main > .menu > .detail_menu li > a:hover{
     color: #111111;
     text-decoration: underline;
     cursor: pointer;

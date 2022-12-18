@@ -28,19 +28,19 @@ public class AddOrderController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String uid = req.getParameter("uid");
-		String count = req.getParameter("count");
-		String price = req.getParameter("price");
-		String discount = req.getParameter("disPrice");
-		String delivery = req.getParameter("delivery");
+		String uid = req.getParameter("ordUid");
+		String count = req.getParameter("ordCount");
+		String price = req.getParameter("ordPrice");
+		String discount = req.getParameter("ordDiscount");
+		String delivery = req.getParameter("ordDelivery");
 		String savePoint = req.getParameter("savePoint");
 		String usedPoint = req.getParameter("usedPoint");
 		String totalPrice = req.getParameter("totalPrice");
-		String recipName = req.getParameter("orderer");
-		String recipHp = req.getParameter("hp");
-		String recipZip = req.getParameter("zip");
-		String recipAddr1 = req.getParameter("addr1");
-		String recipAddr2 = req.getParameter("addr2");
+		String recipName = req.getParameter("recipName");
+		String recipHp = req.getParameter("recipHp");
+		String recipZip = req.getParameter("recipZip");
+		String recipAddr1 = req.getParameter("recipAddr1");
+		String recipAddr2 = req.getParameter("recipAddr2");
 		String payment = req.getParameter("payment");
 		
 		OrderItemVO vo = new OrderItemVO();
@@ -60,44 +60,7 @@ public class AddOrderController extends HttpServlet {
 		vo.setOrdPayment(payment);
 		
 		CartDAO dao = CartDAO.getInstance();
-		ProductDAO dao2 = ProductDAO.getInstance();
 		int result = dao.insertOrderItem(vo);
-
-		String[] arr = req.getParameterValues("arr");
-		String comeCart = req.getParameter("comeCart");
-		
-		//주문완료가 맞다면
-		if(result > 0) {
-			for(int i=0; i<arr.length; i+=2) {
-				//i가 짝수=번호, 홀수=갯수
-				String prodNo = arr[i];
-				String sold = arr[i+1];
-				
-				//판매갯수 ++
-				dao.updateProductSoldUp(prodNo, sold);
-				
-				//재고량--
-				dao.updateProductStockDown(prodNo, sold);
-				
-				//제품찾기
-				ProductVO prod = dao2.selectProduct(prodNo);
-				
-				//주문기록
-				dao.insertOrderItem(prod,sold);
-			}
-			//장바구니를 거쳐 왔다면
-			if(comeCart.equals("1")) {
-				//장바구니 비우기
-				dao.deleteCarts(uid);
-			}
-			//포인트적립
-			dao.updatePointUp(savePoint, uid);
-			//포인트사용
-			dao.updatePointDown(usedPoint, uid);
-			//포인트적립 기록
-			dao.insertPoint(uid,result,savePoint);
-		}
-		
 		
 		resp.setContentType("application/json;charset=UTF-8");
 		JsonObject json = new JsonObject();
@@ -106,22 +69,4 @@ public class AddOrderController extends HttpServlet {
 		writer.print(json);
 		writer.flush();
 	}
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String[] jsonData = req.getParameterValues("array");
-		
-		Gson gson = new Gson();
-		OrderVO vo = gson.fromJson(jsonData.toString(), OrderVO.class);
-		
-		logger.debug("vo: " +vo);
-		
-		resp.setContentType("application/json;charset=UTF-8");
-		JsonObject json = new JsonObject();
-		json.addProperty("result", 1);
-		PrintWriter writer = resp.getWriter();
-		writer.print(json);
-		writer.flush();
-	}
-	
 }

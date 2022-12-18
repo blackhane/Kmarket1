@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,8 @@ public class OrderController extends HttpServlet {
 		orderList.add(vo);
 		
 		req.setAttribute("orderList", orderList);
+		HttpSession session = req.getSession();
+		session.setAttribute("sessItem", orderList);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/_product/order.jsp");
 		dispatcher.forward(req, resp);
@@ -44,21 +47,20 @@ public class OrderController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//장바구니에서 올 경우
-		String jsonData = req.getParameter("jsonData");
-		String[] item = jsonData.split(",");
-		logger.debug("상품번호 : " +item.length);
+		String[] cartNos = req.getParameterValues("chk");
 		
 		CartDAO dao =CartDAO.getInstance();
 		List<CartVO> orderList = new ArrayList<>();
 		
-//		for(int i=0; i<len; i++) {
-//			String cartNo = item[i];
-//			logger.debug("카트번호 : " + cartNo);
-//			CartVO vo = dao.selectCartOrder(cartNo);
-//			orderList.add(vo);
-//		}
+		for(int i=0; i<cartNos.length; i++) {
+			String cartNo = cartNos[i];
+			CartVO vo = dao.selectCartOrder(cartNo);
+			orderList.add(vo);
+		}
 		
 		req.setAttribute("orderList", orderList);
+		HttpSession session = req.getSession();
+		session.setAttribute("sessItem", orderList);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/_product/order.jsp");
 		dispatcher.forward(req, resp);

@@ -40,6 +40,9 @@ public class MemberSQL {
 	//로그인 체크
 	public static String SELECT_USER = "SELECT * FROM `km_member` WHERE `uid`=? AND `pass`=SHA2(?,256)";
 	
+	//아이디 중복체크
+	public static String SELECT_UID = "SELECT COUNT(*) FROM `km_member` WHERE `uid`=?";
+	
 	//자동로그인 체크 (쿠키 저장)
 	public static String MAKE_COOKIE = "UPDATE `km_member` SET `sessId`=?, `sessLimitDate`=DATE_ADD(NOW(), INTERVAL 3 DAY) WHERE `uid`=?";
 	

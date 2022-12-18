@@ -33,11 +33,12 @@ public class HelpDAO extends DBCP{
 				while(rs.next()) {
 					CsVO vo = new CsVO();
 					vo.setNo(rs.getString(1));
+					vo.setGroup(rs.getString(2));
 					vo.setCate(rs.getString(5));
 					vo.setTitle(rs.getString(6));
-					vo.setContent(rs.getString(7));
-					vo.setUid(rs.getString(8));
-					vo.setRdate(rs.getString(10).substring(2,10));
+					vo.setContent(rs.getString(8));
+					vo.setUid(rs.getString(9));
+					vo.setRdate(rs.getString(11).substring(2,10));
 					articles.add(vo);
 				}
 				close();
@@ -57,11 +58,11 @@ public class HelpDAO extends DBCP{
 				while(rs.next()) {
 					CsVO vo = new CsVO();
 					vo.setNo(rs.getString(1));
-					vo.setCate(rs.getString(5));
-					vo.setTitle(rs.getString(6));
-					vo.setContent(rs.getString(7));
-					vo.setUid(rs.getString(8).replaceAll("(?<=.{2}).", "*"));
-					vo.setRdate(rs.getString(10).substring(2,10));
+					vo.setGroup(rs.getString(2));
+					vo.setTitle(rs.getString(7));
+					vo.setContent(rs.getString(9));
+					vo.setUid(rs.getString(10).replaceAll("(?<=.{2}).", "*"));
+					vo.setRdate(rs.getString(12).substring(2,10));
 					articles.add(vo);
 				}
 				close();

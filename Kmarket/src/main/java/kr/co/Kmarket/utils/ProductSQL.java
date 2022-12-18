@@ -14,6 +14,17 @@ public class ProductSQL {
 	//상품목록
 	public static String SELECT_PRODUCTS_LIST = "SELECT * FROM `km_product` WHERE `cate1`=? AND `cate2`=? ORDER BY `prodNo` DESC";
 	
+	//상품리뷰
+	public static String SELECT_REVIEWS = "SELECT a.*, b.prodName FROM `km_product_review` AS a "
+										+ "JOIN `km_product` AS b ON a.prodNo = b.prodNo "
+										+ "WHERE a.`prodNo`=? ORDER BY `revNo` DESC LIMIT ?,5";
+	
+	//상품 전체 개수
+	public static String TOTAL_COUNT = "SELECT COUNT(*) FROM `km_product` WHERE `cate1`=? AND `cate2`=?";
+	
+	//리뷰 전체 개수
+	public static String TOTAL_COUNT_REIVEW = "SELECT COUNT(*) FROM `km_product_review` WHERE `prodNo`=?";
+	
 	//베스트 상품
 	public static String BEST_PRODUCT_5 = "SELECT * FROM `km_product` ORDER BY `sold` DESC LIMIT 5";
 	

@@ -157,6 +157,7 @@ public class CartDAO extends DBCP {
 		}
 		return vo;
 	}
+	
 	//주문완료
 	public int insertOrderItem(OrderItemVO vo) {
 		int result = 0;
@@ -231,126 +232,6 @@ public class CartDAO extends DBCP {
 			logger.error(e.getMessage());
 		}
 		return vo;
-	}
-	
-	//포인트 적립
-	public void updatePointUp(String point,String uid) {
-		try {
-			logger.info("포인트 적립 : "+ point);
-			conn = getConnection();
-			psmt = conn.prepareStatement(CartSQL.UPDATA_POINT_UP);
-			psmt.setString(1, point);
-			psmt.setString(2, uid);
-			psmt.executeUpdate();
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-	}
-	
-	//포인트 사용
-	public void updatePointDown(String point,String uid) {
-		try {
-			logger.info("포인트 사용 : "+ point);
-			conn = getConnection();
-			psmt = conn.prepareStatement(CartSQL.UPDATA_POINT_DOWN);
-			psmt.setString(1, point);
-			psmt.setString(2, uid);
-			psmt.executeUpdate();
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-	}
-	
-	//포인트 기록
-	public void insertPoint(String uid,int ordNo,String point) {
-		try {
-			logger.info("포인트 기록 : "+ point);
-			conn = getConnection();
-			psmt = conn.prepareStatement(CartSQL.INSERT_POINT);
-			psmt.setString(1, uid);
-			psmt.setInt(2, ordNo);
-			psmt.setString(3, point);
-			psmt.executeUpdate();
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-	}
-	
-	//장바구니 비우기
-	public int deleteCarts(String uid) {
-		int result = 0;
-		try {
-			logger.info("장바구니비우기");
-			conn = getConnection();
-			psmt = conn.prepareStatement(CartSQL.DELECT_CARTS);
-			psmt.setString(1, uid);
-			result = psmt.executeUpdate();
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-		return result;
-	}
-	
-	//상품판매++
-	public void updateProductSoldUp(String prodNo, String sold) {
-		try {
-			logger.info("상품판매++");
-			conn = getConnection();
-			psmt = conn.prepareStatement(CartSQL.PRODUCT_SOLD_UP);
-			psmt.setString(1, sold);
-			psmt.setString(2, prodNo);
-			psmt.executeUpdate();
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-	}
-	
-	//상품재고--
-	public void updateProductStockDown(String prodNo, String sold) {
-		try {
-			logger.info("상품재고--");
-			conn = getConnection();
-			psmt = conn.prepareStatement(CartSQL.PRODUCT_STOCK_DOWN);
-			psmt.setString(1, sold);
-			psmt.setString(2, prodNo);
-			psmt.executeUpdate();
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-	}
-	
-	//주문기록
-	public void insertOrderItem(ProductVO vo, String sold) {
-		int count = Integer.parseInt(sold);
-		int price = vo.getPrice()  ;
-		int discount = vo.getDiscount();
-		discount = price/100*discount;
-		int point = vo.getPoint() * count;
-		int delivery = vo.getDelivery();
-		int total = (price-discount) * count + delivery;
-		
-		try {
-			logger.info("주문기록");
-			conn = getConnection();
-			psmt = conn.prepareStatement(CartSQL.INSERT_ORDER_ITEM);
-			psmt.setInt(1, vo.getProdNo());
-			psmt.setString(2, sold);
-			psmt.setInt(3, price*count);
-			psmt.setInt(4, discount*count);
-			psmt.setInt(5, point);
-			psmt.setInt(6, delivery);
-			psmt.setInt(7, total);
-			psmt.executeUpdate();
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
 	}
 	
 }

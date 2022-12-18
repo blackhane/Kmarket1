@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>케이마켓 고객센터</title>
     <link rel="stylesheet" href="/Kmarket/css/css_cs.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
 <body>
     <div id="wrapper">

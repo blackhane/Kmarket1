@@ -6,11 +6,11 @@
                 <p><span>케이마켓</span>이 도와드릴게요!</p>
             </section>
             <section class="notice">
-                <h1>공지사항 <a href="/Kmarket/cs/notice/list.do">전체보기</a></h1>
+                <h1>공지사항 <a href="/Kmarket/cs/notice/list.do?group=all">전체보기</a></h1>
                 <ul>
                 <c:forEach items="${notice}" var="notice">
                     <li>
-                        <a href="#">[${notice.cate}] ${notice.title} <span>${notice.rdate}</span></a>
+                        <a href="/Kmarket/cs/notice/view.do?kind=all&no=${notice.no}">[${notice.cate}] ${notice.title} <span>${notice.rdate}</span></a>
                     </li>
                 </c:forEach>
                 </ul>
@@ -32,7 +32,7 @@
                 <ul>
                	<c:forEach items="${qna}" var="qna">
                     <li>
-                        <a href="#">[${qna.cate}] ${qna.title} <p>${qna.uid}<span>${qna.rdate}</span></p></a>
+                        <a href="#">[${qna.group}] ${qna.title} <p>${qna.uid}<span>${qna.rdate}</span></p></a>
                     </li>
                 </c:forEach>
                     <a href="/Kmarket/cs/qna/write.do">문의글 작성 ></a>

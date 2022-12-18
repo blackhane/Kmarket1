@@ -126,6 +126,101 @@
 			total();
 		});
 		
+		//리뷰
+		
+		//첫 페이지
+		review(1);
+		paging(1,1);
+		
+		//페이지 클릭
+		$(document).on('click', 'a#num',function(e) {
+			e.stopImmediatePropagation();
+			$('a#num').addClass("off").removeClass("on");
+		    $(this).addClass("on").removeClass("off");
+			let start = $(this).data("pg");
+			currentPage = start;
+			review(start);
+		});
+		
+		function paging(pageStart, pg) {
+			let pageGroupStart = pageStart;
+			let pageGroupEnd = pageStart + 9;
+			let lastPageNum = '${lastPageNum}';
+
+			if(pageGroupEnd > lastPageNum){
+				pageGroupEnd = lastPageNum;
+			}
+			let currentPage = pg;
+			
+			if(pageGroupStart > 1){
+				let prev = "<a href='#review' id='prev' class='prev' data-last='"+ pageGroupStart +"'><&nbsp;이전</a>";
+				$('.prev').append(prev);
+			}
+			
+			let tag = "";
+			for(let i=pageGroupStart; i<=pageGroupEnd; i++){
+				tag += "<a href='#review' data-pg='"+i+"' id='num' class=" + (i==currentPage ? 'on':'off') + ">"+i+"</a>";
+			}
+			$('.num').append(tag);
+			
+			if(lastPageNum > pageGroupEnd){
+				let next = "<a href='#review' id='next' class='next' data-last='"+ pageGroupEnd +"'>다음&nbsp;></a>";
+				$('.next').append(next);
+			}
+			
+		}
+
+		$(document).on('click', '#prev',function(e) {
+	    	e.stopImmediatePropagation();
+	    	let st = $('a.prev').data('last');
+			$('.prev').empty();
+			$('.num').empty();
+			$('.next').empty();
+			review(st-1)
+			paging(st-10, st-1);
+	    }); 
+		$(document).on('click', '#next',function(e) {
+	    	e.stopImmediatePropagation();
+			let st = $(this).data('last');
+			$('.prev').empty();
+			$('.num').empty();
+			$('.next').empty();
+			review(st+1)
+			paging(st+1, st+1);
+		});
+	
+		function review(start){
+			let prodNo = ${item.prodNo};
+			let str = (start-1)*5;
+			let jsonData = {
+					'prodNo' : prodNo,
+					'start' : str
+			};
+			console.log(jsonData);
+			$.ajax({
+				url : '/Kmarket/product/review.do',
+				method : 'get',
+				data : jsonData,
+				dataType:'json',
+				success : function(data){
+					if(data != null){
+						$('ul.reply').empty();
+						for(let reply of data){
+							let	tag = "<li>";
+								tag += "<div>";
+								tag += "<h5 class='rating star"+reply.rating+"'>상품평</h5>";
+								tag += "<span>"+reply.uid +" "+ reply.rdate+"</span>";
+								tag += "</div>";
+								tag += "<h3>"+reply.prodName+"</h3>";
+								tag += "<p>"+reply.content+"</p>";
+								tag += "</li>";
+								$('ul.reply').append(tag);
+						}
+					}
+				}
+			});
+			
+		}
 	});
 </script>
             <section class="view">
@@ -146,27 +241,7 @@
                         <nav>
                             <h3>${item.prodName}</h3>
                             <p>${item.descript}</p>
-                            <c:choose>
-                            	<c:when test="${item.score ge 5}">
-                            		<h5 class="rating star5">${item.score}<a href="#review">상품평보기</a></h5>
-                            	</c:when>
-                            	<c:when test="${item.score ge 4}">
-                            		<h5 class="rating star4">${item.score}<a href="#review">상품평보기</a></h5>
-                            	</c:when>
-                            	<c:when test="${item.score ge 3}">
-                            		<h5 class="rating star3">${item.score}<a href="#review">상품평보기</a></h5>
-                            	</c:when>
-                            	<c:when test="${item.score ge 2}">
-                            		<h5 class="rating star2">${item.score}<a href="#review">상품평보기</a></h5>
-                            	</c:when>
-                            	<c:when test="${item.score ge 1}">
-                            		<h5 class="rating star1">${item.score}<a href="#review">상품평보기</a></h5>
-                            	</c:when>
-                            	<c:otherwise>
-                            		<h5 class="rating star0">${item.score}<a href="#review">상품평보기</a></h5>
-                            	</c:otherwise>
-                            </c:choose>
-                            
+                         	<h5 class="rating star${item.score}"><a href="#review">상품평보기</a></h5>
                         </nav>
                         <nav>
                         <c:choose>
@@ -331,95 +406,19 @@
                         환급신청은 [나의쇼핑정보]에서 하실 수 있으며, 자세한 문의는 개별 판매자에게 연락하여 주시기 바랍니다.
                     </p>
                 </article>
-
                 <article class="review" id="review">
-                    <nav>
-                        <h1>상품리뷰</h1>
-                    </nav>
-                    <ul>
-                        <li>
-                            <div>
-                                <h5 class="rating star4">상품평</h5>
-                                <span>seo****** 2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p>
-                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                        <li>
-                            <div>
-                                <h5 class="rating star4">상품평</h5>
-                                <span>seo****** 2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p>
-                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                        <li>
-                            <div>
-                                <h5 class="rating star4">상품평</h5>
-                                <span>seo****** 2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p>
-                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                        <li>
-                            <div>
-                                <h5 class="rating star4">상품평</h5>
-                                <span>seo****** 2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p>
-                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                        <li>
-                            <div>
-                                <h5 class="rating star4">상품평</h5>
-                                <span>seo****** 2018-07-10</span>
-                            </div>
-                            <h3>상품명1/BLUE/L</h3>
-                            <p>
-                                가격대비 정말 괜찮은 옷이라 생각되네요 핏은 음...제가 입기엔 어깨선이 맞고 루즈핏이라 하기도 좀 힘드네요.
-                                아주 약간 루즈한정도...?그래도 이만한 옷은 없다고 봅니다 깨끗하고 포장도 괜찮고 다음에도 여기서 판매하는
-                                제품들을 구매하고 싶네요 정말 만족하고 후기 남깁니다 많이 파시길 바래요 ~ ~ ~
-                            </p>
-                        </li>
-                    </ul>
-                    <div class="paging">
-                        <span class="prev">
-                            <a href="#">
-                                <&nbsp;이전</a>
-                        </span>
-                        <span class="num">
-                            <a href="#" class="on">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                            <a href="#">6</a>
-                            <a href="#">7</a>
-                        </span>
-                        <span class="next">
-                            <a href="#">다음&nbsp;></a>
-                        </span>
+                	<nav>
+                		<h1>상품리뷰</h1>
+                	</nav><c:if test="${total eq 0}">
+                		<p style="text-align:center;">등록된 댓글이 없습니다.</p>
+                	</c:if>
+                	<ul class="reply" id="reply"></ul>
+                	<div class="paging">
+	                	<span class='prev'></span>
+	                	<span class='num'></span>
+	                	<span class='next'></span>
                     </div>
-
                 </article>
-
             </section>
         </main>
-
  <jsp:include page="./_footer.jsp"/>
