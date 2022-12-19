@@ -3,24 +3,24 @@
 <jsp:include page="/_cs/_header.jsp"/>
 <jsp:include page="./nav.jsp"/>
 <style>
-	li.load {display:none;}
+	.load {display:none;}
 </style>
 <script>
 	$(function(){
-		$('li:hidden').slice(0,3).show();
+		//글목록 3개 보여주기
+		$('li:hidden*').slice(0,3).show();
+		
+
 		$('.more').click(function(e){
 			e.preventDefault();
-			txt = $(this).text();
-			console.log(txt);
-			if(txt == '더보기'){
-				$(this).text() = "간단히 보기";
-				$('li:hidden').slice(0,7).show();
+			if($('li:hidden').prevAll().length == 0){
+				$('li').parent().children('.load').slice(3,10).hide();
+				$(this).text('더보기');
+				return;
 			}
-			if(txt == "간단히 보기"){
-				$(this).text() = "더보기";
-				$('li:hidden').slice(0,7).hide();
-			}
-			
+			$('li:hidden').prevAll().slice().show();
+			$(this).text('간단히 보기');
+			return;
 		});
 	});
 </script>
