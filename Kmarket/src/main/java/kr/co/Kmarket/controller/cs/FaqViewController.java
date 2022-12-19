@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.Kmarket.DAO.CsFaqDAO;
+import kr.co.Kmarket.VO.CsVO;
+
 @WebServlet("/cs/faq/view.do")
 public class FaqViewController extends HttpServlet{
 	
@@ -16,6 +19,10 @@ public class FaqViewController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String no = req.getParameter("no");
+		CsVO vo = CsFaqDAO.getInstance().selectArticle(no);
+		
+		req.setAttribute("article", vo);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/_cs/_faq/view.jsp");
 		dispatcher.forward(req, resp);

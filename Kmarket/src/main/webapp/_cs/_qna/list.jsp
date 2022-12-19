@@ -5,6 +5,11 @@
 <script>
 	$(function(){
 		$('.btnInquiry').click(function(){
+			let uid = "${sessUser.uid}"
+			if(uid == ''){
+				alert('로그인 후 이용할 수 있습니다.');
+				return;
+			}
 			location.href = "/Kmarket/cs/qna/write.do";
 		});
 	});
@@ -18,56 +23,12 @@
                     <table>
                     	<c:forEach var="article" items="${articles}">
                         <tr>
-                            <td><a href="/Kmarket/cs/qna/view.do">[${article.cate}] ${article.title}</a></td>
+                            <td><a href="/Kmarket/cs/qna/view.do?no=${article.no}">[${article.cate}] ${article.title}</a></td>
+                            <td>${article.comment eq 0 ? "검토중" : "답변완료"}</td>
                             <td>${article.uid}</td> 
-                            <td>${article.rdate.substring(2, 10)}</td>
+                            <td>${article.rdate}</td>
                         </tr>
                         </c:forEach>
-                        <tr>
-                            <td><a href="#">[탈퇴] 탈퇴 문의내용</a></td>
-                            <td>******</td>
-                            <td>2022-12-06</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">[회원정보] 회원정보 문의내용</a></td>
-                            <td>******</td>
-                            <td>2022-12-06</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">[로그인] 회원정보 문의내용</a></td>
-                            <td>******</td>
-                            <td>2022-12-06</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">[로그인] 회원정보 문의내용</a></td>
-                            <td>******</td>
-                            <td>2022-12-06</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">[로그인] 회원정보 문의내용</a></td>
-                            <td>******</td>
-                            <td>2022-12-06</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">[회원정보] 회원정보 문의내용</a></td>
-                            <td>******</td>
-                            <td>2022-12-06</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">[회원정보] 회원정보 문의내용</a></td>
-                            <td>******</td>
-                            <td>2022-12-06</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">[탈퇴] 회원정보 문의내용</a></td>
-                            <td>******</td>
-                            <td>2022-12-06</td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">[탈퇴] 회원정보 문의내용</a></td>
-                            <td>******</td>
-                            <td>2022-12-06</td>
-                        </tr>
                     </table>
                     <div class="page">
                         <a href="#">이전</a>

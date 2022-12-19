@@ -9,15 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.Kmarket.DAO.CsQnaDAO;
+import kr.co.Kmarket.VO.CsVO;
+
 @WebServlet("/cs/qna/write.do")
-public class NoticeWriteController extends HttpServlet{
+public class QnaWriteController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-	
-	@Override
-	public void init() throws ServletException {
-		// TODO Auto-generated method stub
-		super.init();
-	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,8 +24,22 @@ public class NoticeWriteController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		String cate = req.getParameter("type");
+		String title = req.getParameter("title");
+		String content = req.getParameter("content");
+		String uid = req.getParameter("uid");
+		String regip = req.getRemoteAddr();
+		
+		CsVO vo = new CsVO();
+		vo.setCate(cate);
+		vo.setTitle(title);
+		vo.setContent(content);
+		vo.setUid(uid);
+		vo.setRegip(regip);
+		
+		CsQnaDAO.getInstance().insertArticle(vo);
+		
+		resp.sendRedirect("/Kmarket/cs/qna/list.do");
 	}
 
 }

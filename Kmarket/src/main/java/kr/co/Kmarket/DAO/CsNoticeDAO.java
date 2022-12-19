@@ -6,7 +6,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.co.Kmarket.VO.CsNoticeVO;
 import kr.co.Kmarket.VO.CsVO;
 import kr.co.Kmarket.utils.CsSQL;
 import kr.co.Kmarket.utils.DBCP;
@@ -29,12 +28,13 @@ public class CsNoticeDAO extends DBCP{
 		try {
 			logger.info("공지사항 글목록");
 			conn = getConnection();
-			psmt = conn.prepareStatement(CsSQL.SELECT_ARTICLES);
+			psmt = conn.prepareStatement(CsSQL.SELECT_ARTICLES_NOTICE);
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				CsVO vo = new CsVO();
 				vo.setNo(rs.getString(1));
 				vo.setGroup(rs.getString(2));
+				vo.setComment(rs.getString(4));
 				vo.setCate(rs.getString(5));
 				vo.setTitle(rs.getString(6));
 				vo.setContent(rs.getString(8));
@@ -62,6 +62,7 @@ public class CsNoticeDAO extends DBCP{
 				CsVO vo = new CsVO();
 				vo.setNo(rs.getString(1));
 				vo.setGroup(rs.getString(2));
+				vo.setComment(rs.getString(4));
 				vo.setCate(rs.getString(5));
 				vo.setTitle(rs.getString(6));
 				vo.setContent(rs.getString(8));
@@ -81,7 +82,7 @@ public class CsNoticeDAO extends DBCP{
 		try {
 			logger.info("공지사항 글보기");
 			conn = getConnection();
-			psmt = conn.prepareStatement(CsSQL.SELECT_ARTICLE);
+			psmt = conn.prepareStatement(CsSQL.SELECT_ARTICLE_NOTICE);
 			psmt.setString(1, no);
 			rs = psmt.executeQuery();
 			if(rs.next()) {
