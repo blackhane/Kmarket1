@@ -1,7 +1,6 @@
 package kr.co.Kmarket.VO;
 
 public class CsNoticeVO {
-
 	private String no;
 	private String group;
 	private String cate;

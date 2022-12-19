@@ -66,8 +66,7 @@ $(function(){
                                         </select>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>2차 분류</td>
+                                      <td>2차 분류</td>
                                     <td>
                                         <select name="cate2" id="cate2">
                                             <option value="10">브랜드 여성의류</option>
@@ -236,7 +235,7 @@ $(function(){
                                     <td><input type="text" name="delivery_date"></td>
                                 </tr>
                             </tbody></table>  
-                                   <input type="submit" class = "register_btn" value="등록하기">                       
+                                   <input type="submit" name="submit_product"  class = "register_btn" value="등록하기">                       
                         </section>
                     </form>
                 </article>
