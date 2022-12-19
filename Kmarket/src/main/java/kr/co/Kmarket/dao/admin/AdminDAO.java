@@ -120,8 +120,8 @@ public void insertFaq(CsFaqVO vo) {
 		logger.info("faq 넣기 start...");
 		conn = getConnection();
 		psmt = conn.prepareStatement(AdminSql.INSERT_FAQ);
-		psmt.setString(1, vo.getCate1());
-		psmt.setString(2, vo.getCate2());
+		psmt.setString(1, vo.getGroup());
+		psmt.setString(2, vo.getCate());
 		psmt.setString(3, vo.getTitle());
 		psmt.setString(4, vo.getHit());
 		psmt.setString(5, vo.getContent());

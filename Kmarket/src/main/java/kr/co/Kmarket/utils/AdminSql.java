@@ -56,8 +56,8 @@ public class AdminSql {
 										+ "`rdate`= NOW()";
 	
 	public static final String INSERT_FAQ = "insert into `km_cs_faq` set "
-										+ "`cate1`=?, "
-										+ "`cate2`=?, "
+										+ "`group`=?, "
+										+ "`cate`=?, "
 										+ "`title`=?, "
 										+ "`hit`=?, "
 										+ "`content`=?, "
