@@ -1,7 +1,6 @@
 package kr.co.Kmarket.VO;
 
 public class CsQnaVO {
-	
 	private String no;
 	private String group;	
 	private String parent;
@@ -74,8 +73,3 @@ public class CsQnaVO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-	
-	
-	
-	
-}

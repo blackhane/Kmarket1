@@ -182,6 +182,8 @@ public void insertFaq(CsFaqVO vo) {
 		return product;
 	}
 	
+	// 공지사항 불러오기
+	
 	public List<CsNoticeVO> selectNotice(String cate, String ls) {
 		List<CsNoticeVO> notice = new ArrayList<>();
 		try{			
@@ -248,6 +250,36 @@ public void insertFaq(CsFaqVO vo) {
 		return vo;
 	}
 
+	// 자주묻는질문 불러오기
+	public List<CsFaqVO> selectFaq(String cate, String ls) {
+		List<CsFaqVO> faq = new ArrayList<>();
+		try{			
+			logger.info("자주묻는질문 start..." + ls);
+			conn = getConnection();
+			String sql = "";
+			
+			
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				CsFaqVO vo = new CsFaqVO();
+				vo.setNo(rs.getString(1));
+				vo.setCate(rs.getString(5));
+				vo.setTitle(rs.getString(6));
+				vo.setHit(rs.getString(7));
+				vo.setRdate(rs.getString(11).substring(0,10));
+				faq.add(vo);
+			}
+			close();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}
+		logger.debug("자주묻는질문 입력" + faq.size());
+		return faq;
+	}
+	
+	
+	
 	
 	//delete
 	
@@ -312,6 +344,8 @@ public void insertFaq(CsFaqVO vo) {
 		}
 	}
 
+	
+	
 //	vo.setProdNo(rs.getString(1));
 //	vo.setCate1(rs.getInt(2));
 //	vo.setCate2(rs.getInt(3));

@@ -77,6 +77,46 @@
 	    justify-content: flex-end;
 	    margin-top: 1%;
     }
+    
+    
+    /* btn */
+    .btn_blue{
+    width: 10%;
+    height: 50px;
+    border: 0;
+    margin-right: 3%;
+    background-color: #006cff;
+    color: #fff;
+    cursor: pointer;
+    }
+    
+    .btn_gray{
+    width: 10%;
+    height: 50px;
+    border: 0;
+    margin-right: 3%;
+    background-color: #959595;
+    color: #fff;
+    cursor: pointer;
+    }
+    
+    .btn_red{
+    width: 10%;
+    height: 50px;
+    border: 0;
+    margin-right: 3%;
+    background-color: #FF2D32;
+    color: #fff;
+    cursor: pointer;
+    }
+
+	/* 버튼위치 */
+	
+	 .btn_right {
+        display: flex;
+	    justify-content: flex-end;
+	    margin-top: 1%;
+    }
 
     /* wrapper */
     .admin-wrapper{

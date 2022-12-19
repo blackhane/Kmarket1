@@ -16,6 +16,15 @@ public class FaqListController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		String group = req.getParameter("group");
+		String cate = req.getParameter("cate");
+		String ls = req.getParameter("ls");
+		String title = req.getParameter("title");
+		String content = req.getParameter("content");
+
+		if(ls == null) {
+			ls = "전체보기";
+		}
 		
 		RequestDispatcher dispathcer = req.getRequestDispatcher("/_admin/_cs/_faq/list.jsp");
 		dispathcer.forward(req, resp);

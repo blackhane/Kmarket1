@@ -7,10 +7,10 @@
                         HOME > 고객센터 > <strong>자주묻는질문</strong>
                     </p>
                 </nav>
-                <select name="" id="">
+                <select name="group" id="">
                     <option value="회원">회원</option>
                 </select>
-                <select name="" id="">
+                <select name="cate" id="">
                     <option value="가입">가입</option>
                     <option value="탈퇴">탈퇴</option>
                 </select>
@@ -21,7 +21,8 @@
                                 <tr>
                                     <th><input type="checkbox"></th>
                                     <th>번호</th>
-                                    <th>유형</th>
+                                    <th>1차유형</th>
+                                    <th>2차유형</th>
                                     <th>제목</th>
                                     <th>조회</th>
                                     <th>날짜</th>
@@ -30,6 +31,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>100</td>
+                                    <td>가입</td>
                                     <td>고객서비스</td>
                                     <td><a href="/Kmarket/_cs/_notice/view.do">[안내] 해외결제 사칭 문자 주의</a></td>
                                     <td>조회</td>
