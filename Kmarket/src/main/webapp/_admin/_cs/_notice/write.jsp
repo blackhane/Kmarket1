@@ -9,7 +9,7 @@
                 </nav>
                 <div id="admin_cs_write">
                     <div class="admin_cs_write_div">
-                       <form action="/Kmarket/Kmarket/admin/cs/notice/write.do" method="post">   
+                       <form id="form" action="/Kmarket/admin/cs/notice/write.do" method="post">   
 	                        <table>
 	                            <tbody>
 	                                <tr>
@@ -34,10 +34,9 @@
 	                                </tr>
 	                            </tbody>
 	                        </table>
-	                        <div class="btn">
-	                            <button>삭제</button>
-	                            <button>수정</button>
-	                            <button><input type="submit" value="작성하기"></button>                      
+	                        <div class="btn_right">
+	                            <button  class="btn_gray" onclick = "location.href = '/Kmarket/admin/cs/notice/list.do' ">목록</button>
+	                            <input name="submit_board"  class="btn_blue" type="submit" value="작성하기">                  
                         	</div>
                         </form> 
                     </div>
