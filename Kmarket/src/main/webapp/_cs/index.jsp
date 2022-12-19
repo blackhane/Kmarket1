@@ -1,6 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_cs/_header.jsp"/>
+<script>
+	$(function(){
+		$('.write').click(function(){
+			let uid = "${sessUser.uid}"
+			if(uid == ''){
+				alert('로그인 후 이용할 수 있습니다.');
+				return false;
+			}
+		});
+	});
+</script>
         <main>
             <section class="help">
                 <p><span>케이마켓</span>이 도와드릴게요!</p>
@@ -32,10 +43,10 @@
                 <ul>
                	<c:forEach items="${qna}" var="qna">
                     <li>
-                        <a href="#">[${qna.group}] ${qna.title} <p>${qna.uid}<span>${qna.rdate}</span></p></a>
+                        <a href="/Kmarket/cs/qna/view.do?no=${qna.no}">[${qna.cate}] ${qna.title} <p>${qna.uid}<span>${qna.rdate}</span></p></a>
                     </li>
                 </c:forEach>
-                    <a href="/Kmarket/cs/qna/write.do">문의글 작성 ></a>
+                    <a href="/Kmarket/cs/qna/write.do" class="write">문의글 작성 ></a>
                 </ul>
             </section>
             <section class="consult">

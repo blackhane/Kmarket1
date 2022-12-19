@@ -7,7 +7,7 @@
     </section>
     <div class="menu">
         <aside class="detail_menu">
-                <p>문의하기</p>0
+                <p>문의하기</p>
                 <ul>
                     <li><a href="#" class="current">회원</a></li>
                     <li><a href="#">쿠폰/이벤트</a></li>
