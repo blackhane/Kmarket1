@@ -41,7 +41,7 @@ $(function(){
                     </p>
                 </nav>
                 <article>
-                    <form action="/Kmarket/admin/product/register.do" method="post" enctype="multipart/form-data">
+                    <form action="/Kmarket/admin/register.do" method="post" enctype="multipart/form-data">
                         <!-- 상품분류 -->
                         <section>
                             <h4>상품분류</h4>
@@ -72,12 +72,10 @@ $(function(){
                                         <select name="cate2" id="cate2">
                                             <option value="10">브랜드 여성의류</option>
                                             <option value="11">브랜드 남성의류</option>
-                                            <option value="12">언더웨어</option>
-                                            <option value="13">신발</option>
-                                            <option value="14">가방/잡화</option>
-                                            <option value="15">쥬얼리/시계</option>             
-                                            <option value="16">화장품/향수</option>             
-                                            <option value="17">바디/헤어</option>             
+                                            <option value="12">브랜드 진/캐쥬얼</option>
+                                            <option value="13">브랜드 신발/가방</option>
+                                            <option value="14">브랜드 쥬얼리/시계</option>
+                                            <option value="15">브랜드 아웃도어</option>             
                                         </select>
                                     </td>
                                 </tr>
@@ -118,7 +116,7 @@ $(function(){
                                     <td>할인율</td>
                                     <td>
                                         <span>0을 입력하면 할인율 없음</span>
-                                        <input type="text" name="discount">%
+                                        <input type="text" name="discount">율
                                     </td>
                                 </tr>
                                 <tr>
@@ -142,13 +140,13 @@ $(function(){
                                 <tr>
                                     <td>상품 썸네일</td>
                                     <td>
-                                        <span>크기 120 x 120, 상품 목록에 출력될 이미지 입니다. </span>
+                                        <span>크기 190 x 190, 상품 목록에 출력될 이미지 입니다. </span>
                                         <input type="file" name="thumb1">
 
-                                        <span>크기 240 x 240, 상품 메인에 출력될 이미지 입니다. </span>
+                                        <span>크기 230 x 230, 상품 메인에 출력될 이미지 입니다. </span>
                                         <input type="file" name="thumb2">
 
-                                        <span>크기 480 x 480, 상품 상세에 출력될 이미지 입니다. </span>
+                                        <span>크기 456 x 456, 상품 상세에 출력될 이미지 입니다. </span>
                                         <input type="file" name="thumb3">
                                     </td>
                                 </tr>

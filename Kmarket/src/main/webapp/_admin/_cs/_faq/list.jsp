@@ -2,24 +2,17 @@
 <jsp:include page="/_admin/_header.jsp"/>
             <section id="admin-index">
                 <nav>
-                    <h3>자주묵는질문 목록</h3>
+                    <h3>자주묻는질문 목록</h3>
                     <p>
-                        HOME > 고객센터 > <strong>자주묵는질문</strong>
+                        HOME > 고객센터 > <strong>자주묻는질문</strong>
                     </p>
                 </nav>
-                <select name="" id="">
-                    <option value="1">1차 선택</option>
-                    <option value="1">고객 서비스</option>
-                    <option value="1">안전거래</option>
-                    <option value="1">위해상품</option>
-                    <option value="1">이벤트 당첨</option>
+                <select name="group" id="">
+                    <option value="회원">회원</option>
                 </select>
-                <select name="" id="">
-                    <option value="1">2차 선택</option>
-                    <option value="1">고객 서비스</option>
-                    <option value="1">안전거래</option>
-                    <option value="1">위해상품</option>
-                    <option value="1">이벤트 당첨</option>
+                <select name="cate" id="">
+                    <option value="가입">가입</option>
+                    <option value="탈퇴">탈퇴</option>
                 </select>
                 <div id="admin_cs_list">
                     <div class="admin_cs_list_div">
@@ -28,7 +21,8 @@
                                 <tr>
                                     <th><input type="checkbox"></th>
                                     <th>번호</th>
-                                    <th>유형</th>
+                                    <th>1차유형</th>
+                                    <th>2차유형</th>
                                     <th>제목</th>
                                     <th>조회</th>
                                     <th>날짜</th>
@@ -37,6 +31,7 @@
                                 <tr>
                                     <td><input type="checkbox"></td>
                                     <td>100</td>
+                                    <td>가입</td>
                                     <td>고객서비스</td>
                                     <td><a href="/Kmarket/_cs/_notice/view.do">[안내] 해외결제 사칭 문자 주의</a></td>
                                     <td>조회</td>
@@ -49,7 +44,7 @@
                             </tbody>
                         </table>
                         <div class="btn">
-                            <button>선택 삭제</button>
+                            <button class="btn_red">선택 삭제</button>
                             <button>작성하기</button>
                         </div>
                         <div class="page">

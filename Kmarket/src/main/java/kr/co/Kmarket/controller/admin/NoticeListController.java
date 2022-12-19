@@ -14,7 +14,7 @@ import kr.co.Kmarket.DAO.admin.AdminDAO;
 import kr.co.Kmarket.VO.CsNoticeVO;
 import kr.co.Kmarket.VO.ProductVO;
 
-@WebServlet("/Kmarket/admin/cs/notice/list.do")
+@WebServlet("/admin/cs/notice/list.do")
 public class NoticeListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -22,12 +22,32 @@ public class NoticeListController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		
-		List<CsNoticeVO> notice = AdminDAO.getInstance().selectNotice();
+		String cate = req.getParameter("cate");
+		String ls = req.getParameter("ls");
+		String title = req.getParameter("title");
+		String content = req.getParameter("content");
+
+		if(ls == null) {
+			ls = "전체보기";
+		}
+		
+		List<CsNoticeVO> notice = AdminDAO.getInstance().selectNotice(cate, ls);
 		req.setAttribute("notice", notice);
+		
+		
+		CsNoticeVO vo = new CsNoticeVO();
+		vo.setCate(cate);
+		vo.setTitle(title);
+		vo.setContent(content);
+		
+		req.setAttribute("vo", vo);
 		
 		RequestDispatcher dispathcer = req.getRequestDispatcher("/_admin/_cs/_notice/list.jsp");
 		dispathcer.forward(req, resp);
 	}
 	
-	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+	}
 }

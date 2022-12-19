@@ -10,12 +10,16 @@
                     </p>
                 </nav>
                 <div id="admin_cs_list">
-                    <select name="" id="">
+                <form action="/Kmarket/admin/cs/notice/list.do" method="get">
+                    <select name="ls" id="">
+                    	<option value="전체보기">전체보기</option>
 	                    <option value="고객 서비스">고객 서비스</option>
 	                    <option value="안전거래">안전거래</option>
 	                    <option value="위해상품">위해상품</option>
 	                    <option value="이벤트 당첨">이벤트 당첨</option>
                 	</select>
+                	<input type="submit" value="검색하기">
+                </form>
                     <div class="admin_cs_list_div">
                         <table>
                             <tbody>
@@ -34,31 +38,21 @@
 						                <td><input type="checkbox" name="all"></td>
 		                           		<td>${item.no}</td>
 			                            <td>${item.cate}</td>
-			                            <td>${item.title}</td>
+			                            <td><a href="/Kmarket/admin/cs/notice/view.do?no=${item.no}">${item.title}</a></td>
 			                            <td>${item.hit}</td>
 			                            <td>${item.rdate}</td>
 										<td>
-			                                <a href="/Kmarket/Kmarket/admin/cs/notice/delete.do">[삭제]</a>
-			                                <a href="#">[수정]</a>
+			                                <a href="/Kmarket/admin/cs/notice/delete.do?no=${item.no}">[삭제]</a>
+			                                <a href="/Kmarket/admin/cs/notice/modify.do?no=${item.no}">[수정]</a>
 		                          		</td>
 						            </tr>
 			           			 </c:forEach>
-                                    <td><input type="checkbox"></td>
-                                    <td>100</td>
-                                    <td>고객서비스</td>
-                                    <td><a href="/Kmarket/_cs/_notice/view.do">[안내] 해외결제 사칭 문자 주의</a></td>
-                                    <td>조회</td>
-                                    <td>2022-12-06</td>
-                                    <td>
-                                        <a href="#">[수정]</a>
-                                        <a href="#">[삭제]</a>
-                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="btn">
-                            <button><a href="/Kmarket/admin/cs/notice/delete.do">선택삭제</a></button>
-                            <button><a href="/Kmarket/admin/cs/notice/write.do">작성하기</a></button>
+                            <button class="btn_gray"><a href="/Kmarket/admin/cs/notice/delete.do?no=${item.no}">선택삭제</a></button>
+                            <button class="btn_blue"><a href="/Kmarket/admin/cs/notice/write.do">작성하기</a></button>
                         </div>
                         <div class="page">
                             <a href="#">이전</a>

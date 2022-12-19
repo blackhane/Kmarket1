@@ -2,7 +2,6 @@ package kr.co.Kmarket.DAO.admin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,11 +99,12 @@ public void insertNoctice(CsNoticeVO vo) {
 		logger.info("공지사항 넣기 start...");
 		conn = getConnection();
 		psmt = conn.prepareStatement(AdminSql.INSERT_NOTICE);
-		psmt.setString(1, vo.getCate());
-		psmt.setString(2, vo.getTitle());
-		psmt.setString(3, vo.getHit());
-		psmt.setString(4, vo.getContent());
-		psmt.setString(5, vo.getRegip());
+		psmt.setString(1, vo.getGroup());
+		psmt.setString(2, vo.getCate());
+		psmt.setString(3, vo.getTitle());
+		psmt.setString(4, vo.getHit());
+		psmt.setString(5, vo.getContent());
+		psmt.setString(6, vo.getRegip());
 		
 		psmt.executeUpdate();
 		close();
@@ -182,20 +182,42 @@ public void insertFaq(CsFaqVO vo) {
 		return product;
 	}
 	
-	public List<CsNoticeVO> selectNotice() {
+	// 공지사항 불러오기
+	
+	public List<CsNoticeVO> selectNotice(String cate, String ls) {
 		List<CsNoticeVO> notice = new ArrayList<>();
-		try{
-			logger.info("공지불러오기 start...");
+		try{			
+			logger.info("공지불러오기 start..." + ls);
 			conn = getConnection();
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(AdminSql.SELECT_NOTICE);
+			String sql = "";
+			
+			switch(ls) {
+			case "전체보기":
+				sql = "SELECT * FROM `km_cs_notice` ORDER BY `no` DESC";
+				break;
+			case "고객 서비스":
+				sql = "SELECT * FROM `km_cs_notice` where `cate`='고객 서비스'  ORDER BY `no` DESC";
+				break;
+			case "안전거래":
+				sql = "SELECT * FROM `km_cs_notice` where `cate`='안전거래'  ORDER BY `no` DESC";
+				break;
+			case "위해상품":
+				sql = "SELECT * FROM `km_cs_notice` where `cate`='위해상품'  ORDER BY `no` DESC";
+				break;
+			case "이벤트 당첨":
+				sql = "SELECT * FROM `km_cs_notice` where `cate`='이벤트 당첨'  ORDER BY `no` DESC";
+				break;
+			}
+			
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
 			while(rs.next()) {
 				CsNoticeVO vo = new CsNoticeVO();
 				vo.setNo(rs.getString(1));
 				vo.setCate(rs.getString(5));
 				vo.setTitle(rs.getString(6));
 				vo.setHit(rs.getString(7));
-				vo.setRdate(rs.getString(11));
+				vo.setRdate(rs.getString(11).substring(0,10));
 				notice.add(vo);
 			}
 			close();
@@ -205,7 +227,59 @@ public void insertFaq(CsFaqVO vo) {
 		logger.debug("공지불러오기 입력" + notice.size());
 		return notice;
 	}
+	
+	public CsNoticeVO NoticeView(String no) {
+		CsNoticeVO vo = null;
+		try{			
+			logger.info("공지보기 start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(AdminSql.SELECT_NOTICE);
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				vo = new CsNoticeVO();
+				vo.setNo(rs.getString(1));
+				vo.setCate(rs.getString(5));
+				vo.setTitle(rs.getString(6));
+				vo.setContent(rs.getString(8));
+			}
+			close();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}
+		return vo;
+	}
 
+	// 자주묻는질문 불러오기
+	public List<CsFaqVO> selectFaq(String cate, String ls) {
+		List<CsFaqVO> faq = new ArrayList<>();
+		try{			
+			logger.info("자주묻는질문 start..." + ls);
+			conn = getConnection();
+			String sql = "";
+			
+			
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				CsFaqVO vo = new CsFaqVO();
+				vo.setNo(rs.getString(1));
+				vo.setCate(rs.getString(5));
+				vo.setTitle(rs.getString(6));
+				vo.setHit(rs.getString(7));
+				vo.setRdate(rs.getString(11).substring(0,10));
+				faq.add(vo);
+			}
+			close();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}
+		logger.debug("자주묻는질문 입력" + faq.size());
+		return faq;
+	}
+	
+	
+	
 	
 	//delete
 	
@@ -234,22 +308,44 @@ public void insertFaq(CsFaqVO vo) {
 	 * return newName; }
 	 */
 	
-	public void deleteNotice(String no) {
+	//글수정 업데이트
+	public void updateNotice(String no, String group, String cate, String title, String content) {
 		try {
-			logger.info("공지삭제 start...");
+			logger.info("공지수정 start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement(AdminSql.DELETE_NOTICE);
-			psmt.setString(1, no);
-			psmt.setString(2, no);		
+			psmt = conn.prepareStatement(AdminSql.UPDATE_NOTICE);
+			psmt.setString(1, group);
+			psmt.setString(2, cate);
+			psmt.setString(3, title);
+			psmt.setString(4, content);
+			psmt.setString(5, no);
 			psmt.executeUpdate();
 			close();
-			logger.debug("공지삭제" + no);
-		}catch(Exception e){
-			
+			logger.debug("공지수정" + no);
+		}catch(Exception e){	
 			logger.error(e.getMessage());
 		}
 	}
 
+	
+	
+	//글삭제
+	public void deleteNotice(String no) {
+		try {
+			logger.info("공지삭제 start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(AdminSql.DELETE_NOTICE);	
+			psmt.setString(1, no);		
+			psmt.executeUpdate();
+			close();
+			logger.debug("공지삭제" + no);
+		}catch(Exception e){	
+			logger.error(e.getMessage());
+		}
+	}
+
+	
+	
 //	vo.setProdNo(rs.getString(1));
 //	vo.setCate1(rs.getInt(2));
 //	vo.setCate2(rs.getInt(3));
