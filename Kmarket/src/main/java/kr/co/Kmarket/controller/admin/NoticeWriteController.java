@@ -12,19 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.Kmarket.DAO.admin.AdminDAO;
 import kr.co.Kmarket.VO.CsNoticeVO;
 
-@WebServlet("/Kmarket/admin/cs/notice/write.do")
+@WebServlet("/admin/cs/notice/write.do")
 public class NoticeWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		//카테고리 나누기
-		String group = req.getParameter("group");
-		String cate = req.getParameter("cate");
-		
-		req.setAttribute("group", group);
-		req.setAttribute("cate", cate);
 		
 		RequestDispatcher dispathcer = req.getRequestDispatcher("/_admin/_cs/_notice/write.jsp");
 		dispathcer.forward(req, resp);
@@ -39,9 +33,20 @@ public class NoticeWriteController extends HttpServlet {
 		String content = req.getParameter("content");
 		String regip = req.getParameter("regip");
 		String rdate = req.getRemoteAddr();
-				
+		String group = req.getParameter("group");
+		
+		if(cate.equals("고객 서비스")) {
+			group = "service";
+		}else if(cate.equals("안전거래")){
+			group = "safe";
+		}else if(cate.equals("위해상품")){
+			group = "danger";
+		}else if(cate.equals("이벤트 당첨")){
+			group = "event";
+		}
 		
 		CsNoticeVO vo = new CsNoticeVO();
+		vo.setGroup(group);
 		vo.setCate(cate);
 		vo.setTitle(title);
 		vo.setHit(hit);
@@ -53,7 +58,7 @@ public class NoticeWriteController extends HttpServlet {
 		dao.insertNoctice(vo);
 		
 		// 리다이렉트
-		resp.sendRedirect("/Kmarket/Kmarket/admin/cs/notice/list.do");
+		resp.sendRedirect("/Kmarket/admin/cs/notice/list.do");
 		
 	}
 

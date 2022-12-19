@@ -12,21 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.Kmarket.DAO.admin.AdminDAO;
 import kr.co.Kmarket.VO.CsNoticeVO;
 
-@WebServlet("/admin/cs/notice/delete.do")
-public class NoticeDeleteController extends HttpServlet {
+
+@WebServlet("/admin/cs/notice/view.do")
+public class NoticeViewController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-	
+
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
 		
 		String no = req.getParameter("no");
 		
-		AdminDAO dao = AdminDAO.getInstance();
-		dao.deleteNotice(no);
+				
+		AdminDAO dao =  AdminDAO.getInstance();
+		CsNoticeVO notice = dao.NoticeView(no);
 		
-		// 리다이렉트
-		resp.sendRedirect("/Kmarket/admin/cs/notice/list.do");
-
+		req.setAttribute("notice", notice);
+		
+		RequestDispatcher dispathcer = req.getRequestDispatcher("/_admin/_cs/_notice/view.jsp");
+		dispathcer.forward(req, resp);
 	}
-
 }

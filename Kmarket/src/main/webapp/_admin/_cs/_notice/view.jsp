@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_admin/_header.jsp"/>
             <section id="admin-index">
                 <nav>
@@ -9,26 +10,26 @@
                 </nav>
                 <div id="admin_cs_view">
                     <div class="admin_cs_view_div">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>유형</td>
-                                    <td>고객서비스</td>
-                                </tr>
-                                <tr>
-                                    <td>제목</td>
-                                    <td>[안내] 해외결제 사칭</td>
-                                </tr>
-                                <tr>
-                                    <td>내용</td>
-                                    <td>내용입니당</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="btn">
-                            <button>삭제</button>
-                            <button>수정</button>
-                            <button>작성하기</button>
+                       <table border="0">
+								<tr>
+					                <th>글유형</th>
+					                <td><input type="text" name="title" value="${notice.cate}" readonly/></td>
+					            </tr>
+					            <tr>
+					                <th>제목</th>
+					                <td><input type="text" name="title" value="${notice.title}" readonly/></td>
+					            </tr>
+					            <tr>
+					                <th>내용</th>
+					                <td>
+					                    <textarea name="content" readonly>${notice.content}</textarea>
+					                </td>
+					            </tr>               
+				        </table>
+                        <div class="btn_right">
+                            <button class="btn_red" onclick = "location.href = '/Kmarket/admin/cs/notice/delete.do?no=${notice.no}' ">삭제</button>
+                            <button class="btn_blue" onclick = "location.href = '/Kmarket/admin/cs/notice/modify.do?no=${notice.no}' ">수정</button>
+                            <button class="btn_gray" onclick = "location.href = '/Kmarket/admin/cs/notice/list.do' ">목록</button>
                         </div>
                     </div>
                 </div>
