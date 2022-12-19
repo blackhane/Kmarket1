@@ -8,17 +8,11 @@
 <script>
 	$(function(){
 		//글목록 3개 보여주기
-		$('li:hidden*').slice(0,3).show();
+		$('li:hidden').slice(0,3).show();
 		
-
 		$('.more').click(function(e){
 			e.preventDefault();
-			if($('li:hidden').prevAll().length == 0){
-				$('li').parent().children('.load').slice(3,10).hide();
-				$(this).text('더보기');
-				return;
-			}
-			$('li:hidden').prevAll().slice().show();
+			$('li:hidden').show();
 			$(this).text('간단히 보기');
 			return;
 		});
