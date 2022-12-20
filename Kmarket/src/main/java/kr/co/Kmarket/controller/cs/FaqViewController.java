@@ -20,8 +20,11 @@ public class FaqViewController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String no = req.getParameter("no");
+		String group = req.getParameter("group");
+		
 		CsVO vo = CsFaqDAO.getInstance().selectArticle(no);
 		
+		req.setAttribute("group", group);
 		req.setAttribute("article", vo);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/_cs/_faq/view.jsp");

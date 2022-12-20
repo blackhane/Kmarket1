@@ -22,18 +22,39 @@ public class CsFaqDAO extends DBCP{
 	//로그
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	//카테고리
+	public List<String> searchCate(String group) {
+		List<String> cate = new ArrayList<>();
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.SEARCH_CATE_FAQ);
+			psmt.setString(1, group);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				String str = "";
+				str = rs.getString(1);
+				cate.add(str);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return cate;
+	}
+	
 	//글목록
-	public List<CsVO> selectArticles(String cate) {
+	public List<CsVO> selectArticles(String group) {
 		List<CsVO> articles = new ArrayList<>();
 		try {
 			logger.info("자주묻는질문 글목록");
 			conn = getConnection();
 			psmt = conn.prepareStatement(CsSQL.SELECT_ARTICLES_FAQ);
-			psmt.setString(1, cate);
+			psmt.setString(1, group);
 			rs= psmt.executeQuery();
 			while(rs.next()) {
 				CsVO vo = new CsVO();
 				vo.setNo(rs.getString(1));
+				vo.setGroup(rs.getString(2));
 				vo.setCate(rs.getString(5));
 				vo.setTitle(rs.getString(6));
 				articles.add(vo);

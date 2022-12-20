@@ -497,6 +497,9 @@ main > .menu > .cs_information > div.question > ul > li {
     padding: 20px;
     border-bottom: 1px solid #ccc;
 }
+main > .menu > .cs_information > div.question > ul > li:last-child {
+    border: none;
+}
 main > .menu > .cs_information > div.question > ul > li:hover {
     background: #f8f8f8;
 }

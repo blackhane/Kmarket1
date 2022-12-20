@@ -3,15 +3,10 @@
 <jsp:include page="/_cs/_header.jsp"/>
 <jsp:include page="./nav.jsp"/>
 <style>
-	.load {display:none;}
 </style>
 <script>
 	$(function(){
-		//글목록 3개 보여주기
-		$('li.load1:hidden').slice(0,3).show();
-		$('li.load2:hidden').slice(0,3).show();
-		$('li.load3:hidden').slice(0,3).show();
-		$('li.load4:hidden').slice(0,3).show();
+		$('ul').children('li.load:nth-child(n+4)').hide();
 		
 		$('.more').click(function(){
 			if($(this).text() == '더보기'){
@@ -21,59 +16,32 @@
 				$(this).parent().children('li.load').slice(3,10).hide();
 				$(this).text('더보기');
 			}
-			
 		});
 	});
 </script>
         <article class="cs_information">
                 <p>
-                    <strong>회원</strong><br/>
+                    <strong>${group}</strong><br/>
                     가장 자주 묻는 질문입니다.
                 </p>
-                <div class="question">
-                    <p>가입</p>
+                
+                <c:forEach var="cate" items="${cate}">
+               	<div class="question">
+                    <p>${cate}</p>
                     <ul>
-                    <c:forEach items="${articles1}" var="article">
-                        <li class="load load1"><a href="/Kmarket/cs/faq/view.do?no=${article.no}"><span>Q. </span>${article.title}</a></li>
-                    </c:forEach>
-                    <c:if test="${articles1.size() gt 3}">
-                        <li class="more">더보기</li>
-                    </c:if>
+                    	<c:set var="i" value="1"/>
+	                    <c:forEach items="${articles}" var="article">
+	                    	<c:if test="${article.cate eq cate}">
+	                    		<li class="load"><a href="/Kmarket/cs/faq/view.do?group=${article.group}&no=${article.no}"><span>Q. </span>${article.title}</a></li>
+	                    		<c:set var="i" value="${i+1}"/>
+	                    	</c:if>
+	                    </c:forEach>
+	                    <c:if test="${i gt 4}">
+                    		<li class="more">더보기</li>
+                    	</c:if>
                     </ul>
                 </div>
-                <div class="question">
-                    <p>탈퇴</p>
-                    <ul>
-                    <c:forEach items="${articles2}" var="article">
-                        <li class="load load2"><a href="/Kmarket/cs/faq/view.do?no=${article.no}"><span>Q. </span>${article.title}</a></li>
-                    </c:forEach>
-                    <c:if test="${articles2.size() gt 3}">
-                        <li class="more">더보기</li>
-                    </c:if>
-                    </ul>
-                </div>
-                <div class="question">
-                    <p>회원정보</p>
-                    <ul>
-                    <c:forEach items="${articles3}" var="article">
-                        <li class="load load3"><a href="/Kmarket/cs/faq/view.do?no=${article.no}"><span>Q. </span>${article.title}</a></li>
-                    </c:forEach>
-                    <c:if test="${articles3.size() gt 3}">
-                        <li class="more">더보기</li>
-                    </c:if>
-                    </ul>
-                </div>
-                <div class="question">
-                    <p>로그인</p>
-                    <ul>
-                    <c:forEach items="${articles4}" var="article">
-                        <li class="load load4"><a href="/Kmarket/cs/faq/view.do?no=${article.no}"><span>Q. </span>${article.title}</a></li>
-                    </c:forEach>
-                    <c:if test="${articles4.size() gt 3}">
-                        <li class="more">더보기</li>
-                    </c:if>
-                    </ul>
-                </div>
+                </c:forEach>
         </article>
     </div>
 </main>

@@ -116,7 +116,7 @@
 		}
 		
 		//주문하기 클릭
-		$('.orderCart').click(function(){
+		$('.orderCart').on('click',function(){
 			//장바구니에 물건이 없으면
 			if($('.chk').length == 0){
 				alert('장바구니에 등록된 상품이 없습니다.');

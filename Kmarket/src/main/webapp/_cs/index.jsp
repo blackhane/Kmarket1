@@ -29,13 +29,13 @@
             <section class="faq">
                 <h1>자주 묻는 질문 <a href="/Kmarket/cs/faq/list.do">전체보기</a></h1>
                 <ul>
-                    <li><a href="/Kmarket/cs/faq/list.do"><span>회원</span></a></li>
-                    <li><a href="#"><span>쿠폰/이벤트</span></a></li>
-                    <li><a href="#"><span>주문/결제</span></a></li>
-                    <li><a href="#"><span>배송</span></a></li>
-                    <li><a href="#"><span>취소/반품/교환</span></a></li>
-                    <li><a href="#"><span>여행/숙박/항공</span></a></li>
-                    <li><a href="#"><span>안전거래</span></a></li>
+                    <li><a href="/Kmarket/cs/faq/list.do?group=회원"><span>회원</span></a></li>
+                    <li><a href="/Kmarket/cs/faq/list.do?group=쿠폰/혜택/이벤트"><span>쿠폰/이벤트</span></a></li>
+                    <li><a href="/Kmarket/cs/faq/list.do?group=주문/결제"><span>주문/결제</span></a></li>
+                    <li><a href="/Kmarket/cs/faq/list.do?group=배송"><span>배송</span></a></li>
+                    <li><a href="/Kmarket/cs/faq/list.do?group=취소/반품/교환"><span>취소/반품/교환</span></a></li>
+                    <li><a href="/Kmarket/cs/faq/list.do?group=여행/숙박/항공"><span>여행/숙박/항공</span></a></li>
+                    <li><a href="/Kmarket/cs/faq/list.do?group=안전거래"><span>안전거래</span></a></li>
                 </ul>
             </section>
             <section class="inquiry">
