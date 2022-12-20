@@ -58,6 +58,7 @@ public class HelpDAO extends DBCP{
 				while(rs.next()) {
 					CsVO vo = new CsVO();
 					vo.setNo(rs.getString(1));
+					vo.setGroup(rs.getString(2));
 					vo.setCate(rs.getString(5));
 					vo.setTitle(rs.getString(6));
 					vo.setContent(rs.getString(8));

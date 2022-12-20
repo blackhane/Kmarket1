@@ -23,12 +23,14 @@ public class CsQnaDAO extends DBCP{
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	//글목록
-	public List<CsVO> selectArticles() {
+	public List<CsVO> selectArticles(String group, int start) {
 		List<CsVO> articles = new ArrayList<>();
 		try {
 			logger.info("문의하기 글목록");
 			conn = getConnection();
 			psmt = conn.prepareStatement(CsSQL.SELECT_ARTICLES_QNA);
+			psmt.setString(1, group);
+			psmt.setInt(2, start);
 			rs= psmt.executeQuery();
 			while(rs.next()) {
 				CsVO vo = new CsVO();
@@ -47,6 +49,24 @@ public class CsQnaDAO extends DBCP{
 		return articles;
 	}
 	
+	//전체 글 개수
+	public int selectCountTotal(String group) {
+		int result = 0;
+		try {
+			logger.info("전체 글 개수");
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.COUNT_TOTAL_LIST_QNA);
+			psmt.setString(1, group);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
 	//글보기
 	public CsVO selectArticle(String no) {
 		logger.info("문의하기 글보기");
@@ -58,6 +78,7 @@ public class CsQnaDAO extends DBCP{
 			rs = psmt.executeQuery();
 			if(rs.next()){
 				vo.setNo(rs.getString(1));
+				vo.setGroup(rs.getString(2));
 				vo.setCate(rs.getString(5));
 				vo.setTitle(rs.getString(6));
 				vo.setContent(rs.getString(8));
@@ -82,6 +103,7 @@ public class CsQnaDAO extends DBCP{
 			psmt.setString(3, vo.getContent());
 			psmt.setString(4, vo.getUid());
 			psmt.setString(5, vo.getRegip());
+			psmt.setString(6, vo.getGroup());
 			psmt.executeUpdate();
 			close();
 		}catch(Exception e){

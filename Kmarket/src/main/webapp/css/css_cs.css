@@ -446,7 +446,7 @@ main > .menu > .cs_information > div > .page {
     text-align: center;
     margin-top: 20px;
 }
-main > .menu > .cs_information .page > a:first-child {
+main > .menu > .cs_information .page > a.prev {
     font-size: 0px;
     background: url('/Kmarket/img/img_cs/cs_sprites.png') no-repeat -712px -659px;
 }
@@ -463,7 +463,7 @@ main > .menu > .cs_information .page > a.current {
     border-radius: 17px;
     color: #fff;
 }
-main > .menu > .cs_information .page > a:last-child {
+main > .menu > .cs_information .page > a.next {
     font-size: 0px;
     background: url('/Kmarket/img/img_cs/cs_sprites.png') no-repeat -628px -659px;
 }
@@ -581,7 +581,7 @@ main article table tr > td:nth-child(1) {
     width: 20%;
 }
 main article table tr > td > select {
-    width: 100px;
+    width: 160px;
     height: 40px;
     font-size: 16px;
 }

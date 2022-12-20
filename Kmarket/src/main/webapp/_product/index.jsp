@@ -54,9 +54,9 @@
                     <ul>
                       <c:choose>
                       	<c:when test="${not empty sessUser.uid}">
-                      		<li style="font-weight:bold;">${sessUser.name}님, 환영합니다.</li>
+                      		<li style="font-weight:bold;">${sessUser.name}${sessUser.company}님, 환영합니다.</li>
                       		<li><a href="/Kmarket/logout.do?uid=${sessUser.uid}">로그아웃</a></li>
-                      		<c:if test="${sessUser.name eq '관리자'}">	                      		
+                      		<c:if test="${sessUser.level ge 5}">	                      		
 	                      		<li><a href="/Kmarket/admin/index.do">관리자</a></li>	                     		
 	                      	</c:if>
                       	</c:when>

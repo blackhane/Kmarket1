@@ -10,7 +10,7 @@
                 <p>
                 	${article.content}
                 </p>
-                <a href="/Kmarket/cs/qna/list.do" class="btn btnList">목록보기</a>
+                <a href="/Kmarket/cs/qna/list.do?group=${article.group}" class="btn btnList">목록보기</a>
             </div>
         </article>
     </div>

@@ -37,11 +37,15 @@
                     </c:forEach>
                     </table>
                     <div class="page">
-                        <a href="#">이전</a>
-                        <a href="#" class="current">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">다음</a>
+                        <c:if test="${pageGroupStart gt 1}">
+                     		<a href="/Kmarket/cs/notice/list.do?group=${kind}&pg=${pageGroupStart-1}" class="prev">이전</a>
+			        	</c:if>
+                        <c:forEach var="num" begin="${pageGroupStart}" end="${pageGroupEnd}">
+			            	<a href="/Kmarket/cs/notice/list.do?group=${kind}&pg=${num}" class="num ${currentPage eq num ? 'current' : 'off' }">${num}</a>
+			            </c:forEach>
+	                    <c:if test="${pageGroupEnd lt lastPageNum}">
+	                    	 <a href="/Kmarket/cs/notice/list.do?group=${kind}&pg=${pageGroupEnd+1}" class="next">다음</a>
+			            </c:if>
                     </div>
                 </div>
         </article>

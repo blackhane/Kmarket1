@@ -18,10 +18,10 @@ public class FaqListController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<CsVO> vo1 = CsFaqDAO.getInstance().selectArticles("a");
-		List<CsVO> vo2 = CsFaqDAO.getInstance().selectArticles("b");
-		List<CsVO> vo3 = CsFaqDAO.getInstance().selectArticles("c");
-		List<CsVO> vo4 = CsFaqDAO.getInstance().selectArticles("d");
+		List<CsVO> vo1 = CsFaqDAO.getInstance().selectArticles("가입");
+		List<CsVO> vo2 = CsFaqDAO.getInstance().selectArticles("탈퇴");
+		List<CsVO> vo3 = CsFaqDAO.getInstance().selectArticles("회원정보");
+		List<CsVO> vo4 = CsFaqDAO.getInstance().selectArticles("로그인");
 		req.setAttribute("articles1", vo1);
 		req.setAttribute("articles2", vo2);
 		req.setAttribute("articles3", vo3);

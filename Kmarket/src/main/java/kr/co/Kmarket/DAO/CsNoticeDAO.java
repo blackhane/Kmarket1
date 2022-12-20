@@ -23,12 +23,13 @@ public class CsNoticeDAO extends DBCP{
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	//글목록
-	public List<CsVO> selectArticles() {
+	public List<CsVO> selectArticles(int start) {
 		List<CsVO> articles = new ArrayList<>();
 		try {
 			logger.info("공지사항 글목록");
 			conn = getConnection();
 			psmt = conn.prepareStatement(CsSQL.SELECT_ARTICLES_NOTICE);
+			psmt.setInt(1, start);
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				CsVO vo = new CsVO();
@@ -48,15 +49,49 @@ public class CsNoticeDAO extends DBCP{
 		return articles;
 	}
 	
+	//전체 글 개수
+	public int selectCountTotal() {
+		int result = 0;
+		try {
+			logger.info("전체 글 개수");
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.COUNT_TOTAL_LIST_NOTICE_ALL);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	public int selectCountTotal(String group) {
+		int result = 0;
+		try {
+			logger.info("전체 글 개수");
+			psmt = conn.prepareStatement(CsSQL.COUNT_TOTAL_LIST_NOTICE);
+			psmt.setString(1, group);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
 	//글목록 카테고리
-	public List<CsVO> selectArticles(String group) {
+	public List<CsVO> selectArticles(String group, int start) {
 		List<CsVO> articles = new ArrayList<>();
 		try {
 			logger.info("공지사항 글목록 카테고리");
 			conn = getConnection();
-			String sql = "SELECT * FROM `km_cs_notice` WHERE `group`=?  ORDER BY `no` DESC";
+			String sql = "SELECT * FROM `km_cs_notice` WHERE `group`=?  ORDER BY `no` DESC LIMIT ?,10";
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, group);
+			psmt.setInt(2, start);
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				CsVO vo = new CsVO();

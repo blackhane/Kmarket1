@@ -39,14 +39,14 @@
                 </ul>
             </section>
             <section class="inquiry">
-                <h1>문의하기 <a href="/Kmarket/cs/qna/list.do">전체보기</a></h1>
+                <h1>문의하기 <a href="/Kmarket/cs/qna/list.do?group=회원">전체보기</a></h1>
                 <ul>
                	<c:forEach items="${qna}" var="qna">
                     <li>
-                        <a href="/Kmarket/cs/qna/view.do?no=${qna.no}">[${qna.cate}] ${qna.title} <p>${qna.uid}<span>${qna.rdate}</span></p></a>
+                        <a href="/Kmarket/cs/qna/view.do?group=${qna.group}&no=${qna.no}">[${qna.cate}] ${qna.title} <p>${qna.uid}<span>${qna.rdate}</span></p></a>
                     </li>
                 </c:forEach>
-                    <a href="/Kmarket/cs/qna/write.do" class="write">문의글 작성 ></a>
+                    <a href="/Kmarket/cs/qna/write.do?group=회원" class="write">문의글 작성 ></a>
                 </ul>
             </section>
             <section class="consult">

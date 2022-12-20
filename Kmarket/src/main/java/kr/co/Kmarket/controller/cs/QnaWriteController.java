@@ -18,19 +18,24 @@ public class QnaWriteController extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String group = req.getParameter("group");
+		req.setAttribute("group", group);
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/_cs/_qna/write.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String cate = req.getParameter("type");
+		String group = req.getParameter("type1");
+		String cate = req.getParameter("type2");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String uid = req.getParameter("uid");
 		String regip = req.getRemoteAddr();
 		
 		CsVO vo = new CsVO();
+		vo.setGroup(group);
 		vo.setCate(cate);
 		vo.setTitle(title);
 		vo.setContent(content);
@@ -39,7 +44,7 @@ public class QnaWriteController extends HttpServlet{
 		
 		CsQnaDAO.getInstance().insertArticle(vo);
 		
-		resp.sendRedirect("/Kmarket/cs/qna/list.do");
+		resp.sendRedirect("/Kmarket/cs/qna/list.do?group="+group);
 	}
 
 }
