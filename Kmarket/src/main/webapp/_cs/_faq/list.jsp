@@ -10,10 +10,10 @@
 		
 		$('.more').click(function(){
 			if($(this).text() == '더보기'){
-				$(this).parent().children('li:hidden').show();
+				$(this).parent().children('li:hidden').slideDown(200);
 				$(this).text('간단히 보기');
 			}else{
-				$(this).parent().children('li.load').slice(3,10).hide();
+				$(this).parent().children('li.load').slice(3,10).slideUp(200);
 				$(this).text('더보기');
 			}
 		});
