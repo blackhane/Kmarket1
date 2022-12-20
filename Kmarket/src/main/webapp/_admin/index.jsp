@@ -194,6 +194,20 @@
                     <div>
                         <h4>공지사항</h4>
                         <article>
+                        	<c:forEach var="item" items="${notice}">
+					            <tr>
+					                <td><input type="checkbox" name="all"></td>
+	                           		<td>${item.no}</td>
+		                            <td>${item.cate}</td>
+		                            <td><a href="/Kmarket/admin/cs/notice/view.do?no=${item.no}">${item.title}</a></td>
+		                            <td>${item.hit}</td>
+		                            <td>${item.rdate}</td>
+									<td>
+		                                <a href="/Kmarket/admin/cs/notice/delete.do?no=${item.no}">[삭제]</a>
+		                                <a href="/Kmarket/admin/cs/notice/modify.do?no=${item.no}">[수정]</a>
+	                          		</td>
+					            </tr>
+		           			 </c:forEach>
                             <p>
                                 <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
                                 <span>20-07-08 12:23</span>

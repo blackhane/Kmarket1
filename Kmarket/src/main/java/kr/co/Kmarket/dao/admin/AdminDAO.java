@@ -115,6 +115,7 @@ public void insertNoctice(CsNoticeVO vo) {
 	}
 }
 
+//자주묻는질문
 public void insertFaq(CsFaqVO vo) {
 	try{
 		logger.info("faq 넣기 start...");
@@ -193,19 +194,19 @@ public void insertFaq(CsFaqVO vo) {
 			
 			switch(ls) {
 			case "전체보기":
-				sql = "SELECT * FROM `km_cs_notice` ORDER BY `no` DESC";
+				sql = "SELECT * FROM `km_cs_notice` ORDER BY `no` DESC LIMIT 10";
 				break;
 			case "고객 서비스":
-				sql = "SELECT * FROM `km_cs_notice` where `cate`='고객 서비스'  ORDER BY `no` DESC";
+				sql = "SELECT * FROM `km_cs_notice` where `cate`='고객 서비스'  ORDER BY `no` DESC LIMIT 10";
 				break;
 			case "안전거래":
-				sql = "SELECT * FROM `km_cs_notice` where `cate`='안전거래'  ORDER BY `no` DESC";
+				sql = "SELECT * FROM `km_cs_notice` where `cate`='안전거래'  ORDER BY `no` DESC LIMIT 10";
 				break;
 			case "위해상품":
-				sql = "SELECT * FROM `km_cs_notice` where `cate`='위해상품'  ORDER BY `no` DESC";
+				sql = "SELECT * FROM `km_cs_notice` where `cate`='위해상품'  ORDER BY `no` DESC LIMIT 10";
 				break;
 			case "이벤트 당첨":
-				sql = "SELECT * FROM `km_cs_notice` where `cate`='이벤트 당첨'  ORDER BY `no` DESC";
+				sql = "SELECT * FROM `km_cs_notice` where `cate`='이벤트 당첨'  ORDER BY `no` DESC LIMIT 10";
 				break;
 			}
 			
@@ -251,19 +252,18 @@ public void insertFaq(CsFaqVO vo) {
 	}
 
 	// 자주묻는질문 불러오기
-	public List<CsFaqVO> selectFaq(String cate, String ls) {
+	public List<CsFaqVO> selectFaq(String cate) {
 		List<CsFaqVO> faq = new ArrayList<>();
 		try{			
-			logger.info("자주묻는질문 start..." + ls);
+			logger.info("자주묻는질문 start...");
 			conn = getConnection();
-			String sql = "";
-			
-			
-			psmt = conn.prepareStatement(sql);
+			psmt = conn.prepareStatement(AdminSql.SELECT_FAQ);
+			psmt.setString(1, cate);
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				CsFaqVO vo = new CsFaqVO();
 				vo.setNo(rs.getString(1));
+				vo.setGroup(rs.getString(2));
 				vo.setCate(rs.getString(5));
 				vo.setTitle(rs.getString(6));
 				vo.setHit(rs.getString(7));

@@ -27,8 +27,8 @@ public class FaqWriteController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String cate1 = req.getParameter("cate1");
-		String cate2 = req.getParameter("cate2");
+		String group = req.getParameter("group");
+		String cate = req.getParameter("cate");
 		String title = req.getParameter("title");
 		String ls = req.getParameter("ls");
 		String hit = req.getParameter("hit");
@@ -37,8 +37,8 @@ public class FaqWriteController extends HttpServlet {
 		String rdate = req.getRemoteAddr();
 		
 		CsFaqVO vo = new CsFaqVO();
-		vo.setCate1(cate1);
-		vo.setCate2(cate2);
+		vo.setGroup(group);
+		vo.setCate(cate);
 		vo.setTitle(title);
 		vo.setHit(hit);
 		vo.setContent(content);

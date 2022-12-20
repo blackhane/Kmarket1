@@ -1,6 +1,7 @@
 package kr.co.Kmarket.controller.admin;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import kr.co.Kmarket.DAO.admin.AdminDAO;
+import kr.co.Kmarket.VO.CsFaqVO;
 
 @WebServlet("/admin/cs/faq/list.do")
 public class FaqListController extends HttpServlet{
@@ -18,13 +22,20 @@ public class FaqListController extends HttpServlet{
 		
 		String group = req.getParameter("group");
 		String cate = req.getParameter("cate");
-		String ls = req.getParameter("ls");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
-
-		if(ls == null) {
-			ls = "전체보기";
-		}
+		
+		
+		List<CsFaqVO> faq = AdminDAO.getInstance().selectFaq(cate);
+		req.setAttribute("faq", faq);
+		
+		CsFaqVO vo = new CsFaqVO();
+		vo.setCate(cate);
+		vo.setTitle(title);
+		vo.setContent(content);
+		
+		req.setAttribute("vo", vo);
+		
 		
 		RequestDispatcher dispathcer = req.getRequestDispatcher("/_admin/_cs/_faq/list.jsp");
 		dispathcer.forward(req, resp);

@@ -13,16 +13,16 @@
                        <table border="0">
 								<tr>
 					                <th>글유형</th>
-					                <td><input type="text" name="title" value="${notice.cate}" readonly/></td>
+					                <td>${notice.cate}</td>
 					            </tr>
 					            <tr>
 					                <th>제목</th>
-					                <td><input type="text" name="title" value="${notice.title}" readonly/></td>
+					                <td>${notice.title}</td>
 					            </tr>
 					            <tr>
 					                <th>내용</th>
 					                <td>
-					                    <textarea name="content" readonly>${notice.content}</textarea>
+					                    ${notice.content}
 					                </td>
 					            </tr>               
 				        </table>
