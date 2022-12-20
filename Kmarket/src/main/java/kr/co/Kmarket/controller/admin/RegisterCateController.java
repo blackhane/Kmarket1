@@ -16,7 +16,7 @@ import kr.co.Kmarket.DAO.ProductDAO;
 import kr.co.Kmarket.VO.CateVO;
 
 @WebServlet("/admin/product/findCate2.do")
-public class CateController extends HttpServlet {
+public class RegisterCateController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 

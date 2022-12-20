@@ -3,9 +3,9 @@
 
             <section id="admin-index">
                 <nav>
-                    <h3>자주묵는질문 보기</h3>
+                    <h3>자주믇는질문 보기</h3>
                     <p>
-                        HOME > 고객센터 > <strong>자주묵는질문</strong>
+                        HOME > 고객센터 > <strong>자주묻는질문</strong>
                     </p>
                 </nav>
                 <div id="admin_cs_view">

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/Kmarket/css/css_admin.css">
     <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/Kmarket/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
     <script src="/Kmarket/_admin/admin_js/validation.js"></script>
 </head>
 <script>
@@ -22,15 +23,16 @@
     /* 제이쿼리 끝 */
     })
 </script>
+
 <body>
     <div id="admin-wrapper">
         <header>
             <div>
-                <a href="index.do" class="logo">
+                <a href="/Kmarket/admin/index.do" class="logo">
                     <img src="/Kmarket/img/img_admin/admin_logo.png" alt="로고">
                 </a>
                 <p>
-                    <span>홍길동님 반갑습니다. &nbsp;&nbsp; </span>
+                    <span>관리자님 반갑습니다. &nbsp;&nbsp; </span>
                     <a href="#">HOME |</a>
                     <a href="#">로그아웃 |</a>
                     <a href="#">고객센터</a>
@@ -101,8 +103,8 @@
                             게시판관리
                         </a>
                         <ol>
-                            <li><a href="/Kmarket/admin/cs/notice/list.do">게시판 현황</a></li>
-                            <li><a href="/Kmarket/admin/cs/faq/list.do">고객문의</a></li>
+                            <li><a href="/Kmarket/admin/cs/notice/list.do">공지사항</a></li>
+                            <li><a href="/Kmarket/admin/cs/faq/list.do">자주묻는 질문</a></li>
                         </ol>
                     </li>
                 </ul>
