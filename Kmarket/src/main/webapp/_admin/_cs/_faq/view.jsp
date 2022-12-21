@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_admin/_header.jsp"/>
 
             <section id="admin-index">
@@ -10,26 +11,26 @@
                 </nav>
                 <div id="admin_cs_view">
                     <div class="admin_cs_view_div">
-                        <table>
+                        <table border="0">
                             <tbody>
                                 <tr>
-                                    <td>유형</td>
-                                    <td>고객서비스</td>
+                                    <th>유형</th>
+                                    <td>${faq.group} > ${faq.cate}</td>
                                 </tr>
                                 <tr>
-                                    <td>제목</td>
-                                    <td>[안내] 해외결제 사칭</td>
+                                    <th>제목</th>
+                                    <td>${faq.title}</td>
                                 </tr>
                                 <tr>
-                                    <td>내용</td>
-                                    <td>내용입니당</td>
+                                    <th>내용</th>
+                                    <td>${faq.content}</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="btn">
-                            <button>삭제</button>
-                            <button>수정</button>
-                            <button>작성하기</button>
+                        <div class="btn_right">
+                            <button class="btn_red">삭제</button>
+                            <button class="btn_blue" onclick = "location.href = '/Kmarket/admin/cs/faq/modify.do?no=${faq.no}' ">수정</button>
+                            <button class="btn_gray">작성하기</button>
                         </div>
                     </div>
                 </div>

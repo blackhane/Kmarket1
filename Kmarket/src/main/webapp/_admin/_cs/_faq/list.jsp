@@ -10,7 +10,7 @@
 		   var a = $(this).val();
 	
 		   temp.children().remove();
-		   temp.append('<option value="all">선택하세요</option>');
+		   temp.append('<option value="all">전체보기</option>');
 		   
 		   if(a == '회원'){
 		    temp.append('<option value="가입">가입</option>');
@@ -79,7 +79,7 @@
                 </nav>
                 <form action="/Kmarket/admin/cs/faq/list.do" method="get">
 	                <select name="group" id="">
-	                    <option value="0">선택하세요</option>
+	                    <option value="0">전체보기</option>
 	                    <option value="회원">회원</option>
 	                    <option value="쿠폰/혜택/이벤트">쿠폰/혜택/이벤트</option>
 	                    <option value="주문/결제">주문/결제</option>
@@ -113,12 +113,12 @@
 		                           		<td>${item.no}</td>
 		                           		<td>${item.group}</td>
 			                            <td>${item.cate}</td>
-			                            <td><a href="/Kmarket/admin/cs/notice/view.do?no=${item.no}">${item.title}</a></td>
+			                            <td><a href="/Kmarket/admin/cs/faq/view.do?no=${item.no}">${item.title}</a></td>
 			                            <td>${item.hit}</td>
 			                            <td>${item.rdate}</td>
 										<td>
-			                                <a href="/Kmarket/admin/cs/notice/delete.do?no=${item.no}">[삭제]</a>
-			                                <a href="/Kmarket/admin/cs/notice/modify.do?no=${item.no}">[수정]</a>
+			                                <a href="/Kmarket/admin/cs/faq/delete.do?no=${item.no}">[삭제]</a>
+			                                <a href="/Kmarket/admin/cs/faq/modify.do?no=${item.no}">[수정]</a>
 		                          		</td>
 						            </tr>
 			           			 </c:forEach>
