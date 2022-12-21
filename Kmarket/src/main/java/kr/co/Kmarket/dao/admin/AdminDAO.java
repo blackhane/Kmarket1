@@ -278,7 +278,29 @@ public void insertFaq(CsFaqVO vo) {
 		return faq;
 	}
 	
-	
+	public CsFaqVO FaqView(String no) {
+		CsFaqVO vo = null;
+		try {
+			logger.info("자주묻는질문 보기 start");
+			conn = getConnection();
+			psmt = conn.prepareStatement(AdminSql.SELECT_FAQ_VIEW);
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				vo = new CsFaqVO();
+				vo.setNo(rs.getString(1));
+				vo.setGroup(rs.getString(2));
+				vo.setCate(rs.getString(5));
+				vo.setTitle(rs.getString(6));
+				vo.setHit(rs.getString(7));
+				vo.setContent(rs.getString(8));
+				vo.setRdate(rs.getString(11));
+			}
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}
+		return vo;
+	}
 	
 	
 	//delete
@@ -339,6 +361,25 @@ public void insertFaq(CsFaqVO vo) {
 			psmt.executeUpdate();
 			close();
 			logger.debug("공지삭제" + no);
+		}catch(Exception e){	
+			logger.error(e.getMessage());
+		}
+	}
+
+	//자주묻는질문 수정
+	public void updateFaq(String no, String group, String cate, String title, String content) {
+		try {
+			logger.info("자주묻는질문 수정 start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(AdminSql.UPDATE_FAQ);
+			psmt.setString(1, group);
+			psmt.setString(2, cate);
+			psmt.setString(3, title);
+			psmt.setString(4, content);
+			psmt.setString(5, no);
+			psmt.executeUpdate();
+			close();
+			logger.debug("자주묻는질문 수정" + no);
 		}catch(Exception e){	
 			logger.error(e.getMessage());
 		}

@@ -81,7 +81,18 @@ public class AdminSql {
 	public static final String SELECT_PRODUCT = "select * from `km_product`";
 	public static final String SELECT_NOTICE = "select * from `km_cs_notice` WHERE `no`=?";
 	public static final String SELECT_FAQ = "select * from `km_cs_faq` WHERE `cate`=?";
+	public static final String SELECT_FAQ_VIEW = "select * from `km_cs_faq` WHERE `no`=?";
 	
+
+	//게시판관리 -> 자주묻는질문 수정
+	public static final String UPDATE_FAQ = "UPDATE `km_cs_faq` SET "
+											+ "`group`=?, "
+											+ "`cate`=?, "
+											+ "`title`=?, "
+											+ "`content`=?, "
+											+ "`rdate`= NOW() "
+											+ "WHERE `no` = ?";
+
 	
 	
 	//qna 리스트
@@ -95,4 +106,5 @@ public class AdminSql {
 	
 	//댓글+1
 	public static final String UPDATE_COMMENT_HIT_UP = "UPDATE `board_article` SET  `comment` = `comment`+1 WHERE `no`= ?";
+
 }
