@@ -83,4 +83,16 @@ public class AdminSql {
 	public static final String SELECT_FAQ = "select * from `km_cs_faq` WHERE `cate`=?";
 	
 	
+	
+	//qna 리스트
+	public static final String SELECT_QNA = "SELECT * FROM `km_cs_qna` WHERE `group`=? and `cate` =? ORDER BY `no` DESC LIMIT 10";
+	
+	//qna 글보기
+	public static final String SELECT_QNA_VIEW = "select * from `km_cs_qna` WHERE `no`=?";
+
+	//문의 답변하기
+	public static final String INSERT_COMMENT = "INSERT INTO `km_cs_qna`(`parent`, `content`, `uid`, `regip`, `rdate`) VALUES (?,?,?,?,NOW())";
+	
+	//댓글+1
+	public static final String UPDATE_COMMENT_HIT_UP = "UPDATE `board_article` SET  `comment` = `comment`+1 WHERE `no`= ?";
 }

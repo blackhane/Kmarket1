@@ -31,4 +31,5 @@ public class CsSQL {
 	//글쓰기
 	public static final String INSERT_ARITLCE_QNA = "INSERT INTO `km_cs_qna` SET `cate`=?, `title`=?, `content`=?, `uid`=?, `regip`=?, `group`=?, `rdate`=NOW()";
 	
+
 }
