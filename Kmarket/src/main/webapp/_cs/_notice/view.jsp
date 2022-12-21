@@ -8,8 +8,8 @@
                 <span>${vo.rdate}</span>
             </div>
             <div class="content">
+                ${vo.content}
                 <p>
-                    ${vo.content}
                     <br/><br/>※ 피싱 관련 피해신고
                     <br/><br/>▶ 경찰청 사이버수사국 (국번없이)182 : http://cyberbureau.police.go.kr
                     <br/>▶ KISA 인터넷침해대응센터 (국번없이)118 : http://www.krcert.or.kr
