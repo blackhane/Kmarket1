@@ -1,6 +1,7 @@
 package kr.co.Kmarket.controller.cs;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,8 +44,8 @@ public class QnaWriteController extends HttpServlet{
 		vo.setRegip(regip);
 		
 		CsQnaDAO.getInstance().insertArticle(vo);
-		
-		resp.sendRedirect("/Kmarket/cs/qna/list.do?group="+group);
+		String encoded = URLEncoder.encode(group, "UTF-8");
+		resp.sendRedirect("/Kmarket/cs/qna/list.do?group="+encoded);
 	}
 
 }

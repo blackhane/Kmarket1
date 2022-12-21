@@ -28,7 +28,7 @@
                     	</c:if>
                     	<c:forEach var="article" items="${articles}">
                         <tr>
-                            <td><a href="/Kmarket/cs/qna/view.do?group=${group}&no=${article.no}">[${article.cate}] ${article.title}</a></td>
+                            <td><a href="/Kmarket/cs/qna/view.do?group=${group}&no=${article.no}&pg=${currentPage}">[${article.cate}] ${article.title}</a></td>
                             <td>${article.comment eq 0 ? "검토중" : "답변완료"}</td>
                             <td>${article.uid}</td> 
                             <td>${article.rdate}</td>

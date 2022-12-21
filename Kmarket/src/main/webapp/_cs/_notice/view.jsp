@@ -15,7 +15,7 @@
                     <br/>▶ KISA 인터넷침해대응센터 (국번없이)118 : http://www.krcert.or.kr
                     <br/>감사합니다.
                 </p>
-                <a href="/Kmarket/cs/notice/list.do?group=${kind}" class="btn btnList">목록보기</a>
+                <a href="/Kmarket/cs/notice/list.do?group=${kind}&pg=${pg}" class="btn btnList">목록보기</a>
             </div>
         </article>
     </div>

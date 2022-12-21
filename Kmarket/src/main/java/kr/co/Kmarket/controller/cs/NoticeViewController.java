@@ -21,10 +21,13 @@ public class NoticeViewController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String no = req.getParameter("no");
 		String kind = req.getParameter("kind");
+		String pg = req.getParameter("pg");
+		
 		CsVO vo = CsNoticeDAO.getInstance().selectArticle(no);
 		
 		req.setAttribute("vo", vo);
 		req.setAttribute("kind", kind);
+		req.setAttribute("pg", pg);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/_cs/_notice/view.jsp");
 		dispatcher.forward(req, resp);
