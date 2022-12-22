@@ -110,13 +110,13 @@
 			tag += "<td>"+totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원</td>";
 			tag += "</tr>";
 			tag += "</table>";
-			tag += "<input type='submit' class='orderCart' value='주문하기'>";
+			tag += "<input type='submit' class='orderCart' id='orderCart' value='주문하기'>";
 			tag += "</div>";
 			$('.total').append(tag);
 		}
 		
 		//주문하기 클릭
-		$(document).on('click','.orderCart',function(){
+		$(document).on('click','#orderCart',function(e){
 			e.stopImmediatePropagation();
 			//장바구니에 물건이 없으면
 			if($('.chk').length == 0){
