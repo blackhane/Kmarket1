@@ -15,7 +15,7 @@
                             <tbody>
                                 <tr>
                                     <th>유형</th>
-                                    <td>${faq.group} > ${faq.cate}</td>
+                                    <td>[${faq.group}] > [${faq.cate}]</td>
                                 </tr>
                                 <tr>
                                     <th>제목</th>
@@ -28,7 +28,7 @@
                             </tbody>
                         </table>
                         <div class="btn_right">
-                            <button class="btn_red">삭제</button>
+                            <button class="btn_red" onclick = "location.href = '/Kmarket/admin/cs/faq/delete.do?no=${faq.no}' ">삭제</button>
                             <button class="btn_blue" onclick = "location.href = '/Kmarket/admin/cs/faq/modify.do?no=${faq.no}' ">수정</button>
                             <button class="btn_gray">작성하기</button>
                         </div>

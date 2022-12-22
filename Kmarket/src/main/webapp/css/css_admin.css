@@ -204,6 +204,7 @@
 
     /* 어사이드 목록 */
     main > aside > ul > li > ol{
+    	display:none;
         width: 100%;
         height: auto;
     }
@@ -398,7 +399,7 @@
     #admin-product-list{
         float: right;
         width: 1130px;
-        min-height: 600px;
+        min-height: 800px;
         padding: 20px;
         box-sizing: border-box;
     }
@@ -676,8 +677,14 @@
         text-align: center;
         margin-top: 20px;
     }
-    #admin_cs_list > .admin_cs_list_div > .page > a:first-child {
-        margin-right: 10px;
+    #admin_cs_list > .admin_cs_list_div> .page > a.prev {
+    	width:50px;
+    	margin-right: 10px;
+        font-size: 16px;
+    }
+    
+    #admin_cs_list > .admin_cs_list_div> .page > a.next {
+    	width:50px;
         font-size: 16px;
     }
     #admin_cs_list > .admin_cs_list_div> .page > a {
@@ -692,10 +699,6 @@
         background: #006cff;
         border-radius: 17px;
         color: #fff;
-    }
-
-    #admin_cs_list > .admin_cs_list_div> .page > a:last-child {
-        font-size: 16px;
     }
 
     /* 공지사항 보기 */

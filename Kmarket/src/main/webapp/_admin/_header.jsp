@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -32,10 +33,10 @@
                     <img src="/Kmarket/img/img_admin/admin_logo.png" alt="로고">
                 </a>
                 <p>
-                    <span>관리자님 반갑습니다. &nbsp;&nbsp; </span>
-                    <a href="#">HOME |</a>
-                    <a href="#">로그아웃 |</a>
-                    <a href="#">고객센터</a>
+                    <span>${sessUser.company}님 반갑습니다. &nbsp;&nbsp; </span>
+                    <a href="/Kmarket/admin/index.do">HOME |</a>
+                    <a href="/Kmarket/logout.do">로그아웃 |</a>
+                    <a href="/Kmarket/cs/index.do">고객센터</a>
                 </p>
             </div>
         </header>
@@ -104,7 +105,7 @@
                         </a>
                         <ol>
                             <li><a href="/Kmarket/admin/cs/notice/list.do">공지사항</a></li>
-                            <li><a href="/Kmarket/admin/cs/faq/list.do">자주묻는 질문</a></li>
+                            <li><a href="/Kmarket/admin/cs/faq/list.do?group=전체보기">자주묻는 질문</a></li>
                             <li><a href="/Kmarket/admin/cs/qna/list.do">문의하기</a></li>
                         </ol>
                     </li>

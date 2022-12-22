@@ -80,7 +80,9 @@ public class AdminSql {
 	//상품 리스트
 	public static final String SELECT_PRODUCT = "select * from `km_product`";
 	public static final String SELECT_NOTICE = "select * from `km_cs_notice` WHERE `no`=?";
-	public static final String SELECT_FAQ = "select * from `km_cs_faq` WHERE `cate`=?";
+	public static final String SELECT_FAQ = "select * from `km_cs_faq` ORDER BY `no` DESC LIMIT ?,10";
+	public static final String SELECT_FAQ_GROUP = "select * from `km_cs_faq` WHERE `group`=? ORDER BY `no` DESC LIMIT ?,10";
+	public static final String SELECT_FAQ_CATE = "select * from `km_cs_faq` WHERE `group`=? AND `cate`=? ORDER BY `no` DESC LIMIT ?,10";
 	public static final String SELECT_FAQ_VIEW = "select * from `km_cs_faq` WHERE `no`=?";
 	
 
@@ -92,7 +94,9 @@ public class AdminSql {
 											+ "`content`=?, "
 											+ "`rdate`= NOW() "
 											+ "WHERE `no` = ?";
-
+	
+	//게시판관리 -> 자주묻는질문 삭제
+	public static final String DELETE_FAQ = "delete from `km_cs_faq` WHERE `no`=?";
 	
 	
 	//qna 리스트

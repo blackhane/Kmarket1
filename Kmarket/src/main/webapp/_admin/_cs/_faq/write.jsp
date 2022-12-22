@@ -28,6 +28,7 @@ $(function() {
 	    temp.append('<option value="결제">결제</option>');
 	    temp.append('<option value="구매내역">구매내역</option>');
 	    temp.append('<option value="영수증/증빙">영수증/증빙</option>');
+	    temp.append('<option value="입금확인">입금확인</option>');
 	   }
 	   
 	   if(a == '배송'){
