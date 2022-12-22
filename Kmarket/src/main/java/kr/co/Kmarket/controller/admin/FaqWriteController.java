@@ -1,6 +1,7 @@
 package kr.co.Kmarket.controller.admin;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -49,7 +50,9 @@ public class FaqWriteController extends HttpServlet {
 		dao.insertFaq(vo);
 		
 		// 리다이렉트
-		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do");
+		String groupEncode = URLEncoder.encode(group, "UTF-8");
+		String cateEncode = URLEncoder.encode(cate, "UTF-8");
+		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do?group="+groupEncode+"&cate="+cateEncode);
 		
 	}
 	
