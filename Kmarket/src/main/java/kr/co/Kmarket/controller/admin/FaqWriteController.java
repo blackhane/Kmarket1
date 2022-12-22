@@ -31,29 +31,30 @@ public class FaqWriteController extends HttpServlet {
 		String group = req.getParameter("group");
 		String cate = req.getParameter("cate");
 		String title = req.getParameter("title");
-		String ls = req.getParameter("ls");
 		String hit = req.getParameter("hit");
 		String content = req.getParameter("content");
 		String regip = req.getParameter("regip");
 		String rdate = req.getRemoteAddr();
 		
-		CsFaqVO vo = new CsFaqVO();
-		vo.setGroup(group);
-		vo.setCate(cate);
-		vo.setTitle(title);
-		vo.setHit(hit);
-		vo.setContent(content);
-		vo.setRegip(regip);
-		vo.setRdate(rdate);
-		
 		AdminDAO dao = AdminDAO.getInstance();
-		dao.insertFaq(vo);
 		
-		// 리다이렉트
-		String groupEncode = URLEncoder.encode(group, "UTF-8");
-		String cateEncode = URLEncoder.encode(cate, "UTF-8");
-		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do?group="+groupEncode+"&cate="+cateEncode);
+		int result = dao.selectCountFaq(group,cate);
+		System.out.println(result);
+		if(result < 10) {
+			CsFaqVO vo = new CsFaqVO();
+			vo.setGroup(group);
+			vo.setCate(cate);
+			vo.setTitle(title);
+			vo.setHit(hit);
+			vo.setContent(content);
+			vo.setRegip(regip);
+			vo.setRdate(rdate);
+			dao.insertFaq(vo);
+			resp.sendRedirect("/Kmarket/admin/cs/faq/list.do");
+			return;
+		}
 		
+		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do?code=100");
 	}
 	
 }

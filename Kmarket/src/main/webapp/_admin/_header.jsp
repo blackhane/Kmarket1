@@ -14,15 +14,11 @@
     <script src="/Kmarket/_admin/admin_js/validation.js"></script>
 </head>
 <script>
-    /* 제이쿼리 시작 */
     $(function(){
-
         $('#gnb > li > a').click(function(){
             $(this).siblings().slideToggle(300);
-        })
-
-    /* 제이쿼리 끝 */
-    })
+        });
+    });
 </script>
 
 <body>
@@ -105,7 +101,7 @@
                         </a>
                         <ol>
                             <li><a href="/Kmarket/admin/cs/notice/list.do">공지사항</a></li>
-                            <li><a href="/Kmarket/admin/cs/faq/list.do?group=전체보기">자주묻는 질문</a></li>
+                            <li><a href="/Kmarket/admin/cs/faq/list.do">자주묻는 질문</a></li>
                             <li><a href="/Kmarket/admin/cs/qna/list.do">문의하기</a></li>
                         </ol>
                     </li>

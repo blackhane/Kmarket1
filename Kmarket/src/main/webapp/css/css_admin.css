@@ -109,6 +109,7 @@
         display: flex;
 	    justify-content: flex-end;
 	    margin-top: 1%;
+	    margin-bottom: 20px;
     }
     
     
@@ -607,7 +608,7 @@
     /* 공지사항 목록 */
 
     #admin-index > div{
-        margin-top: 100px;
+        margin-top: 20px;
     }
     
 	#admin_cs_list{
@@ -627,6 +628,10 @@
     
     #admin_cs_list > form{
         margin: 0 0 20px 3%;
+    }
+    #admin_cs_list > div.group {
+    	margin-left : 35px;
+    	margin-bottom : 20px;
     }
     
     

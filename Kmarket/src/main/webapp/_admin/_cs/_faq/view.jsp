@@ -1,9 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_admin/_header.jsp"/>
-
-
-
+<script>
+	$(function(){
+		$('.goList').click(function(){
+			location.href="/Kmarket/admin/cs/faq/list.do";
+		});
+	});
+</script>
             <section id="admin-index">
                 <nav>
                     <h3>자주믇는질문 보기</h3>
@@ -32,7 +36,7 @@
                         <div class="btn_right">
                             <button class="btn_red" onclick = "location.href = '/Kmarket/admin/cs/faq/delete.do?no=${faq.no}' ">삭제</button>
                             <button class="btn_blue" onclick = "location.href = '/Kmarket/admin/cs/faq/modify.do?no=${faq.no}' ">수정</button>
-                            <button class="btn_gray">작성하기</button>
+                            <button class="btn_gray goList">목록</button>
                         </div>
                     </div>
                 </div>

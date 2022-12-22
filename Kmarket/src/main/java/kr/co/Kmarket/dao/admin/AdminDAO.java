@@ -13,6 +13,7 @@ import com.mysql.cj.protocol.a.DebugBufferingPacketReader;
 import kr.co.Kmarket.VO.CsFaqVO;
 import kr.co.Kmarket.VO.CsNoticeVO;
 import kr.co.Kmarket.VO.ProductVO;
+import kr.co.Kmarket.controller.admin.IndexControlller;
 import kr.co.Kmarket.utils.DBCP;
 import kr.co.Kmarket.utils.AdminSql;
 
@@ -115,27 +116,45 @@ public void insertNoctice(CsNoticeVO vo) {
 	}
 }
 
-//자주묻는질문
-public void insertFaq(CsFaqVO vo) {
-	try{
-		logger.info("faq 넣기 start...");
-		conn = getConnection();
-		psmt = conn.prepareStatement(AdminSql.INSERT_FAQ);
-		psmt.setString(1, vo.getGroup());
-		psmt.setString(2, vo.getCate());
-		psmt.setString(3, vo.getTitle());
-		psmt.setString(4, vo.getHit());
-		psmt.setString(5, vo.getContent());
-		psmt.setString(6, vo.getRegip());
-		
-		psmt.executeUpdate();
-		close();
-		
-	}catch(Exception e){
-		e.printStackTrace();
-		logger.error(e.getMessage());
+	//자주묻는질문
+	public int selectCountFaq(String group, String cate) {
+		int result = 0;
+		try{
+			logger.info("게시물 개수 조회");
+			conn = getConnection();
+			psmt = conn.prepareStatement(AdminSql.COUNT_FAQ);
+			psmt.setString(1, group);
+			psmt.setString(2, cate);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			close();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}
+		return result;
 	}
-}
+	
+	public void insertFaq(CsFaqVO vo) {
+		try{
+			logger.info("자주묻는질문 등록");
+			conn = getConnection();
+			psmt = conn.prepareStatement(AdminSql.INSERT_FAQ);
+			psmt.setString(1, vo.getGroup());
+			psmt.setString(2, vo.getCate());
+			psmt.setString(3, vo.getTitle());
+			psmt.setString(4, vo.getHit());
+			psmt.setString(5, vo.getContent());
+			psmt.setString(6, vo.getRegip());
+			
+			psmt.executeUpdate();
+			close();
+			
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}
+	}
 
 
 
@@ -272,65 +291,15 @@ public void insertFaq(CsFaqVO vo) {
 		return vo;
 	}
 
-	// 자주묻는질문 불러오기
-	public List<CsFaqVO> selectFaq(int start) {
+	//Admin 자주묻는질문
+	public List<CsFaqVO> selectFaq(String group, String cate) {
 		List<CsFaqVO> faq = new ArrayList<>();
 		try{			
 			logger.info("자주묻는질문 카테고리");
 			conn = getConnection();
 			psmt = conn.prepareStatement(AdminSql.SELECT_FAQ);
-			psmt.setInt(1, start);
-			rs = psmt.executeQuery();
-			while(rs.next()) {
-				CsFaqVO vo = new CsFaqVO();
-				vo.setNo(rs.getString(1));
-				vo.setGroup(rs.getString(2));
-				vo.setCate(rs.getString(5));
-				vo.setTitle(rs.getString(6));
-				vo.setHit(rs.getString(7));
-				vo.setRdate(rs.getString(11).substring(0,10));
-				faq.add(vo);
-			}
-			close();
-		}catch(Exception e){
-			logger.error(e.getMessage());
-		}
-		return faq;
-	}
-	public List<CsFaqVO> selectFaq(String group, int start) {
-		List<CsFaqVO> faq = new ArrayList<>();
-		try{			
-			logger.info("자주묻는질문 카테고리");
-			conn = getConnection();
-			psmt = conn.prepareStatement(AdminSql.SELECT_FAQ_GROUP);
-			psmt.setString(1, group);
-			psmt.setInt(2, start);
-			rs = psmt.executeQuery();
-			while(rs.next()) {
-				CsFaqVO vo = new CsFaqVO();
-				vo.setNo(rs.getString(1));
-				vo.setGroup(rs.getString(2));
-				vo.setCate(rs.getString(5));
-				vo.setTitle(rs.getString(6));
-				vo.setHit(rs.getString(7));
-				vo.setRdate(rs.getString(11).substring(0,10));
-				faq.add(vo);
-			}
-			close();
-		}catch(Exception e){
-			logger.error(e.getMessage());
-		}
-		return faq;
-	}
-	public List<CsFaqVO> selectFaq(String group, String cate, int start) {
-		List<CsFaqVO> faq = new ArrayList<>();
-		try{			
-			logger.info("자주묻는질문 카테고리");
-			conn = getConnection();
-			psmt = conn.prepareStatement(AdminSql.SELECT_FAQ_CATE);
 			psmt.setString(1, group);
 			psmt.setString(2, cate);
-			psmt.setInt(3, start);
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				CsFaqVO vo = new CsFaqVO();
@@ -346,6 +315,7 @@ public void insertFaq(CsFaqVO vo) {
 		}catch(Exception e){
 			logger.error(e.getMessage());
 		}
+		logger.debug("리스트출력 : " + faq.size());
 		return faq;
 	}
 	
@@ -418,6 +388,7 @@ public void insertFaq(CsFaqVO vo) {
 				vo.setContent(rs.getString(8));
 				vo.setRdate(rs.getString(11));
 			}
+			close();
 		}catch(Exception e){
 			logger.error(e.getMessage());
 		}
@@ -508,18 +479,19 @@ public void insertFaq(CsFaqVO vo) {
 	}
 	
 	// 자주묻는질문 글 삭제
-		public void deleteFaq(String no) {
+		public int deleteFaq(String no) {
+			int result = 0;
 			try {
-				logger.info("자주묻는질문 글 삭제 start...");
+				logger.info("자주묻는질문 삭제");
 				conn = getConnection();
 				psmt = conn.prepareStatement(AdminSql.DELETE_FAQ);	
 				psmt.setString(1, no);		
-				psmt.executeUpdate();
+				result = psmt.executeUpdate();
 				close();
-				logger.debug("FAQ삭제" + no);
 			}catch(Exception e){	
 				logger.error(e.getMessage());
 			}
+			return result;
 		}
 	
 //	vo.setProdNo(rs.getString(1));
