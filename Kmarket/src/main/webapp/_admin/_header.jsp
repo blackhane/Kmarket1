@@ -94,16 +94,18 @@
                             <li><a href="#">배송관리</a></li>
                         </ol>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            게시판관리
-                        </a>
-                        <ol>
-                            <li><a href="/Kmarket/admin/cs/notice/list.do">공지사항</a></li>
-                            <li><a href="/Kmarket/admin/cs/faq/list.do">자주묻는 질문</a></li>
-                            <li><a href="/Kmarket/admin/cs/qna/list.do">문의하기</a></li>
-                        </ol>
-                    </li>
+                    <c:if test="${sessUser.level eq 7}">
+	                    <li>
+	                        <a href="#">
+	                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+	                            게시판관리
+	                        </a>
+	                        <ol>
+	                            <li><a href="/Kmarket/admin/cs/notice/list.do">공지사항</a></li>
+	                            <li><a href="/Kmarket/admin/cs/faq/list.do">자주묻는 질문</a></li>
+	                            <li><a href="/Kmarket/admin/cs/qna/list.do">문의하기</a></li>
+	                        </ol>
+	                    </li>
+                    </c:if>
                 </ul>
             </aside>

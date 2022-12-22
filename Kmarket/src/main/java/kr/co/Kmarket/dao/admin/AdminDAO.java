@@ -251,7 +251,7 @@ public void insertNoctice(CsNoticeVO vo) {
 		List<CsNoticeVO> notice = new ArrayList<>();
 		try{			
 			conn = getConnection();
-			psmt = conn.prepareStatement("SELECT * FROM `km_cs_notice` LIMIT 5");
+			psmt = conn.prepareStatement("SELECT * FROM `km_cs_notice` ORDER BY `no` DESC LIMIT 5");
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				CsNoticeVO vo = new CsNoticeVO();

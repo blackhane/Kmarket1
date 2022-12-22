@@ -196,13 +196,12 @@
                         <h4>공지사항</h4>
                          <article>
                             <table>
-                                <tbody>
-                                    <tr>
-                                        <td>[공지]</td>
-                                        <td><a href="#">${notice.title}</a></td>
-                                        <td>${notice.rdate}</td>
-                                    </tr>
-                                </tbody>
+                            <c:forEach items="${notice}" var="article">
+                            	<tr class="index_notice">
+	                                <td><a href="/Kmarket/admin/cs/notice/view.do?no=${article.no}">${article.title}</a></td>
+	                                <td align="right">${article.rdate}</td>
+	                            </tr>
+                            </c:forEach>
                             </table>
                         </article>
                     </div>
