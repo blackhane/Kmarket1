@@ -20,13 +20,14 @@ public class QnaViewController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		
 		String no = req.getParameter("no");
 		
 		AdminQnaDAO dao = AdminQnaDAO.getInstance();
 		CsQnaVO qna = dao.QnaView(no);
+		CsQnaVO comment = dao.selectComment(no);
 		
 		req.setAttribute("qna", qna);
+		req.setAttribute("comment", comment);
 
 		
 		RequestDispatcher dispathcer = req.getRequestDispatcher("/_admin/_cs/_qna/QnaView.jsp");

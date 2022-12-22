@@ -228,6 +228,27 @@ public void insertFaq(CsFaqVO vo) {
 		logger.debug("공지불러오기 입력" + notice.size());
 		return notice;
 	}
+	public List<CsNoticeVO> selectNotice() {
+		List<CsNoticeVO> notice = new ArrayList<>();
+		try{			
+			conn = getConnection();
+			psmt = conn.prepareStatement("SELECT * FROM `km_cs_notice` LIMIT 5");
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				CsNoticeVO vo = new CsNoticeVO();
+				vo.setNo(rs.getString(1));
+				vo.setCate(rs.getString(5));
+				vo.setTitle(rs.getString(6));
+				vo.setHit(rs.getString(7));
+				vo.setRdate(rs.getString(11).substring(0,10));
+				notice.add(vo);
+			}
+			close();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}
+		return notice;
+	}
 	
 	public CsNoticeVO NoticeView(String no) {
 		CsNoticeVO vo = null;
