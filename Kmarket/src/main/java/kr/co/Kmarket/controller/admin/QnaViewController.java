@@ -28,15 +28,9 @@ public class QnaViewController extends HttpServlet {
 		
 		req.setAttribute("qna", qna);
 		req.setAttribute("comment", comment);
-
 		
 		RequestDispatcher dispathcer = req.getRequestDispatcher("/_admin/_cs/_qna/QnaView.jsp");
 		dispathcer.forward(req, resp);
 		
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
 	}
 }

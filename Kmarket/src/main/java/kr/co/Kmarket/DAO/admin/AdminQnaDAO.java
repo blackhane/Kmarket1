@@ -1,5 +1,6 @@
 package kr.co.Kmarket.DAO.admin;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.Kmarket.VO.CsNoticeVO;
 import kr.co.Kmarket.VO.CsQnaVO;
 import kr.co.Kmarket.VO.CsVO;
+import kr.co.Kmarket.controller.admin.IndexControlller;
 import kr.co.Kmarket.utils.AdminSql;
 import kr.co.Kmarket.utils.CsSQL;
 import kr.co.Kmarket.utils.DBCP;
@@ -80,7 +82,7 @@ public class AdminQnaDAO extends DBCP {
 		public CsQnaVO selectComment(String no) {
 			CsQnaVO vo = new CsQnaVO();
 			try {
-				logger.info("문의하기 댓글 start");
+				logger.info("문의하기 댓글");
 				conn = getConnection();
 				psmt = conn.prepareStatement(AdminSql.SELECT_COMMENT);
 				psmt.setString(1, no);
@@ -99,17 +101,41 @@ public class AdminQnaDAO extends DBCP {
 			return vo;
 		}
 		
+		//댓글 유무확인
+		public String findComment(String no) {
+			String res = "";
+			try {
+				conn = getConnection();
+				psmt = conn.prepareStatement("SELECT `comment` FROM `km_cs_qna` WHERE `no`=?");
+				psmt.setString(1, no);
+				rs = psmt.executeQuery();
+				if(rs.next()) {
+					res = rs.getString(1);
+				}
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			return res;
+		}
+		
 		//문의쓰기
 		public int insertComment(CsQnaVO vo) {
 			int result = 0;
 			try {
 				logger.info("문의하기 댓글작성");
 				conn = getConnection();
+				conn.setAutoCommit(false);
 				psmt = conn.prepareStatement(AdminSql.INSERT_COMMENT);
+				PreparedStatement psmt2 = conn.prepareStatement("UPDATE `km_cs_qna` set `comment`=1 WHERE `no`=?");
 				psmt.setString(1, vo.getParent());
 				psmt.setString(2, vo.getContent());
 				psmt.setString(3, vo.getUid());
+				psmt2.setString(1, vo.getParent());
+				psmt2.executeUpdate();
 				result = psmt.executeUpdate();
+				conn.commit();
+				psmt2.close();
 				close();
 			}catch(Exception e) {
 				logger.error(e.getMessage());
@@ -118,17 +144,20 @@ public class AdminQnaDAO extends DBCP {
 		}
 	
 		//댓글수
-		public void updateCommentHit(String no) {
+		public int updateComment(CsQnaVO vo) {
+			int result = 0;
 			try {
-				logger.info("updateCommentHit start");
+				logger.info("문의하기 댓글수정");
 				conn = getConnection();
-				psmt = conn.prepareStatement(AdminSql.UPDATE_COMMENT_HIT_UP);
-				psmt.setString(1, no);
-				psmt.executeUpdate();
+				psmt = conn.prepareStatement("UPDATE `km_cs_qna` set `content`=? WHERE `parent`=?");
+				psmt.setString(1, vo.getContent());
+				psmt.setString(2, vo.getParent());
+				result = psmt.executeUpdate();
 				close();
 			}catch(Exception e) {
 				logger.error(e.getMessage());
 			}
+			return result;
 		}
 		
 	
