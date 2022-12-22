@@ -76,24 +76,44 @@ public class AdminQnaDAO extends DBCP {
 			return vo;
 		}
 	
+		//문의하기 댓글목록
+		public CsQnaVO selectComment(String no) {
+			CsQnaVO vo = new CsQnaVO();
+			try {
+				logger.info("문의하기 댓글 start");
+				conn = getConnection();
+				psmt = conn.prepareStatement(AdminSql.SELECT_COMMENT);
+				psmt.setString(1, no);
+				rs = psmt.executeQuery();
+				while(rs.next()) {
+					vo.setParent(rs.getString(3));
+					vo.setContent(rs.getString(8));
+					vo.setUid(rs.getString(9));
+					vo.setRegip(rs.getString(10));
+					vo.setRdate(rs.getString(11).substring(2,10));
+				}
+				close();
+			}catch(Exception e) {
+				logger.error(e.getMessage());
+			}
+			return vo;
+		}
 		
-		//댓글쓰기
-		public int insertComment(String parent, String content, String uid, String regip) {
+		//문의쓰기
+		public int insertComment(CsQnaVO vo) {
 			int result = 0;
 			try {
-				logger.info("insertComment start");
+				logger.info("문의하기 댓글작성");
 				conn = getConnection();
 				psmt = conn.prepareStatement(AdminSql.INSERT_COMMENT);
-				psmt.setString(1, parent);
-				psmt.setString(2, content);
-				psmt.setString(3, uid);
-				psmt.setString(4, regip);
+				psmt.setString(1, vo.getParent());
+				psmt.setString(2, vo.getContent());
+				psmt.setString(3, vo.getUid());
 				result = psmt.executeUpdate();
 				close();
 			}catch(Exception e) {
 				logger.error(e.getMessage());
 			}
-			logger.debug("result : " + result);
 			return result;
 		}
 	
@@ -111,37 +131,7 @@ public class AdminQnaDAO extends DBCP {
 			}
 		}
 		
-		//문의하기 댓글목록
-		public List<ArticleVO> selectComment(String no) {
-			List<ArticleVO> articles = new ArrayList<>();
-			try {
-				logger.info("selectComment start");
-				conn = getConnection();
-				psmt = conn.prepareStatement(Sql.SELECT_COMMENTS);
-				psmt.setString(1, no);
-				rs = psmt.executeQuery();
-				while(rs.next()) {
-					ArticleVO vo = new ArticleVO();
-					vo.setNo(rs.getInt(1));
-					vo.setParent(rs.getInt(2));
-					vo.setComment(rs.getInt(3));
-					vo.setCate(rs.getString(4));
-					vo.setTitle(rs.getString(5));
-					vo.setContent(rs.getString(6));
-					vo.setFile(rs.getInt(7));
-					vo.setHit(rs.getInt(8));
-					vo.setUid(rs.getString(9));
-					vo.setRegip(rs.getString(10));
-					vo.setRdate(rs.getString(11).substring(2,10));
-					vo.setNick(rs.getString(12));
-					articles.add(vo);
-				}
-				close();
-			}catch(Exception e) {
-				logger.error(e.getMessage());
-			}
-			return articles;
-		}
+	
 	
 }
 

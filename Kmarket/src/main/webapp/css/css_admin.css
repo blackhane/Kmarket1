@@ -69,6 +69,39 @@
     color: #fff;
     cursor: pointer;
     }
+    
+    .btn_qna_red {
+    width: 20%;
+    height: 40px;
+    border: 0;
+    margin: 10px;
+    margin-right: 3%;
+    background-color: #FF2D32;
+    color: #fff;
+    cursor: pointer;
+	}
+	
+	.btn_qna_blue {
+    width: 20%;
+    height: 40px;
+    border: 0;
+    margin: 10px;
+    margin-right: 3%;
+    background-color: #006cff;
+    color: #fff;
+    cursor: pointer;
+	}
+	
+	.btn_qna_gray {
+    width: 20%;
+    height: 40px;
+    border: 0;
+    margin: 10px;
+    margin-right: 3%;
+    background-color: #959595;
+    color: #fff;
+    cursor: pointer;
+	}
 
 	/* 버튼위치 */
 	
@@ -365,7 +398,7 @@
     #admin-index > div >div:nth-child(2){
         float: right;
     }
-    #admin-index > div > div >article{
+    #admin-index > div > div > article{
         width: 100%;
         margin-top: 6px;
         margin-bottom: 16px;
@@ -374,25 +407,18 @@
         padding: 16px;
         box-sizing: border-box;
     }
-    #admin-index > div > div > article > p{
-        overflow: hidden;
+    
+    #admin-index > div > div > article > table{}
+    #admin-index > div > div > article > table >  tbody{}
+    #admin-index > div > div > article > table >  tbody tr{}
+    #admin-index > div > div > article > table >  tbody tr td:nth-child(1){
+        width: 50px;
     }
-    #admin-index > div > div > article > p >span{
-        line-height: 26px;
+    #admin-index > div > div > article > table >  tbody tr td:nth-child(2){
+        
     }
-
-    #admin-index > div > div > article > p > span:nth-child(1) {
-    float: left;
-    display: block;
-    width: 300px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-align: left;
-    overflow: hidden;
-    }
-
-    #admin-index > div > div > article > p > span:nth-child(2) {
-    float: right;
+    #admin-index > div > div > article > table >  tbody tr td:nth-child(3){
+        width: 111px;
     }
 
     /* produnt list */
@@ -753,6 +779,20 @@
     	height : 400px;
     	font-size: 16px;
     	padding : 1%
+    }
+    
+    .td1{
+    	width:15%;
+    }
+    
+    
+    .td2{
+    	width:50%;
+    }
+    
+    .text_width{
+        width: 90%;
+   		height: 100px;
     }
     
     /* 공지사항 쓰기 */

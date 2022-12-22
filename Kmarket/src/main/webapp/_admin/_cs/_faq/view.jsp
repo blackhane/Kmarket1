@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_admin/_header.jsp"/>
 
+
+
             <section id="admin-index">
                 <nav>
                     <h3>자주믇는질문 보기</h3>

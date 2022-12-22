@@ -105,8 +105,14 @@ public class AdminSql {
 	//qna 글보기
 	public static final String SELECT_QNA_VIEW = "select * from `km_cs_qna` WHERE `no`=?";
 
+	//답변 보기
+	public static final String SELECT_COMMENT = "SELECT * from `km_cs_qna` WHERE `parent` = ?" ;
 	//문의 답변하기
-	public static final String INSERT_COMMENT = "INSERT INTO `km_cs_qna`(`parent`, `content`, `uid`, `regip`, `rdate`) VALUES (?,?,?,?,NOW())";
+	public static final String INSERT_COMMENT = "insert into `km_cs_qna` set "
+												+ "`parent`=?, "
+												+ "`content`=?, "
+												+ "`uid`=?, "
+												+ "`rdate`= NOW()";
 	
 	//댓글+1
 	public static final String UPDATE_COMMENT_HIT_UP = "UPDATE `board_article` SET  `comment` = `comment`+1 WHERE `no`= ?";

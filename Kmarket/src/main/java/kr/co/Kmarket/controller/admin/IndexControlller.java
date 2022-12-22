@@ -25,11 +25,7 @@ public class IndexControlller extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		String cate = req.getParameter("cate");
-		String ls = req.getParameter("ls");
-		
-		List<CsNoticeVO> notice = AdminDAO.getInstance().selectNotice(cate, ls);
+		List<CsNoticeVO> notice = AdminDAO.getInstance().selectNotice();
 		req.setAttribute("notice", notice);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/_admin/index.jsp");
