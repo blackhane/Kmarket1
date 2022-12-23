@@ -95,7 +95,7 @@ public class CsFaqDAO extends DBCP{
 	public void updateArticleHit(String no) {
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(CsSQL.UPDATE_HIT_UP);
+			psmt = conn.prepareStatement(CsSQL.UPDATE_HIT_UP_FAQ);
 			psmt.setString(1, no);
 			psmt.executeUpdate();
 			close();

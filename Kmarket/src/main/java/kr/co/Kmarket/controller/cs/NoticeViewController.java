@@ -23,7 +23,9 @@ public class NoticeViewController extends HttpServlet{
 		String kind = req.getParameter("kind");
 		String pg = req.getParameter("pg");
 		
-		CsVO vo = CsNoticeDAO.getInstance().selectArticle(no);
+		CsNoticeDAO dao = CsNoticeDAO.getInstance();
+		CsVO vo = dao.selectArticle(no);
+		dao.updateArticleHit(no);
 		
 		req.setAttribute("vo", vo);
 		req.setAttribute("kind", kind);

@@ -4,7 +4,7 @@
 <jsp:include page="./nav.jsp"/>
         <article class="cs_information">
             <div class="title">
-                <h2>[${vo.group}] ${vo.title}</h2>
+                <h2>${vo.title}</h2>
                 <span>${vo.rdate}</span>
             </div>
             <div class="content">
