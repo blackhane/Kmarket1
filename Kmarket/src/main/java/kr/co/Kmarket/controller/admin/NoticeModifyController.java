@@ -38,6 +38,16 @@ public class NoticeModifyController extends HttpServlet {
 		String content = req.getParameter("content");
 		String no = req.getParameter("no");
 		
+		if(cate.equals("고객 서비스")) {
+			group = "service";
+		}else if(cate.equals("안전거래")){
+			group = "safe";
+		}else if(cate.equals("위해상품")){
+			group = "danger";
+		}else if(cate.equals("이벤트 당첨")){
+			group = "event";
+		}
+		
 		AdminDAO.getInstance().updateNotice(no, group, cate, title, content);
 		
 		resp.sendRedirect("/Kmarket/admin/cs/notice/view.do?no=" + no);

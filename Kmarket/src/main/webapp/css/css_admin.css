@@ -258,6 +258,7 @@
         width: 1126px;
         min-height: 600px;
         box-sizing: border-box;
+        padding: 20px;
     }
     main > section > nav{
         position: relative;
@@ -622,8 +623,8 @@
     }
     #admin_cs_list > .admin_cs_list_div {
         display: block;
-        margin: 0 20px;
-        width: 95% !important;
+        margin: 0 auto;
+        width: 100% !important;
         height: auto;
         border-top: 2px solid black;
     }
@@ -632,7 +633,6 @@
         margin: 0 0 20px 3%;
     }
     #admin_cs_list > div.group {
-    	margin-left : 35px;
     	margin-bottom : 20px;
     }
     

@@ -204,31 +204,31 @@ public void insertNoctice(CsNoticeVO vo) {
 	
 	// 공지사항 불러오기
 	
-	public List<CsNoticeVO> selectNotice(String cate, String ls) {
+	public List<CsNoticeVO> selectNotice(String cate) {
 		List<CsNoticeVO> notice = new ArrayList<>();
 		try{			
-			logger.info("공지불러오기 start..." + ls);
+			logger.info("공지사항 : "+cate);
 			conn = getConnection();
 			String sql = "";
 			
-			switch(ls) {
+			switch(cate) {
 			case "전체보기":
-				sql = "SELECT * FROM `km_cs_notice` ORDER BY `no` DESC LIMIT 10";
+				sql = "SELECT * FROM `km_cs_notice` ORDER BY `no` DESC";
 				break;
 			case "고객 서비스":
-				sql = "SELECT * FROM `km_cs_notice` where `cate`='고객 서비스'  ORDER BY `no` DESC LIMIT 10";
+				sql = "SELECT * FROM `km_cs_notice` where `cate`='고객 서비스'  ORDER BY `no` DESC";
 				break;
 			case "안전거래":
-				sql = "SELECT * FROM `km_cs_notice` where `cate`='안전거래'  ORDER BY `no` DESC LIMIT 10";
+				sql = "SELECT * FROM `km_cs_notice` where `cate`='안전거래'  ORDER BY `no` DESC";
 				break;
 			case "위해상품":
-				sql = "SELECT * FROM `km_cs_notice` where `cate`='위해상품'  ORDER BY `no` DESC LIMIT 10";
+				sql = "SELECT * FROM `km_cs_notice` where `cate`='위해상품'  ORDER BY `no` DESC";
 				break;
 			case "이벤트 당첨":
-				sql = "SELECT * FROM `km_cs_notice` where `cate`='이벤트 당첨'  ORDER BY `no` DESC LIMIT 10";
+				sql = "SELECT * FROM `km_cs_notice` where `cate`='이벤트 당첨'  ORDER BY `no` DESC";
 				break;
 			}
-			
+			logger.debug(sql);
 			psmt = conn.prepareStatement(sql);
 			rs = psmt.executeQuery();
 			while(rs.next()) {
@@ -244,7 +244,6 @@ public void insertNoctice(CsNoticeVO vo) {
 		}catch(Exception e){
 			logger.error(e.getMessage());
 		}
-		logger.debug("공지불러오기 입력" + notice.size());
 		return notice;
 	}
 	public List<CsNoticeVO> selectNotice() {
@@ -274,7 +273,7 @@ public void insertNoctice(CsNoticeVO vo) {
 		try{			
 			logger.info("공지보기 start...");
 			conn = getConnection();
-			psmt = conn.prepareStatement(AdminSql.SELECT_NOTICE);
+			psmt = conn.prepareStatement(AdminSql.SELECT_NOTICE_VIEW);
 			psmt.setString(1, no);
 			rs = psmt.executeQuery();
 			if(rs.next()) {
@@ -291,6 +290,34 @@ public void insertNoctice(CsNoticeVO vo) {
 		return vo;
 	}
 
+	// 공지사항 카테고리
+	public List<CsNoticeVO> NoticeView(String group, String cate) {
+		List<CsNoticeVO> notice = new ArrayList<>();
+		try{			
+			logger.info("공지사항 카테고리");
+			conn = getConnection();
+			psmt = conn.prepareStatement(AdminSql.SELECT_NOTICE);
+			psmt.setString(1, group);
+			psmt.setString(2, cate);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				CsNoticeVO vo = new CsNoticeVO();
+				vo.setNo(rs.getString(1));
+				vo.setGroup(rs.getString(2));
+				vo.setCate(rs.getString(5));
+				vo.setTitle(rs.getString(6));
+				vo.setHit(rs.getString(7));
+				vo.setRdate(rs.getString(11).substring(0,10));
+				notice.add(vo);
+			}
+			close();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}
+		logger.debug("리스트출력 : " + notice.size());
+		return notice;
+	}
+	
 	//Admin 자주묻는질문
 	public List<CsFaqVO> selectFaq(String group, String cate) {
 		List<CsFaqVO> faq = new ArrayList<>();
@@ -426,7 +453,7 @@ public void insertNoctice(CsNoticeVO vo) {
 	//글수정 업데이트
 	public void updateNotice(String no, String group, String cate, String title, String content) {
 		try {
-			logger.info("공지수정 start...");
+			logger.info("공지수정 : " + group);
 			conn = getConnection();
 			psmt = conn.prepareStatement(AdminSql.UPDATE_NOTICE);
 			psmt.setString(1, group);
@@ -445,18 +472,19 @@ public void insertNoctice(CsNoticeVO vo) {
 	
 	
 	//글삭제
-	public void deleteNotice(String no) {
+	public int deleteNotice(String no) {
+		int result = 0;
 		try {
 			logger.info("공지삭제 start...");
 			conn = getConnection();
 			psmt = conn.prepareStatement(AdminSql.DELETE_NOTICE);	
 			psmt.setString(1, no);		
-			psmt.executeUpdate();
+			result = psmt.executeUpdate();
 			close();
-			logger.debug("공지삭제" + no);
 		}catch(Exception e){	
 			logger.error(e.getMessage());
 		}
+		return result;
 	}
 
 	//자주묻는질문 수정

@@ -10,7 +10,7 @@
 </script>
             <section id="admin-index">
                 <nav>
-                    <h3>자주믇는질문 보기</h3>
+                    <h3>자주묻는질문 보기</h3>
                     <p>
                         HOME > 고객센터 > <strong>자주묻는질문</strong>
                     </p>
