@@ -5,11 +5,6 @@
 <script>
 
 	$(function() {
-		
-        if('${param.code}' == 100){
-        	alert('유형당 등록할 수 있는 게시물을 10건입니다.');
-        }
-        
 		//그룹 선택
 		$("select[name=group]").change(function() {
 			let group = $(this).val();

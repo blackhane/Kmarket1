@@ -12,6 +12,7 @@ import com.mysql.cj.protocol.a.DebugBufferingPacketReader;
 
 import kr.co.Kmarket.VO.CsFaqVO;
 import kr.co.Kmarket.VO.CsNoticeVO;
+import kr.co.Kmarket.VO.CsVO;
 import kr.co.Kmarket.VO.ProductVO;
 import kr.co.Kmarket.controller.admin.IndexControlller;
 import kr.co.Kmarket.utils.DBCP;
@@ -95,27 +96,24 @@ public void insertFile(String prodNo, String newName, String fname) {
 	}
 }
 
-//공지사항
-public void insertNoctice(CsNoticeVO vo) {
-	try{
-		logger.info("공지사항 넣기 start...");
-		conn = getConnection();
-		psmt = conn.prepareStatement(AdminSql.INSERT_NOTICE);
-		psmt.setString(1, vo.getGroup());
-		psmt.setString(2, vo.getCate());
-		psmt.setString(3, vo.getTitle());
-		psmt.setString(4, vo.getHit());
-		psmt.setString(5, vo.getContent());
-		psmt.setString(6, vo.getRegip());
-		
-		psmt.executeUpdate();
-		close();
-		
-	}catch(Exception e){
-		e.printStackTrace();
-		logger.error(e.getMessage());
+	//공지사항
+	public void insertNoctice(CsNoticeVO vo) {
+		try{
+			logger.info("공지사항 등록.");
+			conn = getConnection();
+			psmt = conn.prepareStatement(AdminSql.INSERT_NOTICE);
+			psmt.setString(1, vo.getGroup());
+			psmt.setString(2, vo.getCate());
+			psmt.setString(3, vo.getTitle());
+			psmt.setString(4, vo.getContent());
+			psmt.setString(5, vo.getRegip());
+			psmt.executeUpdate();
+			close();
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e.getMessage());
+		}
 	}
-}
 
 	
 	public void insertFaq(CsFaqVO vo) {
@@ -320,7 +318,7 @@ public void insertNoctice(CsNoticeVO vo) {
 				vo.setCate(rs.getString(5));
 				vo.setTitle(rs.getString(6));
 				vo.setHit(rs.getString(7));
-				vo.setRdate(rs.getString(11).substring(0,10));
+				vo.setRdate(rs.getString(11).substring(2,10));
 				notice.add(vo);
 			}
 			close();

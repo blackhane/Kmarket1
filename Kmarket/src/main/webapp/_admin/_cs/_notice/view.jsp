@@ -27,7 +27,7 @@
 					            </tr>               
 				        </table>
                         <div class="btn_right">
-                            <button class="btn_red" onclick = "location.href = '/Kmarket/admin/cs/notice/delete.do?no=${notice.no}' ">삭제</button>
+                            <button class="btn_red" onclick = "location.href = '/Kmarket/admin/cs/notice/delete2.do?no=${notice.no}' ">삭제</button>
                             <button class="btn_blue" onclick = "location.href = '/Kmarket/admin/cs/notice/modify.do?no=${notice.no}' ">수정</button>
                             <button class="btn_gray" onclick = "location.href = '/Kmarket/admin/cs/notice/list.do' ">목록</button>
                         </div>

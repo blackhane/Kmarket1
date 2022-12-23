@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.Kmarket.DAO.admin.AdminDAO;
 import kr.co.Kmarket.VO.CsFaqVO;
+import kr.co.Kmarket.VO.CsVO;
 
 @WebServlet("/admin/cs/faq/write.do")
 public class FaqWriteController extends HttpServlet {
@@ -19,8 +20,6 @@ public class FaqWriteController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
 		RequestDispatcher dispathcer = req.getRequestDispatcher("/_admin/_cs/_faq/write.jsp");
 		dispathcer.forward(req, resp);
 	}
@@ -31,15 +30,20 @@ public class FaqWriteController extends HttpServlet {
 		String group = req.getParameter("group");
 		String cate = req.getParameter("cate");
 		String title = req.getParameter("title");
-		String hit = req.getParameter("hit");
 		String content = req.getParameter("content");
-		String regip = req.getParameter("regip");
-		String rdate = req.getRemoteAddr();
+		String regip = req.getRemoteAddr();
+		
+		CsVO vo = new CsVO();
+		vo.setGroup(group);
+		vo.setCate(cate);
+		vo.setTitle(title);
+		vo.setContent(content);
+		vo.setRegip(regip);
 		
 		AdminDAO dao = AdminDAO.getInstance();
+		dao.insertNoctice(vo);
 		
-		
-		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do?code=100");
+		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do");
 	}
 	
 }
