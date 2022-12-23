@@ -39,7 +39,7 @@ $(function(){
                 <div id="admin_cs_write">
                     <div class="admin_cs_write_div">
                          <form action="/Kmarket/admin/cs/notice/modify.do" method="post">   
-	                       <input type="hidden" name="no" value="${vo.no }"/>
+	                       <input type="hidden" name="no" value="${vo.no}"/>
 	                        <table>
 	                            <tbody>
 	                                <tr>
@@ -59,7 +59,7 @@ $(function(){
 	                                </tr>
 	                                <tr>
 	                                    <td>내용</td>
-	                                    <td><input type="textarea" name="content" id="content" cols="1000" rows="100" value="${vo.content}"></td>
+	                                    <td><textarea name="content" id="content">${vo.content}</textarea></td>
 	                                </tr>
 	                            </tbody>
 	                        </table>

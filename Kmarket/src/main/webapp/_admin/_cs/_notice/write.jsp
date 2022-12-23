@@ -24,12 +24,15 @@ $(function(){
       
       //저장버튼 클릭시 form 전송
       $("input[name=submit_board]").click(function(){
+    	  if($('select[name=cate]').val() == ''){
+    		  alert('카테고리를 선택해주세요.');
+    		  return false;
+    	  }
+    	  
           oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
           $("input[name=submit_board]").submit();
       }); 
 });
- 
- 
 </script>
 
             <section id="admin-index">
@@ -62,12 +65,12 @@ $(function(){
 	                                </tr>
 	                                <tr>
 	                                    <td>내용</td>
-	                                    <td><input type="textarea" name="content" id="content" rows="22"></td>
+	                                    <td><textarea name="content" id="content" rows="22"></textarea></td>
 	                                </tr>
 	                            </tbody>
 	                        </table>
 	                        <div class="btn_right">
-	                            <button  class="btn_gray" onclick = "location.href = '/Kmarket/admin/cs/notice/list.do' ">목록</button>
+	                            <button  class="btn_gray" onclick = "location.href = '/Kmarket/admin/cs/notice/list.do'">목록</button>
 	                            <input name="submit_board"  class="btn_blue" type="submit" value="작성하기">                  
                         	</div>
                         </form> 
