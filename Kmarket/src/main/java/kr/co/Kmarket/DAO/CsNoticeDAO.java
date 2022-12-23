@@ -122,7 +122,7 @@ public class CsNoticeDAO extends DBCP{
 			rs = psmt.executeQuery();
 			if(rs.next()) {
 				vo.setNo(rs.getString(1));
-				vo.setGroup(rs.getString(2));
+				vo.setCate(rs.getString(5));
 				vo.setTitle(rs.getString(6));
 				vo.setContent(rs.getString(8));
 				vo.setRdate(rs.getString(11).substring(0,10));
@@ -132,5 +132,18 @@ public class CsNoticeDAO extends DBCP{
 			logger.error(e.getMessage());
 		}
 		return vo;
+	}
+	
+	//조회수
+	public void updateArticleHit(String no) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.UPDATE_HIT_UP_NOTICE);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
 	}
 }

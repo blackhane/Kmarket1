@@ -31,7 +31,7 @@
                     </c:if>
                     <c:forEach items="${articles}" var="article">
                         <tr>
-                            <td colspan="2"><a href="/Kmarket/cs/notice/view.do?kind=${kind}&no=${article.no}&pg=${currentPage}">[${article.cate}] ${article.title}</a></td>
+                            <td colspan="2"><a href="/Kmarket/cs/notice/view.do?kind=${kind}&no=${article.no}&pg=${currentPage}">${article.title}</a></td>
                             <td>${article.rdate}</td>
                         </tr>
                     </c:forEach>

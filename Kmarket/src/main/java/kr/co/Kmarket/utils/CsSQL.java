@@ -31,7 +31,9 @@ public class CsSQL {
 	//글쓰기
 	public static final String INSERT_ARITLCE_QNA = "INSERT INTO `km_cs_qna` SET `cate`=?, `title`=?, `content`=?, `uid`=?, `regip`=?, `group`=?, `rdate`=NOW()";
 	
-	//자주묻는질문 조회수
-	public static final String UPDATE_HIT_UP = "UPDATE `km_cs_faq` SET `hit`=`hit`+1 WHERE `no`=?";
+	//조회수
+	public static final String UPDATE_HIT_UP_NOTICE = "UPDATE `km_cs_notice` SET `hit`=`hit`+1 WHERE `no`=?";
+	
+	public static final String UPDATE_HIT_UP_FAQ = "UPDATE `km_cs_faq` SET `hit`=`hit`+1 WHERE `no`=?";
 
 }

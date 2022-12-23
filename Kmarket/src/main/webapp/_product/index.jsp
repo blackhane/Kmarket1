@@ -217,7 +217,7 @@
                     </ol>
                 </article>
             </aside>
-            <section class="content">
+            <section class="content index_content">
             <!-- 슬라이더 영역 -->
             <section class="slider">
                     <ul>

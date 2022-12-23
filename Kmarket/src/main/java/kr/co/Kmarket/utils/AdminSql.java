@@ -78,9 +78,13 @@ public class AdminSql {
 	public static final String DELETE_NOTICE = "delete from `km_cs_notice` WHERE `no`=?";
 										
 	//상품 리스트
+
 	public static final String SELECT_PRODUCT_ALL = "select * from `km_product` LIMIT ?,10";
 	public static final String SELECT_PRODUCT = "select * from `km_product` WHERE `company` = ? LIMIT ?,10";
 	public static final String SELECT_NOTICE = "select * from `km_cs_notice` WHERE `no`=?";
+	public static final String SELECT_NOTICE = "select * from `km_cs_notice` `group`=? AND `cate`=? ORDER BY `no` DESC LIMIT 10";
+	public static final String SELECT_NOTICE_VIEW = "select * from `km_cs_notice` WHERE `no`=?";
+
 	public static final String SELECT_FAQ = "select * from `km_cs_faq` WHERE `group`=? AND `cate`=? ORDER BY `no` DESC LIMIT 10";
 	public static final String SELECT_FAQ_VIEW = "select * from `km_cs_faq` WHERE `no`=?";
 	
