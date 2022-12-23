@@ -479,20 +479,20 @@ public void insertNoctice(CsNoticeVO vo) {
 	}
 	
 	// 자주묻는질문 글 삭제
-		public int deleteFaq(String no) {
-			int result = 0;
-			try {
-				logger.info("자주묻는질문 삭제");
-				conn = getConnection();
-				psmt = conn.prepareStatement(AdminSql.DELETE_FAQ);	
-				psmt.setString(1, no);		
-				result = psmt.executeUpdate();
-				close();
-			}catch(Exception e){	
-				logger.error(e.getMessage());
-			}
-			return result;
+	public int deleteFaq(String no) {
+		int result = 0;
+		try {
+			logger.info("자주묻는질문 삭제");
+			conn = getConnection();
+			psmt = conn.prepareStatement(AdminSql.DELETE_FAQ);	
+			psmt.setString(1, no);		
+			result = psmt.executeUpdate();
+			close();
+		}catch(Exception e){	
+			logger.error(e.getMessage());
 		}
+		return result;
+	}
 	
 //	vo.setProdNo(rs.getString(1));
 //	vo.setCate1(rs.getInt(2));

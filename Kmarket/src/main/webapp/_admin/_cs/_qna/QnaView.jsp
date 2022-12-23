@@ -31,6 +31,18 @@
 			});
 		});
 		
+		$('.goList').click(function(){
+			location.href = "/Kmarket/admin/cs/qna/list.do";
+		});
+		
+		$('.goDelete').click(function(){
+			let answer = confirm('정말 삭제하시겠습니까?')
+			if(answer){
+				let qnaNo = '${qna.no}';
+				location.href = "/Kmarket/admin/cs/qna/delete.do?no=" + qnaNo;
+			}
+		});
+		
 	});
 </script>
 		    <section id="admin-index">
@@ -82,8 +94,8 @@
 								</div>
 	                        </table>	
 							<div class="btn_right">
-	                            <button class="btn_red">삭제</button>
-	                            <button class="btn_gray">목록</button>
+	                            <button class="btn_red goDelete">삭제</button>
+	                            <button class="btn_gray goList">목록</button>
                        	    </div>               
 	                    </div>
 	                </div>

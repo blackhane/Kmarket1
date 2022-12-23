@@ -5,9 +5,9 @@
 <script>
 
 	$(function() {
-        if('${param.code}'==100){
+		
+        if('${param.code}' == 100){
         	alert('유형당 등록할 수 있는 게시물을 10건입니다.');
-        	return;
         }
         
 		//그룹 선택
@@ -208,26 +208,25 @@
                         HOME > 고객센터 > <strong>자주묻는질문</strong>
                     </p>
                 </nav>
-	                
-                <div id="admin_cs_list">
-                	<div class="group">
-                	<select name="group" class="group">
-	                    <option value="회원">회원</option>
-	                    <option value="쿠폰/혜택/이벤트">쿠폰/혜택/이벤트</option>
-	                    <option value="주문/결제">주문/결제</option>
-	                    <option value="배송">배송</option>
-	                    <option value="취소/반품/교환">취소/반품/교환</option>
-	                    <option value="여행/숙박/항공">여행/숙박/항공</option>
-	                    <option value="안전거래">안전거래</option>
-	                </select>
-	                 <select name="cate" class="cate">
-						<option value="">2차 선택</option>
-						<option value="가입">가입</option>
-						<option value="탈퇴">탈퇴</option>
-						<option value="회원정보">회원정보</option>
-						<option value="로그인">로그인</option>
-                 	</select>
-                 	</div>
+	                <div id="admin_cs_list">
+	                	<div class="group">
+	                	<select name="group" class="group">
+		                    <option value="회원">회원</option>
+		                    <option value="쿠폰/혜택/이벤트">쿠폰/혜택/이벤트</option>
+		                    <option value="주문/결제">주문/결제</option>
+		                    <option value="배송">배송</option>
+		                    <option value="취소/반품/교환">취소/반품/교환</option>
+		                    <option value="여행/숙박/항공">여행/숙박/항공</option>
+		                    <option value="안전거래">안전거래</option>
+		                </select>
+		                 <select name="cate" class="cate">
+							<option value="">2차 선택</option>
+							<option value="가입">가입</option>
+							<option value="탈퇴">탈퇴</option>
+							<option value="회원정보">회원정보</option>
+							<option value="로그인">로그인</option>
+	                 	</select>
+	               	</div>
                     <div class="admin_cs_list_div">
                         <table>
                             <tr>

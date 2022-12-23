@@ -95,10 +95,12 @@ public class AdminSql {
 	
 	//게시판관리 -> 자주묻는질문 삭제
 	public static final String DELETE_FAQ = "delete from `km_cs_faq` WHERE `no`=?";
+	//게시판관리 -> 문의하기 삭제
+	public static final String DELETE_QNA = "delete from `km_cs_qna` WHERE `no`=? OR `parent`=?";
 	
 	
 	//qna 리스트
-	public static final String SELECT_QNA = "SELECT * FROM `km_cs_qna` WHERE `group`=? and `cate` =? ORDER BY `no` DESC LIMIT 10";
+	public static final String SELECT_QNA = "SELECT * FROM `km_cs_qna` WHERE `group`=? and `cate` =? ORDER BY `no`";
 	
 	//qna 글보기
 	public static final String SELECT_QNA_VIEW = "select * from `km_cs_qna` WHERE `no`=?";
