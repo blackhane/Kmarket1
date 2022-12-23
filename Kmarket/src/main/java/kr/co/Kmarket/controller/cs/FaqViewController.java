@@ -22,7 +22,9 @@ public class FaqViewController extends HttpServlet{
 		String no = req.getParameter("no");
 		String group = req.getParameter("group");
 		
-		CsVO vo = CsFaqDAO.getInstance().selectArticle(no);
+		CsFaqDAO dao = CsFaqDAO.getInstance();
+		CsVO vo = dao.selectArticle(no);
+		dao.updateArticleHit(no);
 		
 		req.setAttribute("group", group);
 		req.setAttribute("article", vo);

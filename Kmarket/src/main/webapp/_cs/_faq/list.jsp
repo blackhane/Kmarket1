@@ -2,8 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_cs/_header.jsp"/>
 <jsp:include page="./nav.jsp"/>
-<style>
-</style>
 <script>
 	$(function(){
 		$('ul').children('li.load:nth-child(n+4)').hide();

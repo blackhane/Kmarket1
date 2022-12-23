@@ -798,8 +798,12 @@
     }
     
     .text_width{
-        width: 90%;
-   		height: 100px;
+        width: 500px;
+	    height: 100px;
+	    resize: none;
+	    outline: none;
+	    padding: 6px;
+	    font-size: 16px;
     }
     
     /* 공지사항 쓰기 */

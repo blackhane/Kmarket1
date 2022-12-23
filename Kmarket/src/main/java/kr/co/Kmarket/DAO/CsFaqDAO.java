@@ -2,6 +2,7 @@ package kr.co.Kmarket.DAO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,6 +89,19 @@ public class CsFaqDAO extends DBCP{
 			logger.error(e.getMessage());
 		}
 		return vo;
+	}
+	
+	//조회수
+	public void updateArticleHit(String no) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(CsSQL.UPDATE_HIT_UP);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
 	}
 	
 }
