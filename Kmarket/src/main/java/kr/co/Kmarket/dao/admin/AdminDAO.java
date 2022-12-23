@@ -15,6 +15,7 @@ import kr.co.Kmarket.VO.CsNoticeVO;
 import kr.co.Kmarket.VO.ProductVO;
 import kr.co.Kmarket.controller.admin.IndexControlller;
 import kr.co.Kmarket.utils.DBCP;
+import kr.co.Kmarket.utils.ProductSQL;
 import kr.co.Kmarket.utils.AdminSql;
 
 public class AdminDAO extends DBCP {
@@ -116,25 +117,6 @@ public void insertNoctice(CsNoticeVO vo) {
 	}
 }
 
-	//자주묻는질문
-	public int selectCountFaq(String group, String cate) {
-		int result = 0;
-		try{
-			logger.info("게시물 개수 조회");
-			conn = getConnection();
-			psmt = conn.prepareStatement(AdminSql.COUNT_FAQ);
-			psmt.setString(1, group);
-			psmt.setString(2, cate);
-			rs = psmt.executeQuery();
-			if(rs.next()) {
-				result = rs.getInt(1);
-			}
-			close();
-		}catch(Exception e){
-			logger.error(e.getMessage());
-		}
-		return result;
-	}
 	
 	public void insertFaq(CsFaqVO vo) {
 		try{
@@ -157,18 +139,60 @@ public void insertNoctice(CsNoticeVO vo) {
 	}
 
 
-
+	// select Product all
+		public List<ProductVO> selectProduct(int start) {
+			List<ProductVO> product = new ArrayList<>();
+			try{
+				logger.info("상품불러오기 start...");
+				conn = getConnection();
+				psmt = conn.prepareStatement(AdminSql.SELECT_PRODUCT_ALL);
+				psmt.setInt(1, start);
+				rs = psmt.executeQuery();
+				while(rs.next()) {
+					ProductVO vo = new ProductVO();
+					vo.setProdNo(rs.getString(1));
+					vo.setCate1(rs.getInt(2));
+					vo.setCate2(rs.getInt(3));
+					vo.setProdName(rs.getString(4));
+					vo.setDescript(rs.getString(5));
+					vo.setCompany(rs.getString(6));
+					vo.setSeller(rs.getString(7));
+					vo.setPrice(rs.getInt(8));
+					vo.setDiscount(rs.getInt(9));
+					vo.setPoint(rs.getInt(10));
+					vo.setStock(rs.getInt(11));
+					vo.setSold(rs.getInt(12));
+					vo.setDelivery(rs.getInt(13));
+					vo.setHit(rs.getInt(14));
+					vo.setScore(rs.getInt(15));
+					vo.setReview(rs.getInt(16));
+					vo.setThumb1(rs.getString(17));
+					vo.setThumb2(rs.getString(18));
+					vo.setThumb3(rs.getString(19));
+					vo.setDetail(rs.getString(20));
+					vo.setStatus(rs.getString(21));
+					product.add(vo);
+				}
+				close();
+			}catch(Exception e){
+				logger.error(e.getMessage());
+			}
+			logger.debug("데이터 입력" + product.size());
+			return product;
+		}
 
 
 	
 	// select
-	public List<ProductVO> selectProduct() {
+	public List<ProductVO> selectProduct(String company, int start) {
 		List<ProductVO> product = new ArrayList<>();
 		try{
 			logger.info("상품불러오기 start...");
 			conn = getConnection();
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(AdminSql.SELECT_PRODUCT);
+			psmt = conn.prepareStatement(AdminSql.SELECT_PRODUCT);
+			psmt.setString(1, company);
+			psmt.setInt(2, start);
+			rs = psmt.executeQuery();
 			while(rs.next()) {
 				ProductVO vo = new ProductVO();
 				vo.setProdNo(rs.getString(1));
@@ -201,6 +225,44 @@ public void insertNoctice(CsNoticeVO vo) {
 		logger.debug("데이터 입력" + product.size());
 		return product;
 	}
+	
+	//상품리스트 페이징 all
+	public int selectCountTotal() {
+		int result = 0;
+		try {
+			logger.info("페이징 처리");
+			conn = getConnection();
+			psmt = conn.prepareStatement(AdminSql.COUNT_PRODUCT_ALL);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	//상품리스트 페이징
+	public int selectCountTotal(String company) {
+		int result = 0;
+		try {
+			logger.info("페이징 처리");
+			conn = getConnection();
+			psmt = conn.prepareStatement(AdminSql.COUNT_PRODUCT);
+			psmt.setString(1, company);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
 	
 	// 공지사항 불러오기
 	

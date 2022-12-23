@@ -25,6 +25,9 @@
     <div id="admin-wrapper">
         <header>
             <div>
+                <a href="/Kmarket/index.do" class="indexlogo">
+                    <img src="/Kmarket/img/img_cs/logo.png" alt="k마켓로고">
+                </a>
                 <a href="/Kmarket/admin/index.do" class="logo">
                     <img src="/Kmarket/img/img_admin/admin_logo.png" alt="로고">
                 </a>
@@ -77,7 +80,7 @@
                             상품관리
                         </a>
                         <ol>
-                            <li><a href="/Kmarket/admin/product/list.do">상품현황</a></li>
+                            <li><a href="/Kmarket/admin/product/list.do?company=${sessUser.company}&level=${sessUser.level}">상품현황</a></li>
                             <li><a href="/Kmarket/admin/product/register.do">상품등록</a></li>
                             <li><a href="/Kmarket/admin/product/list.do">재고관리</a></li>
                         </ol>

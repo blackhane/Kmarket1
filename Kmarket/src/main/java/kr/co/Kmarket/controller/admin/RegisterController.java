@@ -137,7 +137,7 @@ public class RegisterController extends HttpServlet{
 		dao.insertProduct(vo);
 		
 		// 리다이렉트
-		resp.sendRedirect("/Kmarket/admin/product/list.do");
+		resp.sendRedirect("/Kmarket/admin/product/register.do");
 		
 	}
 	

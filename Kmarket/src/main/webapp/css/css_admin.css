@@ -172,6 +172,11 @@
         margin: 0 auto;
         
     }
+    header > div .indexlogo{
+    	position: absolute;
+	    top: 15px;
+	    left: 35px;
+    }
     header > div > .logo {
         display: block;
 
@@ -462,6 +467,7 @@
     #admin-product-list > table {
         border-top: 2px solid #8798a3;
         margin-top: 15px;
+        min-width: 1100px;
     }
     
     #admin-product-list > table > tbody {
@@ -551,6 +557,12 @@
     #admin-product-list .paging > .num > a.on {
         color: #fe434c;
         font-weight: bold;
+    }
+    
+    .section_ico{
+        float: right;
+	    width: 1126px;
+	    box-sizing: border-box;
     }
     
     p.info {
