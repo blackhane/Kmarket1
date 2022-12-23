@@ -33,56 +33,53 @@
 		
 	});
 </script>
-    <section id="admin-index">
-        <nav>
-            <h3>문의하기 답변</h3>
-            <p>
-                HOME > 고객센터 > <strong>문의하기</strong>
-            </p>
-        </nav>                 
-           <input type="hidden" name="parent" value= "${qna.no}">
-           <input type="hidden" name="uid" value="${qna.uid}">
-            <div id="admin_cs_view">
-                <div class="admin_cs_view_div">
-                     <table>
-                         <tbody>
-                             <tr>
-                                 <td class = "td1">유형</td>
-                                 <td class = "td2">${qna.group} - ${qna.cate}</td>
-                             </tr>
-                             <tr>
-                                 <td class = "td1">제목</td>
-                                 <td class = "td2">${qna.title}</td>
-                             </tr>
-                             <tr>
-                                 <td class = "td1">내용</td>
-                                 <td class = "td2">${qna.content}</td>
-                             </tr>
-                       		<div class="comment">
-                       			<tr>
-                        			<td class = "td1">답변</td>
-                        			<c:choose>
-                        				<c:when test="${comment.content eq null}">
-                        					<td class = "td2">
-                        						<textarea name="comment" class="text_width"></textarea>
-                        					</td>
-                        					<td>
-                        						<input type="button" class="btn_qna_blue commentRegister" name ="submit_board" value="답변등록">
-                        					</td>
-                        				</c:when>
-                        				<c:otherwise>
-                        					<td class = "td2">
-                        						<textarea name="comment" class="text_width">${comment.content}</textarea>
-                       						</td>
-                        					<td>
-                        						<input type="button" class="btn_qna_blue commentRegister" name ="submit_board" value="답변수정">
-                        					</td>
-                        				</c:otherwise>
-                        			</c:choose>
-                        			
-                       			</tr>
- 								</div>
- 								  </tbody>
+		    <section id="admin-index">
+		        <nav>
+		            <h3>문의하기 답변</h3>
+		            <p>
+		                HOME > 고객센터 > <strong>문의하기</strong>
+		            </p>
+		        </nav>                 
+		           <input type="hidden" name="parent" value= "${qna.no}">
+		           <input type="hidden" name="uid" value="${sessUser.uid}">
+		            <div id="admin_cs_view">
+		                <div class="admin_cs_view_div">
+		                     <table>
+			                     <tr>
+			                         <td class = "td1">유형</td>
+			                         <td class = "td2">${qna.group} - ${qna.cate}</td>
+			                     </tr>
+			                     <tr>
+			                         <td class = "td1">제목</td>
+			                         <td class = "td2">${qna.title}</td>
+			                     </tr>
+			                     <tr>
+			                         <td class = "td1">내용</td>
+			                         <td class = "td2">${qna.content}</td>
+			                     </tr>
+			               		<div class="comment">
+			               			<tr>
+			                			<td class = "td1">답변</td>
+			                			<c:choose>
+			                				<c:when test="${comment.content eq null}">
+			                					<td class = "td2">
+			                						<textarea name="comment" class="text_width"></textarea>
+			                					</td>
+			                					<td>
+			                						<input type="button" class="btn_qna_blue commentRegister" name ="submit_board" value="답변등록">
+			                					</td>
+			                				</c:when>
+			                				<c:otherwise>
+			                					<td class = "td2">
+			                						<textarea name="comment" class="text_width">${comment.content}</textarea>
+			               						</td>
+			                					<td>
+			                						<input type="button" class="btn_qna_blue commentRegister" name ="submit_board" value="답변수정">
+			                					</td>
+			                				</c:otherwise>
+			                			</c:choose>
+			               			</tr>
+								</div>
 	                        </table>	
 							<div class="btn_right">
 	                            <button class="btn_red">삭제</button>

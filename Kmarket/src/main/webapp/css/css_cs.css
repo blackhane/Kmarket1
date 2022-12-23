@@ -552,6 +552,7 @@ main > .menu > .cs_information > div.content > p {
     border: none;
     font-size: 16px;
     line-height: 32px;
+    padding-left: 24px;
 }
 .btn {
     display: inline-block;
@@ -602,4 +603,13 @@ main article table tr td > textarea {
 main article > div > .btnWrite {
     background: #067dfd;
     color: #fff;
+}
+
+.comment {
+	font-weight: bold;
+    font-size: 24px;
+    padding: 24px;
+}
+.comment > p {
+	font-size: 16px;
 }

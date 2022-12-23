@@ -29,7 +29,7 @@
                     <img src="/Kmarket/img/img_admin/admin_logo.png" alt="로고">
                 </a>
                 <p>
-                    <span>${sessUser.company}님 반갑습니다. &nbsp;&nbsp; </span>
+                    <span>${sessUser.name}${sessUser.company}님 반갑습니다. &nbsp;&nbsp; </span>
                     <a href="/Kmarket/admin/index.do">HOME |</a>
                     <a href="/Kmarket/logout.do">로그아웃 |</a>
                     <a href="/Kmarket/cs/index.do">고객센터</a>
