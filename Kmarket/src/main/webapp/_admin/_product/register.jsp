@@ -172,23 +172,23 @@ $(function(){
 <!--                                 </tr> -->
                                 <tr>
                                     <td>상품상태</td>
-                                    <td><input type="text" name="status"></td>
+                                    <td><input type="text" name="status" value="새상품"></td>
                                 </tr>
                                 <tr>
                                     <td>부가세 면세여부</td>
-                                    <td><input type="text" name="duty"></td>
+                                    <td><input type="text" name="duty" value="과세상품"></td>
                                 </tr>
                                 <tr>
                                     <td>영수증발행</td>
-                                    <td><input type="text" name="receipt"></td>
+                                    <td><input type="text" name="receipt" value="발행가능-신용카드 전표, 온라인 현금영수증"></td>
                                 </tr>
                                 <tr>
                                     <td>사업자구분</td>
-                                    <td><input type="text" name="bizType"></td>
+                                    <td><input type="text" name="bizType" value="사업자 판매자"></td>
                                 </tr>
                                 <tr>
                                     <td>브랜드</td>
-                                    <td><input type="text" name="brand"></td>
+                                    <td><input type="text" name="brand" value="국내산"></td>
                                 </tr>
                                 <tr>
                                     <td>원산지</td>

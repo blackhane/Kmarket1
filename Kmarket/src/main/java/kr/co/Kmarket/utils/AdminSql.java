@@ -78,7 +78,8 @@ public class AdminSql {
 	public static final String DELETE_NOTICE = "delete from `km_cs_notice` WHERE `no`=?";
 										
 	//상품 리스트
-	public static final String SELECT_PRODUCT = "select * from `km_product`";
+	public static final String SELECT_PRODUCT_ALL = "select * from `km_product` LIMIT ?,10";
+	public static final String SELECT_PRODUCT = "select * from `km_product` WHERE `company` = ? LIMIT ?,10";
 	public static final String SELECT_NOTICE = "select * from `km_cs_notice` WHERE `no`=?";
 	public static final String SELECT_FAQ = "select * from `km_cs_faq` WHERE `group`=? AND `cate`=? ORDER BY `no` DESC LIMIT 10";
 	public static final String SELECT_FAQ_VIEW = "select * from `km_cs_faq` WHERE `no`=?";
@@ -118,5 +119,6 @@ public class AdminSql {
 	public static final String UPDATE_COMMENT_HIT_UP = "UPDATE `board_article` SET  `comment` = `comment`+1 WHERE `no`= ?";
 
 	//게시물 개수
-	public static final String COUNT_FAQ = "SELECT COUNT(*) FROM `km_cs_faq` WHERE `group`=? AND `cate`=?";
+	public static final String COUNT_PRODUCT = "SELECT COUNT(*) FROM `km_product` WHERE `company` = ?";
+	public static final String COUNT_PRODUCT_ALL = "SELECT COUNT(*) FROM `km_product`";
 }

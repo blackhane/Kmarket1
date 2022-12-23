@@ -38,21 +38,6 @@ public class FaqWriteController extends HttpServlet {
 		
 		AdminDAO dao = AdminDAO.getInstance();
 		
-		int result = dao.selectCountFaq(group,cate);
-		System.out.println(result);
-		if(result < 10) {
-			CsFaqVO vo = new CsFaqVO();
-			vo.setGroup(group);
-			vo.setCate(cate);
-			vo.setTitle(title);
-			vo.setHit(hit);
-			vo.setContent(content);
-			vo.setRegip(regip);
-			vo.setRdate(rdate);
-			dao.insertFaq(vo);
-			resp.sendRedirect("/Kmarket/admin/cs/faq/list.do");
-			return;
-		}
 		
 		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do?code=100");
 	}
