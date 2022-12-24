@@ -49,7 +49,6 @@ $(function(){
 	                            <tbody>
 	                                <tr>
 	                                    <td>유형</td>
-	                                    <input type="hidden" name="hit" value= "0">
 	                                    <td>
 	                                        <select name="cate" id="">
 	                                            <option value="고객 서비스">고객 서비스</option>

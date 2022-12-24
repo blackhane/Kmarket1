@@ -12,11 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kr.co.Kmarket.DAO.CartDAO;
-import kr.co.Kmarket.VO.CartVO;
 
 @WebServlet("/product/cartHelper.do")
 public class CartHelperController extends HttpServlet {

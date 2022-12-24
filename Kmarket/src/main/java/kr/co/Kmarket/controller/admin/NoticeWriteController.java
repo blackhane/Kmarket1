@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.Kmarket.DAO.admin.AdminDAO;
-import kr.co.Kmarket.VO.CsNoticeVO;
+import kr.co.Kmarket.VO.CsVO;
 
 @WebServlet("/admin/cs/notice/write.do")
 public class NoticeWriteController extends HttpServlet {
@@ -18,8 +18,6 @@ public class NoticeWriteController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
 		RequestDispatcher dispathcer = req.getRequestDispatcher("/_admin/_cs/_notice/write.jsp");
 		dispathcer.forward(req, resp);
 	}
@@ -29,10 +27,8 @@ public class NoticeWriteController extends HttpServlet {
 		
 		String cate = req.getParameter("cate");
 		String title = req.getParameter("title");
-		String hit = req.getParameter("hit");
 		String content = req.getParameter("content");
-		String regip = req.getParameter("regip");
-		String rdate = req.getRemoteAddr();
+		String regip = req.getRemoteAddr();
 		String group = req.getParameter("group");
 		
 		if(cate.equals("고객 서비스")) {
@@ -45,17 +41,15 @@ public class NoticeWriteController extends HttpServlet {
 			group = "event";
 		}
 		
-		CsNoticeVO vo = new CsNoticeVO();
+		CsVO vo = new CsVO();
 		vo.setGroup(group);
 		vo.setCate(cate);
 		vo.setTitle(title);
-		vo.setHit(hit);
 		vo.setContent(content);
 		vo.setRegip(regip);
-		vo.setRdate(rdate);
 		
 		AdminDAO dao = AdminDAO.getInstance();
-		dao.insertNoctice(vo);
+		dao.insertNotice(vo);
 		
 		// 리다이렉트
 		resp.sendRedirect("/Kmarket/admin/cs/notice/list.do");

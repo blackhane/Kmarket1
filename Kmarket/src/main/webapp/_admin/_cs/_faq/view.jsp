@@ -3,6 +3,16 @@
 <jsp:include page="/_admin/_header.jsp"/>
 <script>
 	$(function(){
+		$(function(){
+			$('.btn_red').click(function(){
+				let answer = confirm('게시물을 삭제하시겠습니까?');
+				if(answer){
+					return true;
+				}
+				return false;
+			});
+		});
+		
 		$('.goList').click(function(){
 			location.href="/Kmarket/admin/cs/faq/list.do";
 		});
@@ -34,7 +44,7 @@
                             </tbody>
                         </table>
                         <div class="btn_right">
-                            <button class="btn_red" onclick = "location.href = '/Kmarket/admin/cs/faq/delete.do?no=${faq.no}' ">삭제</button>
+                            <button class="btn_red" onclick = "location.href = '/Kmarket/admin/cs/faq/delete2.do?no=${faq.no}' ">삭제</button>
                             <button class="btn_blue" onclick = "location.href = '/Kmarket/admin/cs/faq/modify.do?no=${faq.no}' ">수정</button>
                             <button class="btn_gray goList">목록</button>
                         </div>

@@ -4,11 +4,15 @@
 <script>
 
 	$(function() {
-		list('전체보기');
+		
+		if(${param.resultCode eq 101}){
+			alert('게시물이 삭제되었습니다.');
+		}
 		
 		//카테고리 선택
 		$('select[name=cate]').change(function(){
-			list($(this).val());
+			list($(this).val(), 1);
+			paging($(this).val(), 1, 1);
 		});
 		
 		//게시물 삭제
@@ -81,29 +85,43 @@
 				});
 			}
 		});
+
+		console.log('${param.cate}' + '${param.pg}');
+		list('${param.cate}', '${param.pg}');
+		paging('${param.cate}', Math.ceil('${(Math.ceil(param.pg/10)-1) * 10 + 1}'), '${param.pg}');
+		
 		
 		//리스트출력
-		function list(cate){
+		function list(cate, pg){
+			let intPg = parseInt(pg);
+			console.log(intPg);
+			let jsonData = {
+				'cate' : cate,
+				'pg' : pg
+			};
+			
+			console.log(jsonData);
 			$.ajax({
 				url : '/Kmarket/admin/cs/notice/list.do',
 				method : 'post',
-				data : {'cate' : cate},
+				data : jsonData,
 				dataType : 'json',
+				async: false,
 				success : function(data){
 					$('.notice_list').remove();
 					if(data.length > 0){
-						let i = 0;
+						let i = (intPg-1) * 10 + 1;
 						for(let article of data){
-							i += 1;
 							let tag = "<tr class='notice_list'>";
 								tag +="<td><input type='checkbox' name='chk' class='chk' id='chk' data-no='"+article.no+"'></td>";
 								tag += "<td>"+i+"</td>";
 								tag += "<td>"+article.cate+"</td>";
-								tag += "<td><a href='/Kmarket/admin/cs/notice/view.do?no="+article.no+"'>"+article.title+"</a></td>";
+								tag += "<td><a href='/Kmarket/admin/cs/notice/view.do?no="+article.no+"&cate="+cate+"&pg="+pg+"'>"+article.title+"</a></td>";
 								tag += "<td>"+article.hit+"</td>";
 								tag += "<td>"+article.rdate+"</td>";
 								tag += "<td><a href='#' id='delete' data-no='"+article.no+"'>[삭제]</a><a href='/Kmarket/admin/cs/notice/modify.do?no="+article.no+"'>[수정]</a></td>";
 								tag += "</tr>";
+							i += 1;
 							$('.admin_cs_list_div').children('table').append(tag);
 						}
 						return;
@@ -117,6 +135,67 @@
 				}
 			});
 		}
+		
+		//페이징
+		function paging(cate, pg, current){
+			let jsonData = {
+				'cate' : cate,
+				'pg' : pg
+			};
+		
+			console.log(jsonData + current);
+			$.ajax({
+				url : '/Kmarket/admin/cs/notice/page.do',
+				method : 'get',
+				data : jsonData,
+				dataType : 'json',
+				async: false,
+				success : function(data){
+					$('.page').empty();
+					if(data.pageGroupEnd > data.lastPageNum){
+						data.pageGroupEnd = data.lastPageNum;
+					}
+						let tag = "";
+						if(data.pageGroupStart > 1){
+							tag += "<a href='#page' id='prev' class='prev' data-last='"+ data.pageGroupStart +"'><&nbsp;이전</a>";
+						}
+						for(let i=data.pageGroupStart; i<=data.pageGroupEnd; i++){
+							tag += "<a href='#page' id='num' data-pg='"+i+"' class=" + (i==current ? 'current':'off') + ">"+i+"</a>";
+						}
+						if(data.lastPageNum > data.pageGroupEnd){
+							tag += "<a href='#page' id='next' class='next' data-last='"+ data.pageGroupEnd +"'>다음&nbsp;></a>";
+						}
+					$('.page').append(tag);
+				}
+			});
+		}
+		
+		//페이지 클릭
+		$(document).on('click','#num',function(e){
+			e.stopImmediatePropagation();
+			let cate = $('select[name=cate]').val();
+			let pg = $(this).data('pg');
+			
+			$('a#num').addClass("off").removeClass("current");
+		    $(this).addClass("current").removeClass("off");
+		    
+			list(cate, pg);
+		});
+		$(document).on('click', '#prev',function(e) {
+	    	e.stopImmediatePropagation();
+	    	let cate = $('select[name=cate]').val();
+	    	let pg = $(this).data('last');
+	    	list(cate, pg-1);
+	    	paging(cate, pg-10, pg-1);
+	    }); 
+		$(document).on('click', '#next',function(e) {
+	    	e.stopImmediatePropagation();
+	    	let cate = $('select[name=cate]').val();
+			let pg = $(this).data('last');
+			list(cate, pg+1);
+			paging(cate, pg+1, pg+1);
+		});
+		
 		
 		$('.register').click(function(){
 			location.href ="/Kmarket/admin/cs/notice/write.do";
@@ -135,11 +214,11 @@
                 <div id="admin_cs_list">
                 <div class="group">
                     <select name="cate" id="cate">
-                    	<option value="전체보기">전체보기</option>
-	                    <option value="고객 서비스">고객 서비스</option>
-	                    <option value="안전거래">안전거래</option>
-	                    <option value="위해상품">위해상품</option>
-	                    <option value="이벤트 당첨">이벤트 당첨</option>
+                    	<option value="전체보기"  <c:if test="${param.cate == '전체보기'}">selected="selected"</c:if> >전체보기</option>
+	                    <option value="고객 서비스" <c:if test="${param.cate == '고객 서비스'}">selected="selected"</c:if> >고객 서비스</option>
+	                    <option value="안전거래" <c:if test="${param.cate == '안전거래'}">selected="selected"</c:if> >안전거래</option>
+	                    <option value="위해상품" <c:if test="${param.cate == '위해상품'}">selected="selected"</c:if> >위해상품</option>
+	                    <option value="이벤트 당첨" <c:if test="${param.cate == '이벤트'}">selected="selected"</c:if> >이벤트 당첨</option>
                 	</select>
                 	</div>
                     <div class="admin_cs_list_div">

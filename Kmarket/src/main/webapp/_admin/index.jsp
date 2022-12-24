@@ -208,30 +208,14 @@
                     <div>
                         <h4>고객문의</h4>
                         <article>
-                            <p>
-                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
-                                <span>20-07-08 12:23</span>
-                            </p>
-                            <p>
-                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
-                                <span>20-07-08 12:23</span>
-                            </p>
-                            <p>
-                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
-                                <span>20-07-08 12:23</span>
-                            </p>
-                            <p>
-                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
-                                <span>20-07-08 12:23</span>
-                            </p>
-                            <p>
-                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
-                                <span>20-07-08 12:23</span>
-                            </p>
-                            <p>
-                                <span>[공지] 케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.케이마켓 판매자님들은 주기적인 비밀번호 변경을 하세요.</span>
-                                <span>20-07-08 12:23</span>
-                            </p>
+                        	<table>
+                        	<c:forEach items="${qna}" var="article">
+                        		<tr class="index_notice">
+	                                <td><a href="/Kmarket/admin/cs/qna/view.do?no=${article.no}">[${article.cate}] ${article.title}</a></td>
+	                                <td align="right">${article.rdate}</td>
+	                            </tr>
+                        	</c:forEach>
+                            </table>
                         </article>
                     </div> 
                 </div>

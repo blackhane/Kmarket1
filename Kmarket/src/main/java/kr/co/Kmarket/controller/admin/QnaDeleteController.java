@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonObject;
 
-import kr.co.Kmarket.DAO.admin.AdminDAO;
 import kr.co.Kmarket.DAO.admin.AdminQnaDAO;
 
 @WebServlet("/admin/cs/qna/delete.do")
@@ -24,7 +23,7 @@ public class QnaDeleteController extends HttpServlet {
 		AdminQnaDAO dao = AdminQnaDAO.getInstance();
 		dao.deleteQna(no);
 
-		resp.sendRedirect("/Kmarket/admin/cs/qna/list.do?code=101");
+		resp.sendRedirect("/Kmarket/admin/cs/qna/list.do?resultCode=101");
 	}
 	
 	@Override

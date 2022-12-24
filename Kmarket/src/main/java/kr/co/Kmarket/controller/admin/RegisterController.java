@@ -2,9 +2,6 @@ package kr.co.Kmarket.controller.admin;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
@@ -18,12 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.JsonObject;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.Kmarket.DAO.admin.AdminDAO;
-import kr.co.Kmarket.VO.CateVO;
 import kr.co.Kmarket.VO.ProductVO;
 
 @WebServlet("/admin/product/register.do")

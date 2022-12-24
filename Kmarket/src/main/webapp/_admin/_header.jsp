@@ -104,7 +104,7 @@
 	                            게시판관리
 	                        </a>
 	                        <ol>
-	                            <li><a href="/Kmarket/admin/cs/notice/list.do">공지사항</a></li>
+	                            <li><a href="/Kmarket/admin/cs/notice/list.do?cate=전체보기&pg=1">공지사항</a></li>
 	                            <li><a href="/Kmarket/admin/cs/faq/list.do">자주묻는 질문</a></li>
 	                            <li><a href="/Kmarket/admin/cs/qna/list.do">문의하기</a></li>
 	                        </ol>

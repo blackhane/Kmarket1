@@ -7,12 +7,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.co.Kmarket.VO.CsNoticeVO;
 import kr.co.Kmarket.VO.CsQnaVO;
 import kr.co.Kmarket.VO.CsVO;
-import kr.co.Kmarket.controller.admin.IndexControlller;
 import kr.co.Kmarket.utils.AdminSql;
-import kr.co.Kmarket.utils.CsSQL;
 import kr.co.Kmarket.utils.DBCP;
 
 public class AdminQnaDAO extends DBCP {
@@ -40,6 +37,7 @@ public class AdminQnaDAO extends DBCP {
 				CsVO vo = new CsVO();
 				vo.setNo(rs.getString(1));
 				vo.setGroup(rs.getString(2));
+				vo.setComment(rs.getString(4));
 				vo.setCate(rs.getString(5));
 				vo.setTitle(rs.getString(6));
 				vo.setUid(rs.getString(9).replaceAll("(?<=.{2}).", "*"));
@@ -50,7 +48,6 @@ public class AdminQnaDAO extends DBCP {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
-		logger.debug("문의하기 입력" + qna.size());
 		return qna;
 	}
 		

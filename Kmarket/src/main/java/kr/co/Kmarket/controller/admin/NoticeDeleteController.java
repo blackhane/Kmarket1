@@ -3,7 +3,6 @@ package kr.co.Kmarket.controller.admin;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.JsonObject;
 
 import kr.co.Kmarket.DAO.admin.AdminDAO;
-import kr.co.Kmarket.VO.CsNoticeVO;
 
 @WebServlet("/admin/cs/notice/delete.do")
 public class NoticeDeleteController extends HttpServlet {

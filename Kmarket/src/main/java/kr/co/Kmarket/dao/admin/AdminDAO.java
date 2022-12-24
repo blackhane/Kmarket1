@@ -8,15 +8,11 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mysql.cj.protocol.a.DebugBufferingPacketReader;
-
 import kr.co.Kmarket.VO.CsFaqVO;
 import kr.co.Kmarket.VO.CsNoticeVO;
 import kr.co.Kmarket.VO.CsVO;
 import kr.co.Kmarket.VO.ProductVO;
-import kr.co.Kmarket.controller.admin.IndexControlller;
 import kr.co.Kmarket.utils.DBCP;
-import kr.co.Kmarket.utils.ProductSQL;
 import kr.co.Kmarket.utils.AdminSql;
 
 public class AdminDAO extends DBCP {
@@ -30,7 +26,7 @@ public class AdminDAO extends DBCP {
 	private AdminDAO() {}
 	
 
-public void insertProduct(ProductVO vo) {
+	public void insertProduct(ProductVO vo) {
 		try{
 			logger.info("어드민 제품등록...");
 			Connection conn = getConnection();
@@ -77,27 +73,26 @@ public void insertProduct(ProductVO vo) {
 		
 	}
 
-public void insertFile(String prodNo, String newName, String fname) {
-	try{
-		logger.info("파일넣기 start...");
-		Connection conn = getConnection();
-		PreparedStatement psmt = conn.prepareStatement(AdminSql.INSERT_FILE);
-		psmt.setString(1, prodNo);
-		psmt.setString(2, newName);
-		psmt.setString(3, fname);
-		
-		psmt.executeUpdate();
-		psmt.close();
-		conn.close();
-		
-	}catch(Exception e){
-		e.printStackTrace();
-		logger.error(e.getMessage());
+	public void insertFile(String prodNo, String newName, String fname) {
+		try{
+			logger.info("파일넣기 start...");
+			Connection conn = getConnection();
+			PreparedStatement psmt = conn.prepareStatement(AdminSql.INSERT_FILE);
+			psmt.setString(1, prodNo);
+			psmt.setString(2, newName);
+			psmt.setString(3, fname);
+			
+			psmt.executeUpdate();
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			logger.error(e.getMessage());
+		}
 	}
-}
 
-	//공지사항
-	public void insertNoctice(CsNoticeVO vo) {
+	public void insertNotice(CsVO vo) {
 		try{
 			logger.info("공지사항 등록.");
 			conn = getConnection();
@@ -116,7 +111,7 @@ public void insertFile(String prodNo, String newName, String fname) {
 	}
 
 	
-	public void insertFaq(CsFaqVO vo) {
+	public void insertFaq(CsVO vo) {
 		try{
 			logger.info("자주묻는질문 등록");
 			conn = getConnection();
@@ -124,9 +119,8 @@ public void insertFile(String prodNo, String newName, String fname) {
 			psmt.setString(1, vo.getGroup());
 			psmt.setString(2, vo.getCate());
 			psmt.setString(3, vo.getTitle());
-			psmt.setString(4, vo.getHit());
-			psmt.setString(5, vo.getContent());
-			psmt.setString(6, vo.getRegip());
+			psmt.setString(4, vo.getContent());
+			psmt.setString(5, vo.getRegip());
 			
 			psmt.executeUpdate();
 			close();
@@ -136,51 +130,47 @@ public void insertFile(String prodNo, String newName, String fname) {
 		}
 	}
 
-
-	// select Product all
-		public List<ProductVO> selectProduct(int start) {
-			List<ProductVO> product = new ArrayList<>();
-			try{
-				logger.info("상품불러오기 start...");
-				conn = getConnection();
-				psmt = conn.prepareStatement(AdminSql.SELECT_PRODUCT_ALL);
-				psmt.setInt(1, start);
-				rs = psmt.executeQuery();
-				while(rs.next()) {
-					ProductVO vo = new ProductVO();
-					vo.setProdNo(rs.getString(1));
-					vo.setCate1(rs.getInt(2));
-					vo.setCate2(rs.getInt(3));
-					vo.setProdName(rs.getString(4));
-					vo.setDescript(rs.getString(5));
-					vo.setCompany(rs.getString(6));
-					vo.setSeller(rs.getString(7));
-					vo.setPrice(rs.getInt(8));
-					vo.setDiscount(rs.getInt(9));
-					vo.setPoint(rs.getInt(10));
-					vo.setStock(rs.getInt(11));
-					vo.setSold(rs.getInt(12));
-					vo.setDelivery(rs.getInt(13));
-					vo.setHit(rs.getInt(14));
-					vo.setScore(rs.getInt(15));
-					vo.setReview(rs.getInt(16));
-					vo.setThumb1(rs.getString(17));
-					vo.setThumb2(rs.getString(18));
-					vo.setThumb3(rs.getString(19));
-					vo.setDetail(rs.getString(20));
-					vo.setStatus(rs.getString(21));
-					product.add(vo);
-				}
-				close();
-			}catch(Exception e){
-				logger.error(e.getMessage());
+	public List<ProductVO> selectProduct(int start) {
+		List<ProductVO> product = new ArrayList<>();
+		try{
+			logger.info("상품불러오기 start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(AdminSql.SELECT_PRODUCT_ALL);
+			psmt.setInt(1, start);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ProductVO vo = new ProductVO();
+				vo.setProdNo(rs.getString(1));
+				vo.setCate1(rs.getInt(2));
+				vo.setCate2(rs.getInt(3));
+				vo.setProdName(rs.getString(4));
+				vo.setDescript(rs.getString(5));
+				vo.setCompany(rs.getString(6));
+				vo.setSeller(rs.getString(7));
+				vo.setPrice(rs.getInt(8));
+				vo.setDiscount(rs.getInt(9));
+				vo.setPoint(rs.getInt(10));
+				vo.setStock(rs.getInt(11));
+				vo.setSold(rs.getInt(12));
+				vo.setDelivery(rs.getInt(13));
+				vo.setHit(rs.getInt(14));
+				vo.setScore(rs.getInt(15));
+				vo.setReview(rs.getInt(16));
+				vo.setThumb1(rs.getString(17));
+				vo.setThumb2(rs.getString(18));
+				vo.setThumb3(rs.getString(19));
+				vo.setDetail(rs.getString(20));
+				vo.setStatus(rs.getString(21));
+				product.add(vo);
 			}
-			logger.debug("데이터 입력" + product.size());
-			return product;
+			close();
+		}catch(Exception e){
+			logger.error(e.getMessage());
 		}
+		logger.debug("데이터 입력" + product.size());
+		return product;
+	}
 
-
-	
 	// select
 	public List<ProductVO> selectProduct(String company, int start) {
 		List<ProductVO> product = new ArrayList<>();
@@ -263,33 +253,32 @@ public void insertFile(String prodNo, String newName, String fname) {
 	
 	
 	// 공지사항 불러오기
-	
-	public List<CsNoticeVO> selectNotice(String cate) {
+	public List<CsNoticeVO> selectNotice(String cate,int start) {
 		List<CsNoticeVO> notice = new ArrayList<>();
 		try{			
-			logger.info("공지사항 : "+cate);
+			logger.info("공지사항 리스트");
 			conn = getConnection();
 			String sql = "";
 			
 			switch(cate) {
 			case "전체보기":
-				sql = "SELECT * FROM `km_cs_notice` ORDER BY `no` DESC";
+				sql = "SELECT * FROM `km_cs_notice` ORDER BY `no` DESC LIMIT ?,10";
 				break;
 			case "고객 서비스":
-				sql = "SELECT * FROM `km_cs_notice` where `cate`='고객 서비스'  ORDER BY `no` DESC";
+				sql = "SELECT * FROM `km_cs_notice` where `cate`='고객 서비스'  ORDER BY `no` DESC LIMIT ?,10";
 				break;
 			case "안전거래":
-				sql = "SELECT * FROM `km_cs_notice` where `cate`='안전거래'  ORDER BY `no` DESC";
+				sql = "SELECT * FROM `km_cs_notice` where `cate`='안전거래'  ORDER BY `no` DESC LIMIT ?,10";
 				break;
 			case "위해상품":
-				sql = "SELECT * FROM `km_cs_notice` where `cate`='위해상품'  ORDER BY `no` DESC";
+				sql = "SELECT * FROM `km_cs_notice` where `cate`='위해상품'  ORDER BY `no` DESC LIMIT ?,10";
 				break;
 			case "이벤트 당첨":
-				sql = "SELECT * FROM `km_cs_notice` where `cate`='이벤트 당첨'  ORDER BY `no` DESC";
+				sql = "SELECT * FROM `km_cs_notice` where `cate`='이벤트 당첨'  ORDER BY `no` DESC LIMIT ?,10";
 				break;
 			}
-			logger.debug(sql);
 			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, start);
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				CsNoticeVO vo = new CsNoticeVO();
@@ -306,9 +295,45 @@ public void insertFile(String prodNo, String newName, String fname) {
 		}
 		return notice;
 	}
+	
+	public int selectNoticeTotal() {
+		int result = 0;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement("SELECT COUNT(*) FROM `km_cs_notice`");
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		logger.debug("result : " + result);
+		return result;
+	}
+	
+	public int selectNoticeTotal(String cate) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement("SELECT COUNT(*) FROM `km_cs_notice` WHERE `cate`=?");
+			psmt.setString(1, cate);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			close();
+		}catch(Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
 	public List<CsNoticeVO> selectNotice() {
 		List<CsNoticeVO> notice = new ArrayList<>();
 		try{			
+			logger.info("공지사항 인덱스 리스트");
 			conn = getConnection();
 			psmt = conn.prepareStatement("SELECT * FROM `km_cs_notice` ORDER BY `no` DESC LIMIT 5");
 			rs = psmt.executeQuery();
@@ -328,10 +353,33 @@ public void insertFile(String prodNo, String newName, String fname) {
 		return notice;
 	}
 	
+	public List<CsVO> selectQna() {
+		List<CsVO> notice = new ArrayList<>();
+		try{			
+			logger.info("공지사항 인덱스 리스트");
+			conn = getConnection();
+			psmt = conn.prepareStatement("SELECT * FROM `km_cs_qna` WHERE `parent`=0 ORDER BY `no` DESC LIMIT 5");
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				CsVO vo = new CsVO();
+				vo.setNo(rs.getString(1));
+				vo.setCate(rs.getString(5));
+				vo.setTitle(rs.getString(6));
+				vo.setUid(rs.getString(9).replaceAll("(?<=.{2}).", "*"));
+				vo.setRdate(rs.getString(11).substring(2,10));
+				notice.add(vo);
+			}
+			close();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}
+		return notice;
+	}
+	
 	public CsNoticeVO NoticeView(String no) {
 		CsNoticeVO vo = null;
 		try{			
-			logger.info("공지보기 start...");
+			logger.info("공지사항 보기");
 			conn = getConnection();
 			psmt = conn.prepareStatement(AdminSql.SELECT_NOTICE_VIEW);
 			psmt.setString(1, no);
@@ -460,7 +508,7 @@ public void insertFile(String prodNo, String newName, String fname) {
 	public CsFaqVO FaqView(String no) {
 		CsFaqVO vo = null;
 		try {
-			logger.info("자주묻는질문 보기 start");
+			logger.info("자주묻는질문 보기");
 			conn = getConnection();
 			psmt = conn.prepareStatement(AdminSql.SELECT_FAQ_VIEW);
 			psmt.setString(1, no);

@@ -1,28 +1,34 @@
-package kr.co.Kmarket.controller.cs;
+package kr.co.Kmarket.controller.admin;
 
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.co.Kmarket.DAO.CsQnaDAO;
-import kr.co.Kmarket.VO.CsVO;
-@WebServlet("/cs/qna/list.do")
-public class QnaListController extends HttpServlet{
-	private static final long serialVersionUID = 1L;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.google.gson.Gson;
+
+import kr.co.Kmarket.DAO.admin.AdminDAO;
+import kr.co.Kmarket.utils.pageHelper;
+
+@WebServlet("/admin/cs/notice/page.do")
+public class NoticePage extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String group = req.getParameter("group");
+		String cate = req.getParameter("cate");
 		
-		CsQnaDAO dao = CsQnaDAO.getInstance();
-		
-		//페이징
+		//페이징 처리
 		int start = 0;
 		int total = 0;
 		int lastPageNum = 0;
@@ -43,7 +49,13 @@ public class QnaListController extends HttpServlet{
 		pageGroupEnd= currentPageGroup * 10; //끝번호
 		
 		//전체 게시물 갯수
-		total = dao.selectCountTotal(group);
+		AdminDAO dao = AdminDAO.getInstance();
+		
+		if(cate.equals("전체보기")) {
+			total = dao.selectNoticeTotal();
+		}else {
+			total = dao.selectNoticeTotal(cate);
+		}
 		
 		//마지막 페이지 번호
 		if(total % 10 == 0){
@@ -55,22 +67,18 @@ public class QnaListController extends HttpServlet{
 			pageGroupEnd = lastPageNum;
 		}
 		
-		//글 번호 인덱스 (ex:1페이지=0부터, 2페이지=10부터)
-		start = (currentPage - 1) * 10;
+		pageHelper ph = new pageHelper();
+		ph.setPageGroupStart(pageGroupStart);
+		ph.setPageGroupEnd(pageGroupEnd);
+		ph.setCurrentPage(currentPage);
+		ph.setLastPageNum(lastPageNum);
 		
-		req.setAttribute("pageGroupStart", pageGroupStart);
-		req.setAttribute("pageGroupEnd", pageGroupEnd);
-		req.setAttribute("currentPage", currentPage);
-		req.setAttribute("lastPageNum", lastPageNum);
-		req.setAttribute("total", total);
-		req.setAttribute("start", start);
-
-		List<CsVO> vo = dao.selectArticles(group, start);
-		req.setAttribute("articles", vo);
-		req.setAttribute("group", group);
-		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/_cs/_qna/list.jsp");
-		dispatcher.forward(req, resp);
+		Gson gson = new Gson();
+		String jsonData = gson.toJson(ph);
+		PrintWriter writer = resp.getWriter();
+		writer.print(jsonData.toString());
+		logger.debug(jsonData.toString());
+		writer.flush();
 	}
-	
+
 }

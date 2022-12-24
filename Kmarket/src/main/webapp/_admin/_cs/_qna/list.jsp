@@ -4,7 +4,7 @@
 <script>
 	$(function() {
 		
-		if('${param.code}' == 101){
+		if(${param.resultCode eq 101}){
 			alert('게시물이 삭제되었습니다.');
 		}
 		
@@ -107,7 +107,7 @@
 								tag += "<td><a href='/Kmarket/admin/cs/qna/view.do?no="+article.no+"'>"+article.title+"</a></td>";
 								tag += "<td>"+article.uid+"</td>";
 								tag += "<td>"+article.rdate+"</td>";
-								tag += "<td>"+(article.comment = 0 ? '답변완료' : '검토중')+"</td>";
+								tag += "<td>"+(article.comment == 1 ? '답변완료' : '검토중')+"</td>";
 								tag += "</tr>";
 							$('.admin_cs_list_div').children('table').append(tag);
 						}

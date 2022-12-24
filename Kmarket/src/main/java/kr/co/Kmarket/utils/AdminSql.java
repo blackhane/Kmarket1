@@ -102,7 +102,7 @@ public class AdminSql {
 	
 	
 	//qna 리스트
-	public static final String SELECT_QNA = "SELECT * FROM `km_cs_qna` WHERE `group`=? and `cate` =? ORDER BY `no`";
+	public static final String SELECT_QNA = "SELECT * FROM `km_cs_qna` WHERE `group`=? and `cate` =? ORDER BY `no` DESC";
 	
 	//qna 글보기
 	public static final String SELECT_QNA_VIEW = "select * from `km_cs_qna` WHERE `no`=?";

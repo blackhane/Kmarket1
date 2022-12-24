@@ -19,14 +19,17 @@ public class NoticeViewController extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {	
-		
 		String no = req.getParameter("no");
+		String cate = req.getParameter("cate");
+		String pg = req.getParameter("pg");
 		
 				
 		AdminDAO dao =  AdminDAO.getInstance();
 		CsNoticeVO notice = dao.NoticeView(no);
 		
 		req.setAttribute("notice", notice);
+		req.setAttribute("cate", cate);
+		req.setAttribute("pg", pg);
 		
 		RequestDispatcher dispathcer = req.getRequestDispatcher("/_admin/_cs/_notice/view.jsp");
 		dispathcer.forward(req, resp);

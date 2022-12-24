@@ -1,7 +1,6 @@
 package kr.co.Kmarket.controller.product;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.Kmarket.DAO.ProductDAO;
 import kr.co.Kmarket.VO.CateVO;
 import kr.co.Kmarket.VO.ProductVO;
-import kr.co.Kmarket.VO.ReviewVO;
 
 @WebServlet("/product/view.do")
 public class ViewController extends HttpServlet {

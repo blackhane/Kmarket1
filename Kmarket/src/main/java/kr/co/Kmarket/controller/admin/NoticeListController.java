@@ -29,8 +29,11 @@ public class NoticeListController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String cate = req.getParameter("cate");
+		String pg = req.getParameter("pg");
 		
-		List<CsNoticeVO> notice = AdminDAO.getInstance().selectNotice(cate);
+		int start = (Integer.parseInt(pg) - 1) * 10;
+		
+		List<CsNoticeVO> notice = AdminDAO.getInstance().selectNotice(cate,start);
 		
 		resp.setContentType("application/json;charset=UTF-8");
 		Gson gson = new Gson();

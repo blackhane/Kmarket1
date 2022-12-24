@@ -1,6 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_admin/_header.jsp"/>
+<script>
+	$(function(){
+		$('.btn_red').click(function(){
+			let answer = confirm('게시물을 삭제하시겠습니까?');
+			if(answer){
+				return true;
+			}
+			return false;
+		});
+	});
+</script>
             <section id="admin-index">
                 <nav>
                     <h3>공지사항 보기</h3>
@@ -29,7 +40,7 @@
                         <div class="btn_right">
                             <button class="btn_red" onclick = "location.href = '/Kmarket/admin/cs/notice/delete2.do?no=${notice.no}' ">삭제</button>
                             <button class="btn_blue" onclick = "location.href = '/Kmarket/admin/cs/notice/modify.do?no=${notice.no}' ">수정</button>
-                            <button class="btn_gray" onclick = "location.href = '/Kmarket/admin/cs/notice/list.do' ">목록</button>
+                            <button class="btn_gray" onclick = "location.href = '/Kmarket/admin/cs/notice/list.do?cate=${cate}&pg=${pg}' ">목록</button>
                         </div>
                     </div>
                 </div>

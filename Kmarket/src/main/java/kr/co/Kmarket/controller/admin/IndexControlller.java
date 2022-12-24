@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.Kmarket.DAO.admin.AdminDAO;
 import kr.co.Kmarket.VO.CsNoticeVO;
+import kr.co.Kmarket.VO.CsVO;
 
 @WebServlet("/admin/index.do")
 public class IndexControlller extends HttpServlet{
@@ -25,16 +26,18 @@ public class IndexControlller extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		List<CsNoticeVO> notice = AdminDAO.getInstance().selectNotice();
+		
+		AdminDAO dao = AdminDAO.getInstance();
+		
+		List<CsNoticeVO> notice = dao.selectNotice();
+		List<CsVO> qna = dao.selectQna();
+		
 		req.setAttribute("notice", notice);
+		req.setAttribute("qna", qna);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/_admin/index.jsp");
 		dispatcher.forward(req, resp);
 		
 	}
 	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-	}
 }

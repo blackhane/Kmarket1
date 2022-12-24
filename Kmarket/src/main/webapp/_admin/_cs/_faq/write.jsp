@@ -113,7 +113,6 @@
                 <div id="admin_cs_write">
                     <div class="admin_cs_write_div">
                         <form action="/Kmarket/admin/cs/faq/write.do" method="post">   
-	                        <input type="hidden" name="hit" value= "0">
 	                        <table>
 	                            <tbody>
 	                                <tr>

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.Kmarket.DAO.admin.AdminQnaDAO;
-import kr.co.Kmarket.VO.CsNoticeVO;
 import kr.co.Kmarket.VO.CsQnaVO;
 
 @WebServlet("/admin/cs/qna/view.do")
@@ -29,7 +28,7 @@ public class QnaViewController extends HttpServlet {
 		req.setAttribute("qna", qna);
 		req.setAttribute("comment", comment);
 		
-		RequestDispatcher dispathcer = req.getRequestDispatcher("/_admin/_cs/_qna/QnaView.jsp");
+		RequestDispatcher dispathcer = req.getRequestDispatcher("/_admin/_cs/_qna/view.jsp");
 		dispathcer.forward(req, resp);
 		
 	}

@@ -5,6 +5,11 @@
 <script>
 
 	$(function() {
+		
+		if(${param.resultCode eq 101}){
+			alert('게시물이 삭제되었습니다.');
+		}
+		
 		//그룹 선택
 		$("select[name=group]").change(function() {
 			let group = $(this).val();

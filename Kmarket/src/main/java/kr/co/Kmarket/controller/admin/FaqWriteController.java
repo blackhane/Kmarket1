@@ -1,7 +1,6 @@
 package kr.co.Kmarket.controller.admin;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.Kmarket.DAO.admin.AdminDAO;
-import kr.co.Kmarket.VO.CsFaqVO;
 import kr.co.Kmarket.VO.CsVO;
 
 @WebServlet("/admin/cs/faq/write.do")
@@ -41,7 +39,7 @@ public class FaqWriteController extends HttpServlet {
 		vo.setRegip(regip);
 		
 		AdminDAO dao = AdminDAO.getInstance();
-		dao.insertNoctice(vo);
+		dao.insertFaq(vo);
 		
 		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do");
 	}

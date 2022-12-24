@@ -49,7 +49,6 @@ public class ListController extends HttpServlet {
 		int currentPageGroup = 1;
 		int pageGroupStart = 0;
 		int pageGroupEnd = 0;
-		int pageStartNum = 0;
 		
 		//현재 페이지 번호
 		String pg = req.getParameter("pg");
