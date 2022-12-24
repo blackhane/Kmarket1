@@ -27,7 +27,7 @@
                 </ul>
             </section>
             <section class="faq">
-                <h1>자주 묻는 질문 <a href="/Kmarket/cs/faq/list.do">전체보기</a></h1>
+                <h1>자주 묻는 질문 <a href="/Kmarket/cs/faq/list.do?group=회원">전체보기</a></h1>
                 <ul>
                     <li><a href="/Kmarket/cs/faq/list.do?group=회원"><span>회원</span></a></li>
                     <li><a href="/Kmarket/cs/faq/list.do?group=쿠폰/혜택/이벤트"><span>쿠폰/이벤트</span></a></li>

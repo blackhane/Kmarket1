@@ -19,7 +19,7 @@
 		$(document).on('click','#delete',function(e){
 			e.stopImmediatePropagation();
 			let no = $(this).data("no");
-			console.log(no);
+			//console.log(no);
 			let del = confirm('게시물을 삭제하시겠습니까?');
 			
 			if(del){
@@ -86,7 +86,7 @@
 			}
 		});
 
-		console.log('${param.cate}' + '${param.pg}');
+		//console.log('${param.cate}' + '${param.pg}');
 		list('${param.cate}', '${param.pg}');
 		paging('${param.cate}', Math.ceil('${(Math.ceil(param.pg/10)-1) * 10 + 1}'), '${param.pg}');
 		
@@ -94,13 +94,13 @@
 		//리스트출력
 		function list(cate, pg){
 			let intPg = parseInt(pg);
-			console.log(intPg);
+			//console.log(intPg);
 			let jsonData = {
 				'cate' : cate,
 				'pg' : pg
 			};
 			
-			console.log(jsonData);
+			//console.log(jsonData);
 			$.ajax({
 				url : '/Kmarket/admin/cs/notice/list.do',
 				method : 'post',
@@ -143,7 +143,7 @@
 				'pg' : pg
 			};
 		
-			console.log(jsonData + current);
+			//console.log(jsonData + current);
 			$.ajax({
 				url : '/Kmarket/admin/cs/notice/page.do',
 				method : 'get',

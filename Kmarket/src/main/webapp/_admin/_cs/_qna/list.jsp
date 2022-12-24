@@ -153,7 +153,7 @@
 					chkArr.push($(this).data("no"));
 				});
 				
-				console.log(chkArr);
+				//console.log(chkArr);
 				
 				$.ajax({
 					url : '/Kmarket/admin/cs/qna/delete.do',

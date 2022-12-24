@@ -25,19 +25,13 @@ public class CommentController extends HttpServlet {
 		String uid = req.getParameter("uid");
 		
 		AdminQnaDAO dao = AdminQnaDAO.getInstance();
-		String res = dao.findComment(parent);
 		
 		CsQnaVO vo = new CsQnaVO();
 		vo.setParent(parent);
 		vo.setContent(content);
 		vo.setUid(uid);
 
-		int result = 0;
-		if(res.equals("1")) {
-			result = dao.updateComment(vo);
-		}else {
-			result = dao.insertComment(vo);
-		}
+		int result = dao.insertComment(vo);
 		
 		resp.setContentType("application/json;charset=UTF-8");
 		JsonObject json = new JsonObject();

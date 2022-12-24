@@ -22,7 +22,6 @@ public class FaqModifyController extends HttpServlet{
 		String no = req.getParameter("no");
 		
 		CsFaqVO vo = AdminDAO.getInstance().FaqView(no);
-		
 		req.setAttribute("vo", vo);
 	
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/_admin/_cs/_faq/modify.jsp");
@@ -39,6 +38,6 @@ public class FaqModifyController extends HttpServlet{
 		
 		AdminDAO.getInstance().updateFaq(no, group, cate, title, content);
 		
-		resp.sendRedirect("/Kmarket/admin/cs/faq/view.do?no=" + no);
+		resp.sendRedirect("/Kmarket/admin/cs/faq/view.do?no="+no);
 	}
 }

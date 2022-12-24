@@ -38,7 +38,7 @@
                                     <ins class="dis-price"><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/100 * item.discount)}"/></ins>
                                 </li>
                                 <li>
-                                    <del class="org-price">${item.price}</del>
+                                    <del class="org-price"><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/></del>
                                     <span class="discount">${item.discount}%</span>
                                 </li>
                                 <li>

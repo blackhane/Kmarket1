@@ -15,7 +15,7 @@
 				'uid' : uid,
 				'comment' : comment
 			};
-			console.log(jsonData);
+			//console.log(jsonData);
 			
 			$.ajax({
 				url : '/Kmarket/admin/cs/qna/comment.do',
@@ -25,7 +25,8 @@
 				success : function(data){
 					if(data.result > 0){
 						alert('댓글이 등록되었습니다.');
-						$('.commentRegister').val('답변수정');
+						$('.text_width').attr("readonly", true);
+						$('.commentRegister').remove();
 					}
 				}
 			});
@@ -77,16 +78,10 @@
 			                					<td class = "td2">
 			                						<textarea name="comment" class="text_width"></textarea>
 			                					</td>
-			                					<td>
-			                						<input type="button" class="btn_qna_blue commentRegister" name ="submit_board" value="답변등록">
-			                					</td>
 			                				</c:when>
 			                				<c:otherwise>
 			                					<td class = "td2">
-			                						<textarea name="comment" class="text_width">${comment.content}</textarea>
-			               						</td>
-			                					<td>
-			                						<input type="button" class="btn_qna_blue commentRegister" name ="submit_board" value="답변수정">
+			                						<textarea name="comment" class="text_width" readonly>${comment.content}</textarea>
 			                					</td>
 			                				</c:otherwise>
 			                			</c:choose>
@@ -95,6 +90,7 @@
 	                        </table>	
 							<div class="btn_right">
 	                            <button class="btn_red goDelete">삭제</button>
+	                            <input type="button" class="btn_blue commentRegister" name ="submit_board" value="답변등록">
 	                            <button class="btn_gray goList">목록</button>
                        	    </div>               
 	                    </div>

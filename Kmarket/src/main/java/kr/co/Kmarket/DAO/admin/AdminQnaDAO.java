@@ -156,24 +156,5 @@ public class AdminQnaDAO extends DBCP {
 		return result;
 	}
 	
-	//댓글수
-	public int updateComment(CsQnaVO vo) {
-		int result = 0;
-		try {
-			logger.info("문의하기 댓글수정");
-			conn = getConnection();
-			psmt = conn.prepareStatement("UPDATE `km_cs_qna` set `content`=? WHERE `parent`=?");
-			psmt.setString(1, vo.getContent());
-			psmt.setString(2, vo.getParent());
-			result = psmt.executeUpdate();
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-		return result;
-	}
-	
-	
-	
 }
 

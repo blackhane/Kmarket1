@@ -99,7 +99,7 @@
 			let count = $('input[name=num]').val();
 			let price = $('.dis_price').children('ins.ori').text();
 			let total = (count*price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-			console.log(total);
+			////console.log(total);
 			$('.totalPrice').text(total);
 		}
 		total();
@@ -196,7 +196,7 @@
 					'prodNo' : prodNo,
 					'start' : str
 			};
-			console.log(jsonData);
+			//console.log(jsonData);
 			$.ajax({
 				url : '/Kmarket/product/review.do',
 				method : 'get',

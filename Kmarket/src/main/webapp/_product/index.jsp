@@ -90,8 +90,8 @@
                     </ul>
                     <ul class="cs">
                         <li><a href="/Kmarket/cs/notice/list.do?group=all">공지사항</a></li>
-                        <li><a href="/Kmarket/cs/faq/list.do">자주묻는질문</a></li>
-                        <li><a href="/Kmarket/cs/qna/list.do">문의하기</a></li>
+                        <li><a href="/Kmarket/cs/faq/list.do?group=회원">자주묻는질문</a></li>
+                        <li><a href="/Kmarket/cs/qna/list.do?group=회원">문의하기</a></li>
                         <li><a href="/Kmarket/cs/index.do">고객센터</a></li>
                     </ul>
                 </nav>
@@ -204,7 +204,7 @@
 						        </div>
 						        <h2>${item.prodName}</h2>
 						        <div class="org_price">
-						            <del>${item.price}원</del>
+						            <del><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/>원</del>
 						            <span>${item.discount}%</span>
 						        </div>
 						        <div class="dis_price">
@@ -258,7 +258,7 @@
 							<h2>${item.prodName}</h2>
 							<p>${item.descript}</p>
 							<div class="org_price">
-								<del>${item.price}원</del>
+								<del><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/>원</del>
 								<span>${item.discount}%</span>
 							</div>
 							<div class="dis_price">
@@ -280,7 +280,7 @@
 							<h2>${item.prodName}</h2>
 							<p>${item.descript}</p>
 							<div class="org_price">
-								<del>${item.price}원</del>
+								<del><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/></del>
 								<span>${item.discount}%</span>
 							</div>
 							<div class="dis_price">
@@ -302,7 +302,7 @@
 							<h2>${item.prodName}</h2>
 							<p>${item.descript}</p>
 							<div class="org_price">
-								<del>${item.price}원</del>
+								<del><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/>원</del>
 								<span>${item.discount}%</span>
 							</div>
 							<div class="dis_price">
@@ -324,7 +324,7 @@
 							<h2>${discount.prodName}</h2>
 							<p>${discount.descript}</p>
 							<div class="org_price">
-								<del>${discount.price}원</del>
+								<del><fmt:formatNumber type="number" pattern="#,###" value="${discount.price}"/>원</del>
 								<span>${discount.discount}%</span>
 							</div>
 							<div class="dis_price">

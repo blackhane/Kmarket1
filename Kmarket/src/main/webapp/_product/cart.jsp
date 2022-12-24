@@ -40,8 +40,8 @@
 			
 			cartNo.forEach(function(number){
 				<c:forEach items="${cart}" var="cart">
-				console.log(number);
-				console.log(${cart.cartNo});
+				//console.log(number);
+				//console.log(${cart.cartNo});
 				if(number == ${cart.cartNo}){
 					count += ${cart.count};
 					price += ${cart.price} * ${cart.count};
@@ -196,7 +196,7 @@
 						if(data.result > 0){
 							$('input[name=chk]:checked').parent().parent().remove();
 							let chk = document.getElementsByName('chk');
-							console.log("chk : "+chk);
+							//console.log("chk : "+chk);
 							$('.total').empty();
 							totalCart();
 							if(chk.length == 0){

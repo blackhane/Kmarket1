@@ -26,8 +26,8 @@
 			let totalPrice = 0;
 			let savePoint = 0;
 			<c:forEach items="${orderList}" var="order">
-				console.log("${order.prodName}");
-				console.log("${order.count}");
+				//console.log("${order.prodName}");
+				//console.log("${order.count}");
 				count += ${order.count};
 				price += ${order.price * order.count};
 				disPrice += ${(order.price / 100 * order.discount) * order.count} * -1;
@@ -66,7 +66,7 @@
 			let usedPoint = $('input[name=point]').val();
 			//사용포인트 < 최소포인트
 			if(usedPoint < 5000){
-				console.log(usedPoint);
+				//console.log(usedPoint);
 				alert('5000점 이상부터 사용 가능합니다.');
 				$('.pointDiscount').text("0원");
 				$('input[name=point]').val('').focus();
@@ -77,7 +77,7 @@
 			}
 			//사용포인트 > 보유포인트
 			if(usedPoint > maxPoint){
-				console.log($('input[name=point]').val());
+				//console.log($('input[name=point]').val());
 				alert('최대 사용가능한 포인트는 '+maxPoint+'입니다.');
 				$('.pointDiscount').text("0원");
 				$('input[name=point]').val('').focus();
@@ -188,7 +188,7 @@
 				'recipAddr2':recipAddr2,
 				'payment':payment
 			}
-			console.log(jsonData);
+			//console.log(jsonData);
 			
 			$.ajax({
 				url : '/Kmarket/product/orderHelper.do',

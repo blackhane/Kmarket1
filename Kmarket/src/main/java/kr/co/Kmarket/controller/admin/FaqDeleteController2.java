@@ -18,9 +18,11 @@ public class FaqDeleteController2 extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String no = req.getParameter("no");
+		String group = req.getParameter("group");
+		String cate = req.getParameter("cate");
 		AdminDAO.getInstance().deleteFaq(no);
 
-		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do?resultCode=101");
+		resp.sendRedirect("/Kmarket/admin/cs/faq/list.do?group="+group+"&cate="+cate+"&resultCode=101");
 	}
 	
 }

@@ -81,7 +81,7 @@
 		$(document).on('click','#delete',function(e){
 			e.stopImmediatePropagation();
 			let no = $(this).data("no");
-			console.log(no);
+			//console.log(no);
 			let del = confirm('게시물을 삭제하시겠습니까?');
 			
 			if(del){
