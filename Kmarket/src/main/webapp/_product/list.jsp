@@ -35,12 +35,14 @@
                         <td>
                             <ul>
                                 <li>
-                                    <ins class="dis-price"><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/100 * item.discount)}"/></ins>
+                                    <ins class="dis-price"><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/100 * item.discount)}"/>원</ins>
                                 </li>
-                                <li>
-                                    <del class="org-price"><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/></del>
-                                    <span class="discount">${item.discount}%</span>
-                                </li>
+                                <c:if test="${item.discount ne 0}">
+	                                <li>
+	                                    <del class="org-price"><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/>원</del>
+	                                    <span class="discount">${item.discount}%</span>
+	                                </li>
+                                </c:if>
                                 <li>
                                     <c:if test="${item.delivery eq '0'}">
 										<span class="free">무료배송</span>

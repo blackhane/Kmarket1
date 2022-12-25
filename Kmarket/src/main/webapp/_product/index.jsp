@@ -211,10 +211,12 @@
 						            <img src="/Kmarket/file/${item.thumb2}" alt="thumb2" class="best_thumb2" style="width:100%">
 						        </div>
 						        <h2>${item.prodName}</h2>
-						        <div class="org_price">
-						            <del><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/>원</del>
-						            <span>${item.discount}%</span>
-						        </div>
+						        <c:if test="${item.discount ne 0}">
+							        <div class="org_price">
+							            <del><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/>원</del>
+							            <span>${item.discount}%</span>
+							        </div>
+						        </c:if>
 						        <div class="dis_price">
 						            <ins><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/100 * item.discount)}"/>원</ins>
 						        </div>
@@ -265,10 +267,12 @@
 							<div class="thumb"><img src="/Kmarket/file/${item.thumb2}" alt="thumb2"/></div>
 							<h2>${item.prodName}</h2>
 							<p>${item.descript}</p>
-							<div class="org_price">
-								<del><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/>원</del>
-								<span>${item.discount}%</span>
-							</div>
+							<c:if test="${item.discount ne 0}">
+								<div class="org_price">
+									<del><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/>원</del>
+									<span>${item.discount}%</span>
+								</div>
+							</c:if>
 							<div class="dis_price">
 								<ins><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/100 * item.discount)}"/>원</ins>
 								<c:if test="${item.delivery eq '0'}">
@@ -287,10 +291,12 @@
 							<div class="thumb"><img src="/Kmarket/file/${item.thumb2}" alt="thumb2"/></div>
 							<h2>${item.prodName}</h2>
 							<p>${item.descript}</p>
-							<div class="org_price">
-								<del><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/></del>
-								<span>${item.discount}%</span>
-							</div>
+							<c:if test="${item.discount ne 0}">
+								<div class="org_price">
+									<del><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/></del>
+									<span>${item.discount}%</span>
+								</div>
+							</c:if>
 							<div class="dis_price">
 								<ins><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/100 * item.discount)}"/>원</ins>
 								<c:if test="${item.delivery eq '0'}">
@@ -309,10 +315,12 @@
 							<div class="thumb"><img src="/Kmarket/file/${item.thumb2}" alt="thumb2"/></div>
 							<h2>${item.prodName}</h2>
 							<p>${item.descript}</p>
-							<div class="org_price">
-								<del><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/>원</del>
-								<span>${item.discount}%</span>
-							</div>
+							<c:if test="${item.discount ne 0}">
+								<div class="org_price">
+									<del><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/>원</del>
+									<span>${item.discount}%</span>
+								</div>
+							</c:if>
 							<div class="dis_price">
 								<ins><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/100 * item.discount)}"/>원</ins>
 								<c:if test="${item.delivery eq 0}">
@@ -326,18 +334,20 @@
 			<section class="discount" id="discount">
 				<h3><span>할인상품</span></h3>
 				<article>
-					<c:forEach items="${discount}" var="discount">
-						<a href="/Kmarket/product/view.do?cate1=${discount.cate1}&cate2=${discount.cate2}&prodNo=${discount.prodNo}">
-							<div class="thumb"><img src="/Kmarket/file/${discount.thumb2}" alt="thumb2"/></div>
-							<h2>${discount.prodName}</h2>
-							<p>${discount.descript}</p>
-							<div class="org_price">
-								<del><fmt:formatNumber type="number" pattern="#,###" value="${discount.price}"/>원</del>
-								<span>${discount.discount}%</span>
-							</div>
+					<c:forEach items="${discount}" var="item">
+						<a href="/Kmarket/product/view.do?cate1=${item.cate1}&cate2=${item.cate2}&prodNo=${item.prodNo}">
+							<div class="thumb"><img src="/Kmarket/file/${item.thumb2}" alt="thumb2"/></div>
+							<h2>${item.prodName}</h2>
+							<p>${item.descript}</p>
+							<c:if test="${item.discount ne 0}">
+								<div class="org_price">
+									<del><fmt:formatNumber type="number" pattern="#,###" value="${item.price}"/>원</del>
+									<span>${item.discount}%</span>
+								</div>
+							</c:if>
 							<div class="dis_price">
-								<ins><fmt:formatNumber type="number" pattern="#,###" value="${discount.price - (discount.price/100 * discount.discount)}"/>원</ins>
-								<c:if test="${discount.delivery eq 0}">
+								<ins><fmt:formatNumber type="number" pattern="#,###" value="${item.price - (item.price/100 * item.discount)}"/>원</ins>
+								<c:if test="${item.delivery eq 0}">
 									<span class="free">무료배송</span>
 								</c:if>
 							</div>

@@ -69,7 +69,7 @@ $(function(){
 	                            </tbody>
 	                        </table>
 	                        <div class="btn_right">
-	                            <button  class="btn_gray" onclick = "location.href = '/Kmarket/admin/cs/notice/list.do'">목록</button>
+	                            <a href="/Kmarket/admin/cs/notice/list.do?cate=전체보기&pg=1" class="btn_gray" >목록</a> 
 	                            <input name="submit_board"  class="btn_blue" type="submit" value="작성하기">                  
                         	</div>
                         </form> 

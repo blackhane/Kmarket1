@@ -90,7 +90,9 @@
 	                        </table>	
 							<div class="btn_right">
 	                            <button class="btn_red goDelete">삭제</button>
-	                            <input type="button" class="btn_blue commentRegister" name ="submit_board" value="답변등록">
+	                            <c:if test="${comment.content eq null}">
+	                            	<input type="button" class="btn_blue commentRegister" name ="submit_board" value="답변등록">
+	                            </c:if>
 	                            <button class="btn_gray goList">목록</button>
                        	    </div>               
 	                    </div>

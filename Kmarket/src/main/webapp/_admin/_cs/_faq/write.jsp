@@ -63,9 +63,6 @@
 			}
 		});
 		
-		$('.goList').click(function(){
-			location.href="/Kmarket/admin/cs/faq/list.do";
-		});
 	});
 </script>
 
@@ -147,7 +144,7 @@
 	                            </tbody>
 	                        </table>
 		                    <div class="btn_right">
-	                            <button class="btn_gray goList" >목록</button>
+	                            <a href="/Kmarket/admin/cs/faq/list.do" class="btn_gray">목록</a>
 								<input class="btn_blue" type="submit" name="submit_board" value="작성하기">                    
                         	</div>
 	                    </form>

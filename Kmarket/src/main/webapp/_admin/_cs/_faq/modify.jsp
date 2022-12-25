@@ -141,7 +141,7 @@ $(function(){
 	                            </tbody>
 	                        </table>
 	                        <div class="btn_right">
-	                            <button class="btn_red" onclick ="/Kmarket/admin/cs/faq/view.do?no=${vo.no}">취소</button>
+	                        	<a href="/Kmarket/admin/cs/faq/view.do?no=${vo.no}" class="btn_red">취소</a>
 	                            <input class="btn_gray" type="submit" name="submit_board" value="수정하기">                    
                         	</div>
                         </form> 

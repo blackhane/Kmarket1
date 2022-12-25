@@ -263,7 +263,7 @@
                         		<td><fmt:formatNumber type="number" pattern="#,###" value="${order.delivery}"/>원</td>
                         	</c:otherwise>
                         </c:choose>
-                        <td><fmt:formatNumber type="number" pattern="#,###" value="${(order.price - disPrice) * order.count}"/>원</td>
+                        <td><fmt:formatNumber type="number" pattern="#,###" value="${(order.price - disPrice) * order.count + order.delivery}"/>원</td>
                     </tr>
                 </c:forEach>
                 </tbody>
