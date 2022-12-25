@@ -27,6 +27,7 @@ $(function(){
           oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
           $("input[name=submit_board]").submit();
       }); 
+      
 });
 </script>
             <section id="admin-index">
@@ -64,7 +65,7 @@ $(function(){
 	                            </tbody>
 	                        </table>
 	                        <div class="btn_right">
-	                            <button class="btn_red" onclick ="/Kmarket/admin/cs/notice/view.do?no=${vo.no}">취소</button>
+	                            <a href="/Kmarket/admin/cs/notice/view.do?cate=${cate}&pg=${pg}&no=${vo.no}" class="btn_red">취소</a>
 	                            <input class="btn_gray" type="submit" name="submit_board" value="수정하기">                    
                         	</div>
                         </form> 

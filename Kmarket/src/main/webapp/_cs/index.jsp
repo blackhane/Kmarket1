@@ -21,7 +21,7 @@
                 <ul>
                 <c:forEach items="${notice}" var="notice">
                     <li>
-                        <a href="/Kmarket/cs/notice/view.do?kind=all&no=${notice.no}">[${notice.cate}] ${notice.title} <span>${notice.rdate}</span></a>
+                        <a href="/Kmarket/cs/notice/view.do?kind=all&no=${notice.no}&pg=1">[${notice.cate}] ${notice.title} <span>${notice.rdate}</span></a>
                     </li>
                 </c:forEach>
                 </ul>
@@ -43,7 +43,7 @@
                 <ul>
                	<c:forEach items="${qna}" var="qna">
                     <li>
-                        <a href="/Kmarket/cs/qna/view.do?group=${qna.group}&no=${qna.no}">[${qna.cate}] ${qna.title} <p>${qna.uid}<span>${qna.rdate}</span></p></a>
+                        <a href="/Kmarket/cs/qna/view.do?group=${qna.group}&no=${qna.no}&pg=1">[${qna.cate}] ${qna.title} <p>${qna.uid}<span>${qna.rdate}</span></p></a>
                     </li>
                 </c:forEach>
                     <a href="/Kmarket/cs/qna/write.do?group=회원" class="write">문의글 작성 ></a>

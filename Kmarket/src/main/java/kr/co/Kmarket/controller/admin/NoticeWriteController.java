@@ -1,6 +1,7 @@
 package kr.co.Kmarket.controller.admin;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -52,7 +53,8 @@ public class NoticeWriteController extends HttpServlet {
 		dao.insertNotice(vo);
 		
 		// 리다이렉트
-		resp.sendRedirect("/Kmarket/admin/cs/notice/list.do");
+		String ct = URLEncoder.encode("전체보기", "UTF-8");
+		resp.sendRedirect("/Kmarket/admin/cs/notice/list.do?cate="+ct+"&pg=1");
 		
 	}
 

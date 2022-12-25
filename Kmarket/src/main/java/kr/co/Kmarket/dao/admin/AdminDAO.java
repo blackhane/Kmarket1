@@ -167,7 +167,6 @@ public class AdminDAO extends DBCP {
 		}catch(Exception e){
 			logger.error(e.getMessage());
 		}
-		logger.debug("데이터 입력" + product.size());
 		return product;
 	}
 
@@ -210,7 +209,6 @@ public class AdminDAO extends DBCP {
 		}catch(Exception e){
 			logger.error(e.getMessage());
 		}
-		logger.debug("데이터 입력" + product.size());
 		return product;
 	}
 	
@@ -422,7 +420,6 @@ public class AdminDAO extends DBCP {
 		}catch(Exception e){
 			logger.error(e.getMessage());
 		}
-		logger.debug("리스트출력 : " + notice.size());
 		return notice;
 	}
 	
@@ -450,7 +447,6 @@ public class AdminDAO extends DBCP {
 		}catch(Exception e){
 			logger.error(e.getMessage());
 		}
-		logger.debug("리스트출력 : " + faq.size());
 		return faq;
 	}
 	

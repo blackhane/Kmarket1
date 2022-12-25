@@ -1,6 +1,7 @@
 package kr.co.Kmarket.controller.admin;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,10 +21,14 @@ public class NoticeModifyController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String no = req.getParameter("no");
+		String cate = req.getParameter("cate");
+		String pg = req.getParameter("pg");
 		
 		CsNoticeVO vo = AdminDAO.getInstance().NoticeView(no);
 		
 		req.setAttribute("vo", vo);
+		req.setAttribute("cate", cate);
+		req.setAttribute("pg", pg);
 		
 		RequestDispatcher dispathcer = req.getRequestDispatcher("/_admin/_cs/_notice/modify.jsp");
 		dispathcer.forward(req, resp);
@@ -50,7 +55,8 @@ public class NoticeModifyController extends HttpServlet {
 		
 		AdminDAO.getInstance().updateNotice(no, group, cate, title, content);
 		
-		resp.sendRedirect("/Kmarket/admin/cs/notice/view.do?no=" + no);
+		String ct = URLEncoder.encode("전체보기", "UTF-8");
+		resp.sendRedirect("/Kmarket/admin/cs/notice/list.do?cate="+ct+"&pg=1");
 	}
 
 }

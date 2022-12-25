@@ -21,13 +21,13 @@
                       		<c:if test="${sessUser.level ge 5}">	                      		
 	                      		<li><a href="/Kmarket/admin/index.do">관리자</a></li>	                     		
 	                      	</c:if>
+	                  		<li><a href="#">마이페이지</a></li>
                       	</c:when>
                       	<c:otherwise>
                       		<li><a href="/Kmarket/member/login.do">로그인</a></li>
                      		<li><a href="/Kmarket/member/join.do">회원가입</a></li>
                       	</c:otherwise>
                       </c:choose>
-	                  <li><a href="#">마이페이지</a></li>
 	                  <li><a href="/Kmarket/product/cart.do?uid=${sessUser.uid}">장바구니</a></li>
                     </ul>
                 </div>

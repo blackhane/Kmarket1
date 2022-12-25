@@ -32,7 +32,9 @@
 						if(data.result > 0){
 							alert('게시물이 삭제되었습니다.');
 							$('.all').prop("checked",false);
-							list('전체보기');
+							let cate = $('select[name=cate]').val();
+							let pg = $('.current').data('pg');
+							list(cate, pg);
 						}
 					}
 				});
@@ -79,7 +81,9 @@
 						if(data.result > 0){
 							alert('게시물이 삭제되었습니다.');
 							$('.all').prop("checked",false);
-							list('전체보기');
+							let cate = $('select[name=cate]').val();
+							let pg = $('.current').data('pg');
+							list(cate, pg);
 						}
 					}
 				});
@@ -119,7 +123,7 @@
 								tag += "<td><a href='/Kmarket/admin/cs/notice/view.do?no="+article.no+"&cate="+cate+"&pg="+pg+"'>"+article.title+"</a></td>";
 								tag += "<td>"+article.hit+"</td>";
 								tag += "<td>"+article.rdate+"</td>";
-								tag += "<td><a href='#' id='delete' data-no='"+article.no+"'>[삭제]</a><a href='/Kmarket/admin/cs/notice/modify.do?no="+article.no+"'>[수정]</a></td>";
+								tag += "<td><a href='#' id='delete' data-no='"+article.no+"'>[삭제]</a><a href='/Kmarket/admin/cs/notice/modify.do?no="+article.no+"&cate="+cate+"&pg="+pg+"'>[수정]</a></td>";
 								tag += "</tr>";
 							i += 1;
 							$('.admin_cs_list_div').children('table').append(tag);

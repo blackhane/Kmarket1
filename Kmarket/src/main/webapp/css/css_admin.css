@@ -60,7 +60,7 @@
     cursor: pointer;
     }
     
-    .btn_red{
+    .btn_red {
     width: 10%;
     height: 50px;
     border: 0;
@@ -68,6 +68,19 @@
     background-color: #FF2D32;
     color: #fff;
     cursor: pointer;
+    }
+    
+    a.btn_red {
+    	display: block;
+	   	width: 10%;
+	    height: 50px;
+	    border: 0;
+	    margin-right: 3%;
+	    background-color: #FF2D32;
+	    cursor: pointer;
+    	font-size: 13px;
+	    line-height: 50px;
+	    text-align: center;
     }
     
     .btn_qna_red {

@@ -1,6 +1,7 @@
 package kr.co.Kmarket.controller.admin;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +20,8 @@ public class NoticeDeleteController2 extends HttpServlet {
 		String no = req.getParameter("no");
 		AdminDAO.getInstance().deleteNotice(no);
 		
-		resp.sendRedirect("/Kmarket/admin/cs/notice/list.do?resultCode=101");
+		String cate = URLEncoder.encode("전체보기", "UTF-8");
+		resp.sendRedirect("/Kmarket/admin/cs/notice/list.do?&cate="+cate+"&pg=1&resultCode=101");
 	}
 
 }

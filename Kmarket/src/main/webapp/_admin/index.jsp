@@ -198,7 +198,7 @@
                             <table>
                             <c:forEach items="${notice}" var="article">
                             	<tr class="index_notice">
-	                                <td><a href="/Kmarket/admin/cs/notice/view.do?no=${article.no}">${article.title}</a></td>
+	                                <td><a href="/Kmarket/admin/cs/notice/view.do?no=${article.no}&cate=전체보기&pg=1">${article.title}</a></td>
 	                                <td align="right">${article.rdate}</td>
 	                            </tr>
                             </c:forEach>
