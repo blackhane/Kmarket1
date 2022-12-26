@@ -35,6 +35,8 @@ public class IndexControlller extends HttpServlet{
 		req.setAttribute("notice", notice);
 		req.setAttribute("qna", qna);
 		
+		
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/_admin/index.jsp");
 		dispatcher.forward(req, resp);
 		

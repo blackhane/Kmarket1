@@ -23,6 +23,11 @@ public class ListController extends HttpServlet{
 		
 		String level = req.getParameter("level");
 		String company = req.getParameter("company");
+		String search = req.getParameter("search");
+		String keyword = req.getParameter("keyword");
+		
+		System.out.println(search);
+		System.out.println(keyword);
 		
 		List<ProductVO> products = new ArrayList<>();
 		AdminDAO dao = AdminDAO.getInstance();
@@ -52,10 +57,18 @@ public class ListController extends HttpServlet{
 		
 		if(level.equals("7")) {
 			//모든상품
-			total = dao.selectCountTotal();	
+			if(keyword != null) {
+				total = dao.selectCountTotal1(keyword);	
+			}else {
+				total = dao.selectCountTotal();	
+			}
 		}else {
 			//판매자상품
-			total = dao.selectCountTotal(company);
+			if(keyword != null) {
+				total = dao.selectCountTotal(company, keyword);
+			}else {
+				total = dao.selectCountTotal(company);	
+			}
 		}
 		
 		//마지막 페이지 번호
@@ -74,11 +87,22 @@ public class ListController extends HttpServlet{
 		
 		if(level.equals("7")) {
 			//모든상품
-			products = dao.selectProduct(start);	
+			if(keyword != null) {
+				products = dao.selectProduct1(search, keyword, start);
+			}else {
+				products = dao.selectProduct(start);
+			}
 		}else {
 			//판매자상품
-			products = dao.selectProduct(company, start);	
+			if(keyword != null) {
+				products = dao.selectProduct(search, company, keyword, start);
+			}else {
+				products = dao.selectProduct(company, start);	
+			}
+			
 		}
+		
+		
 		
 		req.setAttribute("pageGroupStart", pageGroupStart);
 		req.setAttribute("pageGroupEnd", pageGroupEnd);
@@ -91,6 +115,8 @@ public class ListController extends HttpServlet{
 		
 		RequestDispatcher dispathcer = req.getRequestDispatcher("/_admin/_product/list.jsp");
 		dispathcer.forward(req, resp);
+		
+		
 		/*
 		 * String thumb1 = req.getParameter("thumb1"); String prodNo =
 		 * req.getParameter("prodNo"); String prodName = req.getParameter("prodName");

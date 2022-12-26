@@ -78,7 +78,9 @@ public class AdminSql {
 	//상품 리스트
 
 	public static final String SELECT_PRODUCT_ALL = "select * from `km_product` LIMIT ?,10";
+	public static final String SELECT_PRODUCT_ALL_SEARCH = "select * from `km_product` WHERE `prodName` LIKE ? LIMIT ?,10";
 	public static final String SELECT_PRODUCT = "select * from `km_product` WHERE `company` = ? LIMIT ?,10";
+	public static final String SELECT_SEARCH = "select * from `km_product` WHERE `company` = ? AND `prodName` LIKE ? LIMIT ?,10;";
 	public static final String SELECT_NOTICE = "select * from `km_cs_notice` WHERE `no`=?";
 	public static final String SELECT_NOTICE_VIEW = "select * from `km_cs_notice` WHERE `no`=?";
 
@@ -86,6 +88,10 @@ public class AdminSql {
 	public static final String SELECT_FAQ_VIEW = "select * from `km_cs_faq` WHERE `no`=?";
 	
 
+	//상품검색(검색기능)
+	public static final String SELECT_ARTICLE_BY_KEYWORD = "SELECT * FROM `km_product` WHERE `prodName` LIKE ? ORDER BY `no` DESC";
+
+	
 	//게시판관리 -> 자주묻는질문 수정
 	public static final String UPDATE_FAQ = "UPDATE `km_cs_faq` SET "
 											+ "`group`=?, "
@@ -99,7 +105,9 @@ public class AdminSql {
 	public static final String DELETE_FAQ = "delete from `km_cs_faq` WHERE `no`=?";
 	//게시판관리 -> 문의하기 삭제
 	public static final String DELETE_QNA = "delete from `km_cs_qna` WHERE `no`=? OR `parent`=?";
-	
+	//게시판관리 -> 상품 삭제
+	public static final String DELETE_PRODUCT = "delete from `km_product` WHERE `prodNo`=?";
+
 	
 	//qna 리스트
 	public static final String SELECT_QNA = "SELECT * FROM `km_cs_qna` WHERE `group`=? and `cate` =? ORDER BY `no` DESC";
@@ -122,4 +130,6 @@ public class AdminSql {
 	//게시물 개수
 	public static final String COUNT_PRODUCT = "SELECT COUNT(*) FROM `km_product` WHERE `company` = ?";
 	public static final String COUNT_PRODUCT_ALL = "SELECT COUNT(*) FROM `km_product`";
+	public static final String COUNT_PRODUCT_ALL_SEARCH = "SELECT COUNT(*) FROM `km_product` WHERE `prodName` LIKE ?";
+	public static final String COUNT_PRODUCT_SEARCH = "SELECT COUNT(*) FROM `km_product` WHERE `company` = ? AND `prodName` LIKE ?";
 }
