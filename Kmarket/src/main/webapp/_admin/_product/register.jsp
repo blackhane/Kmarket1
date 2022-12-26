@@ -26,6 +26,12 @@ $(function(){
 		});
 	});
 	
+	$('input[name="price"]').focusout(function(){
+		let price = $(this).val();
+		
+		$('input[name="point"]').val(price/100);
+	});
+	
 })
 
 

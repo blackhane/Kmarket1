@@ -130,6 +130,7 @@ public class AdminDAO extends DBCP {
 		}
 	}
 
+	//모든 상품 리스트
 	public List<ProductVO> selectProduct(int start) {
 		List<ProductVO> product = new ArrayList<>();
 		try{
@@ -169,8 +170,50 @@ public class AdminDAO extends DBCP {
 		}
 		return product;
 	}
+	
+	//모든 상품 검색기능 추가
+	public List<ProductVO> selectProduct1(String search, String keyword, int start) {
+		List<ProductVO> product = new ArrayList<>();
+		try{
+			logger.info("상품불러오기 start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement("SELECT * FROM `km_product` WHERE `"+search+"` LIKE ? LIMIT ?,10");
+			psmt.setString(1, "%"+keyword+"%");
+			psmt.setInt(2, start);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ProductVO vo = new ProductVO();
+				vo.setProdNo(rs.getString(1));
+				vo.setCate1(rs.getInt(2));
+				vo.setCate2(rs.getInt(3));
+				vo.setProdName(rs.getString(4));
+				vo.setDescript(rs.getString(5));
+				vo.setCompany(rs.getString(6));
+				vo.setSeller(rs.getString(7));
+				vo.setPrice(rs.getInt(8));
+				vo.setDiscount(rs.getInt(9));
+				vo.setPoint(rs.getInt(10));
+				vo.setStock(rs.getInt(11));
+				vo.setSold(rs.getInt(12));
+				vo.setDelivery(rs.getInt(13));
+				vo.setHit(rs.getInt(14));
+				vo.setScore(rs.getInt(15));
+				vo.setReview(rs.getInt(16));
+				vo.setThumb1(rs.getString(17));
+				vo.setThumb2(rs.getString(18));
+				vo.setThumb3(rs.getString(19));
+				vo.setDetail(rs.getString(20));
+				vo.setStatus(rs.getString(21));
+				product.add(vo);
+			}
+			close();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}
+		return product;
+	}
 
-	// select
+	// 판매자 상품리스트 select
 	public List<ProductVO> selectProduct(String company, int start) {
 		List<ProductVO> product = new ArrayList<>();
 		try{
@@ -212,6 +255,50 @@ public class AdminDAO extends DBCP {
 		return product;
 	}
 	
+	//판매자 상품리스트 검색기능추가
+	public List<ProductVO> selectProduct(String search, String company, String keyword, int start) {
+		List<ProductVO> product = new ArrayList<>();
+		try{
+			logger.info("상품검색 start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement("SELECT * FROM `km_product` WHERE `company` =? AND `"+search+"` LIKE ? LIMIT ?,10");
+			psmt.setString(1, company);
+			psmt.setString(2, "%"+keyword+"%");
+			psmt.setInt(3, start);
+			rs = psmt.executeQuery();
+			while(rs.next()) {
+				ProductVO vo = new ProductVO();
+				vo.setProdNo(rs.getString(1));
+				vo.setCate1(rs.getInt(2));
+				vo.setCate2(rs.getInt(3));
+				vo.setProdName(rs.getString(4));
+				vo.setDescript(rs.getString(5));
+				vo.setCompany(rs.getString(6));
+				vo.setSeller(rs.getString(7));
+				vo.setPrice(rs.getInt(8));
+				vo.setDiscount(rs.getInt(9));
+				vo.setPoint(rs.getInt(10));
+				vo.setStock(rs.getInt(11));
+				vo.setSold(rs.getInt(12));
+				vo.setDelivery(rs.getInt(13));
+				vo.setHit(rs.getInt(14));
+				vo.setScore(rs.getInt(15));
+				vo.setReview(rs.getInt(16));
+				vo.setThumb1(rs.getString(17));
+				vo.setThumb2(rs.getString(18));
+				vo.setThumb3(rs.getString(19));
+				vo.setDetail(rs.getString(20));
+				vo.setStatus(rs.getString(21));
+				product.add(vo);
+			}
+			close();
+		}catch(Exception e){
+			logger.error(e.getMessage());
+		}
+		return product;
+	}
+	
+
 	//상품리스트 페이징 all
 	public int selectCountTotal() {
 		int result = 0;
@@ -219,6 +306,25 @@ public class AdminDAO extends DBCP {
 			logger.info("페이징 처리");
 			conn = getConnection();
 			psmt = conn.prepareStatement(AdminSql.COUNT_PRODUCT_ALL);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+	
+	//상품리스트 페이징 all +기능추가
+	public int selectCountTotal1(String keyword) {
+		int result = 0;
+		try {
+			logger.info("페이징 처리");
+			conn = getConnection();
+			psmt = conn.prepareStatement(AdminSql.COUNT_PRODUCT_ALL_SEARCH);
+			psmt.setString(1, "%"+keyword+"%");
 			rs = psmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt(1);
@@ -249,6 +355,25 @@ public class AdminDAO extends DBCP {
 		return result;
 	}
 	
+	//상품리스트 검색기능 추가
+	public int selectCountTotal(String company, String keyword) {
+		int result = 0;
+		try {
+			logger.info("페이징 처리");
+			conn = getConnection();
+			psmt = conn.prepareStatement(AdminSql.COUNT_PRODUCT_SEARCH);
+			psmt.setString(1, company);
+			psmt.setString(2, "%"+keyword+"%");
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
 	
 	// 공지사항 불러오기
 	public List<CsNoticeVO> selectNotice(String cate,int start) {
@@ -626,6 +751,22 @@ public class AdminDAO extends DBCP {
 		return result;
 	}
 	
+	//상품 삭제
+	public int deleteProduct(String prodNo) {
+		int result = 0;
+		try {
+			logger.info("상품삭제 start...");
+			conn = getConnection();
+			psmt = conn.prepareStatement(AdminSql.DELETE_PRODUCT);	
+			psmt.setString(1, prodNo);		
+			result = psmt.executeUpdate();
+			close();
+		}catch(Exception e){	
+			logger.error(e.getMessage());
+		}
+		return result;
+	}
+
 //	vo.setProdNo(rs.getString(1));
 //	vo.setCate1(rs.getInt(2));
 //	vo.setCate2(rs.getInt(3));

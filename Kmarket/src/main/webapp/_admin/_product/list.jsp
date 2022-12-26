@@ -2,6 +2,58 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/_admin/_header.jsp"/>
 
+<script>
+//게시물 삭제
+$(functiuon(){
+	
+	$('.delete').on('click',function(e){
+		e.stopImmediatePropagation();
+		let no = $(this).data("no");
+		console.log(no);
+		let del = confirm('게시물을 삭제하시겠습니까?');
+		
+		if(del){
+			$.ajax({
+				url : '/Kmarket/admin/product/delete.do',
+				method : 'get',
+				data : {'no' : no},
+				dataType : 'json',
+				success : function(data){
+					if(data.result > 0){
+						alert('게시물이 삭제되었습니다.');
+						$('.all').prop("checked",false);
+						let cate = $('select[name=cate]').val();
+						let pg = $('.current').data('pg');
+						list(cate, pg);
+					}
+				}
+			});
+		}
+	});
+	
+
+	//전체선택
+	$('.all').click(function(){
+		if($(this).is(":checked")){
+			$('.chk').prop("checked",true);
+		}else{
+			$('.chk').prop("checked",false);
+		}
+	});
+	$(document).on('click','#chk',function(e){
+		e.stopImmediatePropagation();
+		$('.all').prop("checked",false);
+		if($('input[name=chk]:checked').length == $('.chk').length){
+			$('.all').prop("checked",true);
+		}
+	});
+	
+	
+});
+
+
+</script>
+
             <section id="admin-product-list">
                 <nav>
                     <h3>상품목록</h3>
@@ -10,15 +62,20 @@
                     </p>
                 </nav>
                 <div>
-                    <section class="search">
-                        <select name="search" id="search">
-                            <option value="search1">상품명</option>
-                            <option value="search1">상품코드</option>
-                            <option value="search1">제조사</option>
-                            <option value="search1">판매자</option>
-                        </select>
-                        <input type="text" name="search">
-                    </section>
+                	<form action="/Kmarket/admin/product/list.do" method="get">
+	                   <section class="search">
+	                   <input type="hidden" name="level" value="${sessUser.level}">
+	                   <input type="hidden" name="company" value="${sessUser.company}">
+	                    	<select name="search" id="search">
+	                           <option value="prodName">상품명</option>
+	                           <option value="prodNo">상품코드</option>
+	                           <option value="company">제조사</option>
+	                           <option value="seller">판매자</option>
+	                       </select>
+	                       <input type="text" name="keyword">
+	                       <input type="submit" value = "검색">
+	                   </section>
+                    </form>
                 </div>
                 <table>
                     <tbody>
@@ -53,7 +110,7 @@
 	                            <td>${item.seller}</td>
 	                            <td>${item.hit}</td>
 								<td>
-	                                <a href="#">[삭제]</a>
+	                                <a href="/Kmarket/admin/product/delete.do" class = "delete">[삭제]</a>
 	                                <a href="#">[수정]</a>
                           		</td>
 				            </tr>
