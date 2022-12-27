@@ -89,9 +89,8 @@
 			
 			//주문금액 재계산
 			point = usedPoint;
-			
 			//포인트 > 주문금액
-			if(totalPrice < 0){
+			if($('input[name=totalPrice]').val() - usedPoint < 0){
 				alert('주문금액이 0원 이하로 포인트를 사용할 수 없습니다.');
 				$('.pointDiscount').text("0원");
 				$('input[name=point]').val('').focus();
