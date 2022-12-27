@@ -29,7 +29,6 @@ public class NoticePage extends HttpServlet {
 		String cate = req.getParameter("cate");
 		
 		//페이징 처리
-		int start = 0;
 		int total = 0;
 		int lastPageNum = 0;
 		int currentPage = 1;

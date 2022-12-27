@@ -58,7 +58,6 @@ public class RegisterController extends HttpServlet{
 		String thumb2 = mr.getFilesystemName("thumb2");
 		String thumb3 = mr.getFilesystemName("thumb3");
 		String detail = mr.getFilesystemName("detail");
-		String prodNo = mr.getParameter("prodNo");
 		String status = mr.getParameter("status");
 		String duty = mr.getParameter("duty");
 		String receipt = mr.getParameter("receipt");
