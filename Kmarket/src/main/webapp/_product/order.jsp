@@ -33,7 +33,7 @@
 				disPrice += ${(order.price / 100 * order.discount) * order.count} * -1;
 				delivery += ${order.delivery};
 				savePoint += ${order.point};
-				totalPrice += (${order.price} + (${order.price / 100 * order.discount} * -1) + ${order.delivery}) * ${order.count} - point;
+				totalPrice += ((${order.price} + (${order.price / 100 * order.discount} * -1) + ${order.delivery}) * ${order.count});
 			</c:forEach>
 				let tag = "<h2>최종결제 정보</h2>";
 					tag += "<table>";
@@ -54,7 +54,7 @@
 	                tag += "<tr><td>포인트 할인</td><td class='pointDiscount'>"+point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원</td></tr>";
 					tag += "<tr><td>전체주문금액</td>";
 					tag += "<input type='hidden' name='totalPrice' value="+totalPrice+">";
-					tag += "<td>"+totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원</td></tr>";
+					tag += "<td>"+(totalPrice - point).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원</td></tr>";
 					tag += "</table>";
 					tag += "<button type='sumbit' class='complete'>결제하기</button>";
 					$('.final').append(tag);
@@ -91,7 +91,7 @@
 			point = usedPoint;
 			//포인트 > 주문금액
 			if($('input[name=totalPrice]').val() - usedPoint < 0){
-				alert('주문금액이 0원 이하로 포인트를 사용할 수 없습니다.');
+				alert('주문금액의 0원 이하로 포인트를 사용할 수 없습니다.');
 				$('.pointDiscount').text("0원");
 				$('input[name=point]').val('').focus();
 				point = 0;
