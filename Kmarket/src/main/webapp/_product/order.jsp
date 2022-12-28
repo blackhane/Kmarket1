@@ -306,7 +306,7 @@
                 <div>
                     <p>현재 포인트 : <span><fmt:formatNumber type="number" pattern="#,###" value="${sessUser.point}"/></span>점</p>
                     <label>
-                        <input type="text" name="point" value="0" style="text-align: right;">점
+                        <input type="text" name="point" value="" style="text-align: right;">점
                         <input type="button" name="usePoint" value="적용">
                     </label>
                     <span>포인트 5,000점 이상이면 현금처럼 사용 가능합니다.</span>
