@@ -18,7 +18,7 @@
 	});
 </script>
         <article class="cs_information">
-                <p>
+                <p>"C:/Users/java1/Desktop/11/1.png"
                     <strong>${group}</strong><br/>
                     가장 자주 묻는 질문입니다.
                 </p>
