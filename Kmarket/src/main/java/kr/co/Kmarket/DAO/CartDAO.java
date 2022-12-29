@@ -158,37 +158,6 @@ public class CartDAO extends DBCP {
 		return vo;
 	}
 	
-	//주문기록
-	public void insertOrder(CartVO vo, String uid) {
-		int ordNo = 0;
-		try {
-			conn = getConnection();
-			conn.setAutoCommit(false);
-			psmt = conn.prepareStatement(CartSQL.INSERT_ORDER_ITEM);
-			PreparedStatement psmt2 = conn.prepareStatement(CartSQL.SELECT_ORDNO);
-			psmt2.setString(1, uid);
-			rs = psmt2.executeQuery();
-			if(rs.next()) {
-				ordNo = rs.getInt(1);
-			}
-			logger.debug("ordNo : " +ordNo);
-			psmt.setInt(1, ordNo);
-			psmt.setString(2, vo.getProdNo());
-			psmt.setString(3, vo.getCount());
-			psmt.setString(4, vo.getPrice());
-			psmt.setString(5, vo.getDiscount());
-			psmt.setString(6, vo.getPoint());
-			logger.debug("할인가: " + vo.getDisPrice());
-			psmt.setInt(7, (Integer.parseInt(vo.getPrice()) - vo.getDisPrice()) * Integer.parseInt(vo.getCount()));
-			psmt.executeUpdate();
-			conn.commit();
-			psmt2.close();
-			close();
-		}catch(Exception e) {
-			logger.error(e.getMessage());
-		}
-	}
-	
 	//주문완료
 	public int insertOrderItem(OrderItemVO vo) {
 		int result = 0;

@@ -213,33 +213,6 @@
 				dataType : 'json',
 				success : function(data){
 					if(data.result > 0){
-						return true;
-					}
-				}
-			});
-			
-			$.ajax({
-				url : '/Kmarket/product/orderHelper.do',
-				method : 'post',
-				traditional: true,
-				async : false,
-				data : {'cartNo' : cartNo},
-				dataType : 'json',
-				success : function(data){
-					if(data.result > 0){
-						return true;
-					}
-				}
-			});
-			
-			$.ajax({
-				url : '/Kmarket/sell.do',
-				method : 'get',
-				async : false,
-				data : {'uid' : ordUid},
-				dataType : 'json',
-				success : function(data){
-					if(data.result > 0){
 						alert('주문이 완료되었습니다.');
 						return true;
 					}else{
