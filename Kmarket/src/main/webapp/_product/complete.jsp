@@ -61,6 +61,10 @@
                                 <td><span><fmt:formatNumber type="number" pattern="#,###" value="${order.ordDelivery}"/></span>원</td>
                             </tr>
                             <tr>
+                                <td>포인트 할인</td>
+                                <td><span><fmt:formatNumber type="number" pattern="#,###" value="${order.usedPoint * -1}"/></span>원</td>
+                            </tr>
+                            <tr>
                                 <td>총 결제금액</td>
                                 <td><span><fmt:formatNumber type="number" pattern="#,###" value="${order.totalPrice}"/></span>원</td>
                             </tr>

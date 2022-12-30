@@ -126,6 +126,7 @@
 		
 		//검사
 		$('form').submit(function(){
+			
 			if($('input[name=orderer]').val() == ''){
 				alert('주문자를 확인하세요.');
 				$('input[name=orderer]').focus();
@@ -163,7 +164,7 @@
 			let ordDelivery =  $('input[name=delivery]').val();
 			let ordUsed =  $('input[name=used]').val();
 			let ordSave =  $('input[name=save]').val();
-			let ordTotalPrice =  $('input[name=totalPrice]').val();
+			let ordTotalPrice =  $('input[name=totalPrice]').val()-$('input[name=used]').val();
 			let recipName = $('input[name=orderer]').val();
 			let recipHp = $('input[name=hp]').val();	
 			let recipZip = $('input[name=zip]').val();
